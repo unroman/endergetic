@@ -16,7 +16,7 @@ import java.util.function.Predicate;
 public class RayTraceHelper {
 
 	public static HitResult rayTrace(Entity entity, double distance, float delta) {
-		return entity.level.clip(new ClipContext(
+		return entity.level().clip(new ClipContext(
 				entity.getEyePosition(delta),
 				entity.getEyePosition(delta).add(entity.getViewVector(delta).scale(distance)),
 				ClipContext.Block.COLLIDER,
@@ -26,7 +26,7 @@ public class RayTraceHelper {
 	}
 
 	public static HitResult rayTraceWithCustomDirection(Entity entity, float pitch, float yaw, double distance, float delta) {
-		return entity.level.clip(new ClipContext(
+		return entity.level().clip(new ClipContext(
 				entity.getEyePosition(delta),
 				entity.getEyePosition(delta).add(getVectorForRotation(pitch, yaw).scale(distance)),
 				ClipContext.Block.COLLIDER,
@@ -39,10 +39,7 @@ public class RayTraceHelper {
 		Vec3 look = getVectorForRotation(pitch, yaw);
 		Vec3 endVec = entity.getEyePosition(delta).add(look.scale(distance));
 		AABB axisalignedbb = entity.getBoundingBox().expandTowards(look.scale(distance)).inflate(1.0D, 1.0D, 1.0D);
-		EntityHitResult entityRaytraceResult = getEntityHitResult(entity, entity.getEyePosition(delta), endVec, axisalignedbb, (result) -> {
-			return !result.isSpectator() && result.isPickable();
-		}, sqDistance);
-		return entityRaytraceResult;
+		return getEntityHitResult(entity, entity.getEyePosition(delta), endVec, axisalignedbb, (result) -> !result.isSpectator() && result.isPickable(), sqDistance);
 	}
 
 	public static final Vec3 getVectorForRotation(float pitch, float yaw) {
@@ -61,7 +58,7 @@ public class RayTraceHelper {
 	 */
 	@Nullable
 	public static EntityHitResult getEntityHitResult(Entity p_221273_0_, Vec3 p_221273_1_, Vec3 p_221273_2_, AABB p_221273_3_, Predicate<Entity> p_221273_4_, double p_221273_5_) {
-		Level world = p_221273_0_.level;
+		Level world = p_221273_0_.level();
 		double d0 = p_221273_5_;
 		Entity entity = null;
 		Vec3 Vector3d = null;

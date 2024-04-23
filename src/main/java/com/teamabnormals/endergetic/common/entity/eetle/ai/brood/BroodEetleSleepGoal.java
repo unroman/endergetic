@@ -32,7 +32,7 @@ public class BroodEetleSleepGoal extends Goal {
 	@SuppressWarnings("deprecation")
 	public void tick() {
 		BroodEetle broodEetle = this.broodEetle;
-		if (!broodEetle.isOnGround() && broodEetle.level.hasChunkAt(broodEetle.blockPosition())) {
+		if (!broodEetle.onGround() && broodEetle.level.hasChunkAt(broodEetle.blockPosition())) {
 			this.offGroundTicks++;
 		} else {
 			this.offGroundTicks = 0;

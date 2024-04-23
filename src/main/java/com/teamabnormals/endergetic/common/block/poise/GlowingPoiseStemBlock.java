@@ -1,6 +1,6 @@
 package com.teamabnormals.endergetic.common.block.poise;
 
-import com.teamabnormals.blueprint.common.block.wood.LogBlock;
+import com.teamabnormals.blueprint.common.block.LogBlock;
 import com.teamabnormals.endergetic.core.registry.EEParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;

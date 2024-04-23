@@ -226,7 +226,7 @@ public abstract class AbstractEetle extends Monster implements Endimatable {
 		if (!this.isBaby() && this.random.nextFloat() < calculateEggChance(world, this.getBoundingBox().inflate(this.getAttributeValue(Attributes.FOLLOW_RANGE) * 1.25F)) && !this.isRemoved() && !this.dead) {
 			if (!world.isClientSide) {
 				BlockPos pos = this.blockPosition();
-				if (world.getFluidState(pos).isEmpty() && world.getBlockState(pos).getMaterial().isReplaceable()) {
+				if (world.getFluidState(pos).isEmpty() && world.getBlockState(pos).canBeReplaced()) {
 					RandomSource random = this.random;
 					EetleEggBlock.shuffleDirections(EGG_DIRECTIONS, random);
 					BlockState defaultState = EEBlocks.EETLE_EGG.get().defaultBlockState();

@@ -130,7 +130,7 @@ public class BoofloAdolescent extends PathfinderMob implements Endimatable {
 
 			@Override
 			public boolean isStableDestination(BlockPos pos) {
-				return !this.mob.isOnGround();
+				return !this.mob.onGround();
 			}
 
 		};

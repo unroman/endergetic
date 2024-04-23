@@ -38,7 +38,7 @@ public class PuffBugDescentGoal extends Goal {
 		if (!(te instanceof BolloomBudTileEntity && ((BolloomBudTileEntity) te).canBeOpened())) {
 			return false;
 		}
-		return this.puffbug.getTarget() == null && this.ticksPassed < 160 && !this.puffbug.hasLevitation() && !this.puffbug.isOnGround() && this.puffbug.getX() == this.originalPosX && this.puffbug.getZ() == this.originalPosZ;
+		return this.puffbug.getTarget() == null && this.ticksPassed < 160 && !this.puffbug.hasLevitation() && !this.puffbug.onGround() && this.puffbug.getX() == this.originalPosX && this.puffbug.getZ() == this.originalPosZ;
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class PuffBugDescentGoal extends Goal {
 	@Override
 	public void stop() {
 		BlockEntity te = this.world.getBlockEntity(this.budPos);
-		if ((te instanceof BolloomBudTileEntity && ((BolloomBudTileEntity) te).canBeOpened()) && this.puffbug.getX() == this.originalPosX && this.puffbug.getZ() == this.originalPosZ && this.puffbug.isOnGround()) {
+		if ((te instanceof BolloomBudTileEntity && ((BolloomBudTileEntity) te).canBeOpened()) && this.puffbug.getX() == this.originalPosX && this.puffbug.getZ() == this.originalPosZ && this.puffbug.onGround()) {
 			this.puffbug.setPollinationPos(this.budPos);
 		}
 

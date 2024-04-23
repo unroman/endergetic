@@ -33,7 +33,7 @@ public final class GenerationUtils {
 			for (int xx = x1; xx <= x2; xx++) {
 				for (int zz = z1; zz <= z2; zz++) {
 					mutable.set(xx, yy, zz);
-					if (world.getBlockState(mutable).getMaterial().isReplaceable()) {
+					if (world.getBlockState(mutable).canBeReplaced()) {
 						world.setBlock(mutable, block, 2);
 					}
 				}
@@ -47,7 +47,7 @@ public final class GenerationUtils {
 			for (int xx = x1; xx <= x2; xx++) {
 				for (int zz = z1; zz <= z2; zz++) {
 					mutable.set(xx, yy, zz);
-					if (world.getBlockState(mutable).getMaterial().isReplaceable() && (xx == x2 || zz == z2)) {
+					if (world.getBlockState(mutable).canBeReplaced() && (xx == x2 || zz == z2)) {
 						world.setBlock(mutable, block, 2);
 					}
 				}
@@ -83,7 +83,7 @@ public final class GenerationUtils {
 			for (int xx = x1; xx <= x2; xx++) {
 				for (int zz = z1; zz <= z2; zz++) {
 					mutable.set(xx, yy, zz);
-					if (world.getBlockState(mutable).getMaterial().isReplaceable()) {
+					if (world.getBlockState(mutable).canBeReplaced()) {
 						if (rand.nextFloat() <= chance) {
 							world.setBlock(mutable, block2, 2);
 						} else {
@@ -100,7 +100,7 @@ public final class GenerationUtils {
 		for (int yy = y1; yy <= y2; yy++) {
 			for (int xx = x1; xx <= x2; xx++) {
 				for (int zz = z1; zz <= z2; zz++) {
-					if (!world.getBlockState(mutable.set(xx, yy, zz)).getMaterial().isReplaceable()) {
+					if (!world.getBlockState(mutable.set(xx, yy, zz)).canBeReplaced()) {
 						return false;
 					}
 				}
@@ -128,7 +128,7 @@ public final class GenerationUtils {
 		for (int yy = y1; yy <= y2; yy++) {
 			for (int xx = x1; xx <= x2; xx++) {
 				for (int zz = z1; zz <= z2; zz++) {
-					if (world.getBlockState(mutable.set(xx, yy, zz)).getMaterial().isReplaceable()) {
+					if (world.getBlockState(mutable.set(xx, yy, zz)).canBeReplaced()) {
 						return false;
 					}
 				}

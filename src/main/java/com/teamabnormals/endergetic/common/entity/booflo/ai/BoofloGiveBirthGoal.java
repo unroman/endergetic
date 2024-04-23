@@ -19,7 +19,7 @@ public class BoofloGiveBirthGoal extends EndimatedGoal<Booflo> {
 
 	@Override
 	public boolean canUse() {
-		return !this.entity.hasCaughtFruit() && !this.entity.isBoofed() && this.entity.isNoEndimationPlaying() && this.entity.isPregnant() && (this.entity.isOnGround() || this.entity.isPassenger());
+		return !this.entity.hasCaughtFruit() && !this.entity.isBoofed() && this.entity.isNoEndimationPlaying() && this.entity.isPregnant() && (this.entity.onGround() || this.entity.isPassenger());
 	}
 
 	@Override

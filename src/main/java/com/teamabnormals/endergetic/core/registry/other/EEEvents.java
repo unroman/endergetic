@@ -96,7 +96,7 @@ public final class EEEvents {
 			List<MobEffectInstance> list = PotionUtils.getMobEffects(itemstack);
 
 			if (potion == Potions.WATER && list.isEmpty() && event.getRayTraceResult() instanceof BlockHitResult blockraytraceresult) {
-				Level world = potionEntity.level;
+				Level world = potionEntity.level();
 				Direction direction = blockraytraceresult.getDirection();
 				BlockPos blockpos = blockraytraceresult.getBlockPos().relative(Direction.DOWN).relative(direction);
 
@@ -112,7 +112,7 @@ public final class EEEvents {
 	@SubscribeEvent
 	public static void onLivingTick(LivingEvent.LivingTickEvent event) {
 		LivingEntity entity = event.getEntity();
-		if (!entity.level.isClientSide) {
+		if (!entity.level().isClientSide) {
 			int balloonCount = ((BalloonHolder) entity).getBalloons().size();
 			AttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
 			boolean hasABalloon = balloonCount > 0;
@@ -218,8 +218,8 @@ public final class EEEvents {
 	@SubscribeEvent
 	public static void onEntityJoinWorld(EntityJoinLevelEvent event) {
 		Entity entity = event.getEntity();
-		if (entity.level.isClientSide && entity instanceof Purpoid) {
-			((Purpoid) entity).updatePull(entity.position());
+		if (entity.level().isClientSide && entity instanceof Purpoid purpoid) {
+			purpoid.updatePull(entity.position());
 		}
 	}
 

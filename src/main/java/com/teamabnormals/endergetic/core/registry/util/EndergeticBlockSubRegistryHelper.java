@@ -17,9 +17,9 @@ public final class EndergeticBlockSubRegistryHelper extends BlockSubRegistryHelp
 		super(parent);
 	}
 
-	public <B extends Block> RegistryObject<B> createCorrockStandingBlock(String name, Supplier<? extends B> standingSupplier, Supplier<? extends B> wallSupplier, @Nullable CreativeModeTab group) {
+	public <B extends Block> RegistryObject<B> createCorrockStandingBlock(String name, Supplier<? extends B> standingSupplier, Supplier<? extends B> wallSupplier) {
 		RegistryObject<B> standingBlock = this.deferredRegister.register(name, standingSupplier);
-		this.itemRegister.register(name, () -> new CorrockCrownBlockItem(standingBlock.get(), wallSupplier::get, new Item.Properties().tab(group)));
+		this.itemRegister.register(name, () -> new CorrockCrownBlockItem(standingBlock.get(), wallSupplier::get, new Item.Properties()));
 		return standingBlock;
 	}
 

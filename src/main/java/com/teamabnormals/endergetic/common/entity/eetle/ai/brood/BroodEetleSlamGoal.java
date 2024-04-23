@@ -33,7 +33,7 @@ public class BroodEetleSlamGoal extends EndimatedGoal<BroodEetle> {
 		if (broodEetle.isFiringCannon()) {
 			return false;
 		}
-		return broodEetle.canSlam() && broodEetle.isOnGround() && (broodEetle.isNoEndimationPlaying() && BroodEetleFlingGoal.searchForNearbyAggressors(broodEetle, 3.0D).size() > 3) || broodEetle.shouldSlamWhenWakingUp();
+		return broodEetle.canSlam() && broodEetle.onGround() && (broodEetle.isNoEndimationPlaying() && BroodEetleFlingGoal.searchForNearbyAggressors(broodEetle, 3.0D).size() > 3) || broodEetle.shouldSlamWhenWakingUp();
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class BroodEetleSlamGoal extends EndimatedGoal<BroodEetle> {
 			if (livingEntity.hurt(DamageSource.mobAttack(broodEetle), damage)) {
 				broodEetle.doEnchantDamageEffects(broodEetle, livingEntity);
 				double knockbackForce = knockback - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE);
-				float inAirFactor = livingEntity.isOnGround() ? 1.0F : 0.75F;
+				float inAirFactor = livingEntity.onGround() ? 1.0F : 0.75F;
 				Vec3 horizontalVelocity = new Vec3(livingEntity.getX() - posX, 0.0D, livingEntity.getZ() - posZ).normalize().scale((knockbackForce * (random.nextFloat() * 0.75F + 0.5F)) * inAirFactor * power);
 				livingEntity.push(horizontalVelocity.x, knockbackForce * 0.5F * random.nextFloat() * 0.5F * inAirFactor, horizontalVelocity.z);
 				livingEntity.hurtMarked = true;

@@ -49,7 +49,7 @@ public final class KeybindHandler {
 
 		if (BOOF_VEST.isDown() && !player.getAbilities().flying) {
 			ItemStack stack = player.getInventory().getArmor(2);
-			if (stack.getItem() == EEItems.BOOFLO_VEST.get() && !player.isOnGround() && !player.isSpectator()) {
+			if (stack.getItem() == EEItems.BOOFLO_VEST.get() && !player.onGround() && !player.isSpectator()) {
 				if (BoofloVestItem.canBoof(stack, player)) {
 					EntityMotionHelper.knockbackEntity(player, C2SInflateBoofloVestMessage.HORIZONTAL_BOOST_FORCE, C2SInflateBoofloVestMessage.VERTICAL_BOOST_FORCE, true, true);
 					EndergeticExpansion.CHANNEL.sendToServer(new C2SInflateBoofloVestMessage());
@@ -58,7 +58,7 @@ public final class KeybindHandler {
 		}
 		if (player.getVehicle() instanceof Booflo) {
 			Booflo booflo = (Booflo) player.getVehicle();
-			if (!booflo.isOnGround()) {
+			if (!booflo.onGround()) {
 				if (BOOFLO_SLAM.isDown()) {
 					if (booflo.isBoofed() && booflo.getBoostPower() <= 0 && booflo.isNoEndimationPlaying()) {
 						EndergeticExpansion.CHANNEL.sendToServer(new C2SSlamMessage());

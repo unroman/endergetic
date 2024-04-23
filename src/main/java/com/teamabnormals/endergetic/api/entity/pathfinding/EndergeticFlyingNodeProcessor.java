@@ -39,7 +39,7 @@ public class EndergeticFlyingNodeProcessor extends NodeEvaluator {
 	}
 
 	@Override
-	public BlockPathTypes getBlockPathType(BlockGetter blockaccessIn, int x, int y, int z, Mob entitylivingIn, int xSize, int ySize, int zSize, boolean canBreakDoorsIn, boolean canEnterDoorsIn) {
+	public BlockPathTypes getBlockPathType(BlockGetter blockaccessIn, int x, int y, int z, Mob entitylivingIn) {
 		return this.getBlockPathType(blockaccessIn, x, y, z);
 	}
 
@@ -59,7 +59,7 @@ public class EndergeticFlyingNodeProcessor extends NodeEvaluator {
 	@Override
 	protected Node getNode(int x, int y, int z) {
 		Node pathpoint = null;
-		BlockPathTypes pathnodetype = this.getBlockPathType(this.mob.level, x, y, z);
+		BlockPathTypes pathnodetype = this.getBlockPathType(this.mob.level(), x, y, z);
 		float malus = this.mob.getPathfindingMalus(pathnodetype);
 		if (malus >= 0.0F) {
 			pathpoint = super.getNode(x, y, z);

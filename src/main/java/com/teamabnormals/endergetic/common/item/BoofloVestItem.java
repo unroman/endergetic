@@ -58,7 +58,7 @@ public class BoofloVestItem extends ArmorItem {
 			});
 		}
 
-		if (player.isOnGround() || (player.isPassenger() && player.getVehicle().isOnGround())) {
+		if (player.onGround() || (player.isPassenger() && player.getVehicle().onGround())) {
 			tag.putInt(TIMES_BOOFED_TAG, 0);
 		}
 	}

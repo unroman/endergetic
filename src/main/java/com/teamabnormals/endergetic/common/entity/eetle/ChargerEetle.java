@@ -69,7 +69,7 @@ public class ChargerEetle extends AbstractEetle {
 						this.getNavigation().stop();
 						this.getLookControl().setLookAt(attackTarget, 30.0F, 30.0F);
 					}
-					if (this.isOnGround()) {
+					if (this.onGround()) {
 						this.catapultTimer = 0;
 					} else this.catapultTimer--;
 				}

@@ -56,7 +56,7 @@ public class PuffBugHiveBlock extends BaseEntityBlock {
 
 	@Override
 	public void wasExploded(Level world, BlockPos pos, Explosion explosion) {
-		alertPuffBugs(world, pos, explosion.getSourceMob());
+		alertPuffBugs(world, pos, explosion.getIndirectSourceEntity());
 		super.wasExploded(world, pos, explosion);
 	}
 

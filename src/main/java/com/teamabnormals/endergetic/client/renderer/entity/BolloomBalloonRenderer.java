@@ -2,6 +2,7 @@ package com.teamabnormals.endergetic.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import com.mojang.math.Vector3f;
 import com.teamabnormals.endergetic.client.model.bolloom.BolloomBalloonModel;
 import com.teamabnormals.endergetic.common.entity.bolloom.BolloomBalloon;
@@ -29,7 +30,7 @@ public final class BolloomBalloonRenderer extends EntityRenderer<BolloomBalloon>
 	public void render(BolloomBalloon balloon, float entityYaw, float partialTicks, PoseStack matrixStack, MultiBufferSource bufferIn, int packedLightIn) {
 		matrixStack.pushPose();
 		matrixStack.translate(0.0F, 1.5F, 0.0F);
-		matrixStack.mulPose(Vector3f.XP.rotationDegrees(180.0F));
+		matrixStack.mulPose(Axis.XP.rotationDegrees(180.0F));
 
 		VertexConsumer ivertexbuilder = bufferIn.getBuffer(this.model.renderType(this.getTextureLocation(balloon)));
 		this.model.setupAnim(balloon, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);

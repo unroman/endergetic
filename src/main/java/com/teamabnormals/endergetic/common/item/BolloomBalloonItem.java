@@ -101,7 +101,7 @@ public class BolloomBalloonItem extends Item {
 
 	@Override
 	public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
-		Level world = player.level;
+		Level world = player.level();
 		if (!world.isClientSide && canAttachBalloonToTarget(target)) {
 			player.swing(hand, true);
 			attachToEntity(this.balloonColor, target);
@@ -116,7 +116,7 @@ public class BolloomBalloonItem extends Item {
 	}
 
 	public static void attachToEntity(BalloonColor color, Entity target) {
-		Level world = target.level;
+		Level world = target.level();
 		BolloomBalloon balloon = EEEntityTypes.BOLLOOM_BALLOON.get().create(world);
 		if (balloon != null) {
 			balloon.setColor(color);
@@ -150,7 +150,7 @@ public class BolloomBalloonItem extends Item {
 	}
 
 	public static double getPlayerReach(Player player) {
-		double reach = player.getAttribute(ForgeMod.REACH_DISTANCE.get()).getValue();
+		double reach = player.getAttribute(ForgeMod.ENTITY_REACH.get()).getValue();
 		return (player.isCreative() ? reach : reach - 0.5F);
 	}
 
@@ -171,7 +171,7 @@ public class BolloomBalloonItem extends Item {
 	}
 
 	private static EntityHitResult rayTraceEntities(Entity shooter, Vec3 startVec, Vec3 endVec, AABB boundingBox, Predicate<Entity> filter, double distance) {
-		Level world = shooter.level;
+		Level world = shooter.level();
 		double d0 = distance;
 		Entity entity = null;
 		Vec3 vector3d = null;
@@ -221,12 +221,12 @@ public class BolloomBalloonItem extends Item {
 				}
 			}
 
-			if (state.getMaterial().isReplaceable()) {
+			if (state.canBeReplaced()) {
 				BolloomBalloon balloon = new BolloomBalloon(world, blockpos);
 				balloon.setColor(((BolloomBalloonItem) stack.getItem()).getBalloonColor());
 				world.addFreshEntity(balloon);
 				stack.shrink(1);
-			} else if (!state.getMaterial().isReplaceable() && !state.is(BlockTags.FENCES)) {
+			} else if (!state.canBeReplaced() && !state.is(BlockTags.FENCES)) {
 				return super.execute(source, stack);
 			} else if (state.is(BlockTags.FENCES)) {
 				BolloomKnot setKnot = BolloomKnot.getKnotForPosition(world, blockpos);

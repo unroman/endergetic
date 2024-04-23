@@ -7,7 +7,7 @@ import com.teamabnormals.endergetic.core.registry.other.EEEvents;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
@@ -83,7 +83,7 @@ public class CorrockBlock extends Block implements BonemealableBlock {
 	}
 
 	protected Block getConversionBlock(LevelAccessor level) {
-		return CONVERSIONS.getOrDefault(level.registryAccess().registry(Registry.DIMENSION_TYPE_REGISTRY).get().getKey(level.dimensionType()), EEBlocks.CORROCK_OVERWORLD_BLOCK).get();
+		return CONVERSIONS.getOrDefault(level.registryAccess().registry(Registries.DIMENSION_TYPE).get().getKey(level.dimensionType()), EEBlocks.CORROCK_OVERWORLD_BLOCK).get();
 	}
 
 	protected boolean shouldConvert(LevelAccessor level) {
@@ -106,7 +106,7 @@ public class CorrockBlock extends Block implements BonemealableBlock {
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 

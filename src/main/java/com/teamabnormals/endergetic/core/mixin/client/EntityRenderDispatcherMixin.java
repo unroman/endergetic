@@ -20,14 +20,13 @@ public final class EntityRenderDispatcherMixin {
 
 	@Inject(at = @At(value = "JUMP", shift = At.Shift.BEFORE, ordinal = 0), method = "renderHitbox")
 	private static void renderEggSackBoundingBox(PoseStack poseStack, VertexConsumer bufferIn, Entity entity, float partialTicks, CallbackInfo info) {
-		if (entity instanceof BroodEetle) {
-			BroodEggSack eggSackEntity = ((BroodEetle) entity).getEggSack(entity.level);
+		if (entity instanceof BroodEetle broodEetle) {
+			BroodEggSack eggSackEntity = broodEetle.getEggSack(entity.level());
 			if (eggSackEntity != null) {
 				poseStack.pushPose();
 				double x = -Mth.lerp(partialTicks, entity.xOld, entity.getX());
 				double y = -Mth.lerp(partialTicks, entity.yOld, entity.getY());
 				double z = -Mth.lerp(partialTicks, entity.zOld, entity.getZ());
-				BroodEetle broodEetle = (BroodEetle) entity;
 				Vec3 eggSackPos = BroodEggSack.getEggPos(new Vec3(-x, -y, -z), Mth.lerp(partialTicks, broodEetle.yBodyRotO, broodEetle.yBodyRot), broodEetle.getEggCannonProgress(), broodEetle.getEggCannonFlyingProgress(), broodEetle.getFlyingRotations().getRenderFlyPitch(), broodEetle.isOnLastHealthStage());
 				poseStack.translate(x + eggSackPos.x, y + eggSackPos.y, z + eggSackPos.z);
 				AABB axisalignedbb = eggSackEntity.getBoundingBox().move(-eggSackEntity.getX(), -eggSackEntity.getY(), -eggSackEntity.getZ());

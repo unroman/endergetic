@@ -17,6 +17,7 @@ public class EnderTorchBlock extends TorchBlock {
 	}
 
 	@OnlyIn(Dist.CLIENT)
+	@Override
 	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, RandomSource randomSource) {
 		double d0 = (double) pos.getX() + 0.5D;
 		double d1 = (double) pos.getY() + 0.7D;

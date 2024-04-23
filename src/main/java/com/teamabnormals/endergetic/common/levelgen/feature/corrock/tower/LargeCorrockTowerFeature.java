@@ -95,7 +95,7 @@ public final class LargeCorrockTowerFeature extends AbstractCorrockFeature<Corro
 					for (int z = 0; z < 4; z++) {
 						mutable.set(startX + x, startY + y, startZ + z);
 						BlockPos immutable = mutable.immutable();
-						if (level.getBlockState(immutable).getMaterial().isReplaceable()) {
+						if (level.getBlockState(immutable).canBeReplaced()) {
 							positions.add(immutable);
 						}
 					}
@@ -146,7 +146,7 @@ public final class LargeCorrockTowerFeature extends AbstractCorrockFeature<Corro
 		BlockPos.MutableBlockPos mutable = origin.mutable();
 		for (int y = 0; y < 4; y++) {
 			mutable.move(0, -1, 0);
-			if (!world.getBlockState(mutable).getMaterial().isReplaceable()) {
+			if (!world.getBlockState(mutable).canBeReplaced()) {
 				foundGround = true;
 			} else {
 				positions.add(mutable.immutable());

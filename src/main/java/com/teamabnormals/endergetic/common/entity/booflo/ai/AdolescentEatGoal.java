@@ -30,7 +30,7 @@ public class AdolescentEatGoal extends EndimatedGoal<BoofloAdolescent> {
 		if (this.entity.isDescenting()) {
 			return this.isSafePos() && this.entity.hasFruit();
 		} else if (this.entity.isEating()) {
-			return this.entity.isOnGround() && this.entity.hasFruit() && this.eatingTicks < 61;
+			return this.entity.onGround() && this.entity.hasFruit() && this.eatingTicks < 61;
 		}
 
 		return false;
@@ -64,7 +64,7 @@ public class AdolescentEatGoal extends EndimatedGoal<BoofloAdolescent> {
 		this.entity.getNavigation().stop();
 
 		if (this.entity.isDescenting()) {
-			if (this.entity.isOnGround()) {
+			if (this.entity.onGround()) {
 				this.entity.setEating(true);
 				this.entity.setDescenting(false);
 			}

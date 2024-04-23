@@ -5,6 +5,7 @@ import com.teamabnormals.endergetic.common.entity.bolloom.BolloomBalloon;
 import com.teamabnormals.endergetic.common.entity.eetle.GliderEetle;
 import com.teamabnormals.endergetic.core.interfaces.BalloonHolder;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -37,7 +38,7 @@ public final class EntityMixin implements BalloonHolder {
 
 	@Inject(at = @At("HEAD"), method = "isInvulnerableTo", cancellable = true)
 	private void preventGliderEetleSuffocationDamage(DamageSource source, CallbackInfoReturnable<Boolean> info) {
-		if (source == DamageSource.IN_WALL) {
+		if (source.is(DamageTypes.IN_WALL)) {
 			Entity entity = ((Entity) (Object) this);
 			if (entity.isAlive() && entity.isInWall() && entity.getVehicle() instanceof GliderEetle) {
 				info.setReturnValue(true);

@@ -263,7 +263,7 @@ public class BolloomBalloon extends AbstractBolloom {
 		for (int i = 0; i < 3; i++) {
 			BlockPos pos = mutable.below(i);
 			if (this.level.isAreaLoaded(pos, 1)) {
-				if (!this.level.getBlockState(pos).getMaterial().isReplaceable() || this.level.getBlockState(pos).getBlock() == Blocks.LAVA) {
+				if (!this.level.getBlockState(pos).canBeReplaced() || this.level.getBlockState(pos).getBlock() == Blocks.LAVA) {
 					return true;
 				}
 			}

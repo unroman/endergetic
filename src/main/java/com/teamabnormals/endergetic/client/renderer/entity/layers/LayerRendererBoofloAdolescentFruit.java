@@ -29,7 +29,7 @@ public class LayerRendererBoofloAdolescentFruit extends RenderLayer<BoofloAdoles
 			matrixStack.pushPose();
 			matrixStack.translate(0.0F, 1.1F, -0.2F);
 
-			matrixStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
+			matrixStack.mulPose(Axis.XP.rotationDegrees(90.0F));
 
 			this.itemInHandRenderer.renderItem(adolescent, new ItemStack(EEItems.BOLLOOM_FRUIT.get()), ItemTransforms.TransformType.GROUND, false, matrixStack, bufferIn, packedLightIn);
 			matrixStack.popPose();

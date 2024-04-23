@@ -31,7 +31,7 @@ public class EetleEggRenderer extends EntityRenderer<EetleEgg> {
 	@Override
 	public void render(EetleEgg eggsEntity, float entityYaw, float partialTicks, PoseStack matrixStack, MultiBufferSource buffer, int packedLightIn) {
 		matrixStack.pushPose();
-		matrixStack.mulPose(Vector3f.XP.rotationDegrees(180.0F));
+		matrixStack.mulPose(Axis.XP.rotationDegrees(180.0F));
 		matrixStack.translate(0.0F, -1.5F, 0.0F);
 		int size = eggsEntity.getEggSize().ordinal();
 		IEetleEggModel eggsModel = this.eggModels[size];

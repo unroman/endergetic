@@ -5,7 +5,7 @@ import com.teamabnormals.blueprint.core.endimator.PlayableEndimation;
 import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.teamabnormals.endergetic.api.entity.pathfinding.EndergeticFlyingPathNavigator;
-import com.teamabnormals.endergetic.api.util.TemporaryMathUtil;
+import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.endergetic.client.particle.data.CorrockCrownParticleData;
 import com.teamabnormals.endergetic.common.entity.purpoid.ai.*;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
@@ -152,7 +152,7 @@ public class Purpoid extends PathfinderMob implements Endimatable {
 				CorrockCrownParticleData particleData = this.createParticleData();
 				RandomSource random = this.getRandom();
 				for (int i = 0; i < 2; i++) {
-					level.addParticle(particleData, this.getRandomX(0.5D), this.getY() + this.getEyeHeight(), this.getRandomZ(0.5D), TemporaryMathUtil.makeNegativeRandomly(random.nextDouble() * 0.05F, random), dy * random.nextDouble(), TemporaryMathUtil.makeNegativeRandomly(random.nextDouble() * 0.05F, random));
+					level.addParticle(particleData, this.getRandomX(0.5D), this.getY() + this.getEyeHeight(), this.getRandomZ(0.5D), MathUtil.makeNegativeRandomly(random.nextDouble() * 0.05F, random), dy * random.nextDouble(), MathUtil.makeNegativeRandomly(random.nextDouble() * 0.05F, random));
 				}
 			}
 
@@ -316,7 +316,7 @@ public class Purpoid extends PathfinderMob implements Endimatable {
 					CorrockCrownParticleData particleData = this.createParticleData();
 					RandomSource random = this.getRandom();
 					for (int i = 0; i < 12; ++i) {
-						level.addParticle(particleData, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), TemporaryMathUtil.makeNegativeRandomly(random.nextFloat() * 0.25F, random), (random.nextFloat() - random.nextFloat()) * 0.3F + 0.1F, TemporaryMathUtil.makeNegativeRandomly(random.nextFloat() * 0.25F, random));
+						level.addParticle(particleData, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), MathUtil.makeNegativeRandomly(random.nextFloat() * 0.25F, random), (random.nextFloat() - random.nextFloat()) * 0.3F + 0.1F, MathUtil.makeNegativeRandomly(random.nextFloat() * 0.25F, random));
 					}
 					for (int i = 0; i < 20; ++i) {
 						level.addParticle(ParticleTypes.POOF, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), this.random.nextGaussian() * 0.02D, this.random.nextGaussian() * 0.02D, this.random.nextGaussian() * 0.02D);
@@ -765,7 +765,7 @@ public class Purpoid extends PathfinderMob implements Endimatable {
 		Level level = this.level;
 		RandomSource random = this.getRandom();
 		for (int i = 0; i < 12; i++) {
-			level.addParticle(particleData, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), TemporaryMathUtil.makeNegativeRandomly(random.nextFloat() * 0.25F, random), (random.nextFloat() - random.nextFloat()) * 0.3F + 0.1F, TemporaryMathUtil.makeNegativeRandomly(random.nextFloat() * 0.25F, random));
+			level.addParticle(particleData, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), MathUtil.makeNegativeRandomly(random.nextFloat() * 0.25F, random), (random.nextFloat() - random.nextFloat()) * 0.3F + 0.1F, MathUtil.makeNegativeRandomly(random.nextFloat() * 0.25F, random));
 		}
 	}
 
@@ -776,7 +776,7 @@ public class Purpoid extends PathfinderMob implements Endimatable {
 		Level world = this.level;
 		int upperBound = maxDistance - minDistance + 1;
 		for (int i = 0; i < attempts; i++) {
-			BlockPos randomPos = pos.offset(TemporaryMathUtil.makeNegativeRandomly(minDistance + random.nextInt(upperBound), random), TemporaryMathUtil.makeNegativeRandomly(minDistance + random.nextInt(upperBound), random), TemporaryMathUtil.makeNegativeRandomly(minDistance + random.nextInt(upperBound), random));
+			BlockPos randomPos = pos.offset(MathUtil.makeNegativeRandomly(minDistance + random.nextInt(upperBound), random), MathUtil.makeNegativeRandomly(minDistance + random.nextInt(upperBound), random), MathUtil.makeNegativeRandomly(minDistance + random.nextInt(upperBound), random));
 			AABB collisionBox = size.makeBoundingBox(randomPos.getX() + 0.5F, randomPos.getY(), randomPos.getZ() + 0.5F);
 			if (world.noCollision(collisionBox) && !world.containsAnyLiquid(collisionBox)) {
 				this.teleportController.beginTeleportation(this, randomPos, true);

@@ -23,7 +23,7 @@ public class BroodEetleAirSlamGoal extends EndimatedGoal<BroodEetle> {
 	@Override
 	public boolean canUse() {
 		BroodEetle broodEetle = this.entity;
-		if (broodEetle.isNotDroppingEggs() && broodEetle.canSlam() && broodEetle.isFlying() && !broodEetle.isOnGround() && broodEetle.isNoEndimationPlaying()) {
+		if (broodEetle.isNotDroppingEggs() && broodEetle.canSlam() && broodEetle.isFlying() && !broodEetle.onGround() && broodEetle.isNoEndimationPlaying()) {
 			BlockPos takeoffPos = broodEetle.takeoffPos;
 			if (takeoffPos != null) {
 				return !searchForAggressorsUnder(broodEetle, new AABB(takeoffPos).inflate(8.0D, 7.0D, 8.0D)).isEmpty();
@@ -46,7 +46,7 @@ public class BroodEetleAirSlamGoal extends EndimatedGoal<BroodEetle> {
 		broodEetle.setTargetFlyingRotations(new TargetFlyingRotations(-30.0F, 0.0F));
 		broodEetle.push(0.0F, -0.15F, 0.0F);
 
-		if (broodEetle.isOnGround()) {
+		if (broodEetle.onGround()) {
 			int animationTick = broodEetle.getAnimationTick();
 			if (animationTick >= 10 && animationTick <= 60) {
 				NetworkUtil.setPlayingAnimation(broodEetle, EEPlayableEndimations.BROOD_EETLE_AIR_SLAM);
@@ -72,7 +72,7 @@ public class BroodEetleAirSlamGoal extends EndimatedGoal<BroodEetle> {
 			if (livingEntity instanceof Player) {
 				return livingEntity.isAlive() && !livingEntity.isInvisible() && broodEetle.hasLineOfSight(livingEntity) && !((Player) livingEntity).isCreative();
 			}
-			return livingEntity.isAlive() && livingEntity.isOnGround() && !livingEntity.isInvisible() && broodEetle.hasLineOfSight(livingEntity) && (livingEntity instanceof Mob && ((Mob) livingEntity).getTarget() == broodEetle || broodEetle.isAnAggressor(livingEntity));
+			return livingEntity.isAlive() && livingEntity.onGround() && !livingEntity.isInvisible() && broodEetle.hasLineOfSight(livingEntity) && (livingEntity instanceof Mob && ((Mob) livingEntity).getTarget() == broodEetle || broodEetle.isAnAggressor(livingEntity));
 		});
 	}
 

@@ -74,7 +74,7 @@ public class BroodEetleLandGoal extends Goal {
 		BlockPos takeoffPos = broodEetle.takeoffPos;
 		if (broodEetle.isFlying() && broodEetle.position().distanceToSqr(Vec3.atCenterOf(takeoffPos)) <= 3.0F) {
 			broodEetle.setDeltaMovement(broodEetle.getDeltaMovement().scale(0.95F));
-			if (++this.ticksNearTakeoffPos >= 5 && broodEetle.isOnGround()) {
+			if (++this.ticksNearTakeoffPos >= 5 && broodEetle.onGround()) {
 				broodEetle.resetFlyCooldown();
 				broodEetle.setFlying(false);
 				broodEetle.takeoffPos = null;

@@ -8,7 +8,7 @@ import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.teamabnormals.endergetic.api.entity.pathfinding.EndergeticFlyingPathNavigator;
 import com.teamabnormals.endergetic.api.entity.util.RayTraceHelper;
 import com.teamabnormals.endergetic.api.util.GenerationUtils;
-import com.teamabnormals.endergetic.api.util.TemporaryMathUtil;
+import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.endergetic.common.block.entity.BolloomBudTileEntity;
 import com.teamabnormals.endergetic.common.block.entity.BolloomBudTileEntity.BudSide;
 import com.teamabnormals.endergetic.common.block.entity.PuffBugHiveTileEntity;
@@ -271,36 +271,36 @@ public class PuffBug extends Animal implements Endimatable {
 
 			if (this.isEndimationPlaying(EEPlayableEndimations.PUFF_BUG_PUFF) && this.getAnimationTick() == 5) {
 				for (int i = 0; i < 3; i++) {
-					double offsetX = TemporaryMathUtil.makeNegativeRandomly(rand.nextFloat() * 0.1F, rand);
-					double offsetZ = TemporaryMathUtil.makeNegativeRandomly(rand.nextFloat() * 0.1F, rand);
+					double offsetX = MathUtil.makeNegativeRandomly(rand.nextFloat() * 0.1F, rand);
+					double offsetZ = MathUtil.makeNegativeRandomly(rand.nextFloat() * 0.1F, rand);
 
 					double x = this.getX() + offsetX;
 					double y = this.getY() + (rand.nextFloat() * 0.05F) + 0.7F;
 					double z = this.getZ() + offsetZ;
 
-					this.level.addParticle(EEParticleTypes.SHORT_POISE_BUBBLE.get(), x, y, z, TemporaryMathUtil.makeNegativeRandomly((rand.nextFloat() * 0.1F), rand) + 0.05F, (rand.nextFloat() * 0.05F) + 0.025F, TemporaryMathUtil.makeNegativeRandomly((rand.nextFloat() * 0.1F), rand) + 0.05F);
+					this.level.addParticle(EEParticleTypes.SHORT_POISE_BUBBLE.get(), x, y, z, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.1F), rand) + 0.05F, (rand.nextFloat() * 0.05F) + 0.025F, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.1F), rand) + 0.05F);
 				}
 			} else if (this.isEndimationPlaying(EEPlayableEndimations.PUFF_BUG_TELEPORT_TO) && this.getAnimationTick() == 8) {
 				for (int i = 0; i < 6; i++) {
-					double offsetX = TemporaryMathUtil.makeNegativeRandomly(rand.nextFloat() * 0.1F, rand);
-					double offsetZ = TemporaryMathUtil.makeNegativeRandomly(rand.nextFloat() * 0.1F, rand);
+					double offsetX = MathUtil.makeNegativeRandomly(rand.nextFloat() * 0.1F, rand);
+					double offsetZ = MathUtil.makeNegativeRandomly(rand.nextFloat() * 0.1F, rand);
 
 					double x = this.getX() + offsetX;
 					double y = this.getY() + (rand.nextFloat() * 0.05F) + 0.7F;
 					double z = this.getZ() + offsetZ;
 
-					this.level.addParticle(EEParticleTypes.SHORT_POISE_BUBBLE.get(), x, y, z, TemporaryMathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F, (rand.nextFloat() * 0.025F) + 0.025F, TemporaryMathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F);
+					this.level.addParticle(EEParticleTypes.SHORT_POISE_BUBBLE.get(), x, y, z, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F, (rand.nextFloat() * 0.025F) + 0.025F, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F);
 				}
 			} else if (this.isEndimationPlaying(EEPlayableEndimations.PUFF_BUG_TELEPORT_FROM) && this.getAnimationTick() == 5) {
 				for (int i = 0; i < 6; i++) {
-					double offsetX = TemporaryMathUtil.makeNegativeRandomly(rand.nextFloat() * 0.1F, rand);
-					double offsetZ = TemporaryMathUtil.makeNegativeRandomly(rand.nextFloat() * 0.1F, rand);
+					double offsetX = MathUtil.makeNegativeRandomly(rand.nextFloat() * 0.1F, rand);
+					double offsetZ = MathUtil.makeNegativeRandomly(rand.nextFloat() * 0.1F, rand);
 
 					double x = this.getX() + offsetX;
 					double y = this.getY() + (rand.nextFloat() * 0.05F) + 0.7F;
 					double z = this.getZ() + offsetZ;
 
-					this.level.addParticle(EEParticleTypes.SHORT_POISE_BUBBLE.get(), x, y, z, TemporaryMathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F, (rand.nextFloat() * 0.025F) + 0.025F, TemporaryMathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F);
+					this.level.addParticle(EEParticleTypes.SHORT_POISE_BUBBLE.get(), x, y, z, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F, (rand.nextFloat() * 0.025F) + 0.025F, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F);
 				}
 			}
 
@@ -1084,7 +1084,7 @@ public class PuffBug extends Animal implements Endimatable {
 				int swarmSize = rng.nextInt(11) + 10;
 				Vec3 centeredPos = Vec3.atCenterOf(this.blockPosition());
 				for (int i = 0; i < swarmSize; i++) {
-					Vec3 spawnPos = centeredPos.add(TemporaryMathUtil.makeNegativeRandomly(rng.nextFloat() * 5.5F, rng), TemporaryMathUtil.makeNegativeRandomly(rng.nextFloat() * 2.0F, rng), TemporaryMathUtil.makeNegativeRandomly(rng.nextFloat() * 5.5F, rng));
+					Vec3 spawnPos = centeredPos.add(MathUtil.makeNegativeRandomly(rng.nextFloat() * 5.5F, rng), MathUtil.makeNegativeRandomly(rng.nextFloat() * 2.0F, rng), MathUtil.makeNegativeRandomly(rng.nextFloat() * 5.5F, rng));
 
 					if (this.level.isEmptyBlock(new BlockPos(spawnPos))) {
 						PuffBug swarmChild = EEEntityTypes.PUFF_BUG.get().create(this.level);

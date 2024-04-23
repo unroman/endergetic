@@ -34,7 +34,7 @@ public final class C2SInflateMessage {
 					Entity entity = player.getVehicle();
 					if (entity instanceof Booflo) {
 						Booflo booflo = (Booflo) entity;
-						if (!booflo.isOnGround() && !booflo.isBoostLocked() && booflo.getBoostPower() <= 0) {
+						if (!booflo.onGround() && !booflo.isBoostLocked() && booflo.getBoostPower() <= 0) {
 							if (!booflo.isBoofed()) {
 								booflo.setBoostLocked(true);
 								booflo.setBoofed(true);

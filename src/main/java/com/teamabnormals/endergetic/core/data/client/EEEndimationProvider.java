@@ -3,15 +3,15 @@ package com.teamabnormals.endergetic.core.data.client;
 import com.teamabnormals.blueprint.core.endimator.EndimationKeyframe;
 import com.teamabnormals.blueprint.core.endimator.util.EndimationProvider;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 
 import static com.teamabnormals.blueprint.core.endimator.Endimation.Builder.Keyframes.keyframes;
 import static com.teamabnormals.blueprint.core.endimator.Endimation.PartKeyframes.Builder.partKeyframes;
 
 public final class EEEndimationProvider extends EndimationProvider {
 
-	public EEEndimationProvider(DataGenerator generator) {
-		super(generator, EndergeticExpansion.MOD_ID);
+	public EEEndimationProvider(PackOutput output) {
+		super(EndergeticExpansion.MOD_ID, output);
 	}
 
 	@Override

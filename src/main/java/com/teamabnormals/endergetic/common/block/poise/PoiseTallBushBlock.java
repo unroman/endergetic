@@ -1,13 +1,11 @@
 package com.teamabnormals.endergetic.common.block.poise;
 
-import com.teamabnormals.blueprint.core.util.item.ItemStackUtil;
 import com.teamabnormals.endergetic.common.levelgen.feature.PoiseTreeFeature;
 import com.teamabnormals.endergetic.core.registry.EEParticleTypes;
 import com.teamabnormals.endergetic.core.registry.EESoundEvents;
 import com.teamabnormals.endergetic.core.registry.other.tags.EEBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -15,9 +13,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -170,7 +166,7 @@ public class PoiseTallBushBlock extends Block implements BonemealableBlock {
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
@@ -188,14 +184,10 @@ public class PoiseTallBushBlock extends Block implements BonemealableBlock {
 		if (state.getValue(STAGE) == 0) {
 			worldIn.setBlock(pos, state.cycle(STAGE), 4);
 		} else {
-			if (!ForgeEventFactory.saplingGrowTree(worldIn, rand, pos)) return;
+			// TODO: Reimplement
+			// if (!ForgeEventFactory.blockGrowFeature(worldIn, rand, pos)) return;
 			BlockPos treePos = state.getValue(HALF) == DoubleBlockHalf.LOWER ? pos : pos.below();
 			(new PoiseTreeFeature(NoneFeatureConfiguration.CODEC)).place(FeatureConfiguration.NONE, worldIn, worldIn.getChunkSource().getGenerator(), rand, treePos);
 		}
-	}
-
-	@Override
-	public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-		ItemStackUtil.fillAfterItemForCategory(this.asItem(), Items.LARGE_FERN, group, items);
 	}
 }

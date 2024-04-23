@@ -158,6 +158,6 @@ public class CorrockShelfFeature extends AbstractCorrockFeature<ProbabilityFeatu
 
 	private static boolean canReplace(WorldGenLevel world, BlockPos pos) {
 		BlockState state = world.getBlockState(pos);
-		return state.getMaterial().isReplaceable() || state.getBlock() instanceof CorrockPlantBlock || state.getBlock() instanceof CorrockCrownBlock;
+		return state.canBeReplaced() || state.getBlock() instanceof CorrockPlantBlock || state.getBlock() instanceof CorrockCrownBlock;
 	}
 }

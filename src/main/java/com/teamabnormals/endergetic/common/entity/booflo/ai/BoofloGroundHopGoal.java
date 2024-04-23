@@ -22,7 +22,7 @@ public class BoofloGroundHopGoal extends EndimatedGoal<Booflo> {
 		if (RayTraceHelper.rayTrace(this.entity, 1.5D, 1.0F).getType() == Type.BLOCK) {
 			return false;
 		}
-		return this.entity.getMoveControl() instanceof GroundMoveHelperController && this.entity.isOnGround() && !this.entity.isBoofed() && this.entity.hopDelay == 0 && this.entity.isNoEndimationPlaying() && !this.entity.isPassenger() && this.entity.getPassengers().isEmpty();
+		return this.entity.getMoveControl() instanceof GroundMoveHelperController && this.entity.onGround() && !this.entity.isBoofed() && this.entity.hopDelay == 0 && this.entity.isNoEndimationPlaying() && !this.entity.isPassenger() && this.entity.getPassengers().isEmpty();
 	}
 
 	@Override

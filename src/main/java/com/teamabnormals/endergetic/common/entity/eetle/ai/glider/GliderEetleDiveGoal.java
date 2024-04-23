@@ -105,7 +105,7 @@ public class GliderEetleDiveGoal extends Goal {
 		glider.setTargetFlyingRotations(new TargetFlyingRotations(this.targetPitch, glider.getTargetFlyingRotations().getTargetFlyRoll()));
 		glider.setYRot(FlyingRotations.clampedRotate(glider.getYRot(), this.targetYaw, 15.0F));
 		glider.getLookControl().setLookAt(this.divePos);
-		if (ticksDiving > 5 && (glider.isOnGround() || glider.horizontalCollision)) {
+		if (ticksDiving > 5 && (glider.onGround() || glider.horizontalCollision)) {
 			LivingEntity attackTarget = glider.getTarget();
 			if (attackTarget != null && glider.hasPassenger(attackTarget)) {
 				glider.makeGrounded();

@@ -924,7 +924,7 @@ public class PoiseTreeFeature extends Feature<NoneFeatureConfiguration> {
 		Direction randDir = Direction.from3DDataValue(rand.nextInt(4) + 2);
 		int pickedHeight = rand.nextInt((int) Math.ceil(treeHeight / 3.0F)) + 6;
 		BlockPos pickedPosition = pos.relative(randDir).above(pickedHeight);
-		if (world.getBlockState(pickedPosition).getMaterial().isReplaceable() && treeHeight > 15) {
+		if (world.getBlockState(pickedPosition).canBeReplaced() && treeHeight > 15) {
 			if (this.isViableBranchArea(world, pickedPosition, randDir, 2 + branchLengths[0] + branchLengths[1], pickedPosition.relative(randDir, branchLengths[0] + branchLengths[1] + branchLengths[2] + branchLengths[3]).above(3 + branchHeights[2]).above(branchHeights[3]))) {
 				this.setPoiseLog(world, pickedPosition, rand, false, true);
 				this.setPoiseLog(world, pickedPosition.above(), rand, false, true);
@@ -1137,15 +1137,15 @@ public class PoiseTreeFeature extends Feature<NoneFeatureConfiguration> {
 
 	private void setPoiseLog(LevelAccessor world, BlockPos pos, RandomSource rand, boolean isTreeBase, boolean noBubbles) {
 		BlockState logState = rand.nextFloat() <= 0.11F ? GLOWING_POISE_STEM.get() : POISE_STEM.get();
-		if (world.getBlockState(pos).getMaterial().isReplaceable() || world.getBlockState(pos).getBlock() == EEBlocks.POISE_CLUSTER.get()) {
+		if (world.getBlockState(pos).canBeReplaced() || world.getBlockState(pos).getBlock() == EEBlocks.POISE_CLUSTER.get()) {
 			world.setBlock(pos, logState, 2);
 			if (!noBubbles && logState == GLOWING_POISE_STEM.get()) {
 				if (!isTreeBase) {
 					boolean willCollide = world.getBlockState(pos.below()).getBlock() == EEBlocks.GLOWING_POISE_STEM.get() || world.getBlockState(pos.below(2)).getBlock() == EEBlocks.GLOWING_POISE_STEM.get() || world.getBlockState(pos.below(3)).getBlock() == EEBlocks.GLOWING_POISE_STEM.get()
 							|| world.getBlockState(pos.above()).getBlock() == EEBlocks.GLOWING_POISE_STEM.get() || world.getBlockState(pos.above(2)).getBlock() == EEBlocks.GLOWING_POISE_STEM.get() || world.getBlockState(pos.above(3)).getBlock() == EEBlocks.GLOWING_POISE_STEM.get();
 					if (rand.nextFloat() <= 0.70F && !willCollide
-							&& world.getBlockState(pos.north()).getMaterial().isReplaceable() && world.getBlockState(pos.east()).getMaterial().isReplaceable()
-							&& world.getBlockState(pos.south()).getMaterial().isReplaceable() && world.getBlockState(pos.west()).getMaterial().isReplaceable())
+							&& world.getBlockState(pos.north()).canBeReplaced() && world.getBlockState(pos.east()).canBeReplaced()
+							&& world.getBlockState(pos.south()).canBeReplaced() && world.getBlockState(pos.west()).canBeReplaced())
 						this.buildSideBubble(world, pos, rand);
 				} else {
 					boolean willCollide = world.getBlockState(pos.below()).getBlock() == EEBlocks.GLOWING_POISE_STEM.get() || world.getBlockState(pos.below(2)).getBlock() == EEBlocks.GLOWING_POISE_STEM.get() || world.getBlockState(pos.below(3)).getBlock() == EEBlocks.GLOWING_POISE_STEM.get()
@@ -1160,13 +1160,13 @@ public class PoiseTreeFeature extends Feature<NoneFeatureConfiguration> {
 
 	private void setPoiseLogWithDirection(LevelAccessor world, BlockPos pos, RandomSource rand, Direction direction) {
 		BlockState logState = rand.nextFloat() <= 0.90F ? POISE_STEM.get().setValue(GlowingPoiseStemBlock.AXIS, direction.getAxis()) : GLOWING_POISE_STEM.get().setValue(GlowingPoiseStemBlock.AXIS, direction.getAxis());
-		if (world.getBlockState(pos).getMaterial().isReplaceable()) {
+		if (world.getBlockState(pos).canBeReplaced()) {
 			world.setBlock(pos, logState, 2);
 		}
 	}
 
 	private void setPoiseCluster(LevelAccessor world, BlockPos pos) {
-		if (world.getBlockState(pos).getMaterial().isReplaceable()) {
+		if (world.getBlockState(pos).canBeReplaced()) {
 			world.setBlock(pos, EEBlocks.POISE_CLUSTER.get().defaultBlockState(), 2);
 		}
 	}
@@ -1201,7 +1201,7 @@ public class PoiseTreeFeature extends Feature<NoneFeatureConfiguration> {
 		for (int y = pos.getY(); y < pos.getY() + 1; y++) {
 			for (int x = pos.getX() - 1; x < pos.getX() + 2; x++) {
 				for (int z = pos.getZ() - 1; z < pos.getZ() + 2; z++) {
-					if (!world.getBlockState(new BlockPos(x, y, z)).getMaterial().isReplaceable()) {
+					if (!world.getBlockState(new BlockPos(x, y, z)).canBeReplaced()) {
 						return false;
 					}
 				}

@@ -124,7 +124,7 @@ public class GliderEetleDropOffGoal extends Goal {
 		BlockPos clusterPos = null;
 		int largestCluster = 2;
 		Set<ChargerEetle> foundInCluster = new HashSet<>();
-		List<ChargerEetle> chargerEetleEntityList = world.getEntitiesOfClass(ChargerEetle.class, new AABB(origin).inflate(24.0D, 6.0D, 24.0D), Entity::isOnGround);
+		List<ChargerEetle> chargerEetleEntityList = world.getEntitiesOfClass(ChargerEetle.class, new AABB(origin).inflate(24.0D, 6.0D, 24.0D), Entity::onGround);
 		List<Pair<Double, Double>> points = new ArrayList<>();
 		for (ChargerEetle charger : chargerEetleEntityList) {
 			if (!foundInCluster.contains(charger)) {

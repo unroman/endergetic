@@ -29,7 +29,7 @@ public class BoofloTemptGoal extends Goal {
 		if (this.tempter == null) {
 			return false;
 		} else {
-			return !this.booflo.isTamed() && !this.booflo.hasCaughtFruit() && !this.booflo.isInLove() && this.booflo.getMoveControl() instanceof GroundMoveHelperController && !this.booflo.isBoofed() && this.booflo.isOnGround() && this.isTemptedBy(this.tempter.getMainHandItem()) || this.isTemptedBy(this.tempter.getOffhandItem());
+			return !this.booflo.isTamed() && !this.booflo.hasCaughtFruit() && !this.booflo.isInLove() && this.booflo.getMoveControl() instanceof GroundMoveHelperController && !this.booflo.isBoofed() && this.booflo.onGround() && this.isTemptedBy(this.tempter.getMainHandItem()) || this.isTemptedBy(this.tempter.getOffhandItem());
 		}
 	}
 

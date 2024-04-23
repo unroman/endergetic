@@ -34,7 +34,7 @@ public class LayerRendererBoofloFruit extends RenderLayer<Booflo, EntityModel<Bo
 			Vec3 fruitPos = (new Vec3(-1.25D, 0.0D, 0.0D)).yRot(-netHeadYaw * ((float) Math.PI / 180F) - ((float) Math.PI / 2F));
 			matrixStack.translate(fruitPos.x(), fruitPos.y() + 1.15F + this.getFruitPosOffset(booflo), fruitPos.z());
 
-			matrixStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
+			matrixStack.mulPose(Axis.XP.rotationDegrees(90.0F));
 
 			matrixStack.scale(1.3F, 1.3F, 1.3F);
 

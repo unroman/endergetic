@@ -121,8 +121,8 @@ public class EndergeticExpansion {
 		EEPlacedFeatures.PLACED_FEATURES.register(bus);
 		EEStructures.STRUCTURE_TYPES.register(bus);
 		EEStructures.STRUCTURES.register(bus);
-		EEStructures.PieceTypes.STRUCTURE_PIECE_TYPES.register(bus);
-		EEStructures.Sets.STRUCTURE_SETS.register(bus);
+//		EEStructures.PieceTypes.STRUCTURE_PIECE_TYPES.register(bus);
+//		EEStructures.Sets.STRUCTURE_SETS.register(bus);
 		EEDataSerializers.SERIALIZERS.register(bus);
 		EEBiomeModifierSerializers.SERIALIZERS.register(bus);
 
@@ -161,16 +161,16 @@ public class EndergeticExpansion {
 		DataGenerator generator = event.getGenerator();
 		ExistingFileHelper helper = event.getExistingFileHelper();
 
-		boolean includeServer = event.includeServer();
-		generator.addProvider(includeServer, new EEChunkGeneratorModifierProvider(generator));
-		generator.addProvider(includeServer, new EERecipeProvider(generator));
-		generator.addProvider(includeServer, new EEAdvancementModifierProvider(generator));
-		generator.addProvider(includeServer, new EELootModifierProvider(generator));
+		boolean server = event.includeServer();
+		generator.addProvider(server, new EEChunkGeneratorModifierProvider(generator));
+		generator.addProvider(server, new EERecipeProvider(generator));
+		generator.addProvider(server, new EEAdvancementModifierProvider(generator));
+		generator.addProvider(server, new EELootModifierProvider(generator));
 		EEBlockTagsProvider blockTags = new EEBlockTagsProvider(generator, helper);
-		generator.addProvider(includeServer, blockTags);
-		generator.addProvider(includeServer, new EEItemTagsProvider(generator, blockTags, helper));
-		generator.addProvider(includeServer, new EEBiomeTagsProvider(generator, helper));
-		generator.addProvider(includeServer, EEBiomeModifierProvider.create(generator, helper));
+		generator.addProvider(server, blockTags);
+		generator.addProvider(server, new EEItemTagsProvider(generator, blockTags, helper));
+		generator.addProvider(server, new EEBiomeTagsProvider(generator, helper));
+		generator.addProvider(server, EEBiomeModifierProvider.create(generator, helper));
 
 		boolean includeClient = event.includeClient();
 		generator.addProvider(includeClient, new EEEndimationProvider(generator));

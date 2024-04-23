@@ -8,7 +8,7 @@ import com.teamabnormals.endergetic.core.registry.other.EEEvents;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -143,7 +143,7 @@ public class CorrockCrownWallBlock extends CorrockCrownBlock {
 	}
 
 	protected Block getConversionBlock(LevelAccessor level) {
-		return CONVERSIONS.getOrDefault(level.registryAccess().registry(Registry.DIMENSION_TYPE_REGISTRY).get().getKey(level.dimensionType()), EEBlocks.CORROCK_CROWN_OVERWORLD_WALL).get();
+		return CONVERSIONS.getOrDefault(level.registryAccess().registry(Registries.DIMENSION_TYPE).get().getKey(level.dimensionType()), EEBlocks.CORROCK_CROWN_OVERWORLD_WALL).get();
 	}
 
 	private boolean shouldConvert(LevelAccessor level) {

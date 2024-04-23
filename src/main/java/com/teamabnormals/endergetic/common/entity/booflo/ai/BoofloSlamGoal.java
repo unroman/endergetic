@@ -20,7 +20,7 @@ public class BoofloSlamGoal extends EndimatedGoal<Booflo> {
 
 	@Override
 	public boolean canUse() {
-		return this.entity.hasAggressiveAttackTarget() && this.entity.getPassengers().isEmpty() && this.entity.isEndimationPlaying(EEPlayableEndimations.BOOFLO_SWIM) && !this.entity.isOnGround() && this.isEntityUnder() && this.isSolidUnderTarget();
+		return this.entity.hasAggressiveAttackTarget() && this.entity.getPassengers().isEmpty() && this.entity.isEndimationPlaying(EEPlayableEndimations.BOOFLO_SWIM) && !this.entity.onGround() && this.isEntityUnder() && this.isSolidUnderTarget();
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class BoofloSlamGoal extends EndimatedGoal<Booflo> {
 			NetworkUtil.setPlayingAnimation(this.entity, EEPlayableEndimations.BOOFLO_INFLATE);
 			return false;
 		}
-		return !this.entity.isOnGround() && this.isEndimationPlaying();
+		return !this.entity.onGround() && this.isEndimationPlaying();
 	}
 
 	@Override

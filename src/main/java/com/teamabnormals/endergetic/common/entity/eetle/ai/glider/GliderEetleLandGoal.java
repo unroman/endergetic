@@ -13,12 +13,12 @@ public class GliderEetleLandGoal extends Goal {
 
 	@Override
 	public boolean canUse() {
-		return this.glider.shouldLand() && !this.glider.isMoving() && this.glider.isOnGround() && !this.glider.isAggressive() && this.glider.getRandom().nextFloat() < 0.05F;
+		return this.glider.shouldLand() && !this.glider.isMoving() && this.glider.onGround() && !this.glider.isAggressive() && this.glider.getRandom().nextFloat() < 0.05F;
 	}
 
 	@Override
 	public boolean canContinueToUse() {
-		if (this.ticksPassed < 15 && this.glider.isOnGround() && !this.glider.isAggressive()) {
+		if (this.ticksPassed < 15 && this.glider.onGround() && !this.glider.isAggressive()) {
 			return true;
 		}
 		this.glider.setFlying(this.ticksPassed < 10);

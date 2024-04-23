@@ -46,7 +46,7 @@ public class FastBlockParticle extends TextureSheetParticle {
 	}
 
 	public FastBlockParticle init() {
-		this.sourcePos = new BlockPos(this.x, this.y, this.z);
+		this.sourcePos = BlockPos.containing(this.x, this.y, this.z);
 		if (!this.sourceState.is(Blocks.GRASS_BLOCK)) {
 			this.multiplyColor(this.sourcePos);
 		}

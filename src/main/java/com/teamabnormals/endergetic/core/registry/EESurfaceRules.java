@@ -3,6 +3,7 @@ package com.teamabnormals.endergetic.core.registry;
 import com.mojang.serialization.Codec;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.KeyDispatchDataCodec;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,7 +16,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
 public final class EESurfaceRules extends SurfaceRules {
-	public static final DeferredRegister<Codec<? extends RuleSource>> RULES = DeferredRegister.create(Registry.RULE_REGISTRY, EndergeticExpansion.MOD_ID);
+	public static final DeferredRegister<Codec<? extends RuleSource>> RULES = DeferredRegister.create(Registries.MATERIAL_RULE, EndergeticExpansion.MOD_ID);
 
 	public static final RegistryObject<Codec<CorrockRuleSource>> CORROCK = RULES.register("corrock", CorrockRuleSource.CODEC::codec);
 

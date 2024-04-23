@@ -27,7 +27,7 @@ public class BoofloEatFruitGoal extends EndimatedGoal<Booflo> {
 				return false;
 			}
 		}
-		return this.entity.isNoEndimationPlaying() && this.entity.hasCaughtFruit() && !this.entity.isBoofed() && this.entity.isOnGround() && !this.entity.isInLove();
+		return this.entity.isNoEndimationPlaying() && this.entity.hasCaughtFruit() && !this.entity.isBoofed() && this.entity.onGround() && !this.entity.isInLove();
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class BoofloEatFruitGoal extends EndimatedGoal<Booflo> {
 				return false;
 			}
 		}
-		return this.isEndimationPlaying() && flag && !this.entity.isBoofed() && this.entity.isOnGround();
+		return this.isEndimationPlaying() && flag && !this.entity.isBoofed() && this.entity.onGround();
 	}
 
 	@Override

@@ -54,7 +54,7 @@ public class PoismossPathBlock extends Block {
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
 		BlockState blockstate = worldIn.getBlockState(pos.above());
-		return !blockstate.getMaterial().isSolid() || blockstate.getBlock() instanceof FenceGateBlock;
+		return !blockstate.isSolid() || blockstate.getBlock() instanceof FenceGateBlock;
 	}
 
 	@Override

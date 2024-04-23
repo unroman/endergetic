@@ -1339,21 +1339,21 @@ public class PoiseDomeFeature extends Feature<NoneFeatureConfiguration> {
 	}
 
 	private void setPoiseCluster(LevelAccessor world, BlockPos pos, RandomSource rand) {
-		if (world.getBlockState(pos).getMaterial().isReplaceable()) {
+		if (world.getBlockState(pos).canBeReplaced()) {
 			world.setBlock(pos, EEBlocks.POISE_CLUSTER.get().defaultBlockState(), 2);
 		}
 	}
 
 	private void setPoiseLogHighProb(LevelAccessor world, BlockPos pos, RandomSource rand) {
 		BlockState logState = rand.nextFloat() <= 0.35F ? EEBlocks.POISE_STEM.get().defaultBlockState() : EEBlocks.GLOWING_POISE_STEM.get().defaultBlockState();
-		if (world.getBlockState(pos).getMaterial().isReplaceable()) {
+		if (world.getBlockState(pos).canBeReplaced()) {
 			world.setBlock(pos, logState, 2);
 		}
 	}
 
 	private void setPoiseLog(LevelAccessor world, BlockPos pos, RandomSource rand) {
 		BlockState logState = rand.nextFloat() <= 0.90F ? EEBlocks.POISE_STEM.get().defaultBlockState() : EEBlocks.GLOWING_POISE_STEM.get().defaultBlockState();
-		if (world.getBlockState(pos).getMaterial().isReplaceable()) {
+		if (world.getBlockState(pos).canBeReplaced()) {
 			world.setBlock(pos, logState, 2);
 		}
 	}

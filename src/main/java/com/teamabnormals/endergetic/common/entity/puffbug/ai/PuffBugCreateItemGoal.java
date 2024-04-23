@@ -2,7 +2,7 @@ package com.teamabnormals.endergetic.common.entity.puffbug.ai;
 
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatedGoal;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
-import com.teamabnormals.endergetic.api.util.TemporaryMathUtil;
+import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.endergetic.common.entity.puffbug.PuffBug;
 import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
 import net.minecraft.util.RandomSource;
@@ -63,14 +63,14 @@ public class PuffBugCreateItemGoal extends EndimatedGoal<PuffBug> {
 				double posY = this.entity.getY();
 				double posZ = this.entity.getZ();
 				for (int i = 0; i < 6; i++) {
-					double offsetX = TemporaryMathUtil.makeNegativeRandomly(rand.nextFloat() * 0.1F, rand);
-					double offsetZ = TemporaryMathUtil.makeNegativeRandomly(rand.nextFloat() * 0.1F, rand);
+					double offsetX = MathUtil.makeNegativeRandomly(rand.nextFloat() * 0.1F, rand);
+					double offsetZ = MathUtil.makeNegativeRandomly(rand.nextFloat() * 0.1F, rand);
 
 					double x = posX + offsetX;
 					double y = posY + (rand.nextFloat() * 0.05F) + 0.5F;
 					double z = posZ + offsetZ;
 
-					NetworkUtil.spawnParticle("endergetic:short_poise_bubble", x, y, z, TemporaryMathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F, (rand.nextFloat() * 0.025F) + 0.025F, TemporaryMathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F);
+					NetworkUtil.spawnParticle("endergetic:short_poise_bubble", x, y, z, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F, (rand.nextFloat() * 0.025F) + 0.025F, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F);
 				}
 			} else if (this.isEndimationAtTick(85)) {
 				this.entity.playSound(this.entity.getItemCreationSound(), 0.1F, this.entity.isBaby() ? (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.5F : (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);

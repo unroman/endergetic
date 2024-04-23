@@ -45,7 +45,7 @@ public final class PlayerListMixin {
 
 	@Inject(at = @At("RETURN"), method = "placeNewPlayer")
 	private void spawnBalloons(Connection connection, ServerPlayer player, CallbackInfo info) {
-		ServerLevel serverWorld = (ServerLevel) player.level;
+		ServerLevel serverWorld = (ServerLevel) player.level();
 
 		CompoundTag compound = this.server.getWorldData().getLoadedPlayerTag();
 		if (!(compound != null && this.server.isSingleplayerOwner(player.getGameProfile()))) {

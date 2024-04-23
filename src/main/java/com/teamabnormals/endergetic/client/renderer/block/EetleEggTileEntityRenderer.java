@@ -55,17 +55,17 @@ public class EetleEggTileEntityRenderer implements BlockEntityRenderer<EetleEggT
 		switch (facing) {
 			case UP:
 				matrixStack.translate(0.5F, 1.5F, 0.5F);
-				matrixStack.mulPose(Vector3f.XP.rotationDegrees(180.0F));
+				matrixStack.mulPose(Axis.XP.rotationDegrees(180.0F));
 				break;
 			case DOWN:
 				matrixStack.translate(0.5F, -0.5F, 0.5F);
 				break;
 			default:
 				matrixStack.translate(0.5F + facing.getStepX(), 0.5F, 0.5F + facing.getStepZ());
-				matrixStack.mulPose((facing.getAxis() == Direction.Axis.X ? Vector3f.ZP : Vector3f.XN).rotationDegrees(90.0F * facing.getAxisDirection().getStep()));
+				matrixStack.mulPose((facing.getAxis() == Direction.Axis.X ? Axis.ZP : Axis.XN).rotationDegrees(90.0F * facing.getAxisDirection().getStep()));
 				break;
 		}
-		matrixStack.mulPose(Vector3f.YP.rotationDegrees(randomDirection.toYRot()));
+		matrixStack.mulPose(Axis.YP.rotationDegrees(randomDirection.toYRot()));
 		int size = state.getValue(EetleEggBlock.SIZE);
 		IEetleEggModel eggsModel = this.eggModels[size];
 		eggsModel.render(matrixStack, buffer.getBuffer(RenderType.entityCutout(TEXTURES[size])), combinedLight, combinedOverlay, partialTicks, eggs.getSackGrowths());

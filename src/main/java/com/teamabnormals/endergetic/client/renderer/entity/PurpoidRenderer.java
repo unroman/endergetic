@@ -74,9 +74,9 @@ public class PurpoidRenderer extends MobRenderer<Purpoid, PurpoidModel> {
 		Entity ridingEntity = purpoid.getVehicle();
 		if (ridingEntity != null) {
 			if (ridingEntity instanceof LivingEntity livingEntity) {
-				poseStack.mulPose(Vector3f.YP.rotationDegrees(180.0F - Mth.rotLerp(partialTicks, livingEntity.yHeadRotO, livingEntity.yHeadRot)));
+				poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - Mth.rotLerp(partialTicks, livingEntity.yHeadRotO, livingEntity.yHeadRot)));
 			} else {
-				poseStack.mulPose(Vector3f.YP.rotationDegrees(180.0F - rotationYaw));
+				poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - rotationYaw));
 			}
 		} else {
 			Vec3 pull = purpoid.getPull(partialTicks);
@@ -88,16 +88,16 @@ public class PurpoidRenderer extends MobRenderer<Purpoid, PurpoidModel> {
 			float rotationOffset = 0.5F * purpoid.getSize().getScale();
 			float yRot = (float) Mth.atan2(pulledZ, pulledX);
 			poseStack.translate(0.0F, rotationOffset, 0.0F);
-			poseStack.mulPose(Vector3f.YP.rotation(-yRot));
-			poseStack.mulPose(Vector3f.ZP.rotation((float) ((Mth.atan2(Mth.sqrt((float) (pulledX * pulledX + pulledZ * pulledZ)), -pulledY)) - Math.PI)));
-			poseStack.mulPose(Vector3f.YP.rotation(yRot));
+			poseStack.mulPose(Axis.YP.rotation(-yRot));
+			poseStack.mulPose(Axis.ZP.rotation((float) ((Mth.atan2(Mth.sqrt((float) (pulledX * pulledX + pulledZ * pulledZ)), -pulledY)) - Math.PI)));
+			poseStack.mulPose(Axis.YP.rotation(yRot));
 			poseStack.translate(0.0F, -rotationOffset, 0.0F);
 		}
 		if (purpoid.hasCustomName()) {
 			String name = ChatFormatting.stripFormatting(purpoid.getName().getString());
 			if (name.equals("Dinnerbone") || name.equals("Grumm")) {
 				poseStack.translate(0.0D, purpoid.getBbHeight() + 0.1D, 0.0D);
-				poseStack.mulPose(Vector3f.ZP.rotationDegrees(180.0F));
+				poseStack.mulPose(Axis.ZP.rotationDegrees(180.0F));
 			}
 		}
 	}

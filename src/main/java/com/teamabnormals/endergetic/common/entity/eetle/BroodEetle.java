@@ -219,7 +219,7 @@ public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
 			if (this.flyCooldown > 0) this.flyCooldown--;
 			if (this.eggDropOffCooldown > 0) this.eggDropOffCooldown--;
 
-			if (this.random.nextFloat() < 0.005F && this.idleDelay <= 0 && this.isOnGround() && !this.isFiringCannon() && this.isNoEndimationPlaying()) {
+			if (this.random.nextFloat() < 0.005F && this.idleDelay <= 0 && this.onGround() && !this.isFiringCannon() && this.isNoEndimationPlaying()) {
 				NetworkUtil.setPlayingAnimation(this, this.random.nextFloat() < 0.6F && !this.isFlying() ? EEPlayableEndimations.BROOD_EETLE_FLAP : EEPlayableEndimations.BROOD_EETLE_MUNCH);
 				this.resetIdleFlapDelay();
 			}

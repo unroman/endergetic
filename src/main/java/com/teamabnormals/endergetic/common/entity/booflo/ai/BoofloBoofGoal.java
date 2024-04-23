@@ -22,7 +22,7 @@ public class BoofloBoofGoal extends EndimatedGoal<Booflo> {
 
 	@Override
 	public boolean canUse() {
-		boolean onGround = this.entity.isOnGround();
+		boolean onGround = this.entity.onGround();
 		boolean flagChance = !this.entity.hasAggressiveAttackTarget() ? this.entity.getRandom().nextFloat() < 0.25F && this.isEndimationAtTick(20) : this.isEndimationPastOrAtTick(20);
 
 		if (this.entity.hasAggressiveAttackTarget() && !this.entity.isBoofed()) {

@@ -7,8 +7,7 @@ import com.teamabnormals.endergetic.core.EEConfig;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -43,8 +42,8 @@ public final class EndergeticDragonFightManager extends EndDragonFight {
 	private static final Logger LOGGER = LogManager.getLogger();
 	private static final Predicate<Entity> VALID_PLAYER = EntitySelector.ENTITY_STILL_ALIVE.and(EntitySelector.withinDistance(0.0D, 128.0D, 0.0D, 192.0D));
 
-	public EndergeticDragonFightManager(ServerLevel worldIn, long seed, CompoundTag compound) {
-		super(worldIn, seed, compound);
+	public EndergeticDragonFightManager(ServerLevel worldIn, long seed, EndDragonFight.Data data) {
+		super(worldIn, seed, data);
 	}
 
 	@Override
@@ -294,7 +293,7 @@ public final class EndergeticDragonFightManager extends EndDragonFight {
 			ServerLevel level = this.level;
 			level.levelEvent(3000, pos, 0);
 			//Turns out datapacks can't replace the delayed end gateway. Silly Mojang!
-			var endGateway = level.registryAccess().registryOrThrow(Registry.CONFIGURED_FEATURE_REGISTRY).get(new ResourceLocation("end_gateway_delayed"));
+			var endGateway = level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).get(new ResourceLocation("end_gateway_delayed"));
 			if (endGateway != null) endGateway.place(this.level, this.level.getChunkSource().getGenerator(), RandomSource.create(), pos);
 		}
 	}

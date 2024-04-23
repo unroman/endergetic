@@ -26,7 +26,7 @@ public class PoiseClusterFeature extends Feature<NoneFeatureConfiguration> {
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
 		WorldGenLevel level = context.level();
 		BlockPos pos = context.origin();
-		if (level.getBlockState(pos).getMaterial().isReplaceable() && level.getBlockState(pos.below()).getBlock() == EEBlocks.POISMOSS.get()) {
+		if (level.getBlockState(pos).canBeReplaced() && level.getBlockState(pos.below()).getBlock() == EEBlocks.POISMOSS.get()) {
 			RandomSource rand = context.random();
 			this.createGlob(rand.nextInt(12), level, pos, rand);
 			return true;
@@ -96,7 +96,7 @@ public class PoiseClusterFeature extends Feature<NoneFeatureConfiguration> {
 	}
 
 	private void setBlockIfReplacable(LevelAccessor world, BlockPos pos, BlockState newState) {
-		if (world.getBlockState(pos).getMaterial().isReplaceable() && world.getBlockState(pos.above()).getBlock() != EEBlocks.TALL_POISE_BUSH.get() && world.getBlockState(pos.below()).getBlock() != EEBlocks.TALL_POISE_BUSH.get()) {
+		if (world.getBlockState(pos).canBeReplaced() && world.getBlockState(pos.above()).getBlock() != EEBlocks.TALL_POISE_BUSH.get() && world.getBlockState(pos.below()).getBlock() != EEBlocks.TALL_POISE_BUSH.get()) {
 			world.setBlock(pos, newState, 2);
 		}
 	}

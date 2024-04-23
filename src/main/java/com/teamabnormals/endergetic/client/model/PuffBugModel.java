@@ -126,11 +126,11 @@ public class PuffBugModel<E extends PuffBug> extends EndimatorEntityModel<E> {
 
 	private int getPackedLightForStuck(PuffBug puffbug) {
 		float partialTicks = ClientInfo.getPartialTicks();
-		return LightTexture.pack(puffbug.isOnFire() ? 15 : puffbug.level.getBrightness(LightLayer.BLOCK, this.getStuckLightPos(puffbug, partialTicks)), this.entity.level.getBrightness(LightLayer.SKY, this.getStuckLightPos(puffbug, partialTicks)));
+		return LightTexture.pack(puffbug.isOnFire() ? 15 : puffbug.level().getBrightness(LightLayer.BLOCK, this.getStuckLightPos(puffbug, partialTicks)), this.entity.level().getBrightness(LightLayer.SKY, this.getStuckLightPos(puffbug, partialTicks)));
 	}
 
 	private BlockPos getStuckLightPos(PuffBug puffbug, float partialTicks) {
-		BlockPos blockpos = new BlockPos(puffbug.getX(), puffbug.getY() + (double) puffbug.getEyeHeight(), puffbug.getX());
+		BlockPos blockpos = BlockPos.containing(puffbug.getX(), puffbug.getY() + (double) puffbug.getEyeHeight(), puffbug.getX());
 		boolean rotationFlag = true;
 		float[] rotations = puffbug.getRotationController().getRotations(partialTicks);
 		Direction horizontalOffset = Direction.fromYRot(rotations[0]).getOpposite();

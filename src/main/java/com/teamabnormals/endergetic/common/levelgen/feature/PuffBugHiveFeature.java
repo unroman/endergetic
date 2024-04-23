@@ -30,7 +30,7 @@ public class PuffBugHiveFeature extends Feature<NoneFeatureConfiguration> {
 		BlockPos pos = context.origin();
 		BlockPos hivePos = pos.below();
 		if (level.getBlockState(pos.above()).getBlock() == EEBlocks.POISE_STEM.get() || level.getBlockState(pos.above()).getBlock() == EEBlocks.GLOWING_POISE_STEM.get()) {
-			if (level.getBlockState(pos).getMaterial().isReplaceable() && level.getBlockState(pos).getMaterial().isReplaceable()) {
+			if (level.getBlockState(pos).canBeReplaced() && level.getBlockState(pos).canBeReplaced()) {
 				level.setBlock(pos, EEBlocks.HIVE_HANGER.get().defaultBlockState(), 2);
 				level.setBlock(hivePos, EEBlocks.PUFFBUG_HIVE.get().defaultBlockState(), 2);
 				spawnPuffBugs(level, hivePos, context.random());
@@ -38,7 +38,7 @@ public class PuffBugHiveFeature extends Feature<NoneFeatureConfiguration> {
 			}
 		} else {
 			if (level.getBlockState(pos.above()).getBlock() == EEBlocks.POISE_CLUSTER.get() && level.getMaxBuildHeight() > 90) {
-				if (level.getBlockState(pos).getMaterial().isReplaceable() && level.getBlockState(pos).getMaterial().isReplaceable()) {
+				if (level.getBlockState(pos).canBeReplaced() && level.getBlockState(pos).canBeReplaced()) {
 					level.setBlock(pos, EEBlocks.HIVE_HANGER.get().defaultBlockState(), 2);
 					level.setBlock(hivePos, EEBlocks.PUFFBUG_HIVE.get().defaultBlockState(), 2);
 					spawnPuffBugs(level, hivePos, context.random());

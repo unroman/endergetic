@@ -34,7 +34,7 @@ public final class C2SBoostMessage {
 					Entity entity = player.getVehicle();
 					if (entity instanceof Booflo) {
 						Booflo booflo = (Booflo) entity;
-						if (booflo.isBoostExpanding() && !booflo.isBoostLocked() && !booflo.isOnGround() && booflo.isBoofed() && booflo.getBoostPower() > 0) {
+						if (booflo.isBoostExpanding() && !booflo.isBoostLocked() && !booflo.onGround() && booflo.isBoofed() && booflo.getBoostPower() > 0) {
 							NetworkUtil.setPlayingAnimation(booflo, EEPlayableEndimations.BOOFLO_INFLATE);
 							booflo.playSound(booflo.getInflateSound(), 0.75F, 1.0F);
 							booflo.setBoostExpanding(false);

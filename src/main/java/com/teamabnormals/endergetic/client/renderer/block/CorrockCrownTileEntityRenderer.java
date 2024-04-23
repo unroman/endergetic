@@ -43,17 +43,17 @@ public class CorrockCrownTileEntityRenderer implements BlockEntityRenderer<Corro
 		if (isStanding) {
 			matrixStack.translate(0.5F, 1.5F, 0.5F);
 			float angle = -((float) (state.getValue(StandingSignBlock.ROTATION) * 360) / 16.0F);
-			matrixStack.mulPose(Vector3f.YP.rotationDegrees(angle));
+			matrixStack.mulPose(Axis.YP.rotationDegrees(angle));
 		} else {
 			matrixStack.translate(0.5F, 1.5F, 0.5F);
 			float angle = -state.getValue(WallSignBlock.FACING).getOpposite().toYRot();
-			matrixStack.mulPose(Vector3f.YP.rotationDegrees(angle));
+			matrixStack.mulPose(Axis.YP.rotationDegrees(angle));
 
 			matrixStack.translate(0.0F, -0.4F, 0.05F);
 		}
 
 		if (isStanding && state.getValue(CorrockCrownStandingBlock.UPSIDE_DOWN)) {
-			matrixStack.mulPose(Vector3f.XP.rotationDegrees(180.0F));
+			matrixStack.mulPose(Axis.XP.rotationDegrees(180.0F));
 			matrixStack.translate(0.0F, 2.0F, 0.0F);
 		}
 		matrixStack.scale(1.0F, -1.0F, -1.0F);

@@ -7,13 +7,14 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.progress.ChunkProgressListener;
+import net.minecraft.world.RandomSequences;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.CustomSpawner;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.dimension.end.EndDragonFight;
 import net.minecraft.world.level.entity.EntityTickList;
-import net.minecraft.world.level.storage.LevelStorageSource;
+import net.minecraft.world.level.storage.LevelStorageSource.LevelStorageAccess;
 import net.minecraft.world.level.storage.ServerLevelData;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -35,9 +36,9 @@ public final class ServerLevelMixin {
 	public EndDragonFight dragonFight;
 
 	@Inject(at = @At("RETURN"), method = "<init>")
-	private void replaceDragonFightManager(MinecraftServer server, Executor p_i232604_2_, LevelStorageSource.LevelStorageAccess p_i232604_3_, ServerLevelData p_i232604_4_, ResourceKey<Level> p_i232604_5_, LevelStem p_i232604_7_, ChunkProgressListener p_i232604_8_, boolean p_215006_, long p_215007_, List<CustomSpawner> p_215008_, boolean p_215009_, CallbackInfo info) {
+	private void replaceDragonFightManager(MinecraftServer server, Executor p_215000_, LevelStorageAccess p_215001_, ServerLevelData p_215002_, ResourceKey<Level> p_215003_, LevelStem p_215004_, ChunkProgressListener p_215005_, boolean p_215006_, long p_215007_, List<CustomSpawner> p_215008_, boolean p_215009_, RandomSequences p_288977_, CallbackInfo ci) {
 		if (this.dragonFight != null) {
-			this.dragonFight = new EndergeticDragonFightManager(this.dragonFight.level, server.getWorldData().worldGenSettings().seed(), server.getWorldData().endDragonFightData());
+			this.dragonFight = new EndergeticDragonFightManager(this.dragonFight.level, server.getWorldData().worldGenOptions().seed(), server.getWorldData().endDragonFightData());
 		}
 	}
 

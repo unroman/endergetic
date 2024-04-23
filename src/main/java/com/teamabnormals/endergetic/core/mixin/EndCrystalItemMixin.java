@@ -41,7 +41,7 @@ public final class EndCrystalItemMixin {
 						EndCrystal endercrystalentity = new EndCrystal(world, d0 + 0.5D, d1, d2 + 0.5D);
 						endercrystalentity.setShowBottom(false);
 						world.addFreshEntity(endercrystalentity);
-						EndDragonFight dragonfightmanager = ((ServerLevel) world).dragonFight();
+						EndDragonFight dragonfightmanager = ((ServerLevel) world).getDragonFight();
 						if (dragonfightmanager != null) {
 							dragonfightmanager.tryRespawn();
 						}

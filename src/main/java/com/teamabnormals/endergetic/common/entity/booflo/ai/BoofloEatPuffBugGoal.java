@@ -22,7 +22,7 @@ public class BoofloEatPuffBugGoal extends EndimatedGoal<Booflo> {
 				return false;
 			}
 		}
-		return this.entity.isNoEndimationPlaying() && this.entity.hasCaughtPuffBug() && !this.entity.isBoofed() && this.entity.isOnGround() && !this.entity.isInLove();
+		return this.entity.isNoEndimationPlaying() && this.entity.hasCaughtPuffBug() && !this.entity.isBoofed() && this.entity.onGround() && !this.entity.isInLove();
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class BoofloEatPuffBugGoal extends EndimatedGoal<Booflo> {
 				return false;
 			}
 		}
-		return this.isEndimationPlaying() && flag && !this.entity.isBoofed() && this.entity.isOnGround();
+		return this.isEndimationPlaying() && flag && !this.entity.isBoofed() && this.entity.onGround();
 	}
 
 	@Override

@@ -31,10 +31,10 @@ public class DispensedBoofBlockTileEntityRenderer implements BlockEntityRenderer
 
 		if (facing.getAxis().isVertical()) {
 			float offset = -facing.getAxisDirection().getStep();
-			matrixStack.mulPose(Vector3f.XP.rotationDegrees(90.0F * offset));
+			matrixStack.mulPose(Axis.XP.rotationDegrees(90.0F * offset));
 			matrixStack.translate(0.0F, 1.125F, 1.0F * offset);
 		} else {
-			matrixStack.mulPose(Vector3f.YP.rotationDegrees(-facing.toYRot()));
+			matrixStack.mulPose(Axis.YP.rotationDegrees(-facing.toYRot()));
 		}
 
 		matrixStack.scale(1.0F, -1.0F, -1.0F);

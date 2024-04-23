@@ -8,7 +8,7 @@ import com.teamabnormals.endergetic.api.entity.pathfinding.EndergeticFlyingPathN
 import com.teamabnormals.endergetic.api.entity.util.DetectionHelper;
 import com.teamabnormals.endergetic.api.entity.util.EntityItemStackHelper;
 import com.teamabnormals.endergetic.api.entity.util.RayTraceHelper;
-import com.teamabnormals.endergetic.api.util.TemporaryMathUtil;
+import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.endergetic.common.advancement.EECriteriaTriggers;
 import com.teamabnormals.endergetic.common.entity.bolloom.BolloomFruit;
 import com.teamabnormals.endergetic.common.entity.booflo.ai.*;
@@ -199,7 +199,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 
 			int power = this.getBoostPower();
 			if (power > 0 && !this.isBoostExpanding()) {
-				this.setBoostPower(Math.max(0, power - (this.isOnGround() ? 3 : 2)));
+				this.setBoostPower(Math.max(0, power - (this.onGround() ? 3 : 2)));
 				if (this.getBoostPower() <= 0) {
 					this.setBoostLocked(false);
 				}
@@ -223,7 +223,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 				}
 			}
 
-			if (this.isOnGround() && !this.isBoofed() && this.isBoostExpanding()) {
+			if (this.onGround() && !this.isBoofed() && this.isBoostExpanding()) {
 				this.setBoostExpanding(false);
 				this.setBoostLocked(false);
 			}
@@ -231,7 +231,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 			/*
 			 * Resends data to clients
 			 */
-			if (this.isBoofed() && !this.isOnGround()) {
+			if (this.isBoofed() && !this.onGround()) {
 				this.setBoofed(true);
 			}
 
@@ -314,7 +314,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 			}
 		}
 
-		if (this.isOnGround() && this.isBoofed()) {
+		if (this.onGround() && this.isBoofed()) {
 			if (this.hasAggressiveAttackTarget() && !this.hasCaughtPuffBug()) {
 				if (!this.level.isClientSide) {
 					if (this.isNoEndimationPlaying()) {
@@ -511,9 +511,9 @@ public class Booflo extends PathfinderMob implements Endimatable {
 				float playerMoveFoward = rider.zza;
 
 				if (!this.level.isClientSide && playerMoveFoward > 0.0F) {
-					if (this.isOnGround() && this.isNoEndimationPlaying() && !this.isBoofed()) {
+					if (this.onGround() && this.isNoEndimationPlaying() && !this.isBoofed()) {
 						NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.BOOFLO_HOP);
-					} else if (!this.isOnGround() && this.isNoEndimationPlaying() && this.isBoofed()) {
+					} else if (!this.onGround() && this.isNoEndimationPlaying() && this.isBoofed()) {
 						NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.BOOFLO_SWIM);
 					}
 				}
@@ -614,7 +614,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 	/*
 	 * Minecraft's onGround boolean isn't synced correctly so this has its own
 	 */
-	public boolean isOnGround() {
+	public boolean onGround() {
 		return this.entityData.get(ON_GROUND);
 	}
 
@@ -853,15 +853,15 @@ public class Booflo extends PathfinderMob implements Endimatable {
 
 		if (slam) {
 			for (int i = 0; i < 12; i++) {
-				double offsetX = TemporaryMathUtil.makeNegativeRandomly(this.random.nextFloat() * 0.25F, this.random);
-				double offsetZ = TemporaryMathUtil.makeNegativeRandomly(this.random.nextFloat() * 0.25F, this.random);
+				double offsetX = MathUtil.makeNegativeRandomly(this.random.nextFloat() * 0.25F, this.random);
+				double offsetZ = MathUtil.makeNegativeRandomly(this.random.nextFloat() * 0.25F, this.random);
 
 				double x = this.getX() + 0.5D + offsetX;
 				double y = this.getY() + 0.5D + (this.random.nextFloat() * 0.05F);
 				double z = this.getZ() + 0.5D + offsetZ;
 
 				if (this.level.isClientSide) {
-					this.level.addParticle(EEParticleTypes.POISE_BUBBLE.get(), x, y, z, TemporaryMathUtil.makeNegativeRandomly((this.random.nextFloat() * 0.3F), this.random) + 0.025F, (this.random.nextFloat() * 0.15F) + 0.1F, TemporaryMathUtil.makeNegativeRandomly((this.random.nextFloat() * 0.3F), this.random) + 0.025F);
+					this.level.addParticle(EEParticleTypes.POISE_BUBBLE.get(), x, y, z, MathUtil.makeNegativeRandomly((this.random.nextFloat() * 0.3F), this.random) + 0.025F, (this.random.nextFloat() * 0.15F) + 0.1F, MathUtil.makeNegativeRandomly((this.random.nextFloat() * 0.3F), this.random) + 0.025F);
 				}
 			}
 		}
@@ -1265,7 +1265,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 				this.mob.setZza(0.0F);
 			} else {
 				this.operation = MoveControl.Operation.WAIT;
-				if (this.mob.isOnGround()) {
+				if (this.mob.onGround()) {
 					this.mob.setSpeed((float) (this.speedModifier * this.mob.getAttribute(Attributes.MOVEMENT_SPEED).getValue()));
 					if (this.booflo.hopDelay == 0 && this.booflo.isEndimationPlaying(EEPlayableEndimations.BOOFLO_HOP) && this.booflo.getAnimationTick() == 10) {
 						this.booflo.getJumpControl().jump();

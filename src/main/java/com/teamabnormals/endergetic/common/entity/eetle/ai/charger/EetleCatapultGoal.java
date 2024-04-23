@@ -28,10 +28,10 @@ public class EetleCatapultGoal extends EndimatedGoal<ChargerEetle> {
 		} else if (this.entity.getRandom().nextFloat() < 0.1F) {
 			ChargerEetle chargerEetle = this.entity;
 			LivingEntity attackTarget = chargerEetle.getTarget();
-			if (attackTarget != null && attackTarget.isAlive() && !chargerEetle.isCatapultProjectile() && chargerEetle.isOnGround()) {
-				Level world = chargerEetle.level;
+			if (attackTarget != null && attackTarget.isAlive() && !chargerEetle.isCatapultProjectile() && chargerEetle.onGround()) {
+				Level world = chargerEetle.level();
 				ChargerEetle closestCharger = world.getNearestEntity(world.getEntitiesOfClass(ChargerEetle.class, chargerEetle.getBoundingBox().inflate(2.5F), eetle -> {
-					return eetle != chargerEetle && eetle.isOnGround() && !eetle.isBaby() && eetle.getTarget() == attackTarget && !eetle.isCatapulting() && attackTarget.distanceTo(eetle) >= MIN_DISTANCE;
+					return eetle != chargerEetle && eetle.onGround() && !eetle.isBaby() && eetle.getTarget() == attackTarget && !eetle.isCatapulting() && attackTarget.distanceTo(eetle) >= MIN_DISTANCE;
 				}), PREDICATE, null, chargerEetle.getX(), chargerEetle.getY(), chargerEetle.getZ());
 				if (closestCharger != null) {
 					chargerEetle.setCatapultingTarget(closestCharger);
@@ -48,7 +48,7 @@ public class EetleCatapultGoal extends EndimatedGoal<ChargerEetle> {
 		if (target != null && target.isAlive()) {
 			ChargerEetle charger = this.entity;
 			LivingEntity attackTarget = charger.getTarget();
-			return attackTarget != null && attackTarget.isAlive() && target.getTarget() == attackTarget && target.distanceTo(charger) <= charger.getAttributeValue(Attributes.FOLLOW_RANGE) && attackTarget.distanceTo(target) >= MIN_DISTANCE && charger.hasLineOfSight(target) && charger.isOnGround() && PREDICATE.test(charger, target) && PREDICATE.test(charger, attackTarget);
+			return attackTarget != null && attackTarget.isAlive() && target.getTarget() == attackTarget && target.distanceTo(charger) <= charger.getAttributeValue(Attributes.FOLLOW_RANGE) && attackTarget.distanceTo(target) >= MIN_DISTANCE && charger.hasLineOfSight(target) && charger.onGround() && PREDICATE.test(charger, target) && PREDICATE.test(charger, attackTarget);
 		}
 		return false;
 	}

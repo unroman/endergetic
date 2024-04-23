@@ -3,7 +3,7 @@ package com.teamabnormals.endergetic.common.levelgen.structure.structures;
 import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.core.util.MathUtil;
-import com.teamabnormals.endergetic.api.util.TemporaryMathUtil;
+import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.endergetic.common.block.CorrockCrownBlock;
 import com.teamabnormals.endergetic.common.block.CorrockCrownStandingBlock;
 import com.teamabnormals.endergetic.common.block.CorrockCrownWallBlock;
@@ -332,7 +332,7 @@ public final class EetleNestPieces {
 				int shelfs = random.nextInt(3) + 2;
 				for (int i = 0; i < shelfs; i++) {
 					Direction horizontal = Direction.Plane.HORIZONTAL.getRandomDirection(random);
-					BlockPos.MutableBlockPos mutable1 = new BlockPos.MutableBlockPos(originX, originY + TemporaryMathUtil.makeNegativeRandomly(random.nextInt(8), random), originZ);
+					BlockPos.MutableBlockPos mutable1 = new BlockPos.MutableBlockPos(originX, originY + MathUtil.makeNegativeRandomly(random.nextInt(8), random), originZ);
 					if (random.nextFloat() < 0.25F) {
 						for (int j = 0; j < horizontalRadius; j++) {
 							mutable1.move(horizontal);
@@ -412,7 +412,7 @@ public final class EetleNestPieces {
 				int maxHorizontalOffset = type.maxHorizontalOffset;
 				this.xOffset = random.nextInt(maxHorizontalOffset) - random.nextInt(maxHorizontalOffset);
 				int halfMaxYOffset = type.halfMaxYOffset;
-				this.yOffset = (int) TemporaryMathUtil.makeNegativeRandomly(random.nextInt(halfMaxYOffset + 1) + halfMaxYOffset, random);
+				this.yOffset = (int) MathUtil.makeNegativeRandomly(random.nextInt(halfMaxYOffset + 1) + halfMaxYOffset, random);
 				this.zOffset = random.nextInt(maxHorizontalOffset) - random.nextInt(maxHorizontalOffset);
 			}
 
@@ -1122,7 +1122,7 @@ public final class EetleNestPieces {
 				BlockPos end;
 				Direction facing = this.facing;
 				if (this.goesToSurface) {
-					end = startPos.relative(facing, 16 + random.nextInt(9)).relative(facing.getClockWise(), (int) TemporaryMathUtil.makeNegativeRandomly(random.nextInt(7) + 6, random));
+					end = startPos.relative(facing, 16 + random.nextInt(9)).relative(facing.getClockWise(), (int) MathUtil.makeNegativeRandomly(random.nextInt(7) + 6, random));
 					int endX = end.getX();
 					int endZ = end.getZ();
 					int topY = chunkGenerator.getFirstFreeHeight(endX, endZ, Heightmap.Types.WORLD_SURFACE, heightAccessor, randomState);
@@ -1149,7 +1149,7 @@ public final class EetleNestPieces {
 					points.add(endVec);
 					points.add(anchorEnd);
 				} else {
-					end = startPos.relative(facing, 24 + random.nextInt(9)).relative(facing.getClockWise(), (int) TemporaryMathUtil.makeNegativeRandomly(random.nextInt(7) + 6, random)).relative(Direction.UP, (int) TemporaryMathUtil.makeNegativeRandomly(random.nextInt(7) + 6, random));
+					end = startPos.relative(facing, 24 + random.nextInt(9)).relative(facing.getClockWise(), (int) MathUtil.makeNegativeRandomly(random.nextInt(7) + 6, random)).relative(Direction.UP, (int) MathUtil.makeNegativeRandomly(random.nextInt(7) + 6, random));
 					Vec3 endVec = Vec3.atLowerCornerOf(end);
 					Vec3 difference = endVec.subtract(startVec);
 					Vec3 normalizedDifference = difference.normalize();

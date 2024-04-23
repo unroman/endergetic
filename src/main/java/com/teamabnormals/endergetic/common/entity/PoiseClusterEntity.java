@@ -1,7 +1,7 @@
 package com.teamabnormals.endergetic.common.entity;
 
+import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
-import com.teamabnormals.endergetic.api.util.TemporaryMathUtil;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
 import com.teamabnormals.endergetic.core.registry.EEEntityTypes;
 import com.teamabnormals.endergetic.core.registry.EESoundEvents;
@@ -15,7 +15,9 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -97,7 +99,7 @@ public class PoiseClusterEntity extends LivingEntity {
 		}
 
 		if (this.getY() + 1.0F >= this.getOrigin().getY() + this.getBlocksToMoveUp()) {
-			if (!this.level.isClientSide) {
+			if (!this.level().isClientSide) {
 				this.setAscending(false);
 			}
 			this.setBlocksToMoveUp(0);
@@ -108,18 +110,18 @@ public class PoiseClusterEntity extends LivingEntity {
 				this.setDeltaMovement(0, -0.05F, 0);
 			} else if (Math.ceil(this.getY()) == this.getOrigin().getY() && this.tickCount > 10) {
 				for (int i = 0; i < 8; i++) {
-					double offsetX = TemporaryMathUtil.makeNegativeRandomly(this.random.nextFloat() * 0.25F, this.random);
-					double offsetZ = TemporaryMathUtil.makeNegativeRandomly(this.random.nextFloat() * 0.25F, this.random);
+					double offsetX = MathUtil.makeNegativeRandomly(this.random.nextFloat() * 0.25F, this.random);
+					double offsetZ = MathUtil.makeNegativeRandomly(this.random.nextFloat() * 0.25F, this.random);
 
 					double x = this.getOrigin().getX() + 0.5D + offsetX;
 					double y = this.getOrigin().getY() + 0.5D + (this.random.nextFloat() * 0.05F);
 					double z = this.getOrigin().getZ() + 0.5D + offsetZ;
 
 					if (this.isEffectiveAi()) {
-						NetworkUtil.spawnParticle("endergetic:short_poise_bubble", x, y, z, TemporaryMathUtil.makeNegativeRandomly((random.nextFloat() * 0.1F), random) + 0.025F, (random.nextFloat() * 0.15F) + 0.1F, TemporaryMathUtil.makeNegativeRandomly((random.nextFloat() * 0.1F), random) + 0.025F);
+						NetworkUtil.spawnParticle("endergetic:short_poise_bubble", x, y, z, MathUtil.makeNegativeRandomly((random.nextFloat() * 0.1F), random) + 0.025F, (random.nextFloat() * 0.15F) + 0.1F, MathUtil.makeNegativeRandomly((random.nextFloat() * 0.1F), random) + 0.025F);
 					}
 				}
-				this.level.setBlockAndUpdate(this.getOrigin(), EEBlocks.POISE_CLUSTER.get().defaultBlockState());
+				this.level().setBlockAndUpdate(this.getOrigin(), EEBlocks.POISE_CLUSTER.get().defaultBlockState());
 				this.discard();
 			}
 
@@ -127,19 +129,19 @@ public class PoiseClusterEntity extends LivingEntity {
 				BlockPos pos = this.blockPosition();
 
 				for (int i = 0; i < 8; i++) {
-					double offsetX = TemporaryMathUtil.makeNegativeRandomly(this.random.nextFloat() * 0.25F, this.random);
-					double offsetZ = TemporaryMathUtil.makeNegativeRandomly(this.random.nextFloat() * 0.25F, this.random);
+					double offsetX = MathUtil.makeNegativeRandomly(this.random.nextFloat() * 0.25F, this.random);
+					double offsetZ = MathUtil.makeNegativeRandomly(this.random.nextFloat() * 0.25F, this.random);
 
 					double x = pos.getX() + 0.5D + offsetX;
 					double y = pos.getY() + 0.5D + (this.random.nextFloat() * 0.05F);
 					double z = pos.getZ() + 0.5D + offsetZ;
 
 					if (this.isEffectiveAi()) {
-						NetworkUtil.spawnParticle("endergetic:short_poise_bubble", x, y, z, TemporaryMathUtil.makeNegativeRandomly((this.random.nextFloat() * 0.1F), this.random) + 0.025F, (this.random.nextFloat() * 0.15F) + 0.1F, TemporaryMathUtil.makeNegativeRandomly((this.random.nextFloat() * 0.1F), this.random) + 0.025F);
+						NetworkUtil.spawnParticle("endergetic:short_poise_bubble", x, y, z, MathUtil.makeNegativeRandomly((this.random.nextFloat() * 0.1F), this.random) + 0.025F, (this.random.nextFloat() * 0.15F) + 0.1F, MathUtil.makeNegativeRandomly((this.random.nextFloat() * 0.1F), this.random) + 0.025F);
 					}
 				}
 
-				this.level.setBlockAndUpdate(pos, EEBlocks.POISE_CLUSTER.get().defaultBlockState());
+				this.level().setBlockAndUpdate(pos, EEBlocks.POISE_CLUSTER.get().defaultBlockState());
 				this.discard();
 			}
 		}
@@ -154,7 +156,7 @@ public class PoiseClusterEntity extends LivingEntity {
 		if (hasEntity && this.isAscending()) {
 			for (Entity entity : entities) {
 				if (entity instanceof PoiseClusterEntity) {
-					if (!this.level.isClientSide) {
+					if (!this.level().isClientSide) {
 						this.setAscending(false);
 					}
 					this.setBlocksToMoveUp(0);
@@ -185,9 +187,9 @@ public class PoiseClusterEntity extends LivingEntity {
 
 		if (this.getHealth() != 0) this.setHealth(100);
 
-		if (!this.level.isClientSide) {
+		if (!this.level().isClientSide) {
 			if (!this.playedSound) {
-				this.level.broadcastEntityEvent(this, (byte) 1);
+				this.level().broadcastEntityEvent(this, (byte) 1);
 				this.playedSound = true;
 			}
 		}
@@ -197,8 +199,8 @@ public class PoiseClusterEntity extends LivingEntity {
 	public boolean skipAttackInteraction(Entity entityIn) {
 		this.setTimesHit(this.getTimesHit() + 1);
 		if (this.getTimesHit() >= 3) {
-			if (!this.level.isClientSide) {
-				Block.popResource(this.level, this.blockPosition(), new ItemStack(EEBlocks.POISE_CLUSTER.get()));
+			if (!this.level().isClientSide) {
+				Block.popResource(this.level(), this.blockPosition(), new ItemStack(EEBlocks.POISE_CLUSTER.get()));
 			}
 			this.discard();
 			return true;
@@ -210,12 +212,12 @@ public class PoiseClusterEntity extends LivingEntity {
 
 	@Override
 	protected void actuallyHurt(DamageSource damageSrc, float damageAmount) {
-		if (damageSrc.isProjectile()) {
+		if (damageSrc.is(DamageTypeTags.IS_PROJECTILE)) {
 			this.setTimesHit(this.getTimesHit() + 1);
 
 			if (this.getTimesHit() >= 3) {
 				if (!this.getCommandSenderWorld().isClientSide) {
-					Block.popResource(this.level, this.blockPosition(), new ItemStack(EEBlocks.POISE_CLUSTER.get()));
+					Block.popResource(this.level(), this.blockPosition(), new ItemStack(EEBlocks.POISE_CLUSTER.get()));
 				}
 				this.discard();
 			}
@@ -253,7 +255,7 @@ public class PoiseClusterEntity extends LivingEntity {
 
 	@Override
 	public boolean isInvulnerableTo(DamageSource source) {
-		return source == DamageSource.IN_WALL || super.isInvulnerableTo(source);
+		return source.is(DamageTypes.IN_WALL) || super.isInvulnerableTo(source);
 	}
 
 	@Override
@@ -263,7 +265,7 @@ public class PoiseClusterEntity extends LivingEntity {
 
 	private boolean isBlockBlockingPath(boolean down) {
 		Vec3 eyePos = down ? this.position() : this.getEyePosition(1.0F);
-		return this.level.clip(new ClipContext(
+		return this.level().clip(new ClipContext(
 				eyePos,
 				eyePos.add(this.getDeltaMovement()),
 				ClipContext.Block.OUTLINE,
@@ -275,7 +277,7 @@ public class PoiseClusterEntity extends LivingEntity {
 	private void moveEntitiesUp() {
 		if (this.getDeltaMovement().length() > 0 && this.isAscending()) {
 			AABB clusterBB = this.getBoundingBox().move(0.0F, 0.01F, 0.0F);
-			List<Entity> entitiesAbove = this.level.getEntities(this, clusterBB);
+			List<Entity> entitiesAbove = this.level().getEntities(this, clusterBB);
 			if (!entitiesAbove.isEmpty()) {
 				for (Entity entity : entitiesAbove) {
 					if (!entity.isPassenger() && !(entity instanceof PoiseClusterEntity) && entity.getPistonPushReaction() != PushReaction.IGNORE) {
@@ -295,7 +297,7 @@ public class PoiseClusterEntity extends LivingEntity {
 	}
 
 	private void beingDescending() {
-		if (!this.level.isClientSide) {
+		if (!this.level().isClientSide) {
 			this.setAscending(false);
 		}
 		this.setBlocksToMoveUp(0);

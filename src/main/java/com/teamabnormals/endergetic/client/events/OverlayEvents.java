@@ -57,7 +57,7 @@ public final class OverlayEvents {
 						int left = scaledWidth / 2 - 91;
 						int progress = ((Booflo) player.getVehicle()).getBoostPower();
 
-						PoseStack stack = event.getPoseStack();
+						PoseStack stack = event.getGuiGraphics().pose();
 						stack.pushPose();
 						RenderSystem.setShaderTexture(0, new ResourceLocation(EndergeticExpansion.MOD_ID, "textures/gui/booflo_bar.png"));
 
@@ -68,12 +68,12 @@ public final class OverlayEvents {
 
 						stack.popPose();
 					}
-				} else if (overlayID == VanillaGuiOverlay.MOUNT_HEALTH.id() && player.level.getDifficulty() != Difficulty.PEACEFUL && !player.isSpectator() && !player.isCreative() && player.isPassenger() && player.getVehicle() instanceof GliderEetle) {
+				} else if (overlayID == VanillaGuiOverlay.MOUNT_HEALTH.id() && player.level().getDifficulty() != Difficulty.PEACEFUL && !player.isSpectator() && !player.isCreative() && player.isPassenger() && player.getVehicle() instanceof GliderEetle) {
 					event.setCanceled(true);
 				} else if (overlayID == VanillaGuiOverlay.VIGNETTE.id() && MC.options.getCameraType() == CameraType.FIRST_PERSON) {
 					float purpoidFlashProgress = Mth.lerp(event.getPartialTick(), prevPurpoidFlashTime, purpoidFlashTime) * 0.2F;
 					if (purpoidFlashProgress > 0.0F) {
-						PoseStack stack = event.getPoseStack();
+						PoseStack stack = event.getGuiGraphics().pose();
 						stack.pushPose();
 						RenderSystem.disableDepthTest();
 						RenderSystem.depthMask(false);

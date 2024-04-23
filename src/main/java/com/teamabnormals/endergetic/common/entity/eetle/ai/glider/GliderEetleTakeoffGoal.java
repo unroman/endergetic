@@ -17,7 +17,7 @@ public class GliderEetleTakeoffGoal extends Goal {
 	public boolean canUse() {
 		GliderEetle glider = this.glider;
 		if (!glider.isGrounded() && !glider.isFlying() && glider.isNoEndimationPlaying()) {
-			return glider.canFly() && glider.getRandom().nextFloat() < 0.05F || !glider.isOnGround() && willFallFar(glider);
+			return glider.canFly() && glider.getRandom().nextFloat() < 0.05F || !glider.onGround() && willFallFar(glider);
 		}
 		return false;
 	}

@@ -44,7 +44,7 @@ public abstract class BoatMixin extends Entity implements CustomBalloonPositione
 
 	@Override
 	public void onBalloonAttached(BolloomBalloon balloon) {
-		if (!balloon.level.isClientSide && !balloon.hasModifiedBoatOrder) {
+		if (!balloon.level().isClientSide && !balloon.hasModifiedBoatOrder) {
 			Map<UUID, BalloonOrder> orderMap = Maps.newHashMap(((IDataManager) this).getValue(EEDataProcessors.ORDER_DATA));
 			orderMap.put(balloon.getUUID(), getClosestOpenOrder(orderMap));
 			((IDataManager) this).setValue(EEDataProcessors.ORDER_DATA, orderMap);
@@ -54,7 +54,7 @@ public abstract class BoatMixin extends Entity implements CustomBalloonPositione
 
 	@Override
 	public void onBalloonDetached(BolloomBalloon balloon) {
-		if (!balloon.level.isClientSide) {
+		if (!balloon.level().isClientSide) {
 			Map<UUID, BalloonOrder> orderMap = Maps.newHashMap(((IDataManager) this).getValue(EEDataProcessors.ORDER_DATA));
 			orderMap.remove(balloon.getUUID());
 			((IDataManager) this).setValue(EEDataProcessors.ORDER_DATA, orderMap);
@@ -102,7 +102,7 @@ public abstract class BoatMixin extends Entity implements CustomBalloonPositione
 		Item item = stack.getItem();
 		if (item instanceof BolloomBalloonItem && BolloomBalloonItem.canAttachBalloonToTarget(this)) {
 			player.swing(hand, true);
-			if (!this.level.isClientSide) {
+			if (!this.level().isClientSide) {
 				BolloomBalloonItem.attachToEntity(((BolloomBalloonItem) item).getBalloonColor(), this);
 			}
 			if (!player.isCreative()) stack.shrink(1);

@@ -14,9 +14,8 @@ public final class SwordItemMixin {
 
 	@Inject(at = @At(value = "HEAD"), method = "getDestroySpeed", cancellable = true)
 	private void modifyDestroySpeed(ItemStack stack, BlockState state, CallbackInfoReturnable<Float> info) {
-		if (state.getBlock() == EEBlocks.EETLE_EGG.get()) {
-			info.setReturnValue(16.0F);
+		if (state.is(EEBlocks.EETLE_EGG.get())) {
+			info.setReturnValue(15.0F);
 		}
 	}
-
 }

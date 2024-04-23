@@ -11,7 +11,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -48,7 +47,7 @@ public class BoofBlock extends BaseEntityBlock {
 	}
 
 	@Override
-	public boolean isPossibleToRespawnInThis() {
+	public boolean isPossibleToRespawnInThis(BlockState state) {
 		return false;
 	}
 
@@ -77,7 +76,7 @@ public class BoofBlock extends BaseEntityBlock {
 		if (entity.isSuppressingBounce()) {
 			super.fallOn(level, state, pos, entity, fallDistance);
 		} else {
-			entity.causeFallDamage(fallDistance, 0.0F, DamageSource.FALL);
+			entity.causeFallDamage(fallDistance, 0.0F, level.damageSources().fall());
 		}
 	}
 
@@ -121,7 +120,7 @@ public class BoofBlock extends BaseEntityBlock {
 			Level world = source.getLevel();
 			Direction facing = source.getBlockState().getValue(DispenserBlock.FACING);
 			BlockPos pos = source.getPos().relative(facing);
-			if (world.getBlockState(pos).getMaterial().isReplaceable()) {
+			if (world.getBlockState(pos).canBeReplaced()) {
 				world.setBlockAndUpdate(pos, EEBlocks.BOOF_BLOCK_DISPENSED.get().defaultBlockState().setValue(DispensedBoofBlock.FACING, facing).setValue(DispensedBoofBlock.WATERLOGGED, world.getFluidState(pos).is(FluidTags.WATER)));
 				world.playSound(null, pos, EESoundEvents.BOOF_BLOCK_INFLATE.get(), SoundSource.NEUTRAL, 0.85F, 0.9F + world.random.nextFloat() * 0.15F);
 				this.setSuccess(true);

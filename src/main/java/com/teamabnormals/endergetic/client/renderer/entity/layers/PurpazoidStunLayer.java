@@ -47,7 +47,7 @@ public class PurpazoidStunLayer extends RenderLayer<Purpoid, PurpoidModel> {
 
 		stack.pushPose();
 		stack.translate(0.0F, -2.75F, 0.0F);
-		stack.mulPose(Vector3f.YP.rotation(0.20943951023F * ageInTicks));
+		stack.mulPose(Axis.YP.rotation(0.20943951023F * ageInTicks));
 
 		ModelPart gelLayer = gelModel.gelLayer;
 		ModelPart head = model.head;

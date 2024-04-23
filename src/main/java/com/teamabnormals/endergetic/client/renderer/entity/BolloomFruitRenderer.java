@@ -26,7 +26,7 @@ public class BolloomFruitRenderer extends EntityRenderer<BolloomFruit> {
 	public void render(BolloomFruit entity, float entityYaw, float partialTicks, PoseStack matrixStack, MultiBufferSource bufferIn, int packedLightIn) {
 		matrixStack.pushPose();
 		matrixStack.translate(0.0F, 1.5F, 0.0F);
-		matrixStack.mulPose(Vector3f.XP.rotationDegrees(180.0F));
+		matrixStack.mulPose(Axis.XP.rotationDegrees(180.0F));
 
 		VertexConsumer ivertexbuilder = bufferIn.getBuffer(this.model.renderType(this.getTextureLocation(entity)));
 		this.model.setupAnim(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
