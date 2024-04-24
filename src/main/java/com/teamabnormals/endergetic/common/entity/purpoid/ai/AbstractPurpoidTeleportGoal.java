@@ -28,7 +28,7 @@ public abstract class AbstractPurpoidTeleportGoal extends Goal {
 		boolean canUse = false;
 		if ((purpoid.forcedRelativeTeleportingPos != null || (this.notMovingTicks >= 20 && !purpoid.isBoosting() && !purpoid.hasTeleportCooldown())) && !purpoid.isPassenger() && purpoid.isNoEndimationPlaying()) {
 			BlockPos teleportPos = this.generateTeleportPos(purpoid, purpoid.getRandom());
-			Level level = purpoid.level;
+			Level level = purpoid.level();
 			if (teleportPos != null && level.hasChunkAt(teleportPos)) {
 				AABB collisionBox = purpoid.getDimensions(purpoid.getPose()).makeBoundingBox(teleportPos.getX() + 0.5F, teleportPos.getY(), teleportPos.getZ() + 0.5F);
 				if (level.noCollision(collisionBox) && level.isUnobstructed(purpoid, Shapes.create(collisionBox)) && !level.containsAnyLiquid(collisionBox)) {

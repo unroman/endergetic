@@ -12,6 +12,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
@@ -79,10 +80,10 @@ public class EetleEgg extends Entity implements IEntityAdditionalSpawnData {
 
 		this.move(MoverType.SELF, this.getDeltaMovement());
 
-		Level world = this.level;
+		Level world = this.level();
 		if (!world.isClientSide) {
 			BlockPos newPos = this.blockPosition();
-			if (!this.onGround && !world.getFluidState(newPos).is(FluidTags.WATER)) {
+			if (!this.onGround() && !world.getFluidState(newPos).is(FluidTags.WATER)) {
 				if (this.fallTime > 100 && (newPos.getY() < 1 || newPos.getY() > 256) || this.fallTime > 600) {
 					burstOpenEgg(world, newPos, this.random, this.eggSize.ordinal(), this.fromBroodEetle);
 				}
@@ -181,7 +182,7 @@ public class EetleEgg extends Entity implements IEntityAdditionalSpawnData {
 	}
 
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 

@@ -1,0 +1,14 @@
+{
+  "feature": "endergetic:bolloom_bud",
+  "placement": [
+    {
+      "type": "endergetic:noise_heightmap_32",
+      "above_noise": 90,
+      "below_noise": 90,
+      "noise_level": -0.9
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

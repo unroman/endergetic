@@ -1,0 +1,18 @@
+{
+  "feature": "endergetic:corrock_shelf",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 8
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "endergetic:heightmap_spread_lower"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "type": "endergetic:eetle_egg",
+  "config": {
+    "frequency": 0.75,
+    "search_down": false
+  }
+}

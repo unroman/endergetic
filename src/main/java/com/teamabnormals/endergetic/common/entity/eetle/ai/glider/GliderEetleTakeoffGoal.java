@@ -48,7 +48,7 @@ public class GliderEetleTakeoffGoal extends Goal {
 	}
 
 	private static boolean willFallFar(GliderEetle gliderEetleEntity) {
-		Level world = gliderEetleEntity.level;
+		Level world = gliderEetleEntity.level();
 		BlockPos.MutableBlockPos mutable = gliderEetleEntity.blockPosition().mutable();
 		int startY = mutable.getY();
 		for (int i = 0; i < 8; i++) {

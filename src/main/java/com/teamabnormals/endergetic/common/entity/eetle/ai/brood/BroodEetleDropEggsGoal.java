@@ -42,7 +42,7 @@ public class BroodEetleDropEggsGoal extends EndimatedGoal<BroodEetle> {
 		BroodEetle broodEetle = this.entity;
 		if (broodEetle.isEggMouthOpen() && this.ticksPassed % 20 == 0) {
 			this.playEndimation();
-			Level world = broodEetle.level;
+			Level world = broodEetle.level();
 			BroodEggSack eggSack = broodEetle.getEggSack(world);
 			if (eggSack != null) {
 				EetleEgg eetleEgg = new EetleEgg(world, eggSack.position());
@@ -73,12 +73,12 @@ public class BroodEetleDropEggsGoal extends EndimatedGoal<BroodEetle> {
 	public static boolean areFewEetlesNearby(BroodEetle broodEetle) {
 		double followRange = broodEetle.getAttributeValue(Attributes.FOLLOW_RANGE);
 		Sensing senses = broodEetle.getSensing();
-		return broodEetle.level.getEntitiesOfClass(AbstractEetle.class, broodEetle.getBoundingBox().inflate(followRange, followRange * 0.5D, followRange), eetle -> {
+		return broodEetle.level().getEntitiesOfClass(AbstractEetle.class, broodEetle.getBoundingBox().inflate(followRange, followRange * 0.5D, followRange), eetle -> {
 			return eetle.isAlive() && senses.hasLineOfSight(eetle) && (!eetle.isBaby() || eetle.getGrowingAge() >= -240);
 		}).size() <= 2;
 	}
 
 	private static boolean notNearGround(BroodEetle broodEetle) {
-		return broodEetle.level.noCollision(DetectionHelper.checkOnGround(broodEetle.getBoundingBox(), -4.0F));
+		return broodEetle.level().noCollision(DetectionHelper.checkOnGround(broodEetle.getBoundingBox(), -4.0F));
 	}
 }

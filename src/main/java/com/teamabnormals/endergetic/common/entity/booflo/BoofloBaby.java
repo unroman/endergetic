@@ -16,6 +16,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -174,7 +175,7 @@ public class BoofloBaby extends PathfinderMob implements Endimatable {
 	}
 
 	public int getGrowingAge() {
-		if (this.level.isClientSide) {
+		if (this.level().isClientSide) {
 			return -1;
 		} else {
 			return this.growingAge;
@@ -221,7 +222,7 @@ public class BoofloBaby extends PathfinderMob implements Endimatable {
 	public void aiStep() {
 		super.aiStep();
 
-		if (this.level.isClientSide) {
+		if (this.level().isClientSide) {
 			this.prevTailAnimation = this.tailAnimation;
 			if (this.isInWater()) {
 				this.tailSpeed = 1.0F;
@@ -249,10 +250,10 @@ public class BoofloBaby extends PathfinderMob implements Endimatable {
 			}
 		}
 
-		if (this.level.isClientSide) {
+		if (this.level().isClientSide) {
 			if (this.forcedAgeTimer > 0) {
 				if (this.forcedAgeTimer % 4 == 0) {
-					this.level.addParticle(ParticleTypes.HAPPY_VILLAGER, this.getX() + (double) (this.random.nextFloat() * this.getBbWidth() * 2.0F) - (double) this.getBbWidth(), this.getY() + 0.5D + (double) (this.random.nextFloat() * this.getBbHeight()), this.getZ() + (double) (this.random.nextFloat() * this.getBbWidth() * 2.0F) - (double) this.getBbWidth(), 0.0D, 0.0D, 0.0D);
+					this.level().addParticle(ParticleTypes.HAPPY_VILLAGER, this.getX() + (double) (this.random.nextFloat() * this.getBbWidth() * 2.0F) - (double) this.getBbWidth(), this.getY() + 0.5D + (double) (this.random.nextFloat() * this.getBbHeight()), this.getZ() + (double) (this.random.nextFloat() * this.getBbWidth() * 2.0F) - (double) this.getBbWidth(), 0.0D, 0.0D, 0.0D);
 				}
 
 				this.forcedAgeTimer--;
@@ -277,7 +278,7 @@ public class BoofloBaby extends PathfinderMob implements Endimatable {
 		if (this.isAlive()) {
 			this.spawnAtLocation(EEItems.BOOFLO_HIDE.get(), 1);
 
-			BoofloAdolescent booflo = EEEntityTypes.BOOFLO_ADOLESCENT.get().create(this.level);
+			BoofloAdolescent booflo = EEEntityTypes.BOOFLO_ADOLESCENT.get().create(this.level());
 			booflo.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
 
 			if (this.hasCustomName()) {
@@ -297,7 +298,7 @@ public class BoofloBaby extends PathfinderMob implements Endimatable {
 			booflo.setHealth(booflo.getMaxHealth());
 			booflo.setGrowingAge(-24000);
 			booflo.wasBred = this.wasBred;
-			this.level.addFreshEntity(booflo);
+			this.level().addFreshEntity(booflo);
 			this.discard();
 
 			return booflo;
@@ -333,7 +334,7 @@ public class BoofloBaby extends PathfinderMob implements Endimatable {
 		if (itemstack.getItem() == EEItems.BOLLOOM_FRUIT.get()) {
 			EntityItemStackHelper.consumeItemFromStack(player, itemstack);
 			this.ageUp((int) ((-this.getGrowingAge() / 20) * 0.1F), true);
-			return InteractionResult.sidedSuccess(this.level.isClientSide);
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		}
 		return super.mobInteract(player, hand);
 	}
@@ -359,7 +360,7 @@ public class BoofloBaby extends PathfinderMob implements Endimatable {
 
 	@Override
 	public boolean isInvulnerableTo(DamageSource source) {
-		return source == DamageSource.IN_WALL || source == DamageSource.FLY_INTO_WALL || super.isInvulnerableTo(source);
+		return source.is(DamageTypes.IN_WALL) || source.is(DamageTypes.FLY_INTO_WALL) || super.isInvulnerableTo(source);
 	}
 
 	@Override
@@ -383,8 +384,7 @@ public class BoofloBaby extends PathfinderMob implements Endimatable {
 			double viewZ = view.z;
 			Vec3 vec3d = HoverRandomPos.getPos(this.mob, 7, 4, viewX, viewZ, ((float) Math.PI / 2F), 3, 1);
 
-			for (int i = 0; vec3d != null && !this.mob.level.getBlockState(new BlockPos(vec3d)).isPathfindable(this.mob.level, new BlockPos(vec3d), PathComputationType.WATER) && i++ < 10; vec3d = HoverRandomPos.getPos(this.mob, 7, 4, viewX, viewZ, ((float) Math.PI / 2F), 3, 1)) {
-				;
+			for (int i = 0; vec3d != null && !this.mob.level().getBlockState(BlockPos.containing(vec3d)).isPathfindable(this.mob.level(), BlockPos.containing(vec3d), PathComputationType.WATER) && i++ < 10; vec3d = HoverRandomPos.getPos(this.mob, 7, 4, viewX, viewZ, ((float) Math.PI / 2F), 3, 1)) {
 			}
 
 			return vec3d;

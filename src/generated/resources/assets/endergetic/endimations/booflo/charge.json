@@ -13,7 +13,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.75,
           "transform": [
@@ -24,7 +24,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 3.75,
           "transform": [
@@ -47,7 +47,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.75,
           "transform": [
@@ -58,7 +58,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 3.75,
           "transform": [
@@ -81,7 +81,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.75,
           "transform": [
@@ -92,7 +92,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 3.75,
           "transform": [
@@ -115,7 +115,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.75,
           "transform": [
@@ -126,7 +126,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 3.75,
           "transform": [
@@ -149,7 +149,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.75,
           "transform": [
@@ -160,7 +160,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 3.75,
           "transform": [
@@ -183,7 +183,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.75,
           "transform": [
@@ -194,7 +194,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 3.75,
           "transform": [

@@ -9,6 +9,7 @@ import com.teamabnormals.endergetic.core.registry.EEBlocks;
 import com.teamabnormals.endergetic.core.registry.EEFeatures.EEConfiguredFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
@@ -66,7 +67,7 @@ public class CorrockBranchFeature extends AbstractCorrockFeature<CorrockBranchCo
 					}
 
 					BlockPos groundModifierPos = new BlockPos(pos.getX() - 1 + (rand.nextInt(3) - rand.nextInt(3)), pos.getY() - 1, pos.getZ() - 1 + (rand.nextInt(3) - rand.nextInt(3)));
-					EEConfiguredFeatures.DISK_CORROCK.get().place(world, context.chunkGenerator(), rand, groundModifierPos);
+					world.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getOrThrow(EEConfiguredFeatures.DISK_CORROCK).place(world, context.chunkGenerator(), rand, groundModifierPos);
 
 					BlockPos.MutableBlockPos corrockPlantPos = new BlockPos.MutableBlockPos();
 					for (int x = pos.getX() - 4; x < pos.getX() + 4; x++) {

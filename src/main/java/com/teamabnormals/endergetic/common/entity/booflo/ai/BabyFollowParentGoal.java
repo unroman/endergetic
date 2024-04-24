@@ -18,7 +18,7 @@ public class BabyFollowParentGoal extends Goal {
 	}
 
 	public boolean canUse() {
-		List<Booflo> list = this.baby.level.getEntitiesOfClass(Booflo.class, this.baby.getBoundingBox().inflate(10.0D, 8.0D, 10.0D));
+		List<Booflo> list = this.baby.level().getEntitiesOfClass(Booflo.class, this.baby.getBoundingBox().inflate(10.0D, 8.0D, 10.0D));
 		Booflo booflo = null;
 		double d0 = Double.MAX_VALUE;
 

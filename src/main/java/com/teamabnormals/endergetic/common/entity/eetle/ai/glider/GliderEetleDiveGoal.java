@@ -47,7 +47,7 @@ public class GliderEetleDiveGoal extends Goal {
 		}
 		this.prevHealth = glider.getHealth();
 		if (this.ticksGrabbed >= 30) {
-			Level world = glider.level;
+			Level world = glider.level();
 			BlockPos pos = glider.blockPosition();
 			int distanceFromGround = distanceFromGround(glider, world, pos.mutable());
 			if (distanceFromGround > 3 && distanceFromGround < 11) {
@@ -110,7 +110,7 @@ public class GliderEetleDiveGoal extends Goal {
 			if (attackTarget != null && glider.hasPassenger(attackTarget)) {
 				glider.makeGrounded();
 				glider.groundedAttacker = attackTarget;
-				attackTarget.hurt(DamageSource.FLY_INTO_WALL, glider.getRandom().nextInt(6) + 8);
+				attackTarget.hurt(glider.damageSources().flyIntoWall(), glider.getRandom().nextInt(6) + 8);
 			}
 		}
 	}

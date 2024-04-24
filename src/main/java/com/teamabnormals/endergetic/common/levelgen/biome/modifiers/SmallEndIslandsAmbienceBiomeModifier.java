@@ -18,8 +18,8 @@ public enum SmallEndIslandsAmbienceBiomeModifier implements BiomeModifier {
 	public void modify(Holder<Biome> biome, Phase phase, ModifiableBiomeInfo.BiomeInfo.Builder builder) {
 		if (phase == Phase.MODIFY && biome.is(Biomes.SMALL_END_ISLANDS)) {
 			builder.getSpecialEffects()
-					.ambientLoopSound(EESoundEvents.SMALL_END_ISLANDS_LOOP.get())
-					.ambientAdditionsSound(new AmbientAdditionsSettings(EESoundEvents.SMALL_END_ISLANDS_ADDITIONS.get(), 0.0111D));
+					.ambientLoopSound(Holder.direct(EESoundEvents.SMALL_END_ISLANDS_LOOP.get()))
+					.ambientAdditionsSound(new AmbientAdditionsSettings(Holder.direct(EESoundEvents.SMALL_END_ISLANDS_ADDITIONS.get()), 0.0111D));
 		}
 	}
 

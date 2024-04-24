@@ -32,7 +32,7 @@ public class BroodEetleSleepGoal extends Goal {
 	@SuppressWarnings("deprecation")
 	public void tick() {
 		BroodEetle broodEetle = this.broodEetle;
-		if (!broodEetle.onGround() && broodEetle.level.hasChunkAt(broodEetle.blockPosition())) {
+		if (!broodEetle.onGround() && broodEetle.level().hasChunkAt(broodEetle.blockPosition())) {
 			this.offGroundTicks++;
 		} else {
 			this.offGroundTicks = 0;
@@ -57,7 +57,7 @@ public class BroodEetleSleepGoal extends Goal {
 	}
 
 	private static boolean areAnyPlayersClose(BroodEetle broodEetle) {
-		return !broodEetle.level.getEntitiesOfClass(Player.class, broodEetle.getBoundingBox().inflate(2.0F, 0.1F, 2.0F), player -> {
+		return !broodEetle.level().getEntitiesOfClass(Player.class, broodEetle.getBoundingBox().inflate(2.0F, 0.1F, 2.0F), player -> {
 			return player.isAlive() && !player.isInvisible() && !player.isCreative();
 		}).isEmpty();
 	}

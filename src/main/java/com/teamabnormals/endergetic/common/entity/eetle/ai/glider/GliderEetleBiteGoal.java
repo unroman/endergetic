@@ -3,6 +3,7 @@ package com.teamabnormals.endergetic.common.entity.eetle.ai.glider;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatedGoal;
 import com.teamabnormals.endergetic.common.entity.eetle.GliderEetle;
+import com.teamabnormals.endergetic.core.registry.other.EEDamageTypes;
 import com.teamabnormals.endergetic.core.registry.other.EEDataProcessors;
 import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
 import net.minecraft.world.entity.EntitySelector;
@@ -68,7 +69,7 @@ public class GliderEetleBiteGoal extends EndimatedGoal<GliderEetle> {
 			this.delayCounter = 4 + random.nextInt(9);
 			PathNavigation pathNavigator = glider.getNavigation();
 			if (distanceToTargetSq >= 9.0F) {
-				Path path = pathNavigator.createPath(GliderEetleGrabGoal.getAirPosAboveTarget(glider.level, target), 0);
+				Path path = pathNavigator.createPath(GliderEetleGrabGoal.getAirPosAboveTarget(glider.level(), target), 0);
 				if (path == null || !pathNavigator.moveTo(path, 1.25F)) {
 					this.delayCounter += 15;
 				}
@@ -84,7 +85,7 @@ public class GliderEetleBiteGoal extends EndimatedGoal<GliderEetle> {
 			if (!this.isEndimationPlaying()) {
 				this.playEndimation();
 			} else if ((this.isEndimationAtTick(8) || this.isEndimationAtTick(18)) && glider.hasLineOfSight(target)) {
-				target.hurt(GliderEetleMunchGoal.causeMunchDamage(glider), (float) glider.getAttributeValue(Attributes.ATTACK_DAMAGE) + random.nextInt(3));
+				target.hurt(EEDamageTypes.munch(target.level(), glider), (float) glider.getAttributeValue(Attributes.ATTACK_DAMAGE) + random.nextInt(3));
 			}
 		}
 	}

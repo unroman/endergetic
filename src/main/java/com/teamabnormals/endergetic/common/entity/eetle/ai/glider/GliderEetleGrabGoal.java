@@ -88,7 +88,7 @@ public class GliderEetleGrabGoal extends Goal {
 
 			float blocksFromTarget = Mth.sqrt((float) distanceToTargetSq);
 			if (blocksFromTarget >= 3.0F) {
-				Path path = pathNavigator.createPath(getAirPosAboveTarget(glider.level, target), 0);
+				Path path = pathNavigator.createPath(getAirPosAboveTarget(glider.level(), target), 0);
 				if (path == null || !pathNavigator.moveTo(path, 1.25F)) {
 					this.delayCounter += 15;
 				}

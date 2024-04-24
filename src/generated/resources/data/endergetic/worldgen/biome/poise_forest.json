@@ -1,0 +1,91 @@
+{
+  "carvers": {},
+  "creature_spawn_probability": 0.9,
+  "downfall": 0.5,
+  "effects": {
+    "additions_sound": {
+      "sound": {
+        "sound_id": "endergetic:ambient.poise_forest.additions"
+      },
+      "tick_chance": 0.01
+    },
+    "ambient_sound": {
+      "sound_id": "endergetic:ambient.poise_forest.loop"
+    },
+    "fog_color": 10518688,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": {
+        "sound_id": "endergetic:ambient.poise_forest.mood"
+      },
+      "tick_delay": 6000
+    },
+    "music": {
+      "max_delay": 24000,
+      "min_delay": 12000,
+      "replace_current_music": false,
+      "sound": {
+        "sound_id": "endergetic:music.end.poise_forest"
+      }
+    },
+    "sky_color": 0,
+    "water_color": 4159204,
+    "water_fog_color": 329011
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [
+      "endergetic:poise_dome",
+      "endergetic:poise_tree",
+      "minecraft:end_gateway_return"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [
+      "endergetic:poise_cluster",
+      "endergetic:puff_bug_hive",
+      "endergetic:bolloom_bud",
+      "endergetic:tall_poise_bush_patch",
+      "endergetic:poise_bush_patch"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "end_creature": [
+      {
+        "type": "endergetic:booflo_adolescent",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "endergetic:booflo",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 15
+      },
+      {
+        "type": "endergetic:puff_bug",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 10
+      }
+    ],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.5
+}

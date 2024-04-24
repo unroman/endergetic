@@ -31,7 +31,8 @@
           "recipes": [
             "endergetic:large_poise_boat"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

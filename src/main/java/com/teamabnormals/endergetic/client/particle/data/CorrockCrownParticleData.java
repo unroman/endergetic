@@ -4,10 +4,9 @@ import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.Optional;
@@ -73,7 +72,7 @@ public class CorrockCrownParticleData implements ParticleOptions {
 
 	@Override
 	public String writeToString() {
-		return Registries.PARTICLE_TYPE.getKey(this.getType()) + ", eetle:" + this.eetle + ", scale:" + this.scale;
+		return BuiltInRegistries.PARTICLE_TYPE.getKey(this.getType()) + ", eetle:" + this.eetle + ", scale:" + this.scale;
 	}
 
 	public boolean isEetle() {

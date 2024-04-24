@@ -1,0 +1,19 @@
+{
+  "type": "endergetic:weighted_features",
+  "config": {
+    "features": [
+      {
+        "feature": "endergetic:small_corrock_tower",
+        "weight": 6
+      },
+      {
+        "feature": "endergetic:medium_corrock_tower",
+        "weight": 12
+      },
+      {
+        "feature": "endergetic:large_corrock_tower",
+        "weight": 4
+      }
+    ]
+  }
+}

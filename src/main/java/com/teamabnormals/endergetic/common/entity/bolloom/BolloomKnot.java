@@ -4,6 +4,7 @@ import com.teamabnormals.endergetic.core.registry.EEEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -45,7 +46,7 @@ public class BolloomKnot extends Entity {
 		this.xo = this.getX();
 		this.yo = this.getY();
 		this.zo = this.getZ();
-		if (!this.level.isClientSide && this.isAlive() && this.level.isAreaLoaded(this.getHangingPos(), 1) && !this.onValidBlock()) {
+		if (!this.level().isClientSide && this.isAlive() && this.level().isAreaLoaded(this.getHangingPos(), 1) && !this.onValidBlock()) {
 			this.discard();
 		} else if (this.getBalloonsTied() <= 0) {
 			this.discard();
@@ -72,14 +73,14 @@ public class BolloomKnot extends Entity {
 	}
 
 	public void addBalloon(BalloonColor balloonColor) {
-		BolloomBalloon balloon = new BolloomBalloon(this.level, this.getUUID(), this.getHangingPos(), 0.1F);
+		BolloomBalloon balloon = new BolloomBalloon(this.level(), this.getUUID(), this.getHangingPos(), 0.1F);
 		balloon.setColor(balloonColor);
-		this.level.addFreshEntity(balloon);
+		this.level().addFreshEntity(balloon);
 		this.setBalloonsTied(this.getBalloonsTied() + 1);
 	}
 
 	private boolean onValidBlock() {
-		return this.level.getBlockState(this.hangingPosition).is(BlockTags.FENCES);
+		return this.level().getBlockState(this.hangingPosition).is(BlockTags.FENCES);
 	}
 
 	public boolean isPickable() {
@@ -93,7 +94,7 @@ public class BolloomKnot extends Entity {
 
 	@Override
 	public void setPos(double x, double y, double z) {
-		this.hangingPosition = new BlockPos(x, y, z);
+		this.hangingPosition = BlockPos.containing(x, y, z);
 		super.setPos(x, y, z);
 	}
 
@@ -140,7 +141,7 @@ public class BolloomKnot extends Entity {
 
 	@Nonnull
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 }

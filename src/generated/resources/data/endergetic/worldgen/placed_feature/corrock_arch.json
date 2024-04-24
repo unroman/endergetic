@@ -1,0 +1,19 @@
+{
+  "feature": "endergetic:corrock_arch",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 26
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "endergetic:heightmap_spread_double",
+      "heightmap": "MOTION_BLOCKING"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

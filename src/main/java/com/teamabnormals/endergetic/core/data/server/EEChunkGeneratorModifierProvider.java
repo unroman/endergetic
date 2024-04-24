@@ -6,27 +6,31 @@ import com.teamabnormals.blueprint.core.registry.BlueprintSurfaceRules;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import com.teamabnormals.endergetic.core.registry.EEBiomes;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Noises;
+
+import java.util.concurrent.CompletableFuture;
 
 import static net.minecraft.world.level.levelgen.SurfaceRules.*;
 
 public final class EEChunkGeneratorModifierProvider extends ChunkGeneratorModifierProvider {
 
-	public EEChunkGeneratorModifierProvider(DataGenerator dataGenerator) {
-		super(dataGenerator, EndergeticExpansion.MOD_ID);
+	public EEChunkGeneratorModifierProvider(PackOutput output, CompletableFuture<Provider> provider) {
+		super(EndergeticExpansion.MOD_ID, output, provider);
 	}
 
 	@Override
-	protected void registerEntries() {
-		ConditionSource inSlice = new BlueprintSurfaceRules.ModdednessSliceConditionSource(new ResourceLocation(EndergeticExpansion.MOD_ID, "poise_forest"));
-		ConditionSource inPoiseForest = isBiome(EEBiomes.POISE_FOREST.getKey());
+	protected void registerEntries(Provider provider) {
+		// TODO: ModdednessSliceConditionSource
+		//ConditionSource inSlice = new BlueprintSurfaceRules.ModdednessSliceConditionSource(new ResourceLocation(EndergeticExpansion.MOD_ID, "poise_forest"));
+		ConditionSource inPoiseForest = isBiome(EEBiomes.POISE_FOREST);
 		RuleSource poismoss = ifTrue(noiseCondition(Noises.SURFACE, 0.43F, Double.MAX_VALUE), sequence(ifTrue(ON_FLOOR, state(EEBlocks.POISMOSS.get().defaultBlockState())), state(Blocks.END_STONE.defaultBlockState())));
 		RuleSource eumus = ifTrue(noiseCondition(Noises.SURFACE, 0.35F, 0.43F), ifTrue(UNDER_FLOOR, state(EEBlocks.EUMUS.get().defaultBlockState())));
 		RuleSource poismossAndEumus = sequence(poismoss, eumus);
-		RuleSource poiseForest = ifTrue(inSlice, ifTrue(inPoiseForest, poismossAndEumus));
+		RuleSource poiseForest = ifTrue(inPoiseForest, poismossAndEumus); // ifTrue(inSlice, ifTrue(inPoiseForest, poismossAndEumus));
 		this.entry("poise_forest_surface_rule")
 				.selects("the_end")
 				.addModifier(new SurfaceRuleModifier(poiseForest, false));

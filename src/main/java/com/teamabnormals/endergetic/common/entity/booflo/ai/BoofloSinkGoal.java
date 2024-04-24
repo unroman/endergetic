@@ -37,8 +37,8 @@ public class BoofloSinkGoal extends Goal {
 		BlockPos pos = this.booflo.blockPosition();
 		for (int i = 0; i < 10; i++) {
 			BlockPos newPos = pos.below(i);
-			if (Block.canSupportRigidBlock(this.booflo.level, newPos)) {
-				if (this.booflo.level.getBlockState(newPos).getFluidState().isEmpty() && !this.booflo.level.getBlockState(newPos).isBurning(this.booflo.level, newPos)) {
+			if (Block.canSupportRigidBlock(this.booflo.level(), newPos)) {
+				if (this.booflo.level().getBlockState(newPos).getFluidState().isEmpty() && !this.booflo.level().getBlockState(newPos).isBurning(this.booflo.level(), newPos)) {
 					return true;
 				}
 			}

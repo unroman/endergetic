@@ -1,0 +1,8 @@
+{
+  "type": "endergetic:medium_corrock_tower",
+  "config": {
+    "chorus_chance": 0.075,
+    "crown_chance": 0.7,
+    "min_height": 3
+  }
+}

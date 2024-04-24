@@ -1,0 +1,14 @@
+{
+  "feature": "endergetic:puff_bug_hive",
+  "placement": [
+    {
+      "type": "endergetic:noise_heightmap_32",
+      "above_noise": 23,
+      "below_noise": 8,
+      "noise_level": -0.8
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

@@ -2,7 +2,7 @@ package com.teamabnormals.endergetic.client.renderer.entity.layers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.teamabnormals.endergetic.client.model.purpoid.PurpoidGelModel;
 import com.teamabnormals.endergetic.client.model.purpoid.PurpoidModel;
 import com.teamabnormals.endergetic.client.renderer.entity.PurpoidRenderer;

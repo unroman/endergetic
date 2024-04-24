@@ -7,7 +7,6 @@ import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -61,7 +60,7 @@ public class ChargerEetle extends AbstractEetle {
 	public void tick() {
 		super.tick();
 
-		if (!this.level.isClientSide) {
+		if (!this.level().isClientSide) {
 			if (!this.isBaby()) {
 				if (this.isCatapultProjectile()) {
 					LivingEntity attackTarget = this.getTarget();
@@ -99,7 +98,7 @@ public class ChargerEetle extends AbstractEetle {
 		if (!(target instanceof LivingEntity)) {
 			return false;
 		} else {
-			if (!this.level.isClientSide) {
+			if (!this.level().isClientSide) {
 				NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.CHARGER_EETLE_ATTACK);
 			}
 			float attackDamage = (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);
@@ -110,7 +109,7 @@ public class ChargerEetle extends AbstractEetle {
 				damage = attackDamage;
 			}
 
-			boolean attacked = target.hurt(DamageSource.mobAttack(this), damage);
+			boolean attacked = target.hurt(this.damageSources().mobAttack(this), damage);
 			if (attacked) {
 				this.doEnchantDamageEffects(this, target);
 				this.blockedByShield((LivingEntity) target);
@@ -124,7 +123,7 @@ public class ChargerEetle extends AbstractEetle {
 		if (!this.isBaby()) {
 			double knockbackForce = this.getAttributeValue(Attributes.ATTACK_KNOCKBACK) - target.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE);
 			if (knockbackForce > 0.0D) {
-				RandomSource random = this.level.random;
+				RandomSource random = this.level().random;
 				double scale = knockbackForce * (random.nextFloat() * 1.0F + 0.5F);
 				Vec3 horizontalVelocity = new Vec3(target.getX() - this.getX(), 0.0D, target.getZ() - this.getZ()).normalize().scale(scale);
 				target.push(horizontalVelocity.x, knockbackForce * (random.nextFloat() * 0.05F), horizontalVelocity.z);

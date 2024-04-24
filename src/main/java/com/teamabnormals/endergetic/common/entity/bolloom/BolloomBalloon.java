@@ -93,8 +93,8 @@ public class BolloomBalloon extends AbstractBolloom {
 	public void tick() {
 		if (this.isAttachedToEntity() && (!this.attachedEntity.isAlive() || this.attachedEntity.isSpectator())) {
 			this.detachFromEntity();
-		} else if (!this.level.isClientSide && this.attachedEntityUUID != null) {
-			Entity entity = ((ServerLevel) this.level).getEntity(this.attachedEntityUUID);
+		} else if (!this.level().isClientSide && this.attachedEntityUUID != null) {
+			Entity entity = ((ServerLevel) this.level()).getEntity(this.attachedEntityUUID);
 			if (entity != null) {
 				this.attachToEntity(entity);
 			} else {
@@ -149,7 +149,7 @@ public class BolloomBalloon extends AbstractBolloom {
 
 	@Nullable
 	public Entity getKnot() {
-		return ((ServerLevel) this.level).getEntity(this.getKnotId());
+		return ((ServerLevel) this.level()).getEntity(this.getKnotId());
 	}
 
 	private void setFencePos(BlockPos fencePos) {
@@ -199,7 +199,7 @@ public class BolloomBalloon extends AbstractBolloom {
 		this.setDeltaMovement(Vec3.ZERO);
 		if (this.canUpdate()) {
 			this.tick();
-			this.incrementTicksExisted(!this.level.isClientSide);
+			this.incrementTicksExisted(!this.level().isClientSide);
 			if (this.attachedEntity instanceof CustomBalloonPositioner) {
 				((CustomBalloonPositioner) this.attachedEntity).updateAttachedPosition(this);
 			} else if (this.attachedEntity != null) {
@@ -210,7 +210,7 @@ public class BolloomBalloon extends AbstractBolloom {
 
 	@Override
 	public void updatePositionAndMotion(double angleX, double angleZ) {
-		if (this.level.isAreaLoaded(this.blockPosition(), 1)) {
+		if (this.level().isAreaLoaded(this.blockPosition(), 1)) {
 			if (!this.isUntied()) {
 				float sway = this.getSway();
 				this.setPos(
@@ -227,8 +227,8 @@ public class BolloomBalloon extends AbstractBolloom {
 
 	@Override
 	public void updateUntied() {
-		if (this.level.isAreaLoaded(this.getFencePos(), 1) && !this.isUntied()) {
-			if (!this.level.getBlockState(this.getFencePos()).is(BlockTags.FENCES)) {
+		if (this.level().isAreaLoaded(this.getFencePos(), 1) && !this.isUntied()) {
+			if (!this.level().getBlockState(this.getFencePos()).is(BlockTags.FENCES)) {
 				if (this.getKnot() instanceof BolloomKnot bolloomKnot) {
 					bolloomKnot.setBalloonsTied(bolloomKnot.getBalloonsTied() - 1);
 				}
@@ -262,8 +262,8 @@ public class BolloomBalloon extends AbstractBolloom {
 		BlockPos.MutableBlockPos mutable = this.getFencePos().above(3).mutable();
 		for (int i = 0; i < 3; i++) {
 			BlockPos pos = mutable.below(i);
-			if (this.level.isAreaLoaded(pos, 1)) {
-				if (!this.level.getBlockState(pos).canBeReplaced() || this.level.getBlockState(pos).getBlock() == Blocks.LAVA) {
+			if (this.level().isAreaLoaded(pos, 1)) {
+				if (!this.level().getBlockState(pos).canBeReplaced() || this.level().getBlockState(pos).getBlock() == Blocks.LAVA) {
 					return true;
 				}
 			}
@@ -273,7 +273,7 @@ public class BolloomBalloon extends AbstractBolloom {
 
 	@Override
 	public void kill() {
-		if (!this.level.isClientSide) {
+		if (!this.level().isClientSide) {
 			Entity knot = this.getKnot();
 			if (knot instanceof BolloomKnot) {
 				BolloomKnot bolloomKnot = (BolloomKnot) knot;
@@ -287,7 +287,7 @@ public class BolloomBalloon extends AbstractBolloom {
 	public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
 		if (itemstack.getItem() instanceof DyeItem && this.getColor().color != ((DyeItem) itemstack.getItem()).getDyeColor()) {
-			if (!this.level.isClientSide) {
+			if (!this.level().isClientSide) {
 				this.setColor(BalloonColor.byDyeColor(((DyeItem) itemstack.getItem()).getDyeColor()));
 				EntityItemStackHelper.consumeItemFromStack(player, itemstack);
 			}

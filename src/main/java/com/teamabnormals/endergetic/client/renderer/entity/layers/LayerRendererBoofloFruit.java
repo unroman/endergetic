@@ -1,7 +1,7 @@
 package com.teamabnormals.endergetic.client.renderer.entity.layers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.teamabnormals.blueprint.client.ClientInfo;
 import com.teamabnormals.endergetic.common.entity.booflo.Booflo;
 import com.teamabnormals.endergetic.core.registry.EEItems;
@@ -9,9 +9,9 @@ import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -38,7 +38,7 @@ public class LayerRendererBoofloFruit extends RenderLayer<Booflo, EntityModel<Bo
 
 			matrixStack.scale(1.3F, 1.3F, 1.3F);
 
-			this.itemInHandRenderer.renderItem(booflo, new ItemStack(EEItems.BOLLOOM_FRUIT.get()), ItemTransforms.TransformType.GROUND, false, matrixStack, bufferIn, packedLightIn);
+			this.itemInHandRenderer.renderItem(booflo, new ItemStack(EEItems.BOLLOOM_FRUIT.get()), ItemDisplayContext.GROUND, false, matrixStack, bufferIn, packedLightIn);
 			matrixStack.popPose();
 		}
 	}

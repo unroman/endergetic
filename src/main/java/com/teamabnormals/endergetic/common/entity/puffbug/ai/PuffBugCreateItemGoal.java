@@ -52,9 +52,9 @@ public class PuffBugCreateItemGoal extends EndimatedGoal<PuffBug> {
 			RandomSource rand = this.entity.getRandom();
 
 			if (this.isEndimationAtTick(90)) {
-				ItemEntity itementity = new ItemEntity(this.entity.level, this.entity.getX(), this.entity.getY() - 0.5D, this.entity.getZ(), this.entity.getStackToCreate());
+				ItemEntity itementity = new ItemEntity(this.entity.level(), this.entity.getX(), this.entity.getY() - 0.5D, this.entity.getZ(), this.entity.getStackToCreate());
 				itementity.setPickUpDelay(40);
-				this.entity.level.addFreshEntity(itementity);
+				this.entity.level().addFreshEntity(itementity);
 				this.entity.setStackToCreate(null);
 
 				this.entity.removeEffect(MobEffects.LEVITATION);

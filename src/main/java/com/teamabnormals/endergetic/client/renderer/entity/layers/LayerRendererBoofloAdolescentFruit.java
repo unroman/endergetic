@@ -1,15 +1,15 @@
 package com.teamabnormals.endergetic.client.renderer.entity.layers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.teamabnormals.endergetic.client.model.booflo.AdolescentBoofloModel;
 import com.teamabnormals.endergetic.common.entity.booflo.BoofloAdolescent;
 import com.teamabnormals.endergetic.core.registry.EEItems;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -31,7 +31,7 @@ public class LayerRendererBoofloAdolescentFruit extends RenderLayer<BoofloAdoles
 
 			matrixStack.mulPose(Axis.XP.rotationDegrees(90.0F));
 
-			this.itemInHandRenderer.renderItem(adolescent, new ItemStack(EEItems.BOLLOOM_FRUIT.get()), ItemTransforms.TransformType.GROUND, false, matrixStack, bufferIn, packedLightIn);
+			this.itemInHandRenderer.renderItem(adolescent, new ItemStack(EEItems.BOLLOOM_FRUIT.get()), ItemDisplayContext.GROUND, false, matrixStack, bufferIn, packedLightIn);
 			matrixStack.popPose();
 		}
 	}

@@ -6,6 +6,7 @@ import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -55,7 +56,7 @@ public class BroodEggSack extends Entity {
 
 	@Override
 	public void tick() {
-		Level world = this.level;
+		Level world = this.level();
 		BroodEetle broodEetle = this.getBroodEetle(world);
 		if (!world.isClientSide && (broodEetle == null || !broodEetle.isAlive() || broodEetle.getEggSack(world) != this)) {
 			this.discard();
@@ -105,7 +106,7 @@ public class BroodEggSack extends Entity {
 
 	@Override
 	public boolean hurt(DamageSource source, float amount) {
-		Level world = this.level;
+		Level world = this.level();
 		if (!world.isClientSide) {
 			BroodEetle broodEetle = this.getBroodEetle(world);
 			if (broodEetle != null && broodEetle.isAlive() && (broodEetle.isEggMouthOpen() || broodEetle.isOnLastHealthStage())) {
@@ -145,7 +146,7 @@ public class BroodEggSack extends Entity {
 
 	@Override
 	public EntityDimensions getDimensions(Pose pose) {
-		BroodEetle broodEetle = this.getBroodEetle(this.level);
+		BroodEetle broodEetle = this.getBroodEetle(this.level());
 		if (broodEetle != null) {
 			if (broodEetle.isFlying()) {
 				return FLYING_SIZE;
@@ -163,7 +164,7 @@ public class BroodEggSack extends Entity {
 	}
 
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 

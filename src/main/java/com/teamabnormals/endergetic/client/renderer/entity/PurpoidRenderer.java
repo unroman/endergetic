@@ -2,8 +2,7 @@ package com.teamabnormals.endergetic.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.teamabnormals.blueprint.client.BlueprintRenderTypes;
 import com.teamabnormals.endergetic.client.model.purpoid.PurpModel;
 import com.teamabnormals.endergetic.client.model.purpoid.PurpazoidModel;
@@ -27,6 +26,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Matrix4f;
 
 import javax.annotation.Nullable;
 
@@ -63,7 +63,7 @@ public class PurpoidRenderer extends MobRenderer<Purpoid, PurpoidModel> {
 		this.shadowRadius = 0.6F * purpoid.getSize().getScale();
 		super.render(purpoid, entityYaw, partialTicks, poseStack, bufferIn, packedLightIn);
 		if (isInvisibleWhileTeleporting(purpoid)) return;
-		Entity shieldedMommy = purpoid.level.getEntity(purpoid.getIDOfShieldedMommy());
+		Entity shieldedMommy = purpoid.level().getEntity(purpoid.getIDOfShieldedMommy());
 		if (shieldedMommy instanceof Purpoid purpoidMommy && !isInvisibleWhileTeleporting(purpoidMommy)) {
 			renderShieldingLine(purpoid, partialTicks, poseStack, bufferIn, purpoidMommy.getPosition(partialTicks), purpoidMommy.getStunTimer());
 		}
@@ -140,7 +140,7 @@ public class PurpoidRenderer extends MobRenderer<Purpoid, PurpoidModel> {
 		VertexConsumer vertexconsumer = bufferSource.getBuffer(EERenderTypes.PURPAZOID_SHIELDING_LINE);
 		Matrix4f matrix4f = stack.last().pose();
 		float width = 0.1F;
-		float widthProportionalToDistance = Mth.fastInvSqrt(xDifference * xDifference + zDifference * zDifference) * width / 2.0F;
+		float widthProportionalToDistance = (float) Mth.fastInvSqrt(xDifference * xDifference + zDifference * zDifference) * width / 2.0F;
 		float zGap = zDifference * widthProportionalToDistance;
 		float xGap = xDifference * widthProportionalToDistance;
 

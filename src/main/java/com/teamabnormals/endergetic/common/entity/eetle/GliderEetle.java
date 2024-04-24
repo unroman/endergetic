@@ -90,12 +90,12 @@ public class GliderEetle extends AbstractEetle implements IFlyingEetle {
 		if (FLYING.equals(key)) {
 			if (!this.isBaby() && this.isFlying()) {
 				this.moveControl = new FlyingEetleMoveController<>(this, 16.0F, 50.0F);
-				this.navigation = new EndergeticFlyingPathNavigator(this, this.level);
+				this.navigation = new EndergeticFlyingPathNavigator(this, this.level());
 			} else {
 				if (!this.isBaby()) {
 					for (Entity passenger : this.getPassengers()) {
 						passenger.removeVehicle();
-						Level world = this.level;
+						Level world = this.level();
 						if (passenger instanceof LivingEntity && passenger.getVehicle() != this && !world.isClientSide) {
 							AABB passengerBoundingBox = passenger.getBoundingBox();
 							double xSize = passengerBoundingBox.getXsize();
@@ -112,7 +112,7 @@ public class GliderEetle extends AbstractEetle implements IFlyingEetle {
 				}
 				this.idleDelay = this.random.nextInt(41) + 30;
 				this.moveControl = new GroundEetleMoveController(this);
-				this.navigation = this.createNavigation(this.level);
+				this.navigation = this.createNavigation(this.level());
 			}
 		} else if (TARGET_FLYING_ROTATIONS.equals(key)) {
 			this.flyingRotations.setLooking(true);
@@ -164,7 +164,7 @@ public class GliderEetle extends AbstractEetle implements IFlyingEetle {
 	public void tick() {
 		super.tick();
 
-		if (!this.level.isClientSide) {
+		if (!this.level().isClientSide) {
 			AttributeInstance knockbackResistance = this.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
 			if (knockbackResistance != null) {
 				boolean noPassengers = this.getPassengers().isEmpty();
@@ -293,7 +293,7 @@ public class GliderEetle extends AbstractEetle implements IFlyingEetle {
 	}
 
 	@Override
-	public void positionRider(Entity passenger) {
+	public void positionRider(Entity passenger, Entity.MoveFunction function) {
 		this.setYBodyRot(this.getYRot());
 		if (this.hasPassenger(passenger)) {
 			if (passenger instanceof LivingEntity && !isEntityLarge(passenger)) {
@@ -301,7 +301,7 @@ public class GliderEetle extends AbstractEetle implements IFlyingEetle {
 				float y = (float) (boundingBox.maxY - boundingBox.minY) * -0.25F;
 				float pitch = this.flyingRotations.getFlyPitch();
 				Vec3 riderPos = (new Vec3(0.8D + Math.abs(pitch * 0.002F), y, 0.0D)).yRot(-this.getYRot() * ((float) Math.PI / 180F) - ((float) Math.PI / 2F)).xRot(pitch * ((float) Math.PI / 180F));
-				passenger.setPos(this.getX() + riderPos.x, this.getY() + 0.25F + riderPos.y, this.getZ() + riderPos.z);
+				function.accept(passenger, this.getX() + riderPos.x, this.getY() + 0.25F + riderPos.y, this.getZ() + riderPos.z);
 			} else {
 				super.positionRider(passenger);
 			}
@@ -311,7 +311,7 @@ public class GliderEetle extends AbstractEetle implements IFlyingEetle {
 	@Override
 	protected void addPassenger(Entity passenger) {
 		super.addPassenger(passenger);
-		if (!this.level.isClientSide && passenger instanceof LivingEntity && passenger.getVehicle() == this && this.getPassengers().indexOf(passenger) == 0) {
+		if (!this.level().isClientSide && passenger instanceof LivingEntity && passenger.getVehicle() == this && this.getPassengers().indexOf(passenger) == 0) {
 			this.setCaughtSize(EntityDimensions.fixed(1.0F + passenger.getDimensions(passenger.getPose()).width, 0.85F));
 		}
 	}
@@ -323,7 +323,7 @@ public class GliderEetle extends AbstractEetle implements IFlyingEetle {
 			IDataManager dataManager = (IDataManager) passenger;
 			dataManager.setValue(EEDataProcessors.CATCHING_COOLDOWN, dataManager.getValue(EEDataProcessors.CATCHING_COOLDOWN) + 40 + this.random.nextInt(11));
 		}
-		if (!this.level.isClientSide) {
+		if (!this.level().isClientSide) {
 			if (!this.getPassengers().isEmpty()) {
 				Entity indexZeroPassenger = this.getPassengers().get(0);
 				if (indexZeroPassenger instanceof LivingEntity && passenger.getVehicle() == this) {

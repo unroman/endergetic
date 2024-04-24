@@ -1,0 +1,7 @@
+{
+  "type": "endergetic:corrock_patch",
+  "config": {
+    "frequency": 0.175,
+    "search_down": false
+  }
+}

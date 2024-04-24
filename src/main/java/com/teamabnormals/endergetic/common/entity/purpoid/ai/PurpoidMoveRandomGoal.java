@@ -26,7 +26,7 @@ public class PurpoidMoveRandomGoal extends Goal {
 			Purpoid purpoid = this.purpoid;
 			RandomSource random = purpoid.getRandom();
 			Vec3 randomPos;
-			if (purpoid.getY() >= purpoid.level.getSeaLevel() + 30) {
+			if (purpoid.getY() >= purpoid.level().getSeaLevel() + 30) {
 				randomPos = purpoid.position().add(new Vec3(random.nextInt(17) - random.nextInt(17), -random.nextInt(16), random.nextInt(17) - random.nextInt(17)));
 			} else {
 				Vec3 view = purpoid.getViewVector(0.0F);

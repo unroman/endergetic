@@ -29,7 +29,7 @@ public class BroodEetleLandGoal extends Goal {
 		BroodEetle broodEetle = this.broodEetle;
 		if (broodEetle.isFlying() && ((broodEetle.getTicksFlying() >= 700 && broodEetle.getRandom().nextFloat() < 0.1F) || broodEetle.isOnLastHealthStage())) {
 			BlockPos takeoffPos = broodEetle.takeoffPos;
-			Level world = broodEetle.level;
+			Level world = broodEetle.level();
 			boolean canSitOnTakeoffPos = takeoffPos != null && world.loadedAndEntityCanStandOn(takeoffPos.below(), broodEetle);
 			if (canSitOnTakeoffPos) {
 				this.path = broodEetle.getNavigation().createPath(takeoffPos, 0);
@@ -44,7 +44,7 @@ public class BroodEetleLandGoal extends Goal {
 				if (foundGroundPos != null) {
 					this.path = broodEetle.getNavigation().createPath(foundGroundPos.x, foundGroundPos.y, foundGroundPos.z, 0);
 					if (this.path != null) {
-						broodEetle.takeoffPos = new BlockPos(foundGroundPos);
+						broodEetle.takeoffPos = BlockPos.containing(foundGroundPos);
 						return true;
 					}
 				}

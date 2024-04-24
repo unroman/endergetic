@@ -1,4 +1,4 @@
-package com.teamabnormals.endergetic.common;
+package com.teamabnormals.endergetic.core.registry.other;
 
 import com.teamabnormals.blueprint.core.api.WoodTypeRegistryHelper;
 import com.teamabnormals.blueprint.core.util.PropertyUtil.WoodSetProperties;

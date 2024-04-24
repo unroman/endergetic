@@ -78,9 +78,9 @@ public class PuffBugBottleItem extends Item {
 
 	@Override
 	public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
-		if (!target.level.isClientSide && target instanceof Booflo booflo) {
+		if (!target.level().isClientSide && target instanceof Booflo booflo) {
 			if (!booflo.hasCaughtFruit() && !booflo.hasCaughtPuffBug() && booflo.isTamed()) {
-				Level world = player.level;
+				Level world = player.level();
 				PuffBug puffbug = EEEntityTypes.PUFF_BUG.get().create(world);
 				if (puffbug != null) {
 					puffbug.setPos(target.getX(), target.getY(), target.getZ());

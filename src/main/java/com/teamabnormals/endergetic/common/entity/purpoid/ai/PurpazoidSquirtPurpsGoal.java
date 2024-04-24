@@ -32,7 +32,7 @@ public class PurpazoidSquirtPurpsGoal extends Goal {
 			if (++this.ticksWhileWaiting < 10) return false;
 			var revengeTargets = purpoid.revengeTargets;
 			if (!revengeTargets.isEmpty()) {
-				var nearbyRevengeTargets = purpoid.level.getEntitiesOfClass(LivingEntity.class, purpoid.getBoundingBox().inflate(32.0F), entity -> TargetingConditions.DEFAULT.test(purpoid, entity) && revengeTargets.contains(entity.getUUID()));
+				var nearbyRevengeTargets = purpoid.level().getEntitiesOfClass(LivingEntity.class, purpoid.getBoundingBox().inflate(32.0F), entity -> TargetingConditions.DEFAULT.test(purpoid, entity) && revengeTargets.contains(entity.getUUID()));
 				if (!nearbyRevengeTargets.isEmpty()) {
 					Vec3 positionOfRandomNearbyRevengeTarget = nearbyRevengeTargets.get(purpoid.getRandom().nextInt(nearbyRevengeTargets.size())).position();
 					Vec3 direction = purpoid.position().subtract(positionOfRandomNearbyRevengeTarget).normalize();
@@ -74,7 +74,7 @@ public class PurpazoidSquirtPurpsGoal extends Goal {
 		if (animationTick >= 40) {
 			velocityScale = 0.2F;
 			if (animationTick % 4 == 0) {
-				Purpoid purp = EEEntityTypes.PURPOID.get().create(purpoid.level);
+				Purpoid purp = EEEntityTypes.PURPOID.get().create(purpoid.level());
 				if (purp != null) {
 					purp.updateAge(-24000);
 					Vec3 deltaMovement = purpoid.getDeltaMovement();
@@ -86,7 +86,7 @@ public class PurpazoidSquirtPurpsGoal extends Goal {
 					if (random.nextFloat() < 0.143F || animationTick >= 56 && purpoid.needsMoreShielders()) {
 						purpoid.addShielder(purp);
 					}
-					purpoid.level.addFreshEntity(purp);
+					purpoid.level().addFreshEntity(purp);
 				}
 			}
 		}

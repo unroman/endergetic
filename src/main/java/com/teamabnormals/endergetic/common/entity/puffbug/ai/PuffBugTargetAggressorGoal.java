@@ -14,7 +14,7 @@ public class PuffBugTargetAggressorGoal extends HurtByTargetGoal {
 	public void start() {
 		super.start();
 
-		for (PuffBug bugs : this.mob.level.getEntitiesOfClass(PuffBug.class, this.mob.getBoundingBox().inflate(16.0D), (puffbug) -> puffbug.getTarget() == null)) {
+		for (PuffBug bugs : this.mob.level().getEntitiesOfClass(PuffBug.class, this.mob.getBoundingBox().inflate(16.0D), (puffbug) -> puffbug.getTarget() == null)) {
 			bugs.setTarget(this.mob.getTarget());
 		}
 	}

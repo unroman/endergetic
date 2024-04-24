@@ -34,7 +34,7 @@ public class PurpoidTeleportToFlowerGoal extends AbstractPurpoidTeleportGoal {
 		BlockPos restingPos = pos.below(3);
 		purpoid.setRestingPos(restingPos);
 		purpoid.setRestingSide(Direction.UP);
-		var nearbyPurpoids = purpoid.level.getEntitiesOfClass(Purpoid.class, purpoid.getBoundingBox().inflate(12.0D, 12.0D, 12.0D));
+		var nearbyPurpoids = purpoid.level().getEntitiesOfClass(Purpoid.class, purpoid.getBoundingBox().inflate(12.0D, 12.0D, 12.0D));
 		for (Purpoid nearbyPurpoid : nearbyPurpoids) {
 			Purpoid leaderOfNearbyPurpoid = nearbyPurpoid.getLeader();
 			if ((leaderOfNearbyPurpoid == purpoid || leaderOfNearbyPurpoid == null && nearbyPurpoid.distanceToSqr(purpoid) <= 9.0F) && nearbyPurpoid.isBaby() && !nearbyPurpoid.getTeleportController().isTeleporting() && !nearbyPurpoid.isResting()) {
@@ -54,7 +54,7 @@ public class PurpoidTeleportToFlowerGoal extends AbstractPurpoidTeleportGoal {
 		int originY = pos.getY();
 		int originZ = pos.getZ();
 		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
-		Level level = purpoid.level;
+		Level level = purpoid.level();
 		List<BlockPos> teleportPositions = new ArrayList<>();
 		for (int x = originX - 16; x <= originX + 16; x++) {
 			for (int y = originY - 16; y <= originY + 16; y++) {
@@ -71,7 +71,7 @@ public class PurpoidTeleportToFlowerGoal extends AbstractPurpoidTeleportGoal {
 	}
 
 	public static boolean isRestingPosNotBlocked(Purpoid purpoid, Vec3 pos, BlockPos restingPos, Direction side) {
-		Level level = purpoid.level;
+		Level level = purpoid.level();
 		VoxelShape restingPosShape = level.getBlockState(restingPos).getCollisionShape(level, restingPos).move(restingPos.getX(), restingPos.getY(), restingPos.getZ());
 		AABB purpoidCollisionBox = purpoid.getDimensions(purpoid.getPose()).makeBoundingBox(pos.x, pos.y, pos.z);
 		double sideCoordinate;

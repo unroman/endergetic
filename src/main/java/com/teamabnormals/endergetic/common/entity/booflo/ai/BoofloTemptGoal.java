@@ -25,7 +25,7 @@ public class BoofloTemptGoal extends Goal {
 
 	@Override
 	public boolean canUse() {
-		this.tempter = this.booflo.level.getNearestPlayer(SHOULD_FOLLOW, this.booflo);
+		this.tempter = this.booflo.level().getNearestPlayer(SHOULD_FOLLOW, this.booflo);
 		if (this.tempter == null) {
 			return false;
 		} else {
@@ -35,7 +35,7 @@ public class BoofloTemptGoal extends Goal {
 
 	@Override
 	public boolean canContinueToUse() {
-		Player tempter = this.tempter = this.booflo.level.getNearestPlayer(SHOULD_FOLLOW, this.booflo);
+		Player tempter = this.tempter = this.booflo.level().getNearestPlayer(SHOULD_FOLLOW, this.booflo);
 		if (tempter == null) {
 			return false;
 		} else {

@@ -15,7 +15,7 @@ public class BoofloSlamGoal extends EndimatedGoal<Booflo> {
 
 	public BoofloSlamGoal(Booflo booflo) {
 		super(booflo, EEPlayableEndimations.BOOFLO_CHARGE);
-		this.world = booflo.level;
+		this.world = booflo.level();
 	}
 
 	@Override

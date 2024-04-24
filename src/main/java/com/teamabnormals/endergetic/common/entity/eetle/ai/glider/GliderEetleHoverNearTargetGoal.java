@@ -67,7 +67,7 @@ public class GliderEetleHoverNearTargetGoal extends Goal {
 				this.delayCounter += 5;
 			}
 
-			Path path = pathNavigator.createPath(GliderEetleGrabGoal.getAirPosAboveTarget(glider.level, target), 5);
+			Path path = pathNavigator.createPath(GliderEetleGrabGoal.getAirPosAboveTarget(glider.level(), target), 5);
 			if (path == null || !pathNavigator.moveTo(path, 1.25F)) {
 				this.delayCounter += 15;
 			}

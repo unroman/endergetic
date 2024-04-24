@@ -45,7 +45,7 @@ public class BoofloGiveBirthGoal extends EndimatedGoal<Booflo> {
 		Booflo booflo = this.entity;
 		booflo.setYRot(this.originalYaw);
 		if (++this.birthTicks % 20 == 0 && booflo.babiesToBirth > 0) {
-			Level level = booflo.level;
+			Level level = booflo.level();
 			BoofloBaby baby = EEEntityTypes.BOOFLO_BABY.get().create(level);
 			if (baby != null) {
 				booflo.playSound(SoundEvents.ITEM_PICKUP, 0.3F, 0.6F);

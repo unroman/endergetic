@@ -5,6 +5,7 @@ import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -12,6 +13,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
@@ -76,7 +78,7 @@ public abstract class AbstractBolloom extends Entity {
 			seekingVineYRot += 2 * Math.PI;
 		}
 
-		boolean isOnServerSide = !this.level.isClientSide;
+		boolean isOnServerSide = !this.level().isClientSide;
 
 		if (Math.abs(seekingVineYRot) <= 0.1F) {
 			this.setVineYRot(vineYRot + seekingVineYRot, isOnServerSide);
@@ -219,8 +221,8 @@ public abstract class AbstractBolloom extends Entity {
 	}
 
 	protected void doParticles() {
-		if (this.level instanceof ServerLevel) {
-			((ServerLevel) this.level).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, EEBlocks.BOLLOOM_PARTICLE.get().defaultBlockState()), this.getX(), this.getY() + (double) this.getBbHeight() / 1.5D, this.getZ(), 10, this.getBbWidth() / 4.0F, this.getBbHeight() / 4.0F, this.getBbWidth() / 4.0F, 0.05D);
+		if (this.level() instanceof ServerLevel serverLevel) {
+			serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, EEBlocks.BOLLOOM_PARTICLE.get().defaultBlockState()), this.getX(), this.getY() + (double) this.getBbHeight() / 1.5D, this.getZ(), 10, this.getBbWidth() / 4.0F, this.getBbHeight() / 4.0F, this.getBbWidth() / 4.0F, 0.05D);
 		}
 	}
 
@@ -246,7 +248,7 @@ public abstract class AbstractBolloom extends Entity {
 
 	@Override
 	public boolean isInvulnerableTo(DamageSource source) {
-		return this.isInvulnerable() && source != DamageSource.OUT_OF_WORLD && source != DamageSource.CRAMMING;
+		return this.isInvulnerable() && !source.is(DamageTypes.FELL_OUT_OF_WORLD) && !source.is(DamageTypes.CRAMMING);
 	}
 
 	@Override
@@ -256,7 +258,7 @@ public abstract class AbstractBolloom extends Entity {
 
 	@Override
 	public boolean skipAttackInteraction(Entity entityIn) {
-		return entityIn instanceof Player && this.hurt(DamageSource.playerAttack((Player) entityIn), 0.0F);
+		return entityIn instanceof Player player && this.hurt(this.level().damageSources().playerAttack(player), 0.0F);
 	}
 
 	@Override
@@ -264,7 +266,7 @@ public abstract class AbstractBolloom extends Entity {
 		if (this.isInvulnerableTo(source)) {
 			return false;
 		} else {
-			if (this.isAlive() && !this.level.isClientSide) {
+			if (this.isAlive() && !this.level().isClientSide) {
 				this.discard();
 				this.markHurt();
 				this.onBroken(true);
@@ -290,7 +292,7 @@ public abstract class AbstractBolloom extends Entity {
 	}
 
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 }

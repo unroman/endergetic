@@ -104,15 +104,15 @@ public class BoofloBreedGoal extends Goal {
 		this.booflo.breedDelay = 1400;
 		this.mate.breedDelay = 1400;
 
-		this.booflo.level.broadcastEntityEvent(this.booflo, (byte) 18);
-		if (this.booflo.level.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) {
-			this.booflo.level.addFreshEntity(new ExperienceOrb(this.booflo.level, this.booflo.getX(), this.booflo.getY(), this.booflo.getZ(), this.booflo.getRandom().nextInt(7) + 1));
+		this.booflo.level().broadcastEntityEvent(this.booflo, (byte) 18);
+		if (this.booflo.level().getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) {
+			this.booflo.level().addFreshEntity(new ExperienceOrb(this.booflo.level(), this.booflo.getX(), this.booflo.getY(), this.booflo.getZ(), this.booflo.getRandom().nextInt(7) + 1));
 		}
 	}
 
 	@Nullable
 	private Booflo getNearbyMate() {
-		List<Booflo> list = this.booflo.level.getNearbyEntities(Booflo.class, MATE_CHECKER, this.booflo, this.booflo.getBoundingBox().inflate(16.0D));
+		List<Booflo> list = this.booflo.level().getNearbyEntities(Booflo.class, MATE_CHECKER, this.booflo, this.booflo.getBoundingBox().inflate(16.0D));
 		double d0 = Double.MAX_VALUE;
 		Booflo booflo = null;
 

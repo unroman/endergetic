@@ -16,7 +16,7 @@ public class BoofloBoofGoal extends EndimatedGoal<Booflo> {
 
 	public BoofloBoofGoal(Booflo booflo) {
 		super(booflo, EEPlayableEndimations.BOOFLO_INFLATE);
-		this.world = booflo.level;
+		this.world = booflo.level();
 		this.setFlags(EnumSet.of(Flag.MOVE));
 	}
 

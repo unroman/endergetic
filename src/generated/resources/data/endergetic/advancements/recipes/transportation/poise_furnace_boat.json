@@ -31,7 +31,8 @@
           "recipes": [
             "endergetic:poise_furnace_boat"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

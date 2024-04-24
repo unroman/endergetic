@@ -21,7 +21,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.3,
           "transform": [
@@ -32,7 +32,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.45000002,
           "transform": [
@@ -43,7 +43,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.6,
           "transform": [
@@ -54,7 +54,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.75,
           "transform": [
@@ -65,7 +65,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.9,
           "transform": [
@@ -104,7 +104,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.3,
           "transform": [
@@ -115,7 +115,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.45000002,
           "transform": [
@@ -126,7 +126,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.6,
           "transform": [
@@ -137,7 +137,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.75,
           "transform": [
@@ -148,7 +148,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.9,
           "transform": [
@@ -159,7 +159,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 1.0,
           "transform": [
@@ -190,7 +190,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.3,
           "transform": [
@@ -201,7 +201,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.45000002,
           "transform": [
@@ -212,7 +212,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.6,
           "transform": [
@@ -223,7 +223,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.75,
           "transform": [
@@ -270,7 +270,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.3,
           "transform": [
@@ -281,7 +281,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.45000002,
           "transform": [
@@ -292,7 +292,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.6,
           "transform": [
@@ -303,7 +303,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.75,
           "transform": [

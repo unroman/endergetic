@@ -3,7 +3,6 @@ package com.teamabnormals.endergetic.common.levelgen.structure.structures;
 import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.core.util.MathUtil;
-import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.endergetic.common.block.CorrockCrownBlock;
 import com.teamabnormals.endergetic.common.block.CorrockCrownStandingBlock;
 import com.teamabnormals.endergetic.common.block.CorrockCrownWallBlock;
@@ -12,7 +11,7 @@ import com.teamabnormals.endergetic.common.entity.eetle.BroodEetle;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
 import com.teamabnormals.endergetic.core.registry.EEEntityTypes;
-import com.teamabnormals.endergetic.core.registry.EEStructures;
+import com.teamabnormals.endergetic.core.registry.EEStructures.EEStructurePieceTypes;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -82,12 +81,12 @@ public final class EetleNestPieces {
 		private NestDesign nestDesign = null;
 
 		public EetleNestPiece(StructureTemplateManager manager, CompoundTag compoundNBT) {
-			super(EEStructures.PieceTypes.EETLE_NEST.get(), compoundNBT);
+			super(EEStructurePieceTypes.EETLE_NEST.get(), compoundNBT);
 			this.arena = manager.get(ARENA).orElseThrow(() -> new RuntimeException("Failed to get Eetle Nest Arena Template!"));
 		}
 
 		public EetleNestPiece(StructureTemplateManager manager, BlockPos corner) {
-			super(EEStructures.PieceTypes.EETLE_NEST.get(), 0, new BoundingBox(corner.getX() - 64, corner.getY() - 48, corner.getZ() - 64, corner.getX() + 64, corner.getY() + 6, corner.getZ() + 64));
+			super(EEStructurePieceTypes.EETLE_NEST.get(), 0, new BoundingBox(corner.getX() - 64, corner.getY() - 48, corner.getZ() - 64, corner.getX() + 64, corner.getY() + 6, corner.getZ() + 64));
 			this.arena = manager.get(ARENA).orElseThrow(() -> new RuntimeException("Failed to get Eetle Nest Arena Template!"));
 		}
 

@@ -72,7 +72,7 @@ public class PurpoidRestGoal extends Goal {
 		BlockPos restingPos = purpoid.getRestingPos();
 		if (restingPos != null) {
 			Direction side = purpoid.getRestingSide();
-			if (purpoid.level.getBlockState(restingPos).getBlock() != (purpoid.isBaby() ? Blocks.CHORUS_PLANT : Blocks.CHORUS_FLOWER) || !purpoid.level.getBlockState(restingPos.relative(side)).isAir()) return false;
+			if (purpoid.level().getBlockState(restingPos).getBlock() != (purpoid.isBaby() ? Blocks.CHORUS_PLANT : Blocks.CHORUS_FLOWER) || !purpoid.level().getBlockState(restingPos.relative(side)).isAir()) return false;
 			Direction.Axis axis = side.getAxis();
 			Vec3 position = purpoid.position();
 			double purpoidX = position.x;

@@ -59,7 +59,7 @@ public class PurpoidTelefragGoal extends Goal {
 				BlockPos teleportPos = null;
 				BlockPos pos = purpoid.blockPosition();
 				RandomSource random = purpoid.getRandom();
-				Level world = purpoid.level;
+				Level world = purpoid.level();
 				Entity ridingEntity = purpoid.getVehicle();
 				if (sky) {
 					EntityDimensions size = purpoid.getDimensions(purpoid.getPose());
@@ -83,7 +83,7 @@ public class PurpoidTelefragGoal extends Goal {
 							boolean successful = true;
 							while (true) {
 								int y = mutable.getY();
-								if (y > 0 && !world.getBlockState(mutable).getMaterial().blocksMotion()) {
+								if (y > 0 && !world.getBlockState(mutable).blocksMotion()) {
 									mutable.setY(y - 1);
 								} else if (y <= 0) {
 									successful = false;
@@ -105,7 +105,7 @@ public class PurpoidTelefragGoal extends Goal {
 				}
 				if (teleportPos != null) {
 					teleportController.beginTeleportation(purpoid, teleportPos, true);
-					ridingEntity.hurt(DamageSource.mobAttack(purpoid), (float) purpoid.getAttributeValue(Attributes.ATTACK_DAMAGE));
+					ridingEntity.hurt(purpoid.level().damageSources().mobAttack(purpoid), (float) purpoid.getAttributeValue(Attributes.ATTACK_DAMAGE));
 					if (ridingEntity instanceof ServerPlayer) {
 						EndergeticExpansion.CHANNEL.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) ridingEntity), new S2CEnablePurpoidFlash());
 					}

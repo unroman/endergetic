@@ -31,6 +31,7 @@ import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.BossEvent;
@@ -144,14 +145,14 @@ public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
 		if (FLYING.equals(key)) {
 			if (this.isFlying()) {
 				this.moveControl = new FlyingEetleMoveController<>(this, 10.0F, 30.0F);
-				this.navigation = new EndergeticFlyingPathNavigator(this, this.level);
+				this.navigation = new EndergeticFlyingPathNavigator(this, this.level());
 			} else {
 				this.moveControl = new MoveControl(this);
-				this.navigation = this.createNavigation(this.level);
+				this.navigation = this.createNavigation(this.level());
 			}
 			this.resetIdleFlapDelay();
 			this.refreshDimensions();
-			BroodEggSack eggSackEntity = this.getEggSack(this.level);
+			BroodEggSack eggSackEntity = this.getEggSack(this.level());
 			if (eggSackEntity != null) {
 				eggSackEntity.refreshDimensions();
 			}
@@ -163,7 +164,7 @@ public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
 			}
 		} else if (HEALTH_STAGE.equals(key)) {
 			this.refreshDimensions();
-			BroodEggSack eggSackEntity = this.getEggSack(this.level);
+			BroodEggSack eggSackEntity = this.getEggSack(this.level());
 			if (eggSackEntity != null) {
 				eggSackEntity.refreshDimensions();
 			}
@@ -187,7 +188,7 @@ public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
 	public void tick() {
 		super.tick();
 
-		Level world = this.level;
+		Level world = this.level();
 		if (this.isDeadOrDying()) {
 			if (!this.isEndimationPlaying(EEPlayableEndimations.BROOD_EETLE_DEATH_LEFT) && !this.isEndimationPlaying(EEPlayableEndimations.BROOD_EETLE_DEATH_RIGHT) && !world.isClientSide) {
 				NetworkUtil.setPlayingAnimation(this, this.random.nextBoolean() ? EEPlayableEndimations.BROOD_EETLE_DEATH_LEFT : EEPlayableEndimations.BROOD_EETLE_DEATH_RIGHT);
@@ -241,14 +242,14 @@ public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
 			if (this.isFlying()) {
 				this.ticksFlying++;
 
-				if (this.isEndimationPlaying(EEPlayableEndimations.BROOD_EETLE_AIR_SLAM) && this.getAnimationTick() == 5 && (this.onGround || !this.level.noCollision(DetectionHelper.checkOnGround(this.getBoundingBox(), 0.25F)))) {
+				if (this.isEndimationPlaying(EEPlayableEndimations.BROOD_EETLE_AIR_SLAM) && this.getAnimationTick() == 5 && (this.onGround() || !this.level().noCollision(DetectionHelper.checkOnGround(this.getBoundingBox(), 0.25F)))) {
 					BroodEetleSlamGoal.slam(this, this.random, 1.0F);
 				}
 			} else {
 				this.ticksFlying = 0;
 			}
 
-			if (this.level.getGameTime() % 5 == 0) {
+			if (this.level().getGameTime() % 5 == 0) {
 				BlockPos takeoffPos = this.takeoffPos;
 				if (takeoffPos != null && this.position().distanceToSqr(Vec3.atLowerCornerOf(takeoffPos)) > 256.0F) {
 					this.takeoffPos = null;
@@ -391,7 +392,7 @@ public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
 
 	@Override
 	public void checkDespawn() {
-		if (this.level.getDifficulty() == Difficulty.PEACEFUL && this.shouldDespawnInPeaceful()) {
+		if (this.level().getDifficulty() == Difficulty.PEACEFUL && this.shouldDespawnInPeaceful()) {
 			this.discard();
 		} else {
 			this.noActionTime = 0;
@@ -428,7 +429,7 @@ public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
 		if (!(target instanceof LivingEntity)) {
 			return false;
 		} else {
-			if (!this.level.isClientSide) {
+			if (!this.level().isClientSide) {
 				NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.BROOD_EETLE_ATTACK);
 			}
 			float attackDamage = (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);
@@ -439,7 +440,7 @@ public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
 				damage = attackDamage;
 			}
 
-			boolean attacked = target.hurt(DamageSource.mobAttack(this), damage);
+			boolean attacked = target.hurt(this.damageSources().mobAttack(this), damage);
 			if (attacked) {
 				this.doEnchantDamageEffects(this, target);
 				this.blockedByShield((LivingEntity) target);
@@ -453,7 +454,8 @@ public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
 		if (source.getDirectEntity() instanceof AbstractArrow) {
 			return false;
 		}
-		return super.hurt(source, source.isMagic() && source.isBypassArmor() ? amount : amount * (source.isProjectile() ? 0.05F : 0.1F));
+		// TODO: Make sure this works properly
+		return super.hurt(source, source.is(DamageTypeTags.WITCH_RESISTANT_TO) && source.is(DamageTypeTags.BYPASSES_ARMOR) ? amount : amount * (source.is(DamageTypeTags.IS_PROJECTILE) ? 0.05F : 0.1F));
 	}
 
 	public boolean attackEntityFromEggSack(DamageSource source, float amount) {
@@ -472,7 +474,7 @@ public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
 	protected void blockedByShield(LivingEntity target) {
 		double knockbackForce = this.getAttributeValue(Attributes.ATTACK_KNOCKBACK) - target.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE);
 		if (knockbackForce > 0.0D) {
-			RandomSource random = this.level.random;
+			RandomSource random = this.level().random;
 			double scale = knockbackForce * (random.nextFloat() * 0.5F + 0.5F);
 			Vec3 horizontalVelocity = new Vec3(target.getX() - this.getX(), 0.0D, target.getZ() - this.getZ()).normalize().scale(scale);
 			target.push(horizontalVelocity.x, knockbackForce * 0.5F * random.nextFloat() * 0.5F, horizontalVelocity.z);
@@ -724,7 +726,7 @@ public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
 			this.setDroppingEggs(false);
 			this.setFiringCannon(false);
 		} else if (endimation == EEPlayableEndimations.BROOD_EETLE_LAUNCH || endimation == EEPlayableEndimations.BROOD_EETLE_DROP_EGGS) {
-			Level world = this.level;
+			Level world = this.level();
 			if (world instanceof ServerLevel) {
 				Vec3 eggSackPos = BroodEggSack.getEggPos(this.position(), this.yBodyRot, this.getEggCannonProgressServer(), this.getEggCannonFlyingProgressServer(), this.getFlyingRotations().getFlyPitch(), this.isOnLastHealthStage());
 				((ServerLevel) world).sendParticles(new CorrockCrownParticleData(EEParticleTypes.END_CROWN.get(), true), eggSackPos.x(), eggSackPos.y() + (this.isFlying() ? 0.0F : 1.0F), eggSackPos.z(), 20, 0.3125F, 0.3125F, 0.3125F, 0.15D);
@@ -788,7 +790,7 @@ public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
 			int originX = mutable.getX();
 			int originY = mutable.getY();
 			int originZ = mutable.getZ();
-			Level world = broodEetle.level;
+			Level world = broodEetle.level();
 			RandomSource random = broodEetle.random;
 			for (int x = -10; x <= 10; x++) {
 				for (int y = -6; y <= 14; y++) {

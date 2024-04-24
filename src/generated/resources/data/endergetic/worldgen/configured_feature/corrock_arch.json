@@ -1,0 +1,10 @@
+{
+  "type": "endergetic:corrock_arch",
+  "config": {
+    "crown_chance": 0.1,
+    "max_arch_height": 7.0,
+    "max_distance": 22.0,
+    "min_distance": 13.0,
+    "plant_chance": 0.25
+  }
+}

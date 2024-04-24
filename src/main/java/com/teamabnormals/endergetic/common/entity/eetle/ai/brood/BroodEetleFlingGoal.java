@@ -32,7 +32,7 @@ public class BroodEetleFlingGoal extends Goal {
 		}
 		List<LivingEntity> targets = searchForNearbyAggressors(broodEetle, 3.0D);
 		if (!targets.isEmpty() && (targets.size() <= 3 || !broodEetle.canSlam())) {
-			this.target = broodEetle.level.getNearestEntity(targets, PREDICATE, broodEetle, broodEetle.getX(), broodEetle.getY(), broodEetle.getZ());
+			this.target = broodEetle.level().getNearestEntity(targets, PREDICATE, broodEetle, broodEetle.getX(), broodEetle.getY(), broodEetle.getZ());
 			return this.target != null;
 		}
 		return false;
@@ -87,7 +87,7 @@ public class BroodEetleFlingGoal extends Goal {
 	}
 
 	public static List<LivingEntity> searchForNearbyAggressors(BroodEetle broodEetle, double size) {
-		return broodEetle.level.getEntitiesOfClass(LivingEntity.class, broodEetle.getBoundingBox().inflate(size), livingEntity -> {
+		return broodEetle.level().getEntitiesOfClass(LivingEntity.class, broodEetle.getBoundingBox().inflate(size), livingEntity -> {
 			if (livingEntity instanceof Player) {
 				return livingEntity.isAlive() && !livingEntity.isInvisible() && !((Player) livingEntity).isCreative();
 			}

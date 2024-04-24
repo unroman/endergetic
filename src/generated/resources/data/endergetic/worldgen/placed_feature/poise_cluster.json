@@ -1,0 +1,14 @@
+{
+  "feature": "endergetic:poise_cluster",
+  "placement": [
+    {
+      "type": "endergetic:noise_heightmap_32",
+      "above_noise": 22,
+      "below_noise": 4,
+      "noise_level": -0.8
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

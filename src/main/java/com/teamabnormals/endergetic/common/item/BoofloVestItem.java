@@ -1,20 +1,16 @@
 package com.teamabnormals.endergetic.common.item;
 
-import com.teamabnormals.blueprint.core.util.item.ItemStackUtil;
 import com.teamabnormals.endergetic.client.model.armor.BoofloVestModel;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import com.teamabnormals.endergetic.core.registry.other.EEArmorMaterials;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -34,7 +30,7 @@ public class BoofloVestItem extends ArmorItem {
 	public static final String TIMES_BOOFED_TAG = "timesBoofed";
 
 	public BoofloVestItem(Properties properties) {
-		super(EEArmorMaterials.BOOFLO_VEST, EquipmentSlot.CHEST, properties);
+		super(EEArmorMaterials.BOOFLO_VEST, Type.CHESTPLATE, properties);
 	}
 
 	@Override
@@ -61,11 +57,6 @@ public class BoofloVestItem extends ArmorItem {
 		if (player.onGround() || (player.isPassenger() && player.getVehicle().onGround())) {
 			tag.putInt(TIMES_BOOFED_TAG, 0);
 		}
-	}
-
-	@Override
-	public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-		ItemStackUtil.fillAfterItemForCategory(this, Items.TURTLE_HELMET, group, items);
 	}
 
 	@Override

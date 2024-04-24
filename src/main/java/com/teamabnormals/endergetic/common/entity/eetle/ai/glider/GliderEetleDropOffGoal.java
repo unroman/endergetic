@@ -38,7 +38,7 @@ public class GliderEetleDropOffGoal extends Goal {
 		if (glider.getRandom().nextFloat() < 0.05F) {
 			LivingEntity target = glider.getTarget();
 			if (target != null && target.isAlive() && glider.getPassengers().contains(target) && glider.isFlying() && glider.isNoEndimationPlaying()) {
-				Pair<BlockPos, BlockPos> clusterPosPair = findLargestClusterAirAndGroundPositions(glider.level, glider.blockPosition());
+				Pair<BlockPos, BlockPos> clusterPosPair = findLargestClusterAirAndGroundPositions(glider.level(), glider.blockPosition());
 				if (clusterPosPair != null) {
 					BlockPos pos = clusterPosPair.getFirst();
 					this.path = glider.getNavigation().createPath(pos, 0);
@@ -61,7 +61,7 @@ public class GliderEetleDropOffGoal extends Goal {
 		GliderEetle glider = this.glider;
 		LivingEntity target = glider.getTarget();
 		if (target != null && target.isAlive() && glider.getPassengers().contains(target) && glider.isFlying() && glider.getNavigation().isInProgress()) {
-			if (glider.level.getEntitiesOfClass(ChargerEetle.class, this.searchBox).size() < 3) {
+			if (glider.level().getEntitiesOfClass(ChargerEetle.class, this.searchBox).size() < 3) {
 				this.missingClusterTicks++;
 			}
 			return this.missingClusterTicks < 10;
@@ -90,7 +90,7 @@ public class GliderEetleDropOffGoal extends Goal {
 			}
 		} else if (distance <= 20.25D) {
 			AABB projectedBox = getProjectedBoundingBox(glider);
-			if (projectedBox != null && glider.level.getEntitiesOfClass(ChargerEetle.class, projectedBox.inflate(1.0F, 0.0F, 1.0F)).size() >= 4) {
+			if (projectedBox != null && glider.level().getEntitiesOfClass(ChargerEetle.class, projectedBox.inflate(1.0F, 0.0F, 1.0F)).size() >= 4) {
 				glider.makeGrounded();
 				if (attackTarget instanceof IDataManager) {
 					((IDataManager) attackTarget).setValue(EEDataProcessors.CATCHING_COOLDOWN, 40 + glider.getRandom().nextInt(11));
@@ -108,7 +108,7 @@ public class GliderEetleDropOffGoal extends Goal {
 	private static AABB getProjectedBoundingBox(GliderEetle glider) {
 		BlockPos.MutableBlockPos mutable = glider.blockPosition().mutable();
 		int startY = mutable.getY();
-		Level world = glider.level;
+		Level world = glider.level();
 		for (int y = 0; y <= 7; y++) {
 			mutable.setY(startY - y);
 			if (world.loadedAndEntityCanStandOn(mutable, glider)) {
@@ -138,7 +138,7 @@ public class GliderEetleDropOffGoal extends Goal {
 				if (others > largestCluster) {
 					Pair<Double, Double> centroidXZ = computeCentroid(points);
 					points.clear();
-					clusterPos = new BlockPos(centroidXZ.getFirst(), charger.getY(), centroidXZ.getSecond());
+					clusterPos = BlockPos.containing(centroidXZ.getFirst(), charger.getY(), centroidXZ.getSecond());
 				}
 			}
 		}

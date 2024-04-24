@@ -48,13 +48,13 @@ public class BroodEetleLastStageGoal extends Goal {
 				if (BroodEetleLaunchEggsGoal.getNearbyEetleCount(broodEetle) <= 9 || this.cannonTicks <= 75 || random.nextFloat() <= 0.05F) {
 					NetworkUtil.setPlayingAnimation(broodEetle, EEPlayableEndimations.BROOD_EETLE_LAUNCH);
 					Vec3 firingPos = new Vec3(-1.0D, 3.0D, 0.0D).yRot(-broodEetle.yBodyRot * ((float) Math.PI / 180F) - ((float) Math.PI / 2F));
-					EetleEgg eetleEgg = new EetleEgg(broodEetle.level, broodEetle.position().add(firingPos));
+					EetleEgg eetleEgg = new EetleEgg(broodEetle.level(), broodEetle.position().add(firingPos));
 					eetleEgg.setEggSize(EetleEgg.EggSize.random(random, false));
 					eetleEgg.setDeltaMovement(new Vec3((random.nextFloat() - random.nextFloat()) * 0.35F, 0.8F + random.nextFloat() * 0.1F, (random.nextFloat() - random.nextFloat()) * 0.35F));
-					broodEetle.level.addFreshEntity(eetleEgg);
+					broodEetle.level().addFreshEntity(eetleEgg);
 				} else {
 					broodEetle.heal(5.0F);
-					broodEetle.level.broadcastEntityEvent(broodEetle, (byte) 60);
+					broodEetle.level().broadcastEntityEvent(broodEetle, (byte) 60);
 				}
 			}
 		}

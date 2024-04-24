@@ -2,7 +2,7 @@ package com.teamabnormals.endergetic.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.teamabnormals.endergetic.client.model.bolloom.BolloomFruitModel;
 import com.teamabnormals.endergetic.common.entity.bolloom.BolloomFruit;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;

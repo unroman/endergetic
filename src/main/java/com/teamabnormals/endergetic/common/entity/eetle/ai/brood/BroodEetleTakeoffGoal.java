@@ -53,7 +53,7 @@ public class BroodEetleTakeoffGoal extends Goal {
 	}
 
 	private static boolean willFallFar(BroodEetle broodEetle) {
-		Level world = broodEetle.level;
+		Level world = broodEetle.level();
 		BlockPos.MutableBlockPos mutable = broodEetle.blockPosition().mutable();
 		int startY = mutable.getY();
 		for (int i = 0; i < 10; i++) {

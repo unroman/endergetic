@@ -92,8 +92,8 @@ public class AdolescentEatGoal extends EndimatedGoal<BoofloAdolescent> {
 		BlockPos pos = this.entity.blockPosition();
 		for (int i = 0; i < 10; i++) {
 			pos = pos.below(i);
-			if (Block.canSupportRigidBlock(this.entity.level, pos) && i >= 4) {
-				if (this.entity.level.getBlockState(pos).getFluidState().isEmpty() && !this.entity.level.getBlockState(pos).isBurning(this.entity.level, pos)) {
+			if (Block.canSupportRigidBlock(this.entity.level(), pos) && i >= 4) {
+				if (this.entity.level().getBlockState(pos).getFluidState().isEmpty() && !this.entity.level().getBlockState(pos).isBurning(this.entity.level(), pos)) {
 					return true;
 				}
 			}

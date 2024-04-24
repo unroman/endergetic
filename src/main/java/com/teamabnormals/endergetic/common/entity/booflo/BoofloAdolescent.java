@@ -27,6 +27,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -146,8 +147,8 @@ public class BoofloAdolescent extends PathfinderMob implements Endimatable {
 		super.tick();
 
 		if (this.isEndimationPlaying(EEPlayableEndimations.ADOLESCENT_BOOFLO_EATING) && this.getAnimationTick() == 9) {
-			if (this.level instanceof ServerLevel) {
-				((ServerLevel) this.level).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(EEItems.BOLLOOM_FRUIT.get())), this.getX(), this.getY() + (double) this.getBbHeight() / 1.5D, this.getZ(), 10, (double) (this.getBbWidth() / 4.0F), (double) (this.getBbHeight() / 4.0F), (double) (this.getBbWidth() / 4.0F), 0.05D);
+			if (this.level() instanceof ServerLevel serverLevel) {
+				serverLevel.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(EEItems.BOLLOOM_FRUIT.get())), this.getX(), this.getY() + (double) this.getBbHeight() / 1.5D, this.getZ(), 10, (double) (this.getBbWidth() / 4.0F), (double) (this.getBbHeight() / 4.0F), (double) (this.getBbWidth() / 4.0F), 0.05D);
 			}
 			this.playSound(SoundEvents.GENERIC_EAT, 1.0F, 1.0F);
 		}
@@ -163,7 +164,7 @@ public class BoofloAdolescent extends PathfinderMob implements Endimatable {
 			this.setHungry(true);
 		}
 
-		if (this.level.isClientSide) {
+		if (this.level().isClientSide) {
 			this.prevTailAnimation = this.tailAnimation;
 			this.prevSwimmingAnimation = this.swimmingAnimation;
 			if (!this.isInWater()) {
@@ -195,11 +196,11 @@ public class BoofloAdolescent extends PathfinderMob implements Endimatable {
 			this.setBoofBoostCooldown(this.getBoofBoostCooldown() - 1);
 		}
 
-		if ((this.onGround || this.isPassenger()) && this.doesWantToGrow() && this.level.noCollision(this.getBoundingBox().inflate(2.0F, 0.0F, 2.0F))) {
+		if ((this.onGround() || this.isPassenger()) && this.doesWantToGrow() && this.level().noCollision(this.getBoundingBox().inflate(2.0F, 0.0F, 2.0F))) {
 			this.growUp();
 		}
 
-		if (!this.level.isClientSide && ((!this.isDescenting() && !this.isEating()) && this.getBoofBoostCooldown() <= 0 && (this.onGround || this.isEyeInFluid(FluidTags.WATER)))) {
+		if (!this.level().isClientSide && ((!this.isDescenting() && !this.isEating()) && this.getBoofBoostCooldown() <= 0 && (this.onGround() || this.isEyeInFluid(FluidTags.WATER)))) {
 			this.push(-Mth.sin((float) (this.getYRot() * Math.PI / 180.0F)) * (5 * (random.nextFloat() + 0.1F)) * 0.1F, (random.nextFloat() * 0.45F) + 0.65F, Mth.cos((float) (this.getYRot() * Math.PI / 180.0F)) * (5 * (random.nextFloat() + 0.1F)) * 0.1F);
 			NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.ADOLESCENT_BOOFLO_BOOF);
 			this.setFallSpeed(0.0F);
@@ -210,7 +211,7 @@ public class BoofloAdolescent extends PathfinderMob implements Endimatable {
 		}
 
 		//Helps them not fall off the edge
-		if ((this.getBoofBoostCooldown() <= 0 && !this.onGround) && this.level.dimension() == Level.END && !this.isSafePos(this.blockPosition(), 3)) {
+		if ((this.getBoofBoostCooldown() <= 0 && !this.onGround()) && this.level().dimension() == Level.END && !this.isSafePos(this.blockPosition(), 3)) {
 			this.setBoofBoostCooldown(20);
 			this.setFallSpeed(0.0F);
 
@@ -220,7 +221,7 @@ public class BoofloAdolescent extends PathfinderMob implements Endimatable {
 			}
 		}
 
-		if (!this.onGround && this.level.dimension() == Level.END && !this.isSafePos(this.blockPosition(), 3) && !this.level.isClientSide) {
+		if (!this.onGround() && this.level().dimension() == Level.END && !this.isSafePos(this.blockPosition(), 3) && !this.level().isClientSide) {
 			this.push(-Mth.sin((float) (this.getYRot() * Math.PI / 180.0F)) * 0.01F, 0, Mth.cos((float) (this.getYRot() * Math.PI / 180.0F)) * 0.01F);
 		}
 
@@ -228,10 +229,10 @@ public class BoofloAdolescent extends PathfinderMob implements Endimatable {
 			this.setYRot(this.yHeadRot);
 		}
 
-		if (this.level.isClientSide) {
+		if (this.level().isClientSide) {
 			if (this.forcedAgeTimer > 0) {
 				if (this.forcedAgeTimer % 4 == 0) {
-					this.level.addParticle(ParticleTypes.HAPPY_VILLAGER, this.getX() + (this.random.nextFloat() * this.getBbWidth() * 2.0F) - this.getBbWidth(), this.getY() + 0.5D + (this.random.nextFloat() * this.getBbHeight()), this.getZ() + (this.random.nextFloat() * this.getBbWidth() * 2.0F) - this.getBbWidth(), 0.0D, 0.0D, 0.0D);
+					this.level().addParticle(ParticleTypes.HAPPY_VILLAGER, this.getX() + (this.random.nextFloat() * this.getBbWidth() * 2.0F) - this.getBbWidth(), this.getY() + 0.5D + (this.random.nextFloat() * this.getBbHeight()), this.getZ() + (this.random.nextFloat() * this.getBbWidth() * 2.0F) - this.getBbWidth(), 0.0D, 0.0D, 0.0D);
 				}
 
 				this.forcedAgeTimer--;
@@ -264,7 +265,7 @@ public class BoofloAdolescent extends PathfinderMob implements Endimatable {
 
 	@Override
 	public void die(DamageSource cause) {
-		if (this.hasFruit() && this.level.getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+		if (this.hasFruit() && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
 			this.dropFruit();
 		}
 		super.die(cause);
@@ -386,7 +387,7 @@ public class BoofloAdolescent extends PathfinderMob implements Endimatable {
 	}
 
 	public int getGrowingAge() {
-		if (this.level.isClientSide) {
+		if (this.level().isClientSide) {
 			return -1;
 		} else {
 			return this.growingAge;
@@ -432,7 +433,7 @@ public class BoofloAdolescent extends PathfinderMob implements Endimatable {
 		if (this.isAlive()) {
 			this.spawnAtLocation(EEItems.BOOFLO_HIDE.get(), 1);
 
-			Booflo booflo = EEEntityTypes.BOOFLO.get().create(this.level);
+			Booflo booflo = EEEntityTypes.BOOFLO.get().create(this.level());
 			booflo.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
 
 			if (this.hasCustomName()) {
@@ -451,7 +452,7 @@ public class BoofloAdolescent extends PathfinderMob implements Endimatable {
 
 			booflo.wasBred = this.wasBred;
 			booflo.setHealth(booflo.getMaxHealth());
-			this.level.addFreshEntity(booflo);
+			this.level().addFreshEntity(booflo);
 			this.discard();
 
 			return booflo;
@@ -461,7 +462,7 @@ public class BoofloAdolescent extends PathfinderMob implements Endimatable {
 
 	public LivingEntity growDown() {
 		if (this.isAlive()) {
-			BoofloBaby boofloBaby = EEEntityTypes.BOOFLO_BABY.get().create(this.level);
+			BoofloBaby boofloBaby = EEEntityTypes.BOOFLO_BABY.get().create(this.level());
 			boofloBaby.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
 
 			if (this.hasCustomName()) {
@@ -480,7 +481,7 @@ public class BoofloAdolescent extends PathfinderMob implements Endimatable {
 
 			boofloBaby.wasBred = this.wasBred;
 			boofloBaby.setHealth(boofloBaby.getMaxHealth());
-			this.level.addFreshEntity(boofloBaby);
+			this.level().addFreshEntity(boofloBaby);
 			this.discard();
 
 			return boofloBaby;
@@ -502,7 +503,7 @@ public class BoofloAdolescent extends PathfinderMob implements Endimatable {
 		BlockPos newPos = pos;
 		for (int y = 0; y < 10 * muliplier; y++) {
 			newPos = newPos.below(y);
-			BlockState state = this.level.getBlockState(newPos);
+			BlockState state = this.level().getBlockState(newPos);
 			if (state.canOcclude() || (!state.getFluidState().isEmpty() && !state.getFluidState().is(FluidTags.LAVA))) {
 				return true;
 			}
@@ -511,19 +512,19 @@ public class BoofloAdolescent extends PathfinderMob implements Endimatable {
 	}
 
 	public void dropFruit() {
-		if (!this.level.isClientSide) {
+		if (!this.level().isClientSide) {
 			this.spawnAtLocation(EEItems.BOLLOOM_FRUIT.get());
 			this.setHasFruit(false);
 		}
 	}
 
 	public boolean isPlayerNear() {
-		return this.level.getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(2.0F), Booflo.IS_SCARED_BY).size() > 0;
+		return this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(2.0F), Booflo.IS_SCARED_BY).size() > 0;
 	}
 
 	@Override
 	public boolean isInvulnerableTo(DamageSource source) {
-		return source == DamageSource.IN_WALL || source == DamageSource.FLY_INTO_WALL || super.isInvulnerableTo(source);
+		return source.is(DamageTypes.IN_WALL) || source.is(DamageTypes.FLY_INTO_WALL) || super.isInvulnerableTo(source);
 	}
 
 	@Override
@@ -532,11 +533,11 @@ public class BoofloAdolescent extends PathfinderMob implements Endimatable {
 		Item item = itemstack.getItem();
 
 		if (item instanceof SpawnEggItem && ((SpawnEggItem) item).spawnsEntity(itemstack.getTag(), EEEntityTypes.BOOFLO.get())) {
-			if (!this.level.isClientSide) {
-				BoofloBaby baby = EEEntityTypes.BOOFLO_BABY.get().create(this.level);
+			if (!this.level().isClientSide) {
+				BoofloBaby baby = EEEntityTypes.BOOFLO_BABY.get().create(this.level());
 				baby.setGrowingAge(-24000);
 				baby.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
-				this.level.addFreshEntity(baby);
+				this.level().addFreshEntity(baby);
 				if (itemstack.hasCustomHoverName()) {
 					baby.setCustomName(itemstack.getHoverName());
 				}
@@ -548,7 +549,7 @@ public class BoofloAdolescent extends PathfinderMob implements Endimatable {
 			EntityItemStackHelper.consumeItemFromStack(player, itemstack);
 			this.ageUp((int) ((-this.getGrowingAge() / 20) * 0.1F), true);
 			this.setEaten(true);
-			return InteractionResult.sidedSuccess(this.level.isClientSide);
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		}
 		return InteractionResult.PASS;
 	}
@@ -578,7 +579,7 @@ public class BoofloAdolescent extends PathfinderMob implements Endimatable {
 			double viewZ = view.z;
 			Vec3 vec3d = HoverRandomPos.getPos(this.mob, 10, 0, viewX, viewZ, ((float) Math.PI / 2F), 3, 1);
 
-			for (int i = 0; vec3d != null && !this.mob.level.getBlockState(new BlockPos(vec3d)).isPathfindable(this.mob.level, new BlockPos(vec3d), PathComputationType.AIR) && i++ < 10; vec3d = HoverRandomPos.getPos(this.mob, 10, 0, viewX, viewZ, ((float) Math.PI / 2F), 3, 1)) {
+			for (int i = 0; vec3d != null && !this.mob.level().getBlockState(BlockPos.containing(vec3d)).isPathfindable(this.mob.level(), BlockPos.containing(vec3d), PathComputationType.AIR) && i++ < 10; vec3d = HoverRandomPos.getPos(this.mob, 10, 0, viewX, viewZ, ((float) Math.PI / 2F), 3, 1)) {
 				;
 			}
 

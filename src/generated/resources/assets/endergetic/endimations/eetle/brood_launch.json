@@ -13,7 +13,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.25,
           "transform": [
@@ -24,7 +24,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.7,
           "transform": [
@@ -35,7 +35,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.9,
           "transform": [
@@ -56,7 +56,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.25,
           "transform": [
@@ -67,7 +67,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.9,
           "transform": [
@@ -90,7 +90,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.25,
           "transform": [
@@ -101,7 +101,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.7,
           "transform": [
@@ -112,7 +112,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.9,
           "transform": [
@@ -135,7 +135,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.25,
           "transform": [
@@ -146,7 +146,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.7,
           "transform": [
@@ -157,7 +157,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.9,
           "transform": [
@@ -180,7 +180,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.25,
           "transform": [
@@ -191,7 +191,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.7,
           "transform": [
@@ -202,7 +202,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.9,
           "transform": [
@@ -225,7 +225,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.25,
           "transform": [
@@ -236,7 +236,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.7,
           "transform": [
@@ -247,7 +247,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.9,
           "transform": [
@@ -270,7 +270,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.25,
           "transform": [
@@ -281,7 +281,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.45,
           "transform": [
@@ -292,7 +292,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.9,
           "transform": [
@@ -315,7 +315,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.25,
           "transform": [
@@ -326,7 +326,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.45,
           "transform": [
@@ -337,7 +337,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.9,
           "transform": [
@@ -360,7 +360,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.25,
           "transform": [
@@ -371,7 +371,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.45,
           "transform": [
@@ -382,7 +382,7 @@
         },
         {
           "interpolation": {
-            "type": "minecraft:catmullrom"
+            "type": "catmullrom"
           },
           "time": 0.9,
           "transform": [

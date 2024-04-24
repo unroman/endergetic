@@ -1,0 +1,6 @@
+{
+  "type": "endergetic:corrock_shelf",
+  "config": {
+    "probability": 0.75
+  }
+}

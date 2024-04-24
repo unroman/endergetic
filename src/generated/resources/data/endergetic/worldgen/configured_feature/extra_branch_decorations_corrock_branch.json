@@ -1,0 +1,15 @@
+{
+  "type": "endergetic:corrock_branch",
+  "config": {
+    "crown_chance": 0.4,
+    "decorated_branch_chance": 0.5,
+    "valid_ground_states": [
+      {
+        "Name": "endergetic:end_corrock_block"
+      },
+      {
+        "Name": "minecraft:end_stone"
+      }
+    ]
+  }
+}

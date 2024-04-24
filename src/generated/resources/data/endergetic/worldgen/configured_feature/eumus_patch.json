@@ -1,0 +1,7 @@
+{
+  "type": "endergetic:eumus_patch",
+  "config": {
+    "max_extra_patches": 2,
+    "max_extra_radius": 3
+  }
+}

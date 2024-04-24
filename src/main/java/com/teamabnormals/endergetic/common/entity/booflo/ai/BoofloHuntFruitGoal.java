@@ -28,7 +28,7 @@ public class BoofloHuntFruitGoal extends Goal {
 	}
 
 	public boolean canUse() {
-		long i = this.booflo.level.getGameTime();
+		long i = this.booflo.level().getGameTime();
 		if (i - this.lastCanUseCheck < 20L) {
 			return false;
 		} else {

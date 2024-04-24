@@ -22,7 +22,7 @@ public class PuffBugTeleportToBudGoal extends Goal {
 
 	public PuffBugTeleportToBudGoal(PuffBug puffbug) {
 		this.puffbug = puffbug;
-		this.world = puffbug.level;
+		this.world = puffbug.level();
 		this.setFlags(EnumSet.of(Flag.MOVE));
 	}
 

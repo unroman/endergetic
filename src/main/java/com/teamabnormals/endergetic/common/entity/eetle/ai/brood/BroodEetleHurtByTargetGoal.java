@@ -41,7 +41,7 @@ public class BroodEetleHurtByTargetGoal extends Goal {
 
 			double targetDistance = broodEetle.getAttributeValue(Attributes.FOLLOW_RANGE);
 			AABB axisalignedbb = AABB.unitCubeFromLowerCorner(broodEetle.position()).inflate(targetDistance, 10.0D, targetDistance);
-			List<AbstractEetle> list = broodEetle.level.getEntitiesOfClass(AbstractEetle.class, axisalignedbb);
+			List<AbstractEetle> list = broodEetle.level().getEntitiesOfClass(AbstractEetle.class, axisalignedbb);
 			for (AbstractEetle eetle : list) {
 				if (!eetle.isBaby() && (eetle.getTarget() == null || !eetle.getTarget().isAlive()) && !eetle.isAlliedTo(revengeTarget)) {
 					eetle.setTarget(revengeTarget);

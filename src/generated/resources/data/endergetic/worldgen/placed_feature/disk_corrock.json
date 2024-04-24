@@ -1,0 +1,8 @@
+{
+  "feature": "endergetic:disk_corrock",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "feature": "endergetic:extra_crowns_corrock_branch",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 64
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "endergetic:heightmap_spread_double",
+      "heightmap": "MOTION_BLOCKING"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

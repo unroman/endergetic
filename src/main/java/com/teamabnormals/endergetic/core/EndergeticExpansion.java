@@ -61,7 +61,9 @@ import com.teamabnormals.endergetic.core.registry.util.EndergeticItemSubRegistry
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.CampfireRenderer;
 import net.minecraft.client.renderer.entity.EndCrystalRenderer;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -83,6 +85,8 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.concurrent.CompletableFuture;
 
 @Mod(value = EndergeticExpansion.MOD_ID)
 public class EndergeticExpansion {
@@ -117,8 +121,6 @@ public class EndergeticExpansion {
 		EESurfaceRules.RULES.register(bus);
 		EEPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES.register(bus);
 		EEFeatures.FEATURES.register(bus);
-		EEConfiguredFeatures.CONFIGURED_FEATURES.register(bus);
-		EEPlacedFeatures.PLACED_FEATURES.register(bus);
 		EEStructures.STRUCTURE_TYPES.register(bus);
 		EEStructures.STRUCTURES.register(bus);
 //		EEStructures.PieceTypes.STRUCTURE_PIECE_TYPES.register(bus);
@@ -154,26 +156,30 @@ public class EndergeticExpansion {
 	private void clientSetup(FMLClientSetupEvent event) {
 		EEClientCompat.registerClientCompat();
 		EndCrystalRenderer.RENDER_TYPE = RenderType.entityCutoutNoCull(new ResourceLocation(MOD_ID, "textures/entity/end_crystal.png"));
-		BiomeUtil.markEndBiomeCustomMusic(EEBiomes.POISE_FOREST.getKey());
+		BiomeUtil.markEndBiomeCustomMusic(EEBiomes.POISE_FOREST);
 	}
 
 	private void dataSetup(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
+		PackOutput output = generator.getPackOutput();
+		CompletableFuture<Provider> provider = event.getLookupProvider();
 		ExistingFileHelper helper = event.getExistingFileHelper();
 
 		boolean server = event.includeServer();
-		generator.addProvider(server, new EEChunkGeneratorModifierProvider(generator));
-		generator.addProvider(server, new EERecipeProvider(generator));
-		generator.addProvider(server, new EEAdvancementModifierProvider(generator));
-		generator.addProvider(server, new EELootModifierProvider(generator));
-		EEBlockTagsProvider blockTags = new EEBlockTagsProvider(generator, helper);
+		EEDatapackBuiltinEntriesProvider datapackEntries = new EEDatapackBuiltinEntriesProvider(output, provider);
+		generator.addProvider(server, datapackEntries);
+		provider = datapackEntries.getRegistryProvider();
+		generator.addProvider(server, new EEChunkGeneratorModifierProvider(output, provider));
+		generator.addProvider(server, new EERecipeProvider(output));
+		generator.addProvider(server, new EEAdvancementModifierProvider(output, provider));
+		generator.addProvider(server, new EELootModifierProvider(output, provider));
+		EEBlockTagsProvider blockTags = new EEBlockTagsProvider(output, provider, helper);
 		generator.addProvider(server, blockTags);
-		generator.addProvider(server, new EEItemTagsProvider(generator, blockTags, helper));
-		generator.addProvider(server, new EEBiomeTagsProvider(generator, helper));
-		generator.addProvider(server, EEBiomeModifierProvider.create(generator, helper));
+		generator.addProvider(server, new EEItemTagsProvider(output, provider, blockTags.contentsGetter(), helper));
+		generator.addProvider(server, new EEBiomeTagsProvider(output, provider, helper));
 
-		boolean includeClient = event.includeClient();
-		generator.addProvider(includeClient, new EEEndimationProvider(generator));
+		boolean client = event.includeClient();
+		generator.addProvider(client, new EEEndimationProvider(output));
 	}
 
 	private void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {

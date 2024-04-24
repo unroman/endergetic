@@ -24,5 +24,6 @@
     "recipes": [
       "endergetic:poise_boat"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

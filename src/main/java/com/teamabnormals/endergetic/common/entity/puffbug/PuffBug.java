@@ -4,11 +4,11 @@ import com.google.common.collect.Lists;
 import com.teamabnormals.blueprint.core.endimator.Endimatable;
 import com.teamabnormals.blueprint.core.endimator.PlayableEndimation;
 import com.teamabnormals.blueprint.core.endimator.TimedEndimation;
+import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.teamabnormals.endergetic.api.entity.pathfinding.EndergeticFlyingPathNavigator;
 import com.teamabnormals.endergetic.api.entity.util.RayTraceHelper;
 import com.teamabnormals.endergetic.api.util.GenerationUtils;
-import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.endergetic.common.block.entity.BolloomBudTileEntity;
 import com.teamabnormals.endergetic.common.block.entity.BolloomBudTileEntity.BudSide;
 import com.teamabnormals.endergetic.common.block.entity.PuffBugHiveTileEntity;
@@ -23,6 +23,7 @@ import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
@@ -40,6 +41,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -192,7 +194,7 @@ public class PuffBug extends Animal implements Endimatable {
 
 		Vec3 motion = this.getDeltaMovement();
 
-		if (!this.level.isClientSide) {
+		if (!this.level().isClientSide) {
 			if (this.teleportCooldown > 0) {
 				this.teleportCooldown--;
 			}
@@ -202,7 +204,7 @@ public class PuffBug extends Animal implements Endimatable {
 			}
 
 			if (!this.isPassenger() && this.isInflated() && !this.getRotationController().rotating && this.isNoEndimationPlaying()) {
-				if (this.isBoosting() && RayTraceHelper.rayTrace(this, 2.0D, 1.0F).getType() != Type.BLOCK || ((this.onGround || this.isInWater()) && this.puffCooldown <= 0 && this.getPollinationPos() == null && this.getLaunchDirection() == null && this.getFireDirection() == null)) {
+				if (this.isBoosting() && RayTraceHelper.rayTrace(this, 2.0D, 1.0F).getType() != Type.BLOCK || ((this.onGround() || this.isInWater()) && this.puffCooldown <= 0 && this.getPollinationPos() == null && this.getLaunchDirection() == null && this.getFireDirection() == null)) {
 					NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.PUFF_BUG_PUFF);
 					this.playSound(this.getPuffSound(), 0.15F, this.getVoicePitch());
 				}
@@ -215,7 +217,7 @@ public class PuffBug extends Animal implements Endimatable {
 			}
 
 			if (this.getHivePos() == null) {
-				if (this.level.getGameTime() % 5 == 0 && this.getRandom().nextFloat() <= 0.1F) {
+				if (this.level().getGameTime() % 5 == 0 && this.getRandom().nextFloat() <= 0.1F) {
 					PuffBugHiveTileEntity hive = this.findNewNearbyHive();
 					if (hive != null) {
 						this.addToHive(hive);
@@ -234,13 +236,13 @@ public class PuffBug extends Animal implements Endimatable {
 
 						if (this.ticksAwayFromHive < 1500) {
 							if (this.getTarget() == null && this.getRandom().nextInt(7500) == 0 && !this.isInLove() && !this.getHive().isHiveFull()) {
-								for (PuffBug nearbyHiveMembers : this.level.getEntitiesOfClass(PuffBug.class, this.getBoundingBox().inflate(9.0F), puffbug -> (puffbug.getHive() != null && puffbug.getHive() == this.getHive()) && this.distanceTo(puffbug) < 12.0F)) {
+								for (PuffBug nearbyHiveMembers : this.level().getEntitiesOfClass(PuffBug.class, this.getBoundingBox().inflate(9.0F), puffbug -> (puffbug.getHive() != null && puffbug.getHive() == this.getHive()) && this.distanceTo(puffbug) < 12.0F)) {
 
 									this.setInLoveTime(1000);
-									this.level.broadcastEntityEvent(this, (byte) 18);
+									this.level().broadcastEntityEvent(this, (byte) 18);
 
 									nearbyHiveMembers.setInLoveTime(1000);
-									this.level.broadcastEntityEvent(nearbyHiveMembers, (byte) 18);
+									this.level().broadcastEntityEvent(nearbyHiveMembers, (byte) 18);
 
 									if (this.isInLove() || nearbyHiveMembers.isInLove()) break;
 								}
@@ -278,7 +280,7 @@ public class PuffBug extends Animal implements Endimatable {
 					double y = this.getY() + (rand.nextFloat() * 0.05F) + 0.7F;
 					double z = this.getZ() + offsetZ;
 
-					this.level.addParticle(EEParticleTypes.SHORT_POISE_BUBBLE.get(), x, y, z, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.1F), rand) + 0.05F, (rand.nextFloat() * 0.05F) + 0.025F, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.1F), rand) + 0.05F);
+					this.level().addParticle(EEParticleTypes.SHORT_POISE_BUBBLE.get(), x, y, z, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.1F), rand) + 0.05F, (rand.nextFloat() * 0.05F) + 0.025F, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.1F), rand) + 0.05F);
 				}
 			} else if (this.isEndimationPlaying(EEPlayableEndimations.PUFF_BUG_TELEPORT_TO) && this.getAnimationTick() == 8) {
 				for (int i = 0; i < 6; i++) {
@@ -289,7 +291,7 @@ public class PuffBug extends Animal implements Endimatable {
 					double y = this.getY() + (rand.nextFloat() * 0.05F) + 0.7F;
 					double z = this.getZ() + offsetZ;
 
-					this.level.addParticle(EEParticleTypes.SHORT_POISE_BUBBLE.get(), x, y, z, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F, (rand.nextFloat() * 0.025F) + 0.025F, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F);
+					this.level().addParticle(EEParticleTypes.SHORT_POISE_BUBBLE.get(), x, y, z, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F, (rand.nextFloat() * 0.025F) + 0.025F, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F);
 				}
 			} else if (this.isEndimationPlaying(EEPlayableEndimations.PUFF_BUG_TELEPORT_FROM) && this.getAnimationTick() == 5) {
 				for (int i = 0; i < 6; i++) {
@@ -300,7 +302,7 @@ public class PuffBug extends Animal implements Endimatable {
 					double y = this.getY() + (rand.nextFloat() * 0.05F) + 0.7F;
 					double z = this.getZ() + offsetZ;
 
-					this.level.addParticle(EEParticleTypes.SHORT_POISE_BUBBLE.get(), x, y, z, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F, (rand.nextFloat() * 0.025F) + 0.025F, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F);
+					this.level().addParticle(EEParticleTypes.SHORT_POISE_BUBBLE.get(), x, y, z, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F, (rand.nextFloat() * 0.025F) + 0.025F, MathUtil.makeNegativeRandomly((rand.nextFloat() * 0.15F), rand) + 0.025F);
 				}
 			}
 
@@ -347,11 +349,11 @@ public class PuffBug extends Animal implements Endimatable {
 				this.yHeadRot = this.yHeadRotO;
 				this.yBodyRot = this.yBodyRotO;
 
-				if (!this.level.isClientSide && !this.isAtCorrectRestLocation(this.getAttachedHiveSide())) {
+				if (!this.level().isClientSide && !this.isAtCorrectRestLocation(this.getAttachedHiveSide())) {
 					this.setAttachedHiveSide(Direction.UP);
 				}
 			} else {
-				if (!this.level.isClientSide) {
+				if (!this.level().isClientSide) {
 					this.setAttachedHiveSide(Direction.UP);
 				}
 			}
@@ -364,14 +366,14 @@ public class PuffBug extends Animal implements Endimatable {
 				Vec3 fireDirection = this.getFireDirection();
 
 				if (fireDirection != null) {
-					if ((this.level.isClientSide && !this.stuckInBlock) || !this.level.isClientSide) {
+					if ((this.level().isClientSide && !this.stuckInBlock) || !this.level().isClientSide) {
 						this.getRotationController().rotate((float) Mth.wrapDegrees(fireDirection.y() - this.getYRot()), (float) fireDirection.x() + 90.0F, 0.0F, 5);
 					}
 
 					LivingEntity target = this.getTarget();
 
 					if (!this.stuckInBlock) {
-						if (!this.level.isClientSide && target != null && this.isEndimationPlaying(EEPlayableEndimations.PUFF_BUG_FLY)) {
+						if (!this.level().isClientSide && target != null && this.isEndimationPlaying(EEPlayableEndimations.PUFF_BUG_FLY)) {
 							float seekOffset = target.getY() > this.getY() ? 0.0F : 0.5F;
 							Vec3 targetVecNoScale = new Vec3(target.getX() - this.getX(), target.getY() - seekOffset - this.getY(), target.getZ() - this.getZ());
 							Vec3 targetVec = targetVecNoScale.scale(SEEKING_FACTOR);
@@ -401,9 +403,9 @@ public class PuffBug extends Animal implements Endimatable {
 
 		if (this.isProjectile() && !this.isInflated()) {
 			BlockPos blockpos = this.blockPosition();
-			BlockState blockstate = this.level.getBlockState(blockpos);
+			BlockState blockstate = this.level().getBlockState(blockpos);
 			if (!blockstate.isAir() && !this.noPhysics) {
-				VoxelShape voxelshape = blockstate.getCollisionShape(this.level, blockpos);
+				VoxelShape voxelshape = blockstate.getCollisionShape(this.level(), blockpos);
 				if (!voxelshape.isEmpty()) {
 					for (AABB axisalignedbb : voxelshape.toAabbs()) {
 						if (axisalignedbb.move(blockpos).contains(this.position())) {
@@ -415,7 +417,7 @@ public class PuffBug extends Animal implements Endimatable {
 			}
 
 			if (this.stuckInBlock && !this.noPhysics) {
-				if (!this.level.isClientSide && this.stuckInBlockState != blockstate && this.level.noCollision(this.getBoundingBox().inflate(0.06D))) {
+				if (!this.level().isClientSide && this.stuckInBlockState != blockstate && this.level().noCollision(this.getBoundingBox().inflate(0.06D))) {
 					this.disableProjectile();
 				}
 				this.setDeltaMovement(this.getDeltaMovement().multiply(0.0F, 1.0F, 0.0F));
@@ -423,7 +425,7 @@ public class PuffBug extends Animal implements Endimatable {
 				Vec3 positionVec = new Vec3(this.getX(), this.getY(), this.getZ());
 				Vec3 endVec = positionVec.add(motion);
 
-				HitResult traceResult = this.level.clip(new ClipContext(positionVec, endVec, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
+				HitResult traceResult = this.level().clip(new ClipContext(positionVec, endVec, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
 				EntityHitResult entityTraceResult = this.traceEntity(positionVec, endVec);
 
 				if (entityTraceResult != null) {
@@ -457,7 +459,7 @@ public class PuffBug extends Animal implements Endimatable {
 		}
 
 		if (compound.contains("StuckInBlockState", 10)) {
-			this.stuckInBlockState = NbtUtils.readBlockState(compound.getCompound("StuckInBlockState"));
+			this.stuckInBlockState = NbtUtils.readBlockState(this.level().holderLookup(Registries.BLOCK), compound.getCompound("StuckInBlockState"));
 		}
 
 		CompoundTag stackToCreate = compound.getCompound("ItemStackToCreate");
@@ -512,7 +514,7 @@ public class PuffBug extends Animal implements Endimatable {
 		BlockPos hivePos = this.getHivePos();
 		if (hivePos != null) {
 			try {
-				BlockEntity tileEntity = this.level.getBlockEntity(hivePos);
+				BlockEntity tileEntity = this.level().getBlockEntity(hivePos);
 				if (tileEntity instanceof PuffBugHiveTileEntity) {
 					return (PuffBugHiveTileEntity) tileEntity;
 				}
@@ -681,36 +683,36 @@ public class PuffBug extends Animal implements Endimatable {
 
 			this.push(motion.x() * (this.getAttribute(Attributes.MOVEMENT_SPEED).getValue() - 0.1F), motion.y(), motion.z() * (this.getAttribute(Attributes.MOVEMENT_SPEED).getValue() - 0.1F));
 		} else if (endimation == EEPlayableEndimations.PUFF_BUG_TELEPORT_TO) {
-			if (!this.level.isClientSide) {
+			if (!this.level().isClientSide) {
 				this.playSound(this.getTeleportSound(false), 0.65F, this.getVoicePitch());
 			}
 		} else if (endimation == EEPlayableEndimations.PUFF_BUG_FLY) {
-			this.level.playSound(null, this, EESoundEvents.PUFFBUG_LAUNCH.get(), SoundSource.HOSTILE, 0.25F, this.getRandom().nextFloat() * 0.35F + 0.75F);
+			this.level().playSound(null, this, EESoundEvents.PUFFBUG_LAUNCH.get(), SoundSource.HOSTILE, 0.25F, this.getRandom().nextFloat() * 0.35F + 0.75F);
 		}
 	}
 
 	@Override
 	public void onEndimationEnd(PlayableEndimation endimation, PlayableEndimation newEndimation) {
 		if (newEndimation != EEPlayableEndimations.PUFF_BUG_TELEPORT_FROM && endimation == EEPlayableEndimations.PUFF_BUG_TELEPORT_TO) {
-			if (!this.level.isClientSide) {
+			if (!this.level().isClientSide) {
 				NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.PUFF_BUG_TELEPORT_FROM);
 				this.playSound(this.getTeleportSound(true), 0.65F, this.getVoicePitch());
 			}
 		} else if (endimation == EEPlayableEndimations.PUFF_BUG_POLLINATE) {
 			this.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 3000));
 			if (this.getPollinationPos() != null) {
-				BlockEntity te = this.level.getBlockEntity(this.getPollinationPos());
+				BlockEntity te = this.level().getBlockEntity(this.getPollinationPos());
 				if (te instanceof BolloomBudTileEntity) {
 					BolloomBudTileEntity bud = (BolloomBudTileEntity) te;
 					if (bud.canBeOpened()) {
 						for (BudSide side : BudSide.values()) {
 							BlockPos sidePos = side.offsetPosition(this.getPollinationPos());
-							if (this.level.getBlockState(sidePos).getCollisionShape(level, this.getPollinationPos()).isEmpty()) {
-								this.level.destroyBlock(sidePos, true);
+							if (this.level().getBlockState(sidePos).getCollisionShape(this.level(), this.getPollinationPos()).isEmpty()) {
+								this.level().destroyBlock(sidePos, true);
 							}
 						}
 
-						this.level.setBlockAndUpdate(this.getPollinationPos(), level.getBlockState(this.getPollinationPos()).setValue(BolloomBudBlock.OPENED, true));
+						this.level().setBlockAndUpdate(this.getPollinationPos(), this.level().getBlockState(this.getPollinationPos()).setValue(BolloomBudBlock.OPENED, true));
 						bud.startGrowing(this.getRandom(), bud.calculateFruitMaxHeight(), false);
 					}
 				}
@@ -722,7 +724,7 @@ public class PuffBug extends Animal implements Endimatable {
 	public void travel(Vec3 moveDirection) {
 		if (this.isEffectiveAi() && this.isInflated()) {
 			double gravity = this.hasLevitation() ? -0.005D : 0.005D;
-			float speed = this.onGround ? 0.01F : 0.025F;
+			float speed = this.onGround() ? 0.01F : 0.025F;
 
 			this.moveRelative(speed, moveDirection);
 			this.move(MoverType.SELF, this.getDeltaMovement());
@@ -762,11 +764,10 @@ public class PuffBug extends Animal implements Endimatable {
 	@Nullable
 	public PuffBugHiveTileEntity findNewNearbyHive() {
 		BlockPos pos = this.blockPosition();
-		double xyDistance = 16.0D;
-		for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-xyDistance, -6.0D, -xyDistance), pos.offset(xyDistance, 6.0D, xyDistance))) {
+		int xyDistance = 16;
+		for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-xyDistance, -6, -xyDistance), pos.offset(xyDistance, 6, xyDistance))) {
 			if (blockpos.closerToCenterThan(this.position(), xyDistance)) {
-				if (this.level.getBlockState(blockpos).getBlock() == EEBlocks.PUFFBUG_HIVE.get() && this.level.getBlockEntity(blockpos) instanceof PuffBugHiveTileEntity) {
-					PuffBugHiveTileEntity hive = (PuffBugHiveTileEntity) this.level.getBlockEntity(blockpos);
+				if (this.level().getBlockState(blockpos).getBlock() == EEBlocks.PUFFBUG_HIVE.get() && this.level().getBlockEntity(blockpos) instanceof PuffBugHiveTileEntity hive) {
 					if (!hive.isHiveFull() && this.getHive() == null) {
 						return hive;
 					}
@@ -832,7 +833,7 @@ public class PuffBug extends Animal implements Endimatable {
 				for (int z = 0; z < 6; z++) {
 					positions.set(pos.offset(x, y, z));
 
-					if (this.level.isEmptyBlock(positions)) {
+					if (this.level().isEmptyBlock(positions)) {
 						avaliablePositions.add(new BlockPos(positions));
 					}
 				}
@@ -853,7 +854,8 @@ public class PuffBug extends Animal implements Endimatable {
 		if (resultType == HitResult.Type.ENTITY) {
 			EntityHitResult entityResult = (EntityHitResult) result;
 			Entity entity = entityResult.getEntity();
-			if (entity.hurt(DamageSource.mobAttack(this).setProjectile(), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue())) {
+			//TODO: See if this should be changed
+			if (entity.hurt(this.level().damageSources().mobProjectile(this, this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue())) {
 				this.setInflated(true);
 				this.removeFireDirection();
 				this.stuckInBlock = false;
@@ -867,24 +869,24 @@ public class PuffBug extends Animal implements Endimatable {
 			}
 		} else {
 			BlockHitResult blockraytraceresult = (BlockHitResult) result;
-			this.stuckInBlockState = this.level.getBlockState(blockraytraceresult.getBlockPos());
+			this.stuckInBlockState = this.level().getBlockState(blockraytraceresult.getBlockPos());
 			this.stuckInBlock = true;
 
 			Vec3 end = result.getLocation();
 			this.setPos(end.x(), end.y(), end.z());
 			this.setDeltaMovement(Vec3.ZERO);
 
-			if (!this.level.isClientSide) {
+			if (!this.level().isClientSide) {
 				NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.PUFF_BUG_LAND);
 			}
 
-			this.level.playSound(null, this, EESoundEvents.PUFFBUG_LAND.get(), SoundSource.HOSTILE, 0.5F, this.getVoicePitch());
+			this.level().playSound(null, this, EESoundEvents.PUFFBUG_LAND.get(), SoundSource.HOSTILE, 0.5F, this.getVoicePitch());
 		}
 	}
 
 	@Nullable
 	private EntityHitResult traceEntity(Vec3 start, Vec3 end) {
-		return ProjectileUtil.getEntityHitResult(this.level, this, start, end, this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(0.5F), (result) -> {
+		return ProjectileUtil.getEntityHitResult(this.level(), this, start, end, this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(0.5F), (result) -> {
 			return !result.isSpectator() && result.isAlive() && !(result instanceof PuffBug);
 		});
 	}
@@ -893,7 +895,7 @@ public class PuffBug extends Animal implements Endimatable {
 		this.stuckInBlock = false;
 		this.setInflated(true);
 		this.removeFireDirection();
-		this.level.broadcastEntityEvent(this, (byte) 38);
+		this.level().broadcastEntityEvent(this, (byte) 38);
 	}
 
 	public boolean wantsToRest() {
@@ -905,7 +907,7 @@ public class PuffBug extends Animal implements Endimatable {
 	}
 
 	public boolean isAtCorrectRestLocation(Direction side) {
-		BlockEntity te = side == Direction.DOWN ? this.isBaby() ? this.level.getBlockEntity(this.blockPosition().above(1)) : this.level.getBlockEntity(this.blockPosition().above(2)) : this.isBaby() ? this.level.getBlockEntity(this.blockPosition().relative(side.getOpposite())) : this.level.getBlockEntity(this.blockPosition().above(1).relative(side.getOpposite()));
+		BlockEntity te = side == Direction.DOWN ? this.isBaby() ? this.level().getBlockEntity(this.blockPosition().above(1)) : this.level().getBlockEntity(this.blockPosition().above(2)) : this.isBaby() ? this.level().getBlockEntity(this.blockPosition().relative(side.getOpposite())) : this.level().getBlockEntity(this.blockPosition().above(1).relative(side.getOpposite()));
 		if (te != this.getHive()) {
 			return false;
 		}
@@ -915,12 +917,12 @@ public class PuffBug extends Animal implements Endimatable {
 			case UP:
 				return false;
 			case DOWN:
-				float yOffsetDown = this.isBaby() ? 0.45F : -0.15F;
-				return Vec3.atCenterOf((hivePos.below()).offset(0.5F, yOffsetDown, 0.5F)).distanceTo(this.position()) < 0.25F;
+				float yOffsetDown = 0.5F + (this.isBaby() ? 0.45F : -0.15F);
+				return Vec3.atLowerCornerWithOffset(hivePos.below(), 1.0F, yOffsetDown, 1.0F).distanceTo(this.position()) < 0.25F;
 			default:
 				float yOffset = this.isBaby() ? 0.2F : -0.2F;
 				BlockPos sideOffset = hivePos.relative(side);
-				return this.level.isEmptyBlock(sideOffset.above()) && this.level.isEmptyBlock(sideOffset.below())
+				return this.level().isEmptyBlock(sideOffset.above()) && this.level().isEmptyBlock(sideOffset.below())
 						&& Vec3.atLowerCornerOf(sideOffset).add(this.getTeleportController().getOffsetForDirection(side)[0], yOffset, this.getTeleportController().getOffsetForDirection(side)[1]).distanceTo(this.position()) < (this.isBaby() ? 0.1F : 0.25F);
 		}
 	}
@@ -959,7 +961,7 @@ public class PuffBug extends Animal implements Endimatable {
 
 	@Override
 	public Vec3 getLightProbePosition(float partialTicks) {
-		BlockPos blockpos = new BlockPos(this.getX(), this.getY() + (double) this.getEyeHeight(), this.getZ());
+		BlockPos blockpos = BlockPos.containing(this.getX(), this.getY() + (double) this.getEyeHeight(), this.getZ());
 		if (this.stuckInBlock && !this.isInflated()) {
 			boolean rotationFlag = true;
 			float[] rotations = this.getRotationController().getRotations(1.0F);
@@ -970,7 +972,7 @@ public class PuffBug extends Animal implements Endimatable {
 				rotationFlag = false;
 			}
 
-			return this.level.isAreaLoaded(blockpos, 0) ? Vec3.atCenterOf((rotationFlag ? blockpos.relative(horizontalOffset).relative(verticalOffset) : blockpos.relative(horizontalOffset))) : super.getLightProbePosition(partialTicks);
+			return this.level().isAreaLoaded(blockpos, 0) ? Vec3.atCenterOf((rotationFlag ? blockpos.relative(horizontalOffset).relative(verticalOffset) : blockpos.relative(horizontalOffset))) : super.getLightProbePosition(partialTicks);
 		}
 		return super.getLightProbePosition(partialTicks);
 	}
@@ -1043,7 +1045,7 @@ public class PuffBug extends Animal implements Endimatable {
 			if (newStackToCreate != null) {
 				this.setStackToCreate(newStackToCreate);
 				this.usePlayerItem(player, hand, itemstack);
-				return InteractionResult.sidedSuccess(this.level.isClientSide);
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
 			}
 			return InteractionResult.PASS;
 		} else {
@@ -1086,13 +1088,13 @@ public class PuffBug extends Animal implements Endimatable {
 				for (int i = 0; i < swarmSize; i++) {
 					Vec3 spawnPos = centeredPos.add(MathUtil.makeNegativeRandomly(rng.nextFloat() * 5.5F, rng), MathUtil.makeNegativeRandomly(rng.nextFloat() * 2.0F, rng), MathUtil.makeNegativeRandomly(rng.nextFloat() * 5.5F, rng));
 
-					if (this.level.isEmptyBlock(new BlockPos(spawnPos))) {
-						PuffBug swarmChild = EEEntityTypes.PUFF_BUG.get().create(this.level);
+					if (this.level().isEmptyBlock(BlockPos.containing(spawnPos))) {
+						PuffBug swarmChild = EEEntityTypes.PUFF_BUG.get().create(this.level());
 						swarmChild.moveTo(spawnPos.x(), spawnPos.y(), spawnPos.z(), 0.0F, 0.0F);
-						swarmChild.finalizeSpawn(worldIn, this.level.getCurrentDifficultyAt(new BlockPos(spawnPos)), MobSpawnType.EVENT, null, null);
+						swarmChild.finalizeSpawn(worldIn, this.level().getCurrentDifficultyAt(BlockPos.containing(spawnPos)), MobSpawnType.EVENT, null, null);
 						swarmChild.setAge(-24000);
 
-						this.level.addFreshEntity(swarmChild);
+						this.level().addFreshEntity(swarmChild);
 					}
 				}
 			}
@@ -1114,7 +1116,8 @@ public class PuffBug extends Animal implements Endimatable {
 	protected void doPush(Entity entity) {
 		if (!this.isInflated() && !(entity instanceof PuffBug)) {
 			if (this.isProjectile()) {
-				if (entity.hurt(DamageSource.mobAttack(this).setProjectile(), 5.0F)) {
+				// TODO: See if this an issue
+				if (entity.hurt(this.damageSources().mobProjectile(this, this), 5.0F)) {
 					this.setInflated(true);
 					this.removeFireDirection();
 					this.stuckInBlock = false;
@@ -1138,7 +1141,7 @@ public class PuffBug extends Animal implements Endimatable {
 
 	@Override
 	public boolean isInvulnerableTo(DamageSource source) {
-		return ((this.isProjectile() || this.isPassenger()) && (source == DamageSource.IN_WALL || source == DamageSource.FLY_INTO_WALL || source == DamageSource.CRAMMING)) || super.isInvulnerableTo(source);
+		return ((this.isProjectile() || this.isPassenger()) && (source.is(DamageTypes.IN_WALL) || source.is(DamageTypes.FLY_INTO_WALL) || source.is(DamageTypes.CRAMMING))) || super.isInvulnerableTo(source);
 	}
 
 	@Override
@@ -1154,7 +1157,7 @@ public class PuffBug extends Animal implements Endimatable {
 	@Nullable
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel p_146743_, AgeableMob p_146744_) {
-		return EEEntityTypes.PUFF_BUG.get().create(this.level);
+		return EEEntityTypes.PUFF_BUG.get().create(this.level());
 	}
 
 	public SoundEvent getPuffSound() {
@@ -1242,7 +1245,7 @@ public class PuffBug extends Animal implements Endimatable {
 
 		TeleportController(PuffBug puffbug) {
 			this.puffbug = puffbug;
-			this.world = puffbug.level;
+			this.world = puffbug.level();
 		}
 
 		public void processTeleportation() {
@@ -1395,7 +1398,7 @@ public class PuffBug extends Animal implements Endimatable {
 			this.rotating = true;
 			this.ticksSinceNotRotating = 0;
 
-			if (!this.puffbug.level.isClientSide) {
+			if (!this.puffbug.level().isClientSide) {
 				EndergeticExpansion.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> this.puffbug), new RotateMessage(this.puffbug.getId(), tickLength, yaw, pitch, roll));
 			}
 		}

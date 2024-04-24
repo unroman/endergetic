@@ -34,7 +34,7 @@ public class PuffBugRestOnHiveGoal extends Goal {
 			this.puffbug.getRotationController().rotate(0.0F, -115.0F, 0.0F, ticks);
 		}
 
-		if (this.puffbug.level.getGameTime() % 60 == 0) {
+		if (this.puffbug.level().getGameTime() % 60 == 0) {
 			this.puffbug.heal(2.0F);
 		}
 

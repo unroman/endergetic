@@ -1,23 +1,39 @@
 package com.teamabnormals.endergetic.core.registry;
 
-import com.teamabnormals.blueprint.core.util.registry.BiomeSubRegistryHelper;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import com.teamabnormals.endergetic.core.registry.EEFeatures.EEPlacedFeatures;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.EndPlacements;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.Musics;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid = EndergeticExpansion.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = EndergeticExpansion.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public final class EEBiomes {
-	private static final BiomeSubRegistryHelper HELPER = EndergeticExpansion.REGISTRY_HELPER.getBiomeSubHelper();
+	public static final ResourceKey<Biome> POISE_FOREST = createKey("poise_forest");
 
-	public static final BiomeSubRegistryHelper.KeyedBiome POISE_FOREST = HELPER.createBiome("poise_forest", EEBiomes::poiseForest);
+	public static void bootstrap(BootstapContext<Biome> context) {
+		HolderGetter<PlacedFeature> features = context.lookup(Registries.PLACED_FEATURE);
+		HolderGetter<ConfiguredWorldCarver<?>> carvers = context.lookup(Registries.CONFIGURED_CARVER);
 
-	public static Biome poiseForest() {
+		context.register(POISE_FOREST, poiseForest(features, carvers));
+	}
+
+	public static ResourceKey<Biome> createKey(String name) {
+		return ResourceKey.create(Registries.BIOME, new ResourceLocation(EndergeticExpansion.MOD_ID, name));
+	}
+
+	public static Biome poiseForest(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
 		return new Biome.BiomeBuilder()
-				.precipitation(Biome.Precipitation.NONE)
+				.hasPrecipitation(false)
 				.temperature(0.5F)
 				.downfall(0.5F)
 				.specialEffects(
@@ -26,10 +42,10 @@ public final class EEBiomes {
 								.waterColor(4159204)
 								.waterFogColor(329011)
 								.fogColor(10518688)
-								.backgroundMusic(Musics.createGameMusic(EESoundEvents.POISE_FOREST_MUSIC.get()))
-								.ambientLoopSound(EESoundEvents.POISE_FOREST_LOOP.get())
-								.ambientAdditionsSound(new AmbientAdditionsSettings(EESoundEvents.POISE_FOREST_ADDITIONS.get(), 0.01D))
-								.ambientMoodSound(new AmbientMoodSettings(EESoundEvents.POISE_FOREST_MOOD.get(), 6000, 8, 2.0D))
+								.backgroundMusic(Musics.createGameMusic(Holder.direct(EESoundEvents.POISE_FOREST_MUSIC.get())))
+								.ambientLoopSound(Holder.direct(EESoundEvents.POISE_FOREST_LOOP.get()))
+								.ambientAdditionsSound(new AmbientAdditionsSettings(Holder.direct(EESoundEvents.POISE_FOREST_ADDITIONS.get()), 0.01D))
+								.ambientMoodSound(new AmbientMoodSettings(Holder.direct(EESoundEvents.POISE_FOREST_MOOD.get()), 6000, 8, 2.0D))
 								.build()
 				)
 				.mobSpawnSettings(
@@ -41,15 +57,15 @@ public final class EEBiomes {
 								.build()
 				)
 				.generationSettings(
-						new BiomeGenerationSettings.Builder()
-								.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, EEPlacedFeatures.POISE_DOME.getHolder().get())
-								.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, EEPlacedFeatures.POISE_TREE.getHolder().get())
+						new BiomeGenerationSettings.Builder(features, carvers)
+								.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, EEPlacedFeatures.POISE_DOME)
+								.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, EEPlacedFeatures.POISE_TREE)
 								.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, EndPlacements.END_GATEWAY_RETURN)
-								.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EEPlacedFeatures.POISE_CLUSTER.getHolder().get())
-								.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EEPlacedFeatures.PUFF_BUG_HIVE.getHolder().get())
-								.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EEPlacedFeatures.BOLLOOM_BUD.getHolder().get())
-								.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EEPlacedFeatures.TALL_POISE_BUSH_PATCH.getHolder().get())
-								.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EEPlacedFeatures.POISE_BUSH_PATCH.getHolder().get())
+								.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EEPlacedFeatures.POISE_CLUSTER)
+								.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EEPlacedFeatures.PUFF_BUG_HIVE)
+								.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EEPlacedFeatures.BOLLOOM_BUD)
+								.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EEPlacedFeatures.TALL_POISE_BUSH_PATCH)
+								.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EEPlacedFeatures.POISE_BUSH_PATCH)
 								.build()
 				).build();
 	}

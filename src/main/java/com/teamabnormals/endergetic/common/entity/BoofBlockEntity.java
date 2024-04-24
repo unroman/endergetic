@@ -6,6 +6,7 @@ import com.teamabnormals.endergetic.core.registry.other.tags.EEEntityTypeTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -52,12 +53,12 @@ public class BoofBlockEntity extends Entity {
 	@Override
 	public void tick() {
 		AABB bb = this.getBoundingBox().inflate(0, 0.25F, 0);
-		List<Entity> entities = this.level.getEntitiesOfClass(Entity.class, bb, (entity -> !entity.isPassenger()));
+		List<Entity> entities = this.level().getEntitiesOfClass(Entity.class, bb, (entity -> !entity.isPassenger()));
 		for (Entity entity : entities) {
 			if (!entity.getType().is(EEEntityTypeTags.BOOF_BLOCK_RESISTANT)) {
 				if (entity instanceof AbstractArrow) {
 					this.setForProjectile(true);
-					this.level.setBlockAndUpdate(getOrigin(), Blocks.AIR.defaultBlockState());
+					this.level().setBlockAndUpdate(getOrigin(), Blocks.AIR.defaultBlockState());
 					entity.push(Mth.sin((float) (entity.getYRot() * Math.PI / 180.0F)) * 3 * 0.1F, 0.55D, -Mth.cos((float) (entity.getYRot() * Math.PI / 180.0F)) * 3 * 0.1F);
 				} else {
 					if (entity.getY() - 0.45F >= this.getY()) {
@@ -77,10 +78,10 @@ public class BoofBlockEntity extends Entity {
 		}
 
 		if (this.tickCount >= 10) {
-			if (this.level.isAreaLoaded(this.getOrigin(), 1) && this.level.getBlockState(getOrigin()).getBlock() == EEBlocks.BOOF_BLOCK.get() && !this.isForProjectile()) {
-				this.level.setBlockAndUpdate(this.getOrigin(), EEBlocks.BOOF_BLOCK.get().defaultBlockState());
-			} else if (this.level.isAreaLoaded(this.getOrigin(), 1) && this.isForProjectile()) {
-				this.level.setBlockAndUpdate(this.getOrigin(), EEBlocks.BOOF_BLOCK.get().defaultBlockState());
+			if (this.level().isAreaLoaded(this.getOrigin(), 1) && this.level().getBlockState(getOrigin()).getBlock() == EEBlocks.BOOF_BLOCK.get() && !this.isForProjectile()) {
+				this.level().setBlockAndUpdate(this.getOrigin(), EEBlocks.BOOF_BLOCK.get().defaultBlockState());
+			} else if (this.level().isAreaLoaded(this.getOrigin(), 1) && this.isForProjectile()) {
+				this.level().setBlockAndUpdate(this.getOrigin(), EEBlocks.BOOF_BLOCK.get().defaultBlockState());
 			}
 			this.discard();
 		}
@@ -143,7 +144,7 @@ public class BoofBlockEntity extends Entity {
 	}
 
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 }

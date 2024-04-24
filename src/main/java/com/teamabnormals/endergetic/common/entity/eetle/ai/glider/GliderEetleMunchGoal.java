@@ -2,9 +2,8 @@ package com.teamabnormals.endergetic.common.entity.eetle.ai.glider;
 
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatedGoal;
 import com.teamabnormals.endergetic.common.entity.eetle.GliderEetle;
+import com.teamabnormals.endergetic.core.registry.other.EEDamageTypes;
 import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
@@ -43,7 +42,7 @@ public class GliderEetleMunchGoal extends EndimatedGoal<GliderEetle> {
 		LivingEntity attackTarget = this.entity.getTarget();
 		if (attackTarget != null && this.entity.getPassengers().contains(attackTarget)) {
 			if (this.isEndimationAtTick(8) || this.isEndimationAtTick(18)) {
-				attackTarget.hurt(causeMunchDamage(this.entity), (float) this.entity.getAttributeValue(Attributes.ATTACK_DAMAGE) + attackTarget.getRandom().nextInt(2));
+				attackTarget.hurt(EEDamageTypes.munch(this.entity.level(), this.entity), (float) this.entity.getAttributeValue(Attributes.ATTACK_DAMAGE) + attackTarget.getRandom().nextInt(2));
 			}
 		}
 	}
@@ -56,9 +55,5 @@ public class GliderEetleMunchGoal extends EndimatedGoal<GliderEetle> {
 	@Override
 	public boolean requiresUpdateEveryTick() {
 		return true;
-	}
-
-	public static DamageSource causeMunchDamage(GliderEetle glider) {
-		return new EntityDamageSource("endergetic.munch", glider);
 	}
 }

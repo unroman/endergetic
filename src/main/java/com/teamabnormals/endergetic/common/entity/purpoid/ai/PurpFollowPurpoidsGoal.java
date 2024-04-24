@@ -22,7 +22,7 @@ public class PurpFollowPurpoidsGoal extends Goal {
 	public boolean canUse() {
 		Purpoid purp = this.purp;
 		if (!purp.isBaby()) return false;
-		List<? extends Purpoid> list = purp.level.getEntitiesOfClass(Purpoid.class, purp.getBoundingBox().inflate(12.0D, 12.0D, 12.0D));
+		List<? extends Purpoid> list = purp.level().getEntitiesOfClass(Purpoid.class, purp.getBoundingBox().inflate(12.0D, 12.0D, 12.0D));
 		Purpoid newLeader = null;
 		double smallestDistance = Double.MAX_VALUE;
 		for (Purpoid purpoid : list) {

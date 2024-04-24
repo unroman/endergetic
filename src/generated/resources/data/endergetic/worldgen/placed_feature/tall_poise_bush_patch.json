@@ -1,0 +1,26 @@
+{
+  "feature": "endergetic:tall_poise_bush_patch",
+  "placement": [
+    {
+      "type": "endergetic:noise_heightmap_32",
+      "above_noise": 8,
+      "below_noise": 2,
+      "noise_level": -0.8
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "below_top": 0
+        },
+        "min_inclusive": {
+          "above_bottom": 0
+        }
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

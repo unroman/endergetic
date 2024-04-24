@@ -64,7 +64,7 @@ public abstract class AbstractEetle extends Monster implements Endimatable {
 	protected AbstractEetle(EntityType<? extends AbstractEetle> type, Level world) {
 		super(type, world);
 		this.moveControl = new GroundEetleMoveController(this);
-		this.maxUpStep = 0.5F;
+		this.setMaxUpStep(0.5F);
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public abstract class AbstractEetle extends Monster implements Endimatable {
 	public void tick() {
 		super.tick();
 
-		if (!this.level.isClientSide && this.isAlive()) {
+		if (!this.level().isClientSide && this.isAlive()) {
 			int age = this.growingAge;
 			if (age < 0) {
 				this.updateAge(++age);
@@ -104,7 +104,7 @@ public abstract class AbstractEetle extends Monster implements Endimatable {
 				if (this.despawnTimer > 0) {
 					int newTime = --this.despawnTimer;
 					if (newTime == 0) {
-						this.level.broadcastEntityEvent(this, (byte) 20);
+						this.level().broadcastEntityEvent(this, (byte) 20);
 						this.discard();
 					} else if (newTime <= 100 && newTime % 10 == 0) {
 						LivingEntity attackTarget = this.getTarget();
@@ -145,7 +145,7 @@ public abstract class AbstractEetle extends Monster implements Endimatable {
 		this.updateGoals(this.goalSelector, this.targetSelector, child);
 		if (child) {
 			this.xpReward = 2;
-			if (this.level != null && !this.level.isClientSide) {
+			if (this.level() != null && !this.level().isClientSide) {
 				AttributeInstance maxHealth = this.getAttribute(Attributes.MAX_HEALTH);
 				if (maxHealth != null) {
 					maxHealth.addTransientModifier(LEETLE_HEALTH);
@@ -204,11 +204,11 @@ public abstract class AbstractEetle extends Monster implements Endimatable {
 						mutable.set(currentX, world.getHeight(Heightmap.Types.MOTION_BLOCKING, currentX, currentZ), currentZ);
 						if (world.isEmptyBlock(mutable) && Block.canSupportRigidBlock(world, mutable.below())) {
 							EntityType<?> type = this.getType();
-							Entity entity = type.create(this.level);
+							Entity entity = type.create(this.level());
 							if (entity instanceof AbstractEetle) {
 								AbstractEetle eetle = (AbstractEetle) entity;
 								eetle.updateAge(-(20000 + this.random.nextInt(4001)));
-								if (this.level.addFreshEntity(eetle)) {
+								if (this.level().addFreshEntity(eetle)) {
 									entity.absMoveTo(currentX + 0.5F, mutable.getY(), currentZ + 0.5F, this.random.nextFloat() * 360.0F, 0.0F);
 								}
 							}
@@ -222,7 +222,7 @@ public abstract class AbstractEetle extends Monster implements Endimatable {
 
 	@Override
 	public void die(DamageSource cause) {
-		Level world = this.level;
+		Level world = this.level();
 		if (!this.isBaby() && this.random.nextFloat() < calculateEggChance(world, this.getBoundingBox().inflate(this.getAttributeValue(Attributes.FOLLOW_RANGE) * 1.25F)) && !this.isRemoved() && !this.dead) {
 			if (!world.isClientSide) {
 				BlockPos pos = this.blockPosition();
@@ -272,7 +272,7 @@ public abstract class AbstractEetle extends Monster implements Endimatable {
 
 	@Override
 	public void onEndimationEnd(PlayableEndimation endimation, PlayableEndimation newEndimation) {
-		Level world = this.level;
+		Level world = this.level();
 		if (endimation == EEPlayableEndimations.EETLE_GROW_UP && world instanceof ServerLevel) {
 			this.setBaby(false);
 			this.playSound(EESoundEvents.LEETLE_TRANSFORM.get(), this.getSoundVolume(), this.getVoicePitch());
@@ -387,9 +387,9 @@ public abstract class AbstractEetle extends Monster implements Endimatable {
 				}
 				mob.setSpeed(moveSpeed);
 				BlockPos blockpos = mob.blockPosition();
-				BlockState blockstate = mob.level.getBlockState(blockpos);
-				VoxelShape voxelshape = blockstate.getCollisionShape(mob.level, blockpos);
-				if (d2 > mob.maxUpStep && d0 * d0 + d1 * d1 < (double) Math.max(1.0F, mob.getBbWidth()) || !voxelshape.isEmpty() && mob.getY() < voxelshape.max(Direction.Axis.Y) + (double) blockpos.getY() && !blockstate.is(BlockTags.DOORS) && !blockstate.is(BlockTags.FENCES)) {
+				BlockState blockstate = mob.level().getBlockState(blockpos);
+				VoxelShape voxelshape = blockstate.getCollisionShape(mob.level(), blockpos);
+				if (d2 > mob.maxUpStep() && d0 * d0 + d1 * d1 < (double) Math.max(1.0F, mob.getBbWidth()) || !voxelshape.isEmpty() && mob.getY() < voxelshape.max(Direction.Axis.Y) + (double) blockpos.getY() && !blockstate.is(BlockTags.DOORS) && !blockstate.is(BlockTags.FENCES)) {
 					mob.getJumpControl().jump();
 					this.operation = MoveControl.Operation.JUMPING;
 				}

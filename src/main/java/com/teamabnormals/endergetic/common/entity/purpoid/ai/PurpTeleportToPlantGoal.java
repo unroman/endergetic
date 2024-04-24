@@ -46,7 +46,7 @@ public class PurpTeleportToPlantGoal extends AbstractPurpoidTeleportGoal {
 		int originY = pos.getY();
 		int originZ = pos.getZ();
 		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
-		Level level = purpoid.level;
+		Level level = purpoid.level();
 		List<Pair<BlockPos, Direction>> sidedTeleportPositions = new ArrayList<>();
 		List<Direction> shuffledHorizontals = Direction.Plane.HORIZONTAL.shuffledCopy(random);
 		for (int x = originX - sizeXZ; x <= originX + sizeXZ; x++) {

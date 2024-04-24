@@ -1,7 +1,7 @@
 package com.teamabnormals.endergetic.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.teamabnormals.endergetic.client.model.eetle.eggs.IEetleEggModel;
 import com.teamabnormals.endergetic.client.model.eetle.eggs.LargeEetleEggModel;
 import com.teamabnormals.endergetic.client.model.eetle.eggs.MediumEetleEggModel;

@@ -8,7 +8,7 @@ import com.teamabnormals.endergetic.common.entity.eetle.GliderEetle;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -59,11 +59,10 @@ public final class OverlayEvents {
 
 						PoseStack stack = event.getGuiGraphics().pose();
 						stack.pushPose();
-						RenderSystem.setShaderTexture(0, new ResourceLocation(EndergeticExpansion.MOD_ID, "textures/gui/booflo_bar.png"));
-
-						OverlayEvents.drawTexture(stack, left, top, 0, 0, 182, 5);
+						ResourceLocation texture = new ResourceLocation(EndergeticExpansion.MOD_ID, "textures/gui/booflo_bar.png");
+						drawTexture(event.getGuiGraphics(), texture, left, top, 0, 0, 182, 5);
 						if (progress > 0) {
-							OverlayEvents.drawTexture(stack, left, top, 0, 5, progress, 10);
+							drawTexture(event.getGuiGraphics(), texture, left, top, 0, 5, progress, 10);
 						}
 
 						stack.popPose();
@@ -103,8 +102,8 @@ public final class OverlayEvents {
 		}
 	}
 
-	private static void drawTexture(PoseStack stack, int posX, int posY, int p_blit_3_, int p_blit_4_, int p_blit_5_, int p_blit_6_) {
-		GuiComponent.blit(stack, posX, posY, -90, (float) p_blit_3_, (float) p_blit_4_, p_blit_5_, p_blit_6_, 256, 256);
+	private static void drawTexture(GuiGraphics guiGraphics, ResourceLocation location, int posX, int posY, int p_blit_3_, int p_blit_4_, int p_blit_5_, int p_blit_6_) {
+		guiGraphics.blit(location, posX, posY, -90, (float) p_blit_3_, (float) p_blit_4_, p_blit_5_, p_blit_6_, 256, 256);
 	}
 
 	public static void enablePurpoidFlash() {

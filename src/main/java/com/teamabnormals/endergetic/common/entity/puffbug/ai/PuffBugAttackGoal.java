@@ -114,7 +114,7 @@ public class PuffBugAttackGoal extends Goal {
 	}
 
 	private boolean canFitNewCollisionShape() {
-		return this.puffbug.isBaby() ? this.puffbug.level.noCollision(this.getBoundingBoxForSize(PuffBug.PROJECTILE_SIZE_CHILD).move(0.0F, 0.225F, 0.0F)) : this.puffbug.level.noCollision(this.getBoundingBoxForSize(PuffBug.PROJECTILE_SIZE).move(0.0F, 0.225F, 0.0F));
+		return this.puffbug.isBaby() ? this.puffbug.level().noCollision(this.getBoundingBoxForSize(PuffBug.PROJECTILE_SIZE_CHILD).move(0.0F, 0.225F, 0.0F)) : this.puffbug.level().noCollision(this.getBoundingBoxForSize(PuffBug.PROJECTILE_SIZE).move(0.0F, 0.225F, 0.0F));
 	}
 
 	private AABB getBoundingBoxForSize(EntityDimensions size) {
@@ -128,7 +128,7 @@ public class PuffBugAttackGoal extends Goal {
 		Vec3 eyeVec = this.puffbug.getEyePosition(1.0F);
 		Vec3 lookVec = RayTraceHelper.getVectorForRotation(pitch, yaw);
 		Vec3 vec3d2 = eyeVec.add(lookVec.x() * SHOOT_RANGE, lookVec.y() * SHOOT_RANGE, lookVec.z() * SHOOT_RANGE);
-		return this.puffbug.level.clip(new ClipContext(eyeVec, vec3d2, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, this.puffbug));
+		return this.puffbug.level().clip(new ClipContext(eyeVec, vec3d2, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, this.puffbug));
 	}
 
 	@Override

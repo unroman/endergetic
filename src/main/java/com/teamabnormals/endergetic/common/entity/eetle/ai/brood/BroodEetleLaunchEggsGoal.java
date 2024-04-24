@@ -57,11 +57,11 @@ public class BroodEetleLaunchEggsGoal extends EndimatedGoal<BroodEetle> {
 		if (broodEetle.isEggMouthOpen() && this.ticksPassed % 20 == 0) {
 			this.playEndimation();
 			Vec3 firingPos = new Vec3(-1.0D, 3.0D, 0.0D).yRot(-broodEetle.yBodyRot * ((float) Math.PI / 180F) - ((float) Math.PI / 2F));
-			EetleEgg eetleEgg = new EetleEgg(broodEetle.level, broodEetle.position().add(firingPos));
+			EetleEgg eetleEgg = new EetleEgg(broodEetle.level(), broodEetle.position().add(firingPos));
 			RandomSource random = broodEetle.getRandom();
 			eetleEgg.setEggSize(EetleEgg.EggSize.random(random, true));
 			eetleEgg.setDeltaMovement(new Vec3((random.nextFloat() - random.nextFloat()) * 0.35F, 0.8F + random.nextFloat() * 0.1F, (random.nextFloat() - random.nextFloat()) * 0.35F));
-			broodEetle.level.addFreshEntity(eetleEgg);
+			broodEetle.level().addFreshEntity(eetleEgg);
 			this.shotsToFire--;
 		}
 	}
@@ -92,7 +92,7 @@ public class BroodEetleLaunchEggsGoal extends EndimatedGoal<BroodEetle> {
 		double followRange = broodEetle.getAttributeValue(Attributes.FOLLOW_RANGE);
 		double posY = broodEetle.getY();
 		Sensing senses = broodEetle.getSensing();
-		return broodEetle.level.getEntitiesOfClass(AbstractEetle.class, broodEetle.getBoundingBox().inflate(followRange, followRange * 0.75D, followRange), eetle -> {
+		return broodEetle.level().getEntitiesOfClass(AbstractEetle.class, broodEetle.getBoundingBox().inflate(followRange, followRange * 0.75D, followRange), eetle -> {
 			if (eetle.getY() - posY >= 0.5F && !senses.hasLineOfSight(eetle)) {
 				return false;
 			}

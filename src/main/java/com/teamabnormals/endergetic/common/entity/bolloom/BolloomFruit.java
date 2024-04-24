@@ -115,8 +115,8 @@ public class BolloomFruit extends AbstractBolloom {
 	@Override
 	public void updateUntied() {
 		BlockPos budPos = this.getBudPos();
-		if (this.level.isAreaLoaded(budPos, 1)) {
-			if (this.level.getBlockState(budPos).getBlock() != EEBlocks.BOLLOOM_BUD.get() || !this.level.getBlockState(budPos).getValue(BolloomBudBlock.OPENED)) {
+		if (this.level().isAreaLoaded(budPos, 1)) {
+			if (this.level().getBlockState(budPos).getBlock() != EEBlocks.BOLLOOM_BUD.get() || !this.level().getBlockState(budPos).getValue(BolloomBudBlock.OPENED)) {
 				this.setUntied(true);
 			}
 		}
@@ -130,7 +130,7 @@ public class BolloomFruit extends AbstractBolloom {
 	public void onBroken(boolean dropFruit) {
 		super.onBroken(dropFruit);
 		if (dropFruit) {
-			Block.popResource(this.level, this.blockPosition(), new ItemStack(EEItems.BOLLOOM_FRUIT.get()));
+			Block.popResource(this.level(), this.blockPosition(), new ItemStack(EEItems.BOLLOOM_FRUIT.get()));
 		}
 	}
 
@@ -139,8 +139,8 @@ public class BolloomFruit extends AbstractBolloom {
 		BlockPos.MutableBlockPos mutable = this.blockPosition().mutable();
 		for (int i = 0; i < this.getVineHeight(); i++) {
 			BlockPos pos = mutable.below(i);
-			if (this.level.isAreaLoaded(pos, 1)) {
-				if (!this.level.getBlockState(pos).isAir()) {
+			if (this.level().isAreaLoaded(pos, 1)) {
+				if (!this.level().getBlockState(pos).isAir()) {
 					return false;
 				}
 			}

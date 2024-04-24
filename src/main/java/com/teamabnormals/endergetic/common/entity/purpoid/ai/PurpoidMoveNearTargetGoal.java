@@ -63,7 +63,7 @@ public class PurpoidMoveNearTargetGoal extends Goal {
 			}
 
 			PathNavigation pathNavigator = purpoid.getNavigation();
-			Path path = pathNavigator.createPath(PurpoidAttackGoal.findAirPosAboveTarget(purpoid.level, target), random.nextInt(3) + 3);
+			Path path = pathNavigator.createPath(PurpoidAttackGoal.findAirPosAboveTarget(purpoid.level(), target), random.nextInt(3) + 3);
 			if (path == null || !pathNavigator.moveTo(path, 2.0F)) {
 				this.delayCounter += 15;
 			}

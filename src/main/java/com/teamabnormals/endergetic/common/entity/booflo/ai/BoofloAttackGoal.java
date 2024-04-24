@@ -111,11 +111,11 @@ public class BoofloAttackGoal extends Goal {
 		BlockPos targetPos = BlockPos.ZERO;
 		boolean isOpenBelow = true;
 		for (int y = 0; y < UPPER_DISTANCE; y++) {
-			if (!target.level.getBlockState(startingPos.above(y)).getCollisionShape(target.level, startingPos.above(y)).isEmpty()) {
+			if (!target.level().getBlockState(startingPos.above(y)).getCollisionShape(target.level(), startingPos.above(y)).isEmpty()) {
 				isOpenBelow = false;
 			}
 
-			if (target.level.getBlockState(startingPos.above(y)).getCollisionShape(target.level, startingPos.above(y)).isEmpty() && y > 9) {
+			if (target.level().getBlockState(startingPos.above(y)).getCollisionShape(target.level(), startingPos.above(y)).isEmpty() && y > 9) {
 				targetPos = startingPos.above(y);
 			}
 		}

@@ -11,24 +11,24 @@ import net.minecraft.advancements.critereon.BredAnimalsTrigger;
 import net.minecraft.advancements.critereon.ConsumeItemTrigger;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.KilledTrigger;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 public final class EEAdvancementModifierProvider extends AdvancementModifierProvider {
 	private static final EntityType<?>[] BREEDABLE_ANIMALS = new EntityType[]{EEEntityTypes.PUFF_BUG.get()};
 	private static final EntityType<?>[] MOBS_TO_KILL = new EntityType[]{EEEntityTypes.BOOFLO.get(), EEEntityTypes.PUFF_BUG.get()};
 
-	public EEAdvancementModifierProvider(DataGenerator dataGenerator) {
-		super(dataGenerator, EndergeticExpansion.MOD_ID);
+	public EEAdvancementModifierProvider(PackOutput output, CompletableFuture<Provider> provider) {
+		super(EndergeticExpansion.MOD_ID, output, provider);
 	}
 
 	@Override
-	protected void registerEntries() {
+	protected void registerEntries(Provider provider) {
 		CriteriaModifier.Builder balancedDiet = CriteriaModifier.builder(this.modId);
 		balancedDiet.addCriterion("bolloom_fruit", ConsumeItemTrigger.TriggerInstance.usedItem(EEItems.BOLLOOM_FRUIT.get()));
 		this.entry("husbandry/balanced_diet")

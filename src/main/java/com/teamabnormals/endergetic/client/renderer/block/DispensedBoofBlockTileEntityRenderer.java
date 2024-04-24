@@ -2,7 +2,7 @@ package com.teamabnormals.endergetic.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.teamabnormals.endergetic.client.model.BoofBlockDispenserModel;
 import com.teamabnormals.endergetic.common.block.entity.boof.DispensedBlockBoofTileEntity;
 import com.teamabnormals.endergetic.common.block.poise.boof.DispensedBoofBlock;

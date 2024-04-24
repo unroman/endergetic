@@ -10,7 +10,7 @@ import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock
 import com.teamabnormals.blueprint.common.block.sign.BlueprintStandingSignBlock;
 import com.teamabnormals.blueprint.common.block.sign.BlueprintWallSignBlock;
 import com.teamabnormals.blueprint.common.item.BEWLRBlockItem;
-import com.teamabnormals.endergetic.common.EEProperties;
+import com.teamabnormals.endergetic.core.registry.other.EEProperties;
 import com.teamabnormals.endergetic.common.block.*;
 import com.teamabnormals.endergetic.common.block.entity.BolloomBudTileEntity;
 import com.teamabnormals.endergetic.common.block.poise.*;

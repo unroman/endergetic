@@ -62,7 +62,7 @@ public class BroodEetleSlamGoal extends EndimatedGoal<BroodEetle> {
 	}
 
 	public static void slam(BroodEetle broodEetle, RandomSource random, float power) {
-		ServerLevel world = (ServerLevel) broodEetle.level;
+		ServerLevel world = (ServerLevel) broodEetle.level();
 		double posX = broodEetle.getX();
 		double posY = broodEetle.getY();
 		double posZ = broodEetle.getZ();
@@ -83,7 +83,7 @@ public class BroodEetleSlamGoal extends EndimatedGoal<BroodEetle> {
 				damage = 0.0F;
 			}
 
-			if (livingEntity.hurt(DamageSource.mobAttack(broodEetle), damage)) {
+			if (livingEntity.hurt(world.damageSources().mobAttack(broodEetle), damage)) {
 				broodEetle.doEnchantDamageEffects(broodEetle, livingEntity);
 				double knockbackForce = knockback - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE);
 				float inAirFactor = livingEntity.onGround() ? 1.0F : 0.75F;

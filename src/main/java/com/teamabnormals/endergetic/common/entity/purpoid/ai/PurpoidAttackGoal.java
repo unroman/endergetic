@@ -10,7 +10,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
@@ -77,7 +76,7 @@ public class PurpoidAttackGoal extends Goal {
 			this.delayCounter = 15 + random.nextInt(11);
 			PathNavigation pathNavigator = purpoid.getNavigation();
 			if (distanceToTargetSq >= 9.0F) {
-				Path path = pathNavigator.createPath(purpoid.getSize() == PurpoidSize.NORMAL ? findAirPosAboveTarget(purpoid.level, target) : target.blockPosition().above(random.nextInt(3)), 0);
+				Path path = pathNavigator.createPath(purpoid.getSize() == PurpoidSize.NORMAL ? findAirPosAboveTarget(purpoid.level(), target) : target.blockPosition().above(random.nextInt(3)), 0);
 				if (path == null || !pathNavigator.moveTo(path, 2.25F)) {
 					this.delayCounter += 20;
 				}
@@ -92,7 +91,7 @@ public class PurpoidAttackGoal extends Goal {
 		if (distanceToTargetSq <= reachRange) {
 			if (small) {
 				if (purpoid.isEndimationPlaying(EEPlayableEndimations.PURPOID_TELEFRAG) && purpoid.getAnimationTick() == 5) {
-					target.hurt(DamageSource.mobAttack(purpoid), (float) purpoid.getAttributeValue(Attributes.ATTACK_DAMAGE));
+					target.hurt(purpoid.level().damageSources().mobAttack(purpoid), (float) purpoid.getAttributeValue(Attributes.ATTACK_DAMAGE));
 					double targetX = target.getX();
 					double targetY = target.getY();
 					double targetZ = target.getZ();
@@ -118,7 +117,7 @@ public class PurpoidAttackGoal extends Goal {
 			double targetX = target.getX();
 			double targetY = target.getY();
 			double targetZ = target.getZ();
-			Level level = purpoid.level;
+			Level level = purpoid.level();
 			EntityDimensions dimensions = purpoid.getDimensions(purpoid.getPose());
 			double predictedXDisplacement = Mth.clamp(target.getDeltaMovement().x() * 57.0F, -7.0D, 7.0D);
 			double predictedZDisplacement = Mth.clamp(target.getDeltaMovement().z() * 57.0F, -7.0D, 7.0D);

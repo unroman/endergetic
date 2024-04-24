@@ -14,7 +14,7 @@ public class PuffBugPollinateGoal extends EndimatedGoal<PuffBug> {
 
 	public PuffBugPollinateGoal(PuffBug puffbug) {
 		super(puffbug, EEPlayableEndimations.PUFF_BUG_POLLINATE);
-		this.world = puffbug.level;
+		this.world = puffbug.level();
 	}
 
 	@Override

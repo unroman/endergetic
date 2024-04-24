@@ -35,6 +35,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
@@ -104,10 +105,10 @@ public class Booflo extends PathfinderMob implements Endimatable {
 
 	public Booflo(EntityType<? extends Booflo> type, Level world) {
 		super(type, world);
-		this.attackingNavigator = new EndergeticFlyingPathNavigator(this, this.level);
+		this.attackingNavigator = new EndergeticFlyingPathNavigator(this, this.level());
 		this.moveControl = new GroundMoveHelperController(this);
 		this.hopDelay = this.getDefaultGroundHopDelay();
-		this.maxUpStep = 1.0F;
+		this.setMaxUpStep(1.0F);
 	}
 
 	@Override
@@ -174,7 +175,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 				this.navigation = this.attackingNavigator;
 			} else {
 				if (this.navigation instanceof EndergeticFlyingPathNavigator) {
-					this.navigation = new FlyingPathNavigation(this, this.level) {
+					this.navigation = new FlyingPathNavigation(this, this.level()) {
 
 						@Override
 						public boolean isStableDestination(BlockPos pos) {
@@ -190,12 +191,12 @@ public class Booflo extends PathfinderMob implements Endimatable {
 			}
 		}
 
-		if (!this.level.isClientSide) {
+		if (!this.level().isClientSide) {
 			if (this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_CHARGE) && this.getAnimationTick() >= 15) {
 				this.push(0.0F, -0.225F, 0.0F);
 			}
 
-			this.setOnGround(!this.level.noCollision(DetectionHelper.checkOnGround(this.getBoundingBox(), 0.07F)));
+			this.setOnGround(!this.level().noCollision(DetectionHelper.checkOnGround(this.getBoundingBox(), 0.07F)));
 
 			int power = this.getBoostPower();
 			if (power > 0 && !this.isBoostExpanding()) {
@@ -248,12 +249,12 @@ public class Booflo extends PathfinderMob implements Endimatable {
 			if (this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_EAT)) {
 				if ((this.getAnimationTick() > 20 && this.getAnimationTick() <= 140)) {
 					if (this.getAnimationTick() % 20 == 0) {
-						if (this.level instanceof ServerLevel && this.hasCaughtFruit()) {
-							((ServerLevel) this.level).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(EEItems.BOLLOOM_FRUIT.get())), this.getX(), this.getY() + (double) this.getBbHeight() / 1.5D, this.getZ(), 10, (double) (this.getBbWidth() / 4.0F), (double) (this.getBbHeight() / 4.0F), (double) (this.getBbWidth() / 4.0F), 0.05D);
+						if (this.level() instanceof ServerLevel && this.hasCaughtFruit()) {
+							((ServerLevel) this.level()).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(EEItems.BOLLOOM_FRUIT.get())), this.getX(), this.getY() + (double) this.getBbHeight() / 1.5D, this.getZ(), 10, (double) (this.getBbWidth() / 4.0F), (double) (this.getBbHeight() / 4.0F), (double) (this.getBbWidth() / 4.0F), 0.05D);
 						}
 
 						if (this.hasCaughtPuffBug()) {
-							this.getPassengers().get(0).hurt(DamageSource.mobAttack(this), 0.0F);
+							this.getPassengers().get(0).hurt(this.level().damageSources().mobAttack(this), 0.0F);
 						}
 
 						this.playSound(SoundEvents.GENERIC_EAT, 1.0F, 1.0F);
@@ -277,7 +278,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 				}
 			}
 
-			if (this.shouldPlayLandSound && this.onGround && !this.wasOnGround) {
+			if (this.shouldPlayLandSound && this.onGround() && !this.wasOnGround) {
 				this.playSound(this.getHopSound(true), 0.95F, this.getVoicePitch());
 				this.shouldPlayLandSound = false;
 			}
@@ -287,7 +288,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 			this.boof(1.0F, 1.0F, false);
 		}
 
-		if (!this.level.isClientSide && this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_GROWL)) {
+		if (!this.level().isClientSide && this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_GROWL)) {
 			if (this.getAnimationTick() == 10) {
 				this.playSound(this.getGrowlSound(), 0.75F, this.getVoicePitch());
 			}
@@ -316,7 +317,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 
 		if (this.onGround() && this.isBoofed()) {
 			if (this.hasAggressiveAttackTarget() && !this.hasCaughtPuffBug()) {
-				if (!this.level.isClientSide) {
+				if (!this.level().isClientSide) {
 					if (this.isNoEndimationPlaying()) {
 						NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.BOOFLO_INFLATE);
 					} else if (this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_CHARGE)) {
@@ -338,7 +339,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 			this.setHungry(true);
 		}
 
-		if (this.level.isClientSide) {
+		if (this.level().isClientSide) {
 			if (this.isBoofed()) {
 				this.OPEN_JAW.setDecrementing(this.getBoofloAttackTarget() == null || this.hasCaughtPuffBug() || (this.hasAggressiveAttackTarget() && !(this.getBoofloAttackTarget() instanceof PuffBug)));
 
@@ -346,7 +347,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 			}
 		}
 
-		this.wasOnGround = this.onGround;
+		this.wasOnGround = this.onGround();
 
 		if (this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_EAT) && !this.hasCaughtFruit()) {
 			this.setYRot(this.yHeadRot = this.yBodyRot = this.getLockedYaw());
@@ -365,23 +366,23 @@ public class Booflo extends PathfinderMob implements Endimatable {
 				double d0 = this.random.nextGaussian() * 0.02D;
 				double d1 = this.random.nextGaussian() * 0.02D;
 				double d2 = this.random.nextGaussian() * 0.02D;
-				this.level.addParticle(ParticleTypes.HEART, this.getX() + (this.random.nextFloat() * this.getBbWidth() * 2.0F) - this.getBbWidth(), this.getY() + 0.5D + (this.random.nextFloat() * this.getBbHeight()), this.getZ() + (this.random.nextFloat() * this.getBbWidth() * 2.0F) - this.getBbWidth(), d0, d1, d2);
+				this.level().addParticle(ParticleTypes.HEART, this.getX() + (this.random.nextFloat() * this.getBbWidth() * 2.0F) - this.getBbWidth(), this.getY() + 0.5D + (this.random.nextFloat() * this.getBbHeight()), this.getZ() + (this.random.nextFloat() * this.getBbWidth() * 2.0F) - this.getBbWidth(), d0, d1, d2);
 			}
 		}
 
-		if (!this.level.isClientSide && this.croakDelay == 0 && !this.isTempted() && this.isAlive() && this.onGround && !this.isBoofed() && this.random.nextInt(1000) < this.ambientSoundTime++ && this.isNoEndimationPlaying() && this.getPassengers().isEmpty()) {
+		if (!this.level().isClientSide && this.croakDelay == 0 && !this.isTempted() && this.isAlive() && this.onGround() && !this.isBoofed() && this.random.nextInt(1000) < this.ambientSoundTime++ && this.isNoEndimationPlaying() && this.getPassengers().isEmpty()) {
 			this.ambientSoundTime = -this.getAmbientSoundInterval();
 			NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.BOOFLO_CROAK);
 		}
 
-		if (this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_CROAK) && this.getAnimationTick() == 5 && !this.level.isClientSide) {
+		if (this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_CROAK) && this.getAnimationTick() == 5 && !this.level().isClientSide) {
 			this.playSound(this.getAmbientSound(), 1.25F, this.getVoicePitch());
 		}
 
 		if (this.hasAggressiveAttackTarget()) {
 			this.setYRot(this.yHeadRot);
 			Entity attackTarget = this.getBoofloAttackTarget();
-			if (!this.level.isClientSide && (this.distanceToSqr(attackTarget) > 1152.0D || attackTarget.isInvisible() || (attackTarget instanceof PuffBug && attackTarget.isPassenger()))) {
+			if (!this.level().isClientSide && (this.distanceToSqr(attackTarget) > 1152.0D || attackTarget.isInvisible() || (attackTarget instanceof PuffBug && attackTarget.isPassenger()))) {
 				this.setBoofloAttackTargetId(0);
 			}
 		}
@@ -462,7 +463,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 		if (BOOFED.equals(key)) {
 			this.refreshDimensions();
 			if (this.isBoofed()) {
-				this.navigation = new FlyingPathNavigation(this, this.level) {
+				this.navigation = new FlyingPathNavigation(this, this.level()) {
 
 					@Override
 					public boolean isStableDestination(BlockPos pos) {
@@ -473,21 +474,21 @@ public class Booflo extends PathfinderMob implements Endimatable {
 				this.moveControl = new FlyingMoveController(this);
 				this.lookControl = new FlyingLookController(this, 10);
 
-				if (!this.level.isClientSide && this.tickCount > 5) {
+				if (!this.level().isClientSide && this.tickCount > 5) {
 					this.playSound(this.getInflateSound(), this.getSoundVolume(), this.getVoicePitch());
 				}
 
 				this.deflateDelay = 10;
 			} else {
-				this.navigation = this.createNavigation(this.level);
+				this.navigation = this.createNavigation(this.level());
 				this.moveControl = new GroundMoveHelperController(this);
 				this.lookControl = new LookControl(this);
 
-				if (!this.level.isClientSide && this.tickCount > 5) {
+				if (!this.level().isClientSide && this.tickCount > 5) {
 					this.playSound(this.getDeflateSound(), this.getSoundVolume(), this.getVoicePitch());
 				}
 
-				if (this.level.isClientSide) {
+				if (this.level().isClientSide) {
 					this.OPEN_JAW.setTick(0);
 					this.setBoofloAttackTargetId(0);
 				}
@@ -510,7 +511,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 
 				float playerMoveFoward = rider.zza;
 
-				if (!this.level.isClientSide && playerMoveFoward > 0.0F) {
+				if (!this.level().isClientSide && playerMoveFoward > 0.0F) {
 					if (this.onGround() && this.isNoEndimationPlaying() && !this.isBoofed()) {
 						NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.BOOFLO_HOP);
 					} else if (!this.onGround() && this.isNoEndimationPlaying() && this.isBoofed()) {
@@ -535,7 +536,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 						this.setDeltaMovement(this.getDeltaMovement().subtract(0, gravity, 0));
 					}
 				} else {
-					if (this.onGround && this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_HOP) && this.getAnimationTick() == 10) {
+					if (this.onGround() && this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_HOP) && this.getAnimationTick() == 10) {
 						Vec3 motion = this.getDeltaMovement();
 						MobEffectInstance jumpBoost = this.getEffect(MobEffects.JUMP);
 						float boostPower = jumpBoost == null ? 1.0F : (float) (jumpBoost.getAmplifier() + 1);
@@ -587,7 +588,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 
 	@Override
 	protected void removePassenger(Entity passenger) {
-		if (!this.level.isClientSide && this.isBoostExpanding() && !this.isBoostLocked() && passenger instanceof Player && this.getControllingPassenger() == passenger) {
+		if (!this.level().isClientSide && this.isBoostExpanding() && !this.isBoostLocked() && passenger instanceof Player && this.getControllingPassenger() == passenger) {
 			this.setBoostExpanding(false);
 		}
 		super.removePassenger(passenger);
@@ -705,7 +706,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 
 	@Nullable
 	public Entity getBoofloAttackTarget() {
-		Entity entity = this.level.getEntity(this.getBoofloAttackTargetId());
+		Entity entity = this.level().getEntity(this.getBoofloAttackTargetId());
 		if (entity == null || entity != null && !entity.isAlive() || entity instanceof Booflo) {
 			this.setBoofloAttackTargetId(0);
 		}
@@ -730,7 +731,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 			this.playerInLove = player.getUUID();
 		}
 
-		this.level.broadcastEntityEvent(this, (byte) 18);
+		this.level().broadcastEntityEvent(this, (byte) 18);
 	}
 
 	public void setFruitsNeeded(int fruitsNeeded) {
@@ -785,7 +786,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 		if (this.playerInLove == null) {
 			return null;
 		} else {
-			Player playerentity = this.level.getPlayerByUUID(this.playerInLove);
+			Player playerentity = this.level().getPlayerByUUID(this.playerInLove);
 			return playerentity instanceof ServerPlayer ? (ServerPlayer) playerentity : null;
 		}
 	}
@@ -795,8 +796,8 @@ public class Booflo extends PathfinderMob implements Endimatable {
 		this.setOwnerId(player.getUUID());
 		if (player instanceof ServerPlayer serverPlayer) {
 			//Creates wolf to still trigger tamed - as booflo isn't an AnimalEntity
-			CriteriaTriggers.TAME_ANIMAL.trigger(serverPlayer, EntityType.WOLF.create(this.level));
-			if (!this.level.isClientSide) {
+			CriteriaTriggers.TAME_ANIMAL.trigger(serverPlayer, EntityType.WOLF.create(this.level()));
+			if (!this.level().isClientSide) {
 				EECriteriaTriggers.TAME_BOOFLO.trigger(serverPlayer);
 			}
 		}
@@ -806,7 +807,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 	public LivingEntity getOwner() {
 		try {
 			UUID uuid = this.getOwnerId();
-			return uuid == null ? null : this.level.getPlayerByUUID(uuid);
+			return uuid == null ? null : this.level().getPlayerByUUID(uuid);
 		} catch (IllegalArgumentException exception) {
 			return null;
 		}
@@ -816,7 +817,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 	public LivingEntity getLastFedPlayer() {
 		try {
 			UUID uuid = this.getLastFedId();
-			return uuid == null ? null : this.level.getPlayerByUUID(uuid);
+			return uuid == null ? null : this.level().getPlayerByUUID(uuid);
 		} catch (IllegalArgumentException exception) {
 			return null;
 		}
@@ -860,17 +861,17 @@ public class Booflo extends PathfinderMob implements Endimatable {
 				double y = this.getY() + 0.5D + (this.random.nextFloat() * 0.05F);
 				double z = this.getZ() + 0.5D + offsetZ;
 
-				if (this.level.isClientSide) {
-					this.level.addParticle(EEParticleTypes.POISE_BUBBLE.get(), x, y, z, MathUtil.makeNegativeRandomly((this.random.nextFloat() * 0.3F), this.random) + 0.025F, (this.random.nextFloat() * 0.15F) + 0.1F, MathUtil.makeNegativeRandomly((this.random.nextFloat() * 0.3F), this.random) + 0.025F);
+				if (this.level().isClientSide) {
+					this.level().addParticle(EEParticleTypes.POISE_BUBBLE.get(), x, y, z, MathUtil.makeNegativeRandomly((this.random.nextFloat() * 0.3F), this.random) + 0.025F, (this.random.nextFloat() * 0.15F) + 0.1F, MathUtil.makeNegativeRandomly((this.random.nextFloat() * 0.3F), this.random) + 0.025F);
 				}
 			}
 		}
 
-		for (Entity entity : this.level.getEntitiesOfClass(Entity.class, this.getBoundingBox().inflate(3.5F * Math.max(offensiveStrength / 2.0F, 1.0F)), entity -> entity != this && (entity instanceof ItemEntity || entity instanceof LivingEntity) && !(entity instanceof Player && ((Player) entity).isCreative() && ((Player) entity).getAbilities().flying))) {
+		for (Entity entity : this.level().getEntitiesOfClass(Entity.class, this.getBoundingBox().inflate(3.5F * Math.max(offensiveStrength / 2.0F, 1.0F)), entity -> entity != this && (entity instanceof ItemEntity || entity instanceof LivingEntity) && !(entity instanceof Player && ((Player) entity).isCreative() && ((Player) entity).getAbilities().flying))) {
 			float resistance = this.isResistantToBoof(entity) ? 0.15F : 1.0F;
 			float amount = (0.2F * offensiveStrength) * resistance;
 			if (offensiveStrength > 2.0F && resistance > 0.15F && entity != this.getControllingPassenger()) {
-				entity.hurt(DamageSource.mobAttack(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getBaseValue());
+				entity.hurt(this.level().damageSources().mobAttack(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getBaseValue());
 				entity.hurtMarked = false;
 			}
 			Vec3 result = entity.position().subtract(this.position());
@@ -880,7 +881,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 
 	public LivingEntity growDown() {
 		if (this.isAlive()) {
-			BoofloAdolescent boofloAdolescent = EEEntityTypes.BOOFLO_ADOLESCENT.get().create(this.level);
+			BoofloAdolescent boofloAdolescent = EEEntityTypes.BOOFLO_ADOLESCENT.get().create(this.level());
 			boofloAdolescent.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
 
 			if (this.hasCustomName()) {
@@ -899,7 +900,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 
 			boofloAdolescent.wasBred = this.wasBred;
 			boofloAdolescent.setHealth(boofloAdolescent.getMaxHealth());
-			this.level.addFreshEntity(boofloAdolescent);
+			this.level().addFreshEntity(boofloAdolescent);
 			this.discard();
 			return boofloAdolescent;
 		}
@@ -925,7 +926,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 	}
 
 	public List<Player> getNearbyPlayers(float multiplier) {
-		return this.level.getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(8.0F * multiplier, 4.0F, 8.0F * multiplier), IS_SCARED_BY);
+		return this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(8.0F * multiplier, 4.0F, 8.0F * multiplier), IS_SCARED_BY);
 	}
 
 	public boolean isPlayerNear(float multiplier) {
@@ -978,23 +979,23 @@ public class Booflo extends PathfinderMob implements Endimatable {
 		Item item = itemstack.getItem();
 
 		if (item instanceof SpawnEggItem && ((SpawnEggItem) item).spawnsEntity(itemstack.getTag(), this.getType())) {
-			if (!this.level.isClientSide) {
-				BoofloBaby baby = EEEntityTypes.BOOFLO_BABY.get().create(this.level);
+			if (!this.level().isClientSide) {
+				BoofloBaby baby = EEEntityTypes.BOOFLO_BABY.get().create(this.level());
 				baby.setGrowingAge(-24000);
 				baby.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
-				this.level.addFreshEntity(baby);
+				this.level().addFreshEntity(baby);
 				if (itemstack.hasCustomHoverName()) {
 					baby.setCustomName(itemstack.getHoverName());
 				}
 
 				EntityItemStackHelper.consumeItemFromStack(player, itemstack);
 			}
-			return InteractionResult.sidedSuccess(this.level.isClientSide);
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		} else if (item == EEBlocks.POISE_CLUSTER.get().asItem() && this.canBreed()) {
 			EntityItemStackHelper.consumeItemFromStack(player, itemstack);
 			this.setInLove(player);
-			return InteractionResult.sidedSuccess(this.level.isClientSide);
-		} else if (item == EEItems.BOLLOOM_FRUIT.get() && !this.isAggressive() && !this.hasCaughtFruit() && this.onGround) {
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
+		} else if (item == EEItems.BOLLOOM_FRUIT.get() && !this.isAggressive() && !this.hasCaughtFruit() && this.onGround()) {
 			ParticleOptions particle = ParticleTypes.HEART;
 			EntityItemStackHelper.consumeItemFromStack(player, itemstack);
 			this.setCaughtFruit(true);
@@ -1006,7 +1007,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 					this.setLastFedId(player.getUUID());
 					particle = ParticleTypes.SMOKE;
 
-					if (!this.level.isClientSide) {
+					if (!this.level().isClientSide) {
 						NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.BOOFLO_GROWL);
 					}
 				} else {
@@ -1018,15 +1019,15 @@ public class Booflo extends PathfinderMob implements Endimatable {
 				}
 			}
 
-			if (this.level.isClientSide) {
+			if (this.level().isClientSide) {
 				for (int i = 0; i < 7; ++i) {
 					double d0 = this.random.nextGaussian() * 0.02D;
 					double d1 = this.random.nextGaussian() * 0.02D;
 					double d2 = this.random.nextGaussian() * 0.02D;
-					this.level.addParticle(particle, this.getX() + (double) (this.random.nextFloat() * this.getBbWidth() * 2.0F) - (double) this.getBbWidth(), this.getY() + 0.5D + (double) (this.random.nextFloat() * this.getBbHeight()), this.getZ() + (double) (this.random.nextFloat() * this.getBbWidth() * 2.0F) - (double) this.getBbWidth(), d0, d1, d2);
+					this.level().addParticle(particle, this.getX() + (double) (this.random.nextFloat() * this.getBbWidth() * 2.0F) - (double) this.getBbWidth(), this.getY() + 0.5D + (double) (this.random.nextFloat() * this.getBbHeight()), this.getZ() + (double) (this.random.nextFloat() * this.getBbWidth() * 2.0F) - (double) this.getBbWidth(), d0, d1, d2);
 				}
 			}
-			return InteractionResult.sidedSuccess(this.level.isClientSide);
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		} else if (item instanceof DyeItem && this.isTamed()) {
 			DyeColor dyecolor = ((DyeItem) item).getDyeColor();
 			if (dyecolor != this.getBraceletsColor()) {
@@ -1034,7 +1035,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 				if (!player.getAbilities().instabuild) {
 					itemstack.shrink(1);
 				}
-				return InteractionResult.sidedSuccess(this.level.isClientSide);
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
 			}
 		} else {
 			InteractionResult result = itemstack.interactLivingEntity(player, this, hand);
@@ -1043,7 +1044,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 			}
 
 			if (this.isTamed() && !this.isVehicle() && !this.isPregnant()) {
-				if (!this.level.isClientSide) {
+				if (!this.level().isClientSide) {
 					player.setYRot(this.getYRot());
 					player.setXRot(this.getXRot());
 					player.startRiding(this);
@@ -1055,25 +1056,25 @@ public class Booflo extends PathfinderMob implements Endimatable {
 	}
 
 	@Override
-	public void positionRider(Entity passenger) {
+	public void positionRider(Entity passenger, Entity.MoveFunction func) {
 		if (this.hasPassenger(passenger)) {
 			if (passenger instanceof BoofloBaby boofloBaby) {
 				Vec3 ridingOffset = boofloBaby.getBirthPositionOffset().yRot(-this.getYRot() * ((float) Math.PI / 180F) - ((float) Math.PI / 2F));
-				passenger.setPos(this.getX() + ridingOffset.x, this.getY() + 0.9F, this.getZ() + ridingOffset.z);
+				func.accept(passenger, this.getX() + ridingOffset.x, this.getY() + 0.9F, this.getZ() + ridingOffset.z);
 			} else if (passenger instanceof PuffBug puffbug) {
 				passenger.setYRot(puffbug.yBodyRot = puffbug.yHeadRot = (this.getYRot() - 75.0F));
 				if (this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_EAT) && this.getAnimationTick() > 15) {
 					Vec3 ridingPos = (new Vec3(1.0D, 0.0D, 0.0D)).yRot(-this.getYRot() * ((float) Math.PI / 180F) - ((float) Math.PI / 2F));
 					float yOffset = puffbug.isBaby() ? 0.1F : 0.3F;
 
-					passenger.setPos(this.getX() + ridingPos.x(), this.getY() - yOffset - (0.15F * getEatingOffsetProgress(this.getAnimationTick())), this.getZ() + ridingPos.z());
+					func.accept(passenger, this.getX() + ridingPos.x(), this.getY() - yOffset - (0.15F * getEatingOffsetProgress(this.getAnimationTick())), this.getZ() + ridingPos.z());
 				} else {
-					passenger.setPos(this.getX(), this.getY() + 0.25F, this.getZ());
+					func.accept(passenger, this.getX(), this.getY() + 0.25F, this.getZ());
 				}
 			} else {
-				super.positionRider(passenger);
-				if (passenger instanceof Mob) {
-					this.yBodyRot = ((Mob) passenger).yBodyRot;
+				super.positionRider(passenger, func);
+				if (passenger instanceof Mob mob) {
+					this.yBodyRot = mob.yBodyRot;
 				}
 			}
 		}
@@ -1113,7 +1114,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 				this.setBoofloAttackTargetId(entitySource.getId());
 			}
 		}
-		float newCalculatedDamage = source == DamageSource.IN_WALL ? 0.5F : amount;
+		float newCalculatedDamage = source.is(DamageTypes.IN_WALL) ? 0.5F : amount;
 		if (super.hurt(source, source.getEntity() instanceof PuffBug ? 2.5F : newCalculatedDamage)) {
 			if (this.isNoEndimationPlaying()) NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.BOOFLO_HURT);
 			return true;
@@ -1151,11 +1152,12 @@ public class Booflo extends PathfinderMob implements Endimatable {
 		return this.isBoofed() ? BOOFED_SIZE : super.getDimensions(poseIn);
 	}
 
-	@Override
-	@Nullable
-	public Entity getControllingPassenger() {
-		return this.getPassengers().isEmpty() ? null : this.getPassengers().get(0);
-	}
+	// TODO: Does this cause a problem?
+//	@Override
+//	@Nullable
+//	public LivingEntity getControllingPassenger() {
+//		return this.getPassengers().isEmpty() ? null : this.getPassengers().get(0);
+//	}
 
 	protected boolean isResistantToBoof(Entity entity) {
 		return entity instanceof Booflo || entity instanceof BoofloAdolescent || entity instanceof BoofloBaby;
@@ -1174,7 +1176,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 				double d0 = this.random.nextGaussian() * 0.02D;
 				double d1 = this.random.nextGaussian() * 0.02D;
 				double d2 = this.random.nextGaussian() * 0.02D;
-				this.level.addParticle(ParticleTypes.HEART, this.getX() + (double) (this.random.nextFloat() * this.getBbWidth() * 2.0F) - (double) this.getBbWidth(), this.getY() + 0.5D + (double) (this.random.nextFloat() * this.getBbHeight()), this.getZ() + (double) (this.random.nextFloat() * this.getBbWidth() * 2.0F) - (double) this.getBbWidth(), d0, d1, d2);
+				this.level().addParticle(ParticleTypes.HEART, this.getX() + (double) (this.random.nextFloat() * this.getBbWidth() * 2.0F) - (double) this.getBbWidth(), this.getY() + 0.5D + (double) (this.random.nextFloat() * this.getBbHeight()), this.getZ() + (double) (this.random.nextFloat() * this.getBbWidth() * 2.0F) - (double) this.getBbWidth(), d0, d1, d2);
 			}
 		} else {
 			super.handleEntityEvent(id);

@@ -20,13 +20,13 @@ public class PuffBugDescentGoal extends Goal {
 
 	public PuffBugDescentGoal(PuffBug puffbug) {
 		this.puffbug = puffbug;
-		this.world = puffbug.level;
+		this.world = puffbug.level();
 	}
 
 	@Override
 	public boolean canUse() {
 		if (this.puffbug.getTarget() == null && !this.puffbug.hasLevitation() && this.isBolloomBudUnder() && this.puffbug.getBudPos() != null) {
-			this.budPos = new BlockPos(this.puffbug.getX() - 0.5F, this.puffbug.getY() - 0.5F, this.puffbug.getZ() - 0.5F).below(2);
+			this.budPos = BlockPos.containing(this.puffbug.getX() - 0.5F, this.puffbug.getY() - 0.5F, this.puffbug.getZ() - 0.5F).below(2);
 			return true;
 		}
 		return false;
@@ -86,7 +86,7 @@ public class PuffBugDescentGoal extends Goal {
 	}
 
 	private boolean isBolloomBudUnder() {
-		BlockPos pos = new BlockPos(this.puffbug.getX() - 0.5F, this.puffbug.getY() - 0.5F, this.puffbug.getZ() - 0.5F);
+		BlockPos pos = BlockPos.containing(this.puffbug.getX() - 0.5F, this.puffbug.getY() - 0.5F, this.puffbug.getZ() - 0.5F);
 
 		if (this.world.getBlockState(pos.below()).getCollisionShape(this.world, pos.below()).isEmpty() && this.world.getBlockState(pos.below(2)).getBlock() == EEBlocks.BOLLOOM_BUD.get()) {
 			this.budPos = pos.below(2);

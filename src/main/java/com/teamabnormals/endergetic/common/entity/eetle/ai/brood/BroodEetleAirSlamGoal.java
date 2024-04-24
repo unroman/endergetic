@@ -65,7 +65,7 @@ public class BroodEetleAirSlamGoal extends EndimatedGoal<BroodEetle> {
 	}
 
 	private static List<LivingEntity> searchForAggressorsUnder(BroodEetle broodEetle, AABB otherBounds) {
-		return broodEetle.level.getEntitiesOfClass(LivingEntity.class, DetectionHelper.expandDownwards(broodEetle.getBoundingBox(), 10.0F), livingEntity -> {
+		return broodEetle.level().getEntitiesOfClass(LivingEntity.class, DetectionHelper.expandDownwards(broodEetle.getBoundingBox(), 10.0F), livingEntity -> {
 			if (broodEetle.getY() - livingEntity.getY() < 4 || !otherBounds.contains(livingEntity.position())) {
 				return false;
 			}
