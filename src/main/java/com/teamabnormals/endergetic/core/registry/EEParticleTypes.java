@@ -2,19 +2,16 @@ package com.teamabnormals.endergetic.core.registry;
 
 import com.mojang.serialization.Codec;
 import com.teamabnormals.endergetic.client.particle.CorrockCrownParticle;
-import com.teamabnormals.endergetic.client.particle.FastBlockParticle.Factory;
+import com.teamabnormals.endergetic.client.particle.FastBlockParticle;
 import com.teamabnormals.endergetic.client.particle.PoiseBubbleParticle;
 import com.teamabnormals.endergetic.client.particle.data.CorrockCrownParticleData;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.FlameParticle;
-import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -25,6 +22,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Function;
 
+@EventBusSubscriber(modid = EndergeticExpansion.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class EEParticleTypes {
 	public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, EndergeticExpansion.MOD_ID);
 
@@ -45,37 +43,15 @@ public class EEParticleTypes {
 		return PARTICLES.register(name, () -> new ParticleTypeWithData<>(deserializer, function));
 	}
 
-	@OnlyIn(Dist.CLIENT)
-	@EventBusSubscriber(modid = EndergeticExpansion.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-	public static class RegisterParticleFactories {
-
-		@OnlyIn(Dist.CLIENT)
-		@SubscribeEvent(priority = EventPriority.LOWEST)
-		public static void registerParticleTypes(RegisterParticleProvidersEvent event) {
-			ParticleEngine particleManager = Minecraft.getInstance().particleEngine;
-			if (ENDER_FLAME.isPresent()) {
-				particleManager.register(ENDER_FLAME.get(), FlameParticle.Provider::new);
-			}
-			if (POISE_BUBBLE.isPresent()) {
-				particleManager.register(POISE_BUBBLE.get(), PoiseBubbleParticle.Factory::new);
-			}
-			if (SHORT_POISE_BUBBLE.isPresent()) {
-				particleManager.register(SHORT_POISE_BUBBLE.get(), PoiseBubbleParticle.ShortFactory::new);
-			}
-			if (FAST_BLOCK.isPresent()) {
-				particleManager.register(FAST_BLOCK.get(), new Factory());
-			}
-			if (OVERWORLD_CROWN.isPresent()) {
-				particleManager.register(OVERWORLD_CROWN.get(), CorrockCrownParticle.Factory::new);
-			}
-			if (NETHER_CROWN.isPresent()) {
-				particleManager.register(NETHER_CROWN.get(), CorrockCrownParticle.Factory::new);
-			}
-			if (END_CROWN.isPresent()) {
-				particleManager.register(END_CROWN.get(), CorrockCrownParticle.Factory::new);
-			}
-		}
-
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public static void registerParticleTypes(RegisterParticleProvidersEvent event) {
+		event.registerSpriteSet(ENDER_FLAME.get(), FlameParticle.Provider::new);
+		event.registerSpriteSet(POISE_BUBBLE.get(), PoiseBubbleParticle.Factory::new);
+		event.registerSpriteSet(SHORT_POISE_BUBBLE.get(), PoiseBubbleParticle.ShortFactory::new);
+		event.registerSpecial(FAST_BLOCK.get(), new FastBlockParticle.Factory());
+		event.registerSpriteSet(OVERWORLD_CROWN.get(), CorrockCrownParticle.Factory::new);
+		event.registerSpriteSet(NETHER_CROWN.get(), CorrockCrownParticle.Factory::new);
+		event.registerSpriteSet(END_CROWN.get(), CorrockCrownParticle.Factory::new);
 	}
 
 	static class ParticleTypeWithData<T extends ParticleOptions> extends ParticleType<T> {

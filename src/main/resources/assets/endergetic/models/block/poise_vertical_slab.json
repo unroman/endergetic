@@ -1,8 +1,0 @@
-{
-    "parent": "endergetic:block/vertical_slab",
-    "textures": {
-        "bottom": "endergetic:block/poise_planks",
-        "top": "endergetic:block/poise_planks",
-        "side": "endergetic:block/poise_planks"
-    }
-}

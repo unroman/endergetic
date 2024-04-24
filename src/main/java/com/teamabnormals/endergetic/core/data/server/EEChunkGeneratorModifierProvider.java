@@ -6,11 +6,14 @@ import com.teamabnormals.blueprint.core.registry.BlueprintSurfaceRules;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import com.teamabnormals.endergetic.core.registry.EEBiomes;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
+import com.teamabnormals.endergetic.core.registry.EESurfaceRules;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Noises;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 
 import java.util.concurrent.CompletableFuture;
 
