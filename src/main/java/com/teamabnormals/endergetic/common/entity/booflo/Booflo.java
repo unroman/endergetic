@@ -14,7 +14,7 @@ import com.teamabnormals.endergetic.common.entity.bolloom.BolloomFruit;
 import com.teamabnormals.endergetic.common.entity.booflo.ai.*;
 import com.teamabnormals.endergetic.common.entity.puffbug.PuffBug;
 import com.teamabnormals.endergetic.core.registry.*;
-import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Position;

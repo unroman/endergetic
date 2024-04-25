@@ -5,7 +5,7 @@ import com.teamabnormals.endergetic.api.util.GenerationUtils;
 import com.teamabnormals.endergetic.common.block.poise.GlowingPoiseStemBlock;
 import com.teamabnormals.endergetic.common.block.poise.PoiseTallBushBlock;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
-import com.teamabnormals.endergetic.core.registry.other.tags.EEBlockTags;
+import com.teamabnormals.endergetic.core.other.tags.EEBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;

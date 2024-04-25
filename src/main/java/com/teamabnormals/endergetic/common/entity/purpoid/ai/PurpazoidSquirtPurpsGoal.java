@@ -3,7 +3,7 @@ package com.teamabnormals.endergetic.common.entity.purpoid.ai;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.teamabnormals.endergetic.common.entity.purpoid.Purpoid;
 import com.teamabnormals.endergetic.core.registry.EEEntityTypes;
-import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;

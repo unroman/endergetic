@@ -5,7 +5,7 @@ import com.teamabnormals.endergetic.api.entity.util.EntityMotionHelper;
 import com.teamabnormals.endergetic.common.item.BoofloVestItem;
 import com.teamabnormals.endergetic.core.registry.EEItems;
 import com.teamabnormals.endergetic.core.registry.EESoundEvents;
-import com.teamabnormals.endergetic.core.registry.other.tags.EEEntityTypeTags;
+import com.teamabnormals.endergetic.core.other.tags.EEEntityTypeTags;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundSource;

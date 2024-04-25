@@ -3,7 +3,7 @@ package com.teamabnormals.endergetic.common.entity.eetle.ai.glider;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
 import com.teamabnormals.endergetic.common.entity.eetle.GliderEetle;
 import com.teamabnormals.endergetic.common.entity.eetle.flying.TargetFlyingRotations;
-import com.teamabnormals.endergetic.core.registry.other.EEDataProcessors;
+import com.teamabnormals.endergetic.core.other.EEDataProcessors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;

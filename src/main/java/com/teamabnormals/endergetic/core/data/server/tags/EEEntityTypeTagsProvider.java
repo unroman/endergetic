@@ -1,7 +1,7 @@
 package com.teamabnormals.endergetic.core.data.server.tags;
 
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import com.teamabnormals.endergetic.core.registry.other.tags.EEEntityTypeTags;
+import com.teamabnormals.endergetic.core.other.tags.EEEntityTypeTags;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;

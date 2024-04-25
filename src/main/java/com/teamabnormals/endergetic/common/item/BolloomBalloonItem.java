@@ -6,7 +6,7 @@ import com.teamabnormals.endergetic.common.entity.bolloom.BolloomBalloon;
 import com.teamabnormals.endergetic.common.entity.bolloom.BolloomKnot;
 import com.teamabnormals.endergetic.core.interfaces.BalloonHolder;
 import com.teamabnormals.endergetic.core.registry.EEEntityTypes;
-import com.teamabnormals.endergetic.core.registry.other.tags.EEEntityTypeTags;
+import com.teamabnormals.endergetic.core.other.tags.EEEntityTypeTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;

@@ -1,4 +1,4 @@
-package com.teamabnormals.endergetic.core.registry.other;
+package com.teamabnormals.endergetic.core.other;
 
 import net.minecraft.data.BlockFamily;
 

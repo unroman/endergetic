@@ -12,6 +12,8 @@ import com.teamabnormals.blueprint.common.block.sign.BlueprintStandingSignBlock;
 import com.teamabnormals.blueprint.common.block.sign.BlueprintWallHangingSignBlock;
 import com.teamabnormals.blueprint.common.block.sign.BlueprintWallSignBlock;
 import com.teamabnormals.blueprint.common.item.BEWLRBlockItem;
+import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
+import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
 import com.teamabnormals.endergetic.common.block.*;
 import com.teamabnormals.endergetic.common.block.entity.BolloomBudTileEntity;
 import com.teamabnormals.endergetic.common.block.poise.*;
@@ -20,13 +22,18 @@ import com.teamabnormals.endergetic.common.block.poise.boof.DispensedBoofBlock;
 import com.teamabnormals.endergetic.common.block.poise.hive.PuffBugHiveBlock;
 import com.teamabnormals.endergetic.common.block.poise.hive.PuffbugHiveHangerBlock;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import com.teamabnormals.endergetic.core.registry.other.EEProperties;
+import com.teamabnormals.endergetic.core.other.EEConstants;
+import com.teamabnormals.endergetic.core.other.EEProperties;
 import com.teamabnormals.endergetic.core.registry.util.EndergeticBlockSubRegistryHelper;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
@@ -34,9 +41,14 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.BiFunction;
+import java.util.function.Predicate;
+
+import static net.minecraft.world.item.CreativeModeTabs.*;
+import static net.minecraft.world.item.crafting.Ingredient.of;
 
 @EventBusSubscriber(modid = EndergeticExpansion.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public final class EEBlocks {
@@ -158,6 +170,55 @@ public final class EEBlocks {
 	public static final RegistryObject<Block> POISMOSS_PATH = HELPER.createBlock("poismoss_path", () -> new PoismossPathBlock(() -> Blocks.END_STONE, EEProperties.POISMOSS_PATH));
 
 	public static final RegistryObject<Block> EETLE_EGG = HELPER.createBlock("eetle_egg", () -> new EetleEggBlock(EEProperties.EETLE_EGG));
+
+	public static void setupTabEditors() {
+		CreativeModeTabContentsPopulator.mod(EndergeticExpansion.MOD_ID)
+				.tab(BUILDING_BLOCKS)
+				.addItemsAfter(of(Blocks.WARPED_BUTTON), POISE_STAIRS, POISE_SLAB, POISE_FENCE, POISE_FENCE_GATE, POISE_DOOR, POISE_TRAPDOOR, POISE_PRESSURE_PLATE, POISE_BUTTON)
+				.addItemsAfter(modLoaded(Blocks.WARPED_BUTTON, "woodworks"), POISE_BOARDS)
+				.addItemsAfter(of(Blocks.WARPED_BUTTON), POISE_STEM, POISE_WOOD, GLOWING_POISE_STEM, GLOWING_POISE_WOOD, STRIPPED_POISE_STEM, STRIPPED_POISE_WOOD, POISE_PLANKS)
+				.addItemsAfter(of(Blocks.END_STONE_BRICKS), CRACKED_END_STONE_BRICKS)
+				.addItemsAfter(of(Blocks.END_STONE_BRICK_WALL), CHISELED_END_STONE_BRICKS)
+				.addItemsAfter(of(Blocks.PURPUR_BLOCK), CRACKED_PURPUR_BLOCK)
+				.addItemsAfter(of(Blocks.PURPUR_SLAB), EUMUS, EUMUS_BRICKS, CRACKED_EUMUS_BRICKS, EUMUS_BRICK_STAIRS, EUMUS_BRICK_SLAB, EUMUS_BRICK_WALL, CHISELED_EUMUS_BRICKS)
+				.tab(NATURAL_BLOCKS)
+				.addItemsAfter(of(Blocks.WARPED_STEM), POISE_STEM)
+				.addItemsAfter(of(Blocks.END_STONE), POISMOSS, POISMOSS_PATH, EUMUS, EUMUS_POISMOSS, EUMUS_POISMOSS_PATH)
+				.addItemsBefore(of(Blocks.OAK_SAPLING), POISE_CLUSTER)
+				.addItemsBefore(of(Blocks.VINE), POISE_BUSH, TALL_POISE_BUSH, BOLLOOM_BUD)
+				.addItemsAfter(of(Blocks.HAY_BLOCK), BOLLOOM_CRATE)
+				.addItemsAfter(of(Blocks.PEARLESCENT_FROGLIGHT), BOOF_BLOCK, PUFFBUG_HIVE)
+				.addItemsBefore(of(Blocks.BEDROCK), MYSTICAL_OBSIDIAN, MYSTICAL_OBSIDIAN_WALL, ACIDIAN_LANTERN, CRYSTAL_HOLDER, MYSTICAL_OBSIDIAN_ACTIVATION_RUNE, ACTIVATED_MYSTICAL_OBSIDIAN_ACTIVATION_RUNE, MYSTICAL_OBSIDIAN_RUNE)
+				.tab(FUNCTIONAL_BLOCKS)
+				.addItemsAfter(of(Blocks.SOUL_TORCH), ENDER_TORCH)
+				.addItemsAfter(of(Blocks.SOUL_CAMPFIRE), ENDER_CAMPFIRE)
+				.addItemsAfter(of(Blocks.SOUL_LANTERN), ENDER_LANTERN)
+				.addItemsBefore(of(Items.END_CRYSTAL), ACIDIAN_LANTERN)
+				.addItemsAfter(of(Blocks.WARPED_HANGING_SIGN), POISE_SIGNS.getFirst(), POISE_HANGING_SIGNS.getFirst())
+				.tab(REDSTONE_BLOCKS)
+				.addItemsBefore(of(Blocks.SCULK_SENSOR), BOOF_BLOCK);
+
+		CreativeModeTabContentsPopulator.mod("woodworks_1")
+				.tab(FUNCTIONAL_BLOCKS)
+				.addItemsAfter(ofID(EEConstants.WARPED_LADDER), POISE_LADDER)
+				.addItemsAfter(ofID(EEConstants.WARPED_BEEHIVE), POISE_BEEHIVE)
+				.addItemsAfter(ofID(EEConstants.CHISELED_WARPED_BOOKSHELF), POISE_BOOKSHELF, CHISELED_POISE_BOOKSHELF)
+				.addItemsAfter(ofID(EEConstants.WARPED_CHEST), POISE_CHEST)
+				.tab(REDSTONE_BLOCKS)
+				.addItemsAfter(ofID(EEConstants.TRAPPED_WARPED_CHEST), TRAPPED_POISE_CHEST);
+	}
+
+	public static Predicate<ItemStack> modLoaded(ItemLike item, String... modids) {
+		return stack -> of(item).test(stack) && BlockSubRegistryHelper.areModsLoaded(modids);
+	}
+
+	public static Predicate<ItemStack> ofID(ResourceLocation location, ItemLike fallback, String... modids) {
+		return stack -> (BlockSubRegistryHelper.areModsLoaded(modids) ? of(ForgeRegistries.ITEMS.getValue(location)) : of(fallback)).test(stack);
+	}
+
+	public static Predicate<ItemStack> ofID(ResourceLocation location, String... modids) {
+		return stack -> (BlockSubRegistryHelper.areModsLoaded(modids) && of(ForgeRegistries.ITEMS.getValue(location)).test(stack));
+	}
 
 	@OnlyIn(Dist.CLIENT)
 	private static BiFunction<BlockEntityRenderDispatcher, EntityModelSet, BlockEntityWithoutLevelRenderer> bolloomBudISTER() {

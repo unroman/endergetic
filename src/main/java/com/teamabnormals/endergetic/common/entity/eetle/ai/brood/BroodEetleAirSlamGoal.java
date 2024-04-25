@@ -5,7 +5,7 @@ import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.teamabnormals.endergetic.api.entity.util.DetectionHelper;
 import com.teamabnormals.endergetic.common.entity.eetle.BroodEetle;
 import com.teamabnormals.endergetic.common.entity.eetle.flying.TargetFlyingRotations;
-import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;

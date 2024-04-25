@@ -3,7 +3,7 @@ package com.teamabnormals.endergetic.integration.jei;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
 import com.teamabnormals.endergetic.core.registry.EEItems;
-import com.teamabnormals.endergetic.core.registry.other.EEArmorMaterials;
+import com.teamabnormals.endergetic.core.other.EEArmorMaterials;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;

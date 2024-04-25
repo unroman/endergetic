@@ -4,7 +4,7 @@ import com.teamabnormals.endergetic.common.levelgen.biome.modifiers.SmallEndIsla
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import com.teamabnormals.endergetic.core.registry.EEEntityTypes;
 import com.teamabnormals.endergetic.core.registry.EEFeatures.EEPlacedFeatures;
-import com.teamabnormals.endergetic.core.registry.other.tags.EEBiomeTags;
+import com.teamabnormals.endergetic.core.other.tags.EEBiomeTags;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;

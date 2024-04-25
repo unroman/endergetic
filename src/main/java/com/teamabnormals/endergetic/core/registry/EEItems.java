@@ -2,20 +2,26 @@ package com.teamabnormals.endergetic.core.registry;
 
 import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.common.item.BlueprintRecordItem;
+import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
 import com.teamabnormals.endergetic.common.entity.bolloom.BalloonColor;
 import com.teamabnormals.endergetic.common.item.*;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
+import com.teamabnormals.endergetic.core.other.EEConstants;
 import com.teamabnormals.endergetic.core.registry.util.EndergeticItemSubRegistryHelper;
 import com.teamabnormals.endergetic.integration.boatload.EEBoatTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.RegistryObject;
+
+import static com.teamabnormals.blueprint.core.util.item.ItemStackUtil.is;
+import static com.teamabnormals.endergetic.core.registry.EEBlocks.*;
+import static net.minecraft.world.item.CreativeModeTabs.*;
+import static net.minecraft.world.item.crafting.Ingredient.of;
 
 @EventBusSubscriber(modid = EndergeticExpansion.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public final class EEItems {
@@ -58,6 +64,28 @@ public final class EEItems {
 	public static final RegistryObject<EetleSpawnEggItem> EETLE_SPAWN_EGG = HELPER.createEetleSpawnEgg();
 	public static final RegistryObject<ForgeSpawnEggItem> PURPOID_SPAWN_EGG = HELPER.createSpawnEggItem("purpoid", EEEntityTypes.PURPOID::get, 6240129, 11179503);
 
+	public static void setupTabEditors() {
+		CreativeModeTabContentsPopulator.mod(EndergeticExpansion.MOD_ID)
+				.tab(FOOD_AND_DRINKS)
+				.addItemsAfter(of(Items.CHORUS_FRUIT), BOLLOOM_FRUIT)
+				.tab(TOOLS_AND_UTILITIES)
+				.addItemsAfter(of(Items.MUSIC_DISC_RELIC), MUSIC_DISC_KILOBYTE)
+				.addItemsAfter(ofID(EEConstants.LARGE_WARPED_BOAT), POISE_FURNACE_BOAT, LARGE_POISE_BOAT)
+				.addItemsAfter(ofID(EEConstants.LARGE_WARPED_BOAT, Items.BAMBOO_CHEST_RAFT), POISE_BOAT.getFirst(), POISE_BOAT.getSecond())
+				.tab(INGREDIENTS)
+				.addItemsAfter(of(Items.SHULKER_SHELL), BOOFLO_HIDE)
+				.addItemsAfter(of(Items.NETHER_BRICK), EUMUS_BRICK)
+				.tab(TOOLS_AND_UTILITIES)
+				.addItemsBefore(of(Items.FISHING_ROD), PUFFBUG_BOTTLE)
+				.addItemsAfter(of(Items.LEAD), BOLLOOM_BALLOON)
+				.tab(COLORED_BLOCKS)
+				.addItems(BOLLOOM_BALLOON, WHITE_BOLLOOM_BALLOON, LIGHT_GRAY_BOLLOOM_BALLOON, GRAY_BOLLOOM_BALLOON, BLACK_BOLLOOM_BALLOON, BROWN_BOLLOOM_BALLOON, RED_BOLLOOM_BALLOON, ORANGE_BOLLOOM_BALLOON, YELLOW_BOLLOOM_BALLOON, LIME_BOLLOOM_BALLOON, GREEN_BOLLOOM_BALLOON, CYAN_BOLLOOM_BALLOON, LIGHT_BLUE_BOLLOOM_BALLOON, BLUE_BOLLOOM_BALLOON, PURPLE_BOLLOOM_BALLOON, MAGENTA_BOLLOOM_BALLOON, PINK_BOLLOOM_BALLOON)
+				.tab(COMBAT)
+				.addItemsAfter(of(Items.TURTLE_HELMET), BOOFLO_VEST)
+				.tab(SPAWN_EGGS)
+				.addItemsAlphabetically(is(SpawnEggItem.class), BOOFLO_SPAWN_EGG, PUFF_BUG_SPAWN_EGG);
+	}
+	
 	public static class EEFoods {
 		public static final FoodProperties BOLLOOM_FRUIT = new FoodProperties.Builder().nutrition(2).saturationMod(0.3F).effect(() -> new MobEffectInstance(MobEffects.LEVITATION, 125, 0), 1.0F).alwaysEat().build();
 		//TODO: Subject to change

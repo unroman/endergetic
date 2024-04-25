@@ -5,7 +5,7 @@ import com.mojang.math.Axis;
 import com.teamabnormals.blueprint.client.ClientInfo;
 import com.teamabnormals.endergetic.common.entity.booflo.Booflo;
 import com.teamabnormals.endergetic.core.registry.EEItems;
-import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;

@@ -9,8 +9,8 @@ import com.teamabnormals.endergetic.client.particle.data.CorrockCrownParticleDat
 import com.teamabnormals.endergetic.common.entity.purpoid.ai.*;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import com.teamabnormals.endergetic.core.registry.EEParticleTypes;
-import com.teamabnormals.endergetic.core.registry.other.EEDataSerializers;
-import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.other.EEDataSerializers;
+import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;

@@ -53,10 +53,10 @@ import com.teamabnormals.endergetic.core.keybinds.KeybindHandler;
 import com.teamabnormals.endergetic.core.registry.*;
 import com.teamabnormals.endergetic.core.registry.EEStructureTypes.EEStructurePieceTypes;
 import com.teamabnormals.endergetic.core.registry.builtin.EEBiomes;
-import com.teamabnormals.endergetic.core.registry.other.EEClientCompat;
-import com.teamabnormals.endergetic.core.registry.other.EECompat;
-import com.teamabnormals.endergetic.core.registry.other.EEDataProcessors;
-import com.teamabnormals.endergetic.core.registry.other.EEDataSerializers;
+import com.teamabnormals.endergetic.core.other.EEClientCompat;
+import com.teamabnormals.endergetic.core.other.EECompat;
+import com.teamabnormals.endergetic.core.other.EEDataProcessors;
+import com.teamabnormals.endergetic.core.other.EEDataSerializers;
 import com.teamabnormals.endergetic.core.registry.util.EndergeticBlockSubRegistryHelper;
 import com.teamabnormals.endergetic.core.registry.util.EndergeticEntitySubRegistryHelper;
 import com.teamabnormals.endergetic.core.registry.util.EndergeticItemSubRegistryHelper;
@@ -128,6 +128,8 @@ public class EndergeticExpansion {
 		EEBiomeModifierSerializers.SERIALIZERS.register(bus);
 
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+			EEItems.setupTabEditors();
+			EEBlocks.setupTabEditors();
 			bus.addListener(EventPriority.LOWEST, this::clientSetup);
 			bus.addListener(KeybindHandler::registerKeys);
 			bus.addListener(this::registerLayerDefinitions);

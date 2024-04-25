@@ -4,7 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
 import com.teamabnormals.endergetic.common.entity.eetle.ChargerEetle;
 import com.teamabnormals.endergetic.common.entity.eetle.GliderEetle;
-import com.teamabnormals.endergetic.core.registry.other.EEDataProcessors;
+import com.teamabnormals.endergetic.core.other.EEDataProcessors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;

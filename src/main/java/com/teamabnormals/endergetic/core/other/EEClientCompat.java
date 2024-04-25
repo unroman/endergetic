@@ -1,4 +1,4 @@
-package com.teamabnormals.endergetic.core.registry.other;
+package com.teamabnormals.endergetic.core.other;
 
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;

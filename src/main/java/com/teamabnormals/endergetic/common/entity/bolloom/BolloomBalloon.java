@@ -5,7 +5,7 @@ import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import com.teamabnormals.endergetic.core.interfaces.BalloonHolder;
 import com.teamabnormals.endergetic.core.interfaces.CustomBalloonPositioner;
 import com.teamabnormals.endergetic.core.registry.EEEntityTypes;
-import com.teamabnormals.endergetic.core.registry.other.EEDataSerializers;
+import com.teamabnormals.endergetic.core.other.EEDataSerializers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;

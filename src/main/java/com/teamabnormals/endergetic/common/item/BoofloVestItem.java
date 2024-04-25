@@ -2,7 +2,7 @@ package com.teamabnormals.endergetic.common.item;
 
 import com.teamabnormals.endergetic.client.model.armor.BoofloVestModel;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import com.teamabnormals.endergetic.core.registry.other.EEArmorMaterials;
+import com.teamabnormals.endergetic.core.other.EEArmorMaterials;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;

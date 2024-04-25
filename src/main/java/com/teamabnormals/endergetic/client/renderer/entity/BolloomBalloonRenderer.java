@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.teamabnormals.endergetic.client.model.bolloom.BolloomBalloonModel;
 import com.teamabnormals.endergetic.common.entity.bolloom.BolloomBalloon;
-import com.teamabnormals.endergetic.core.registry.other.EERenderTypes;
+import com.teamabnormals.endergetic.core.other.EERenderTypes;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;

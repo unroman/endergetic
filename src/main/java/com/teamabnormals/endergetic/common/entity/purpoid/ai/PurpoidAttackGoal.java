@@ -5,7 +5,7 @@ import com.teamabnormals.endergetic.common.entity.purpoid.Purpoid;
 import com.teamabnormals.endergetic.common.entity.purpoid.PurpoidSize;
 import com.teamabnormals.endergetic.common.network.entity.S2CEnablePurpoidFlash;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;

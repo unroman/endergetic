@@ -13,8 +13,8 @@ import com.teamabnormals.endergetic.client.renderer.entity.layers.PurpoidEmissiv
 import com.teamabnormals.endergetic.client.renderer.entity.layers.PurpoidGelLayer;
 import com.teamabnormals.endergetic.common.entity.purpoid.Purpoid;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
-import com.teamabnormals.endergetic.core.registry.other.EERenderTypes;
+import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.other.EERenderTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;

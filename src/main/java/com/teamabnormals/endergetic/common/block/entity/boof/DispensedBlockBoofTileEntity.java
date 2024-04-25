@@ -2,7 +2,7 @@ package com.teamabnormals.endergetic.common.block.entity.boof;
 
 import com.teamabnormals.endergetic.common.block.poise.boof.DispensedBoofBlock;
 import com.teamabnormals.endergetic.core.registry.EEBlockEntityTypes;
-import com.teamabnormals.endergetic.core.registry.other.tags.EEEntityTypeTags;
+import com.teamabnormals.endergetic.core.other.tags.EEEntityTypeTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;

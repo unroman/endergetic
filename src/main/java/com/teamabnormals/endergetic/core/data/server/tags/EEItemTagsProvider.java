@@ -4,8 +4,8 @@ import com.teamabnormals.blueprint.core.data.server.tags.BlueprintItemTagsProvid
 import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
-import com.teamabnormals.endergetic.core.registry.other.tags.EEBlockTags;
-import com.teamabnormals.endergetic.core.registry.other.tags.EEItemTags;
+import com.teamabnormals.endergetic.core.other.tags.EEBlockTags;
+import com.teamabnormals.endergetic.core.other.tags.EEItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
