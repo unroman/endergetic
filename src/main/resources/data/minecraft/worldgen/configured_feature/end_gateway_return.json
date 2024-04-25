@@ -1,7 +1,11 @@
 {
-	"config": {
-		"exit": [100, 50, 0],
-		"exact": true
-	},
-	"type": "endergetic:end_gateway"
+  "type": "endergetic:end_gateway",
+  "config": {
+    "exact": true,
+    "exit": [
+      100,
+      50,
+      0
+    ]
+  }
 }

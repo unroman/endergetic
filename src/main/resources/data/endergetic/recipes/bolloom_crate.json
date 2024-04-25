@@ -17,7 +17,7 @@
   "conditions": [
     {
       "type": "blueprint:quark_flag",
-       "flag": "apple_crate"
+      "flag": "apple_crate"
     }
   ]
 }

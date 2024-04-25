@@ -46,12 +46,12 @@ public final class EetleNestPieces {
 	private static final Direction[] ATTACHMENT_DIRECTIONS = Direction.values();
 	private static final Direction[] TUNNEL_SIDES = new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
 	private static final Direction[] EGG_DIRECTIONS = Direction.values();
-	private static final Block CORROCK_BLOCK = EEBlocks.CORROCK_END_BLOCK.get();
+	private static final Block CORROCK_BLOCK = EEBlocks.END_CORROCK_BLOCK.get();
 	private static final Block EUMUS = EEBlocks.EUMUS.get();
-	private static final Block CROWN_STANDING = EEBlocks.CORROCK_CROWN_END_STANDING.get();
-	private static final Block CROWN_WALL = EEBlocks.CORROCK_CROWN_END_WALL.get();
+	private static final Block CROWN_STANDING = EEBlocks.END_CORROCK_CROWN.get();
+	private static final Block CROWN_WALL = EEBlocks.END_WALL_CORROCK_CROWN.get();
 	private static final Block EETLE_EGSS = EEBlocks.EETLE_EGG.get();
-	private static final Block CORROCK = EEBlocks.CORROCK_END.get();
+	private static final Block CORROCK = EEBlocks.END_CORROCK.get();
 	private static final Block SPECKLED_CORROCK = EEBlocks.SPECKLED_END_CORROCK.get();
 	public static final Set<Block> CARVABLE_BLOCKS = Sets.newHashSet(Blocks.STONE, Blocks.END_STONE, CORROCK_BLOCK, CORROCK, CROWN_STANDING, CROWN_WALL, EETLE_EGSS, EUMUS, SPECKLED_CORROCK, EEBlocks.INFESTED_CORROCK.get(), EEBlocks.POISMOSS.get(), EEBlocks.EUMUS_POISMOSS.get());
 	private static final BlockState CORROCK_BLOCK_STATE = CORROCK_BLOCK.defaultBlockState();

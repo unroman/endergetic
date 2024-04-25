@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Set;
 
 public class SpeckledCorrockPatchFeature extends Feature<MultiPatchConfig> {
-	private static final Block CORROCK_BLOCK = EEBlocks.CORROCK_END_BLOCK.get();
+	private static final Block CORROCK_BLOCK = EEBlocks.END_CORROCK_BLOCK.get();
 	private static final Set<Block> TRANSFORMABLE_BLOCKS = Sets.newHashSet(Blocks.END_STONE, CORROCK_BLOCK, EEBlocks.SPECKLED_END_CORROCK.get(), EEBlocks.EUMUS.get());
 	private static final BlockState END_STONE = Blocks.END_STONE.defaultBlockState();
 	private static final BlockState SPECKLED_CORROCK = EEBlocks.SPECKLED_END_CORROCK.get().defaultBlockState();
@@ -36,7 +36,7 @@ public class SpeckledCorrockPatchFeature extends Feature<MultiPatchConfig> {
 		BlockPos pos = context.origin();
 		BlockPos down = EndergeticPatchConfig.getPos(level, pos, false).below();
 		Block downBlock = level.getBlockState(down).getBlock();
-		if (downBlock == EEBlocks.CORROCK_END_BLOCK.get()) {
+		if (downBlock == EEBlocks.END_CORROCK_BLOCK.get()) {
 			RandomSource rand = context.random();
 			MultiPatchConfig config = context.config();
 			int extraPatches = 1 + rand.nextInt(config.getMaxExtraPatches() + 1);

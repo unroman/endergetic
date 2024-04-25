@@ -2,7 +2,6 @@ package com.teamabnormals.endergetic.core.registry;
 
 import com.mojang.serialization.Codec;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.KeyDispatchDataCodec;
@@ -34,7 +33,7 @@ public final class EESurfaceRules extends SurfaceRules {
 		public SurfaceRule apply(Context context) {
 			NormalNoise normalNoise = context.randomState.getOrCreateNoise(Noises.SURFACE);
 			PositionalRandomFactory randomFactory = context.randomState.getOrCreateRandomFactory(new ResourceLocation(EndergeticExpansion.MOD_ID, "corrock"));
-			BlockState corrock = EEBlocks.CORROCK_END_BLOCK.get().defaultBlockState();
+			BlockState corrock = EEBlocks.END_CORROCK_BLOCK.get().defaultBlockState();
 			BlockState eumus = EEBlocks.EUMUS.get().defaultBlockState();
 			BlockState speckledCorrock = EEBlocks.SPECKLED_END_CORROCK.get().defaultBlockState();
 

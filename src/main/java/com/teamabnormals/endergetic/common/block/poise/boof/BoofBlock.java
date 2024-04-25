@@ -121,7 +121,7 @@ public class BoofBlock extends BaseEntityBlock {
 			Direction facing = source.getBlockState().getValue(DispenserBlock.FACING);
 			BlockPos pos = source.getPos().relative(facing);
 			if (world.getBlockState(pos).canBeReplaced()) {
-				world.setBlockAndUpdate(pos, EEBlocks.BOOF_BLOCK_DISPENSED.get().defaultBlockState().setValue(DispensedBoofBlock.FACING, facing).setValue(DispensedBoofBlock.WATERLOGGED, world.getFluidState(pos).is(FluidTags.WATER)));
+				world.setBlockAndUpdate(pos, EEBlocks.DISPENSED_BOOF_BLOCK.get().defaultBlockState().setValue(DispensedBoofBlock.FACING, facing).setValue(DispensedBoofBlock.WATERLOGGED, world.getFluidState(pos).is(FluidTags.WATER)));
 				world.playSound(null, pos, EESoundEvents.BOOF_BLOCK_INFLATE.get(), SoundSource.NEUTRAL, 0.85F, 0.9F + world.random.nextFloat() * 0.15F);
 				this.setSuccess(true);
 			}

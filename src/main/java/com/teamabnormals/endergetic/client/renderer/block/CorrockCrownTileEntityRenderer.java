@@ -70,9 +70,9 @@ public class CorrockCrownTileEntityRenderer implements BlockEntityRenderer<Corro
 
 	public int getTexture(CorrockCrownTileEntity te) {
 		Block block = te.getBlockState().getBlock();
-		if (block == EEBlocks.CORROCK_CROWN_END_STANDING.get() || block == EEBlocks.CORROCK_CROWN_END_WALL.get() || block == EEBlocks.PETRIFIED_CORROCK_CROWN_END_STANDING.get() || block == EEBlocks.PETRIFIED_CORROCK_CROWN_END_WALL.get()) {
+		if (block == EEBlocks.END_CORROCK_CROWN.get() || block == EEBlocks.END_WALL_CORROCK_CROWN.get() || block == EEBlocks.PETRIFIED_END_CORROCK_CROWN.get() || block == EEBlocks.PETRIFIED_END_WALL_CORROCK_CROWN.get()) {
 			return 0;
-		} else if (block == EEBlocks.CORROCK_CROWN_NETHER_STANDING.get() || block == EEBlocks.CORROCK_CROWN_NETHER_WALL.get() || block == EEBlocks.PETRIFIED_CORROCK_CROWN_NETHER_STANDING.get() || block == EEBlocks.PETRIFIED_CORROCK_CROWN_NETHER_WALL.get()) {
+		} else if (block == EEBlocks.NETHER_CORROCK_CROWN.get() || block == EEBlocks.NETHER_WALL_CORROCK_CROWN.get() || block == EEBlocks.PETRIFIED_NETHER_CORROCK_CROWN.get() || block == EEBlocks.PETRIFIED_NETHER_WALL_CORROCK_CROWN.get()) {
 			return 1;
 		} else {
 			return 2;

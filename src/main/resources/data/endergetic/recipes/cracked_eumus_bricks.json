@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-	"item": "endergetic:eumus_bricks"
+    "item": "endergetic:eumus_bricks"
   },
   "result": "endergetic:cracked_eumus_bricks",
   "experience": 0.1,

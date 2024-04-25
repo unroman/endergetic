@@ -37,9 +37,9 @@ import java.util.function.Supplier;
 
 public class CorrockCrownWallBlock extends CorrockCrownBlock {
 	private static final Map<ResourceLocation, Supplier<CorrockCrownWallBlock>> CONVERSIONS = Util.make(Maps.newHashMap(), (conversions) -> {
-		conversions.put(BuiltinDimensionTypes.OVERWORLD.location(), EEBlocks.CORROCK_CROWN_OVERWORLD_WALL);
-		conversions.put(BuiltinDimensionTypes.NETHER.location(), EEBlocks.CORROCK_CROWN_NETHER_WALL);
-		conversions.put(BuiltinDimensionTypes.END.location(), EEBlocks.CORROCK_CROWN_END_WALL);
+		conversions.put(BuiltinDimensionTypes.OVERWORLD.location(), EEBlocks.OVERWORLD_WALL_CORROCK_CROWN);
+		conversions.put(BuiltinDimensionTypes.NETHER.location(), EEBlocks.NETHER_WALL_CORROCK_CROWN);
+		conversions.put(BuiltinDimensionTypes.END.location(), EEBlocks.END_WALL_CORROCK_CROWN);
 	});
 	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	private static final Map<Direction, VoxelShape> SHAPES = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.box(0.0D, 4.5D, 14.0D, 16.0D, 12.5D, 16.0D), Direction.SOUTH, Block.box(0.0D, 4.5D, 0.0D, 16.0D, 12.5D, 2.0D), Direction.EAST, Block.box(0.0D, 4.5D, 0.0D, 2.0D, 12.5D, 16.0D), Direction.WEST, Block.box(14.0D, 4.5D, 0.0D, 16.0D, 12.5D, 16.0D)));
@@ -143,7 +143,7 @@ public class CorrockCrownWallBlock extends CorrockCrownBlock {
 	}
 
 	protected Block getConversionBlock(LevelAccessor level) {
-		return CONVERSIONS.getOrDefault(level.registryAccess().registry(Registries.DIMENSION_TYPE).get().getKey(level.dimensionType()), EEBlocks.CORROCK_CROWN_OVERWORLD_WALL).get();
+		return CONVERSIONS.getOrDefault(level.registryAccess().registry(Registries.DIMENSION_TYPE).get().getKey(level.dimensionType()), EEBlocks.OVERWORLD_WALL_CORROCK_CROWN).get();
 	}
 
 	private boolean shouldConvert(LevelAccessor level) {

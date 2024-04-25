@@ -1,0 +1,26 @@
+{
+  "values": [
+    "minecraft:end_stone",
+    "minecraft:end_stone_bricks",
+    "minecraft:end_stone_brick_stairs",
+    "minecraft:end_stone_brick_slab",
+    "minecraft:end_stone_brick_wall",
+    "endergetic:cracked_end_stone_bricks",
+    "endergetic:chiseled_end_stone_bricks",
+    "endergetic:poismoss",
+    "endergetic:eumus",
+    "endergetic:eumus_poismoss",
+    "endergetic:eumus_bricks",
+    "endergetic:eumus_brick_stairs",
+    "endergetic:eumus_brick_slab",
+    "endergetic:eumus_brick_wall",
+    "endergetic:cracked_eumus_bricks",
+    "endergetic:chiseled_eumus_bricks",
+    "endergetic:crystal_holder",
+    "endergetic:mystical_obsidian",
+    "endergetic:mystical_obsidian_wall",
+    "endergetic:mystical_obsidian_rune",
+    "endergetic:mystical_obsidian_activation_rune",
+    "endergetic:activated_mystical_obsidian_activation_rune"
+  ]
+}

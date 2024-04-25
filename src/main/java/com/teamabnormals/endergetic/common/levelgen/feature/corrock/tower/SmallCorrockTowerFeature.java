@@ -26,7 +26,7 @@ public final class SmallCorrockTowerFeature extends AbstractCorrockFeature<Proba
 	public boolean place(FeaturePlaceContext<ProbabilityFeatureConfiguration> context) {
 		WorldGenLevel level = context.level();
 		BlockPos pos = context.origin();
-		if (level.isEmptyBlock(pos) && level.getBlockState(pos.below()).getBlock() == EEBlocks.CORROCK_END_BLOCK.get() && level.getBlockState(pos.below(2)).canOcclude()) {
+		if (level.isEmptyBlock(pos) && level.getBlockState(pos.below()).getBlock() == EEBlocks.END_CORROCK_BLOCK.get() && level.getBlockState(pos.below(2)).canOcclude()) {
 			GenerationPiece base = getBase(level, pos);
 			if (base != null) {
 				BlockState corrockBlockState = CORROCK_BLOCK_STATE.get();

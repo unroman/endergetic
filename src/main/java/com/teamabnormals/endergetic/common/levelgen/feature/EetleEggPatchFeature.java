@@ -32,7 +32,7 @@ public class EetleEggPatchFeature extends Feature<EndergeticPatchConfig> {
 		EetleEggBlock.shuffleDirections(DIRECTIONS, rand);
 		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 		float chance = config.getFrequency();
-		Block corrockBlock = EEBlocks.CORROCK_END_BLOCK.get();
+		Block corrockBlock = EEBlocks.END_CORROCK_BLOCK.get();
 		Block eumus = EEBlocks.EUMUS.get();
 		for (int j = 0; j < 45; j++) {
 			mutable.setWithOffset(pos, rand.nextInt(9) - rand.nextInt(9), rand.nextInt(9) - rand.nextInt(9), rand.nextInt(9) - rand.nextInt(9));

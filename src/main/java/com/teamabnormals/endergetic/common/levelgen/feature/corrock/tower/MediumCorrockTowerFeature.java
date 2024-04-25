@@ -28,7 +28,7 @@ public final class MediumCorrockTowerFeature extends AbstractCorrockFeature<Corr
 	public boolean place(FeaturePlaceContext<CorrockTowerConfig> context) {
 		WorldGenLevel world = context.level();
 		BlockPos pos = context.origin();
-		if (world.isEmptyBlock(pos) && world.getBlockState(pos.below()).getBlock() == EEBlocks.CORROCK_END_BLOCK.get() && world.getBlockState(pos.below(2)).canOcclude()) {
+		if (world.isEmptyBlock(pos) && world.getBlockState(pos.below()).getBlock() == EEBlocks.END_CORROCK_BLOCK.get() && world.getBlockState(pos.below(2)).canOcclude()) {
 			BlockState corrockBlockState = CORROCK_BLOCK_STATE.get();
 			GenerationPiece base = new GenerationPiece((w, p) -> w.isEmptyBlock(p.pos));
 			RandomSource rand = context.random();

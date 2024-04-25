@@ -28,7 +28,7 @@ public final class LargeCorrockTowerFeature extends AbstractCorrockFeature<Corro
 	public boolean place(FeaturePlaceContext<CorrockTowerConfig> context) {
 		WorldGenLevel level = context.level();
 		BlockPos pos = context.origin();
-		if (level.isEmptyBlock(pos) && level.getBlockState(pos.below()).getBlock() == EEBlocks.CORROCK_END_BLOCK.get() && level.getBlockState(pos.below(2)).canOcclude()) {
+		if (level.isEmptyBlock(pos) && level.getBlockState(pos.below()).getBlock() == EEBlocks.END_CORROCK_BLOCK.get() && level.getBlockState(pos.below(2)).canOcclude()) {
 			BlockState corrockBlockState = CORROCK_BLOCK_STATE.get();
 			List<BlockPos> corrockPositions = new ArrayList<>();
 			if (tryToMakeGroundSuitable(level, corrockPositions, pos)) {

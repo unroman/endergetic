@@ -69,21 +69,21 @@ public final class EEEvents {
 	private static final AttributeModifier PURPOID_SLOWFALL = new AttributeModifier(UUID.fromString("6bec3438-1392-426b-9173-618fa9499de5"), "Slow falling acceleration reduction from a Purpoid", -0.07, AttributeModifier.Operation.ADDITION);
 
 	public static final Map<Supplier<Block>, Supplier<Block>> PETRIFICATION_MAP = Util.make(Maps.newHashMap(), (petrifications) -> {
-		petrifications.put(EEBlocks.CORROCK_END, EEBlocks.PETRIFIED_CORROCK_END);
-		petrifications.put(EEBlocks.CORROCK_NETHER, EEBlocks.PETRIFIED_CORROCK_NETHER);
-		petrifications.put(EEBlocks.CORROCK_OVERWORLD, EEBlocks.PETRIFIED_CORROCK_OVERWORLD);
-		petrifications.put(EEBlocks.CORROCK_END_BLOCK, EEBlocks.PETRIFIED_CORROCK_END_BLOCK);
-		petrifications.put(EEBlocks.CORROCK_NETHER_BLOCK, EEBlocks.PETRIFIED_CORROCK_NETHER_BLOCK);
-		petrifications.put(EEBlocks.CORROCK_OVERWORLD_BLOCK, EEBlocks.PETRIFIED_CORROCK_OVERWORLD_BLOCK);
+		petrifications.put(EEBlocks.END_CORROCK, EEBlocks.PETRIFIED_END_CORROCK);
+		petrifications.put(EEBlocks.NETHER_CORROCK, EEBlocks.PETRIFIED_NETHER_CORROCK);
+		petrifications.put(EEBlocks.OVERWORLD_CORROCK, EEBlocks.PETRIFIED_OVERWORLD_CORROCK);
+		petrifications.put(EEBlocks.END_CORROCK_BLOCK, EEBlocks.PETRIFIED_END_CORROCK_BLOCK);
+		petrifications.put(EEBlocks.NETHER_CORROCK_BLOCK, EEBlocks.PETRIFIED_NETHER_CORROCK_BLOCK);
+		petrifications.put(EEBlocks.OVERWORLD_CORROCK_BLOCK, EEBlocks.PETRIFIED_OVERWORLD_CORROCK_BLOCK);
 		petrifications.put(EEBlocks.SPECKLED_OVERWORLD_CORROCK, EEBlocks.PETRIFIED_SPECKLED_OVERWORLD_CORROCK);
 		petrifications.put(EEBlocks.SPECKLED_NETHER_CORROCK, EEBlocks.PETRIFIED_SPECKLED_NETHER_CORROCK);
 		petrifications.put(EEBlocks.SPECKLED_END_CORROCK, EEBlocks.PETRIFIED_SPECKLED_END_CORROCK);
-		petrifications.put(EEBlocks.CORROCK_CROWN_END_STANDING::get, EEBlocks.PETRIFIED_CORROCK_CROWN_END_STANDING::get);
-		petrifications.put(EEBlocks.CORROCK_CROWN_NETHER_STANDING::get, EEBlocks.PETRIFIED_CORROCK_CROWN_NETHER_STANDING::get);
-		petrifications.put(EEBlocks.CORROCK_CROWN_OVERWORLD_STANDING::get, EEBlocks.PETRIFIED_CORROCK_CROWN_OVERWORLD_STANDING::get);
-		petrifications.put(EEBlocks.CORROCK_CROWN_END_WALL::get, EEBlocks.PETRIFIED_CORROCK_CROWN_END_WALL::get);
-		petrifications.put(EEBlocks.CORROCK_CROWN_NETHER_WALL::get, EEBlocks.PETRIFIED_CORROCK_CROWN_NETHER_WALL::get);
-		petrifications.put(EEBlocks.CORROCK_CROWN_OVERWORLD_WALL::get, EEBlocks.PETRIFIED_CORROCK_CROWN_OVERWORLD_WALL::get);
+		petrifications.put(EEBlocks.END_CORROCK_CROWN::get, EEBlocks.PETRIFIED_END_CORROCK_CROWN::get);
+		petrifications.put(EEBlocks.NETHER_CORROCK_CROWN::get, EEBlocks.PETRIFIED_NETHER_CORROCK_CROWN::get);
+		petrifications.put(EEBlocks.OVERWORLD_CORROCK_CROWN::get, EEBlocks.PETRIFIED_OVERWORLD_CORROCK_CROWN::get);
+		petrifications.put(EEBlocks.END_WALL_CORROCK_CROWN::get, EEBlocks.PETRIFIED_END_WALL_CORROCK_CROWN::get);
+		petrifications.put(EEBlocks.NETHER_WALL_CORROCK_CROWN::get, EEBlocks.PETRIFIED_NETHER_WALL_CORROCK_CROWN::get);
+		petrifications.put(EEBlocks.OVERWORLD_WALL_CORROCK_CROWN::get, EEBlocks.PETRIFIED_OVERWORLD_WALL_CORROCK_CROWN::get);
 		petrifications.put(EEBlocks.INFESTED_CORROCK, EEBlocks.PETRIFIED_INFESTED_CORROCK);
 	});
 

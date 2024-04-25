@@ -34,9 +34,9 @@ import java.util.function.Supplier;
 
 public class CorrockBlock extends Block implements BonemealableBlock {
 	private static final Map<ResourceLocation, Supplier<Block>> CONVERSIONS = Util.make(Maps.newHashMap(), (conversions) -> {
-		conversions.put(BuiltinDimensionTypes.OVERWORLD.location(), EEBlocks.CORROCK_OVERWORLD_BLOCK);
-		conversions.put(BuiltinDimensionTypes.NETHER.location(), EEBlocks.CORROCK_NETHER_BLOCK);
-		conversions.put(BuiltinDimensionTypes.END.location(), EEBlocks.CORROCK_END_BLOCK);
+		conversions.put(BuiltinDimensionTypes.OVERWORLD.location(), EEBlocks.OVERWORLD_CORROCK_BLOCK);
+		conversions.put(BuiltinDimensionTypes.NETHER.location(), EEBlocks.NETHER_CORROCK_BLOCK);
+		conversions.put(BuiltinDimensionTypes.END.location(), EEBlocks.END_CORROCK_BLOCK);
 	});
 	private final Supplier<Block> speckledBlock;
 	private final Supplier<Block> plantBlock;
@@ -83,7 +83,7 @@ public class CorrockBlock extends Block implements BonemealableBlock {
 	}
 
 	protected Block getConversionBlock(LevelAccessor level) {
-		return CONVERSIONS.getOrDefault(level.registryAccess().registry(Registries.DIMENSION_TYPE).get().getKey(level.dimensionType()), EEBlocks.CORROCK_OVERWORLD_BLOCK).get();
+		return CONVERSIONS.getOrDefault(level.registryAccess().registry(Registries.DIMENSION_TYPE).get().getKey(level.dimensionType()), EEBlocks.OVERWORLD_CORROCK_BLOCK).get();
 	}
 
 	protected boolean shouldConvert(LevelAccessor level) {

@@ -18,7 +18,7 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import java.util.Set;
 
 public class EumusPatchFeature extends Feature<MultiPatchConfig> {
-	private static final Set<Block> TRANSFORMABLE_BLOCKS = Sets.newHashSet(Blocks.END_STONE, EEBlocks.CORROCK_END_BLOCK.get(), EEBlocks.SPECKLED_END_CORROCK.get());
+	private static final Set<Block> TRANSFORMABLE_BLOCKS = Sets.newHashSet(Blocks.END_STONE, EEBlocks.END_CORROCK_BLOCK.get(), EEBlocks.SPECKLED_END_CORROCK.get());
 	private static final BlockState EUMUS = EEBlocks.EUMUS.get().defaultBlockState();
 
 	public EumusPatchFeature(Codec<MultiPatchConfig> codec) {
@@ -30,7 +30,7 @@ public class EumusPatchFeature extends Feature<MultiPatchConfig> {
 		WorldGenLevel level = context.level();
 		BlockPos down = EndergeticPatchConfig.getPos(level, context.origin(), false).below();
 		Block downBlock = level.getBlockState(down).getBlock();
-		if (downBlock == EEBlocks.CORROCK_END_BLOCK.get()) {
+		if (downBlock == EEBlocks.END_CORROCK_BLOCK.get()) {
 			RandomSource rand = context.random();
 			MultiPatchConfig config = context.config();
 			int extraPatches = 1 + rand.nextInt(config.getMaxExtraPatches() + 1);

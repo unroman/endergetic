@@ -21,8 +21,8 @@ import java.util.function.Supplier;
 public class InfestedCorrockBlock extends Block {
 	private static final Direction[] POSSIBLE_DIRECTIONS = Direction.values();
 	private static final Map<ResourceLocation, Supplier<Block>> CONVERSIONS = Util.make(Maps.newHashMap(), (conversions) -> {
-		conversions.put(BuiltinDimensionTypes.OVERWORLD.location(), EEBlocks.CORROCK_OVERWORLD_BLOCK);
-		conversions.put(BuiltinDimensionTypes.NETHER.location(), EEBlocks.CORROCK_NETHER_BLOCK);
+		conversions.put(BuiltinDimensionTypes.OVERWORLD.location(), EEBlocks.OVERWORLD_CORROCK_BLOCK);
+		conversions.put(BuiltinDimensionTypes.NETHER.location(), EEBlocks.NETHER_CORROCK_BLOCK);
 		conversions.put(BuiltinDimensionTypes.END.location(), EEBlocks.INFESTED_CORROCK);
 	});
 
@@ -76,7 +76,7 @@ public class InfestedCorrockBlock extends Block {
 	}
 
 	protected Block getConversionBlock(LevelAccessor level) {
-		return CONVERSIONS.getOrDefault(level.registryAccess().registry(Registries.DIMENSION_TYPE).get().getKey(level.dimensionType()), EEBlocks.CORROCK_OVERWORLD_BLOCK).get();
+		return CONVERSIONS.getOrDefault(level.registryAccess().registry(Registries.DIMENSION_TYPE).get().getKey(level.dimensionType()), EEBlocks.OVERWORLD_CORROCK_BLOCK).get();
 	}
 
 	protected boolean shouldConvert(LevelAccessor level) {

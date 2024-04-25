@@ -23,16 +23,16 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 public abstract class AbstractCorrockFeature<FC extends FeatureConfiguration> extends Feature<FC> {
-	protected static final Block CORROCK_BLOCK_BLOCK = EEBlocks.CORROCK_END_BLOCK.get();
-	protected static final LazyLoadedValue<BlockState> CORROCK_STATE = new LazyLoadedValue<>(() -> EEBlocks.CORROCK_END.get().defaultBlockState());
-	protected static final LazyLoadedValue<BlockState> CORROCK_BLOCK_STATE = new LazyLoadedValue<>(() -> EEBlocks.CORROCK_END_BLOCK.get().defaultBlockState());
+	protected static final Block CORROCK_BLOCK_BLOCK = EEBlocks.END_CORROCK_BLOCK.get();
+	protected static final LazyLoadedValue<BlockState> CORROCK_STATE = new LazyLoadedValue<>(() -> EEBlocks.END_CORROCK.get().defaultBlockState());
+	protected static final LazyLoadedValue<BlockState> CORROCK_BLOCK_STATE = new LazyLoadedValue<>(() -> EEBlocks.END_CORROCK_BLOCK.get().defaultBlockState());
 
 	protected static BlockState getCorrockCrownWall(Direction facing) {
-		return EEBlocks.CORROCK_CROWN_END_WALL.get().defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, facing);
+		return EEBlocks.END_WALL_CORROCK_CROWN.get().defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, facing);
 	}
 
 	protected static BlockState getCorrockCrownStanding(int rotation) {
-		return EEBlocks.CORROCK_CROWN_END_STANDING.get().defaultBlockState().setValue(CorrockCrownStandingBlock.ROTATION, rotation);
+		return EEBlocks.END_CORROCK_CROWN.get().defaultBlockState().setValue(CorrockCrownStandingBlock.ROTATION, rotation);
 	}
 
 	public AbstractCorrockFeature(Codec<FC> configFactory) {

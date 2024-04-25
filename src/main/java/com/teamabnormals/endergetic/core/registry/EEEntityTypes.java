@@ -76,12 +76,12 @@ public final class EEEntityTypes {
 		if (Monster.checkMonsterSpawnRules(entityType, world, spawnReason, pos, random) || isInfestedCorrockNearby(world, pos)) {
 			BlockPos down = pos.below();
 			Block downBlock = world.getBlockState(down).getBlock();
-			if (downBlock == EEBlocks.CORROCK_END_BLOCK.get() || downBlock == EEBlocks.EUMUS.get() || downBlock == EEBlocks.INFESTED_CORROCK.get()) {
+			if (downBlock == EEBlocks.END_CORROCK_BLOCK.get() || downBlock == EEBlocks.EUMUS.get() || downBlock == EEBlocks.INFESTED_CORROCK.get()) {
 				return true;
 			}
 			for (Direction direction : Direction.Plane.HORIZONTAL) {
 				Block offsetBlock = world.getBlockState(down.relative(direction)).getBlock();
-				if (offsetBlock == EEBlocks.CORROCK_END_BLOCK.get() || offsetBlock == EEBlocks.EUMUS.get()) {
+				if (offsetBlock == EEBlocks.END_CORROCK_BLOCK.get() || offsetBlock == EEBlocks.EUMUS.get()) {
 					return true;
 				}
 			}

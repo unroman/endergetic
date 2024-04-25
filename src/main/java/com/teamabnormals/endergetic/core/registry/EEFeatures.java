@@ -15,9 +15,11 @@ import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.features.EndFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
@@ -84,6 +86,9 @@ public final class EEFeatures {
 		public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
 			HolderGetter<ConfiguredFeature<?, ?>> features = context.lookup(Registries.CONFIGURED_FEATURE);
 
+			register(context, EndFeatures.END_GATEWAY_RETURN, ENDERGETIC_END_GATEWAY.get(), EndGatewayConfiguration.knownExit(ServerLevel.END_SPAWN_POINT, true));
+			register(context, EndFeatures.END_GATEWAY_DELAYED, ENDERGETIC_END_GATEWAY.get(), EndGatewayConfiguration.delayedExitSearch());
+
 			register(context, POISE_DOME, EEFeatures.POISE_DOME.get(), FeatureConfiguration.NONE);
 			register(context, POISE_TREE, EEFeatures.POISE_TREE.get(), FeatureConfiguration.NONE);
 			register(context, POISE_CLUSTER, EEFeatures.POISE_CLUSTER.get(), FeatureConfiguration.NONE);
@@ -93,9 +98,9 @@ public final class EEFeatures {
 			register(context, TALL_POISE_BUSH_PATCH, EEFeatures.TALL_POISE_BUSH_PATCH.get(), FeatureConfiguration.NONE);
 
 			register(context, CORROCK_PATCH, EEFeatures.CORROCK_PATCH.get(), new EndergeticPatchConfig(0.175F, false));
-			register(context, DISK_CORROCK, EEFeatures.CORROCK_GROUND_PATCH.get(), new DiskConfiguration(RuleBasedBlockStateProvider.simple(EEBlocks.CORROCK_END_BLOCK.get()), BlockPredicate.matchesBlocks(Blocks.END_STONE), UniformInt.of(2, 3), 3));
-			register(context, EXTRA_BRANCH_DECORATIONS_CORROCK_BRANCH, EEFeatures.CORROCK_BRANCH.get(), new CorrockBranchConfig(ImmutableList.of(Blocks.END_STONE.defaultBlockState(), EEBlocks.CORROCK_END_BLOCK.get().defaultBlockState()), 0.4F, 0.5F));
-			register(context, EXTRA_CROWNS_CORROCK_BRANCH, EEFeatures.CORROCK_BRANCH.get(), new CorrockBranchConfig(ImmutableList.of(EEBlocks.CORROCK_END_BLOCK.get().defaultBlockState(), EEBlocks.EUMUS.get().defaultBlockState()), 0.5F, 0.4F));
+			register(context, DISK_CORROCK, EEFeatures.CORROCK_GROUND_PATCH.get(), new DiskConfiguration(RuleBasedBlockStateProvider.simple(EEBlocks.END_CORROCK_BLOCK.get()), BlockPredicate.matchesBlocks(Blocks.END_STONE), UniformInt.of(2, 3), 3));
+			register(context, EXTRA_BRANCH_DECORATIONS_CORROCK_BRANCH, EEFeatures.CORROCK_BRANCH.get(), new CorrockBranchConfig(ImmutableList.of(Blocks.END_STONE.defaultBlockState(), EEBlocks.END_CORROCK_BLOCK.get().defaultBlockState()), 0.4F, 0.5F));
+			register(context, EXTRA_CROWNS_CORROCK_BRANCH, EEFeatures.CORROCK_BRANCH.get(), new CorrockBranchConfig(ImmutableList.of(EEBlocks.END_CORROCK_BLOCK.get().defaultBlockState(), EEBlocks.EUMUS.get().defaultBlockState()), 0.5F, 0.4F));
 			register(context, SMALL_CORROCK_TOWER, EEFeatures.SMALL_CORROCK_TOWER.get(), new ProbabilityFeatureConfiguration(0.25F));
 			register(context, MEDIUM_CORROCK_TOWER, EEFeatures.MEDIUM_CORROCK_TOWER.get(), new CorrockTowerConfig(3, 4, 0.7F, 0.075F));
 			register(context, LARGE_CORROCK_TOWER, EEFeatures.LARGE_CORROCK_TOWER.get(), new CorrockTowerConfig(2, 5, 0.9F, 0.1F));

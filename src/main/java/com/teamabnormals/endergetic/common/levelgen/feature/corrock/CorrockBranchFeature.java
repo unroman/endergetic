@@ -74,7 +74,7 @@ public class CorrockBranchFeature extends AbstractCorrockFeature<CorrockBranchCo
 						for (int y = pos.getY(); y < pos.getY() + baseHeight + 10; y++) {
 							for (int z = pos.getZ() - 4; z < pos.getZ() + 4; z++) {
 								corrockPlantPos.set(x, y, z);
-								boolean isCorrockBelow = world.getBlockState(corrockPlantPos.below()).getBlock() == EEBlocks.CORROCK_END_BLOCK.get();
+								boolean isCorrockBelow = world.getBlockState(corrockPlantPos.below()).getBlock() == EEBlocks.END_CORROCK_BLOCK.get();
 								if ((isCorrockBelow && rand.nextFloat() < 0.25F || !isCorrockBelow && rand.nextFloat() < 0.025F) && world.isEmptyBlock(corrockPlantPos) && CORROCK_STATE.get().canSurvive(world, corrockPlantPos)) {
 									world.setBlock(corrockPlantPos, CORROCK_STATE.get(), 2);
 								}

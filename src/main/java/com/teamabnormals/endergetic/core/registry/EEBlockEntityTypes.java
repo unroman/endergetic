@@ -16,10 +16,10 @@ public final class EEBlockEntityTypes {
 	private static final BlockEntitySubRegistryHelper HELPER = EndergeticExpansion.REGISTRY_HELPER.getBlockEntitySubHelper();
 
 	public static final RegistryObject<BlockEntityType<CorrockCrownTileEntity>> CORROCK_CROWN = HELPER.createBlockEntity("corrock_crown", CorrockCrownTileEntity::new, () -> Set.of(
-			EEBlocks.CORROCK_CROWN_OVERWORLD_STANDING.get(), EEBlocks.CORROCK_CROWN_OVERWORLD_WALL.get(), EEBlocks.CORROCK_CROWN_NETHER_STANDING.get(),
-			EEBlocks.CORROCK_CROWN_NETHER_WALL.get(), EEBlocks.CORROCK_CROWN_END_STANDING.get(), EEBlocks.CORROCK_CROWN_END_WALL.get(),
-			EEBlocks.PETRIFIED_CORROCK_CROWN_OVERWORLD_STANDING.get(), EEBlocks.PETRIFIED_CORROCK_CROWN_OVERWORLD_WALL.get(), EEBlocks.PETRIFIED_CORROCK_CROWN_NETHER_STANDING.get(),
-			EEBlocks.PETRIFIED_CORROCK_CROWN_NETHER_WALL.get(), EEBlocks.PETRIFIED_CORROCK_CROWN_END_STANDING.get(), EEBlocks.PETRIFIED_CORROCK_CROWN_END_WALL.get()
+			EEBlocks.OVERWORLD_CORROCK_CROWN.get(), EEBlocks.OVERWORLD_WALL_CORROCK_CROWN.get(), EEBlocks.NETHER_CORROCK_CROWN.get(),
+			EEBlocks.NETHER_WALL_CORROCK_CROWN.get(), EEBlocks.END_CORROCK_CROWN.get(), EEBlocks.END_WALL_CORROCK_CROWN.get(),
+			EEBlocks.PETRIFIED_OVERWORLD_CORROCK_CROWN.get(), EEBlocks.PETRIFIED_OVERWORLD_WALL_CORROCK_CROWN.get(), EEBlocks.PETRIFIED_NETHER_CORROCK_CROWN.get(),
+			EEBlocks.PETRIFIED_NETHER_WALL_CORROCK_CROWN.get(), EEBlocks.PETRIFIED_END_CORROCK_CROWN.get(), EEBlocks.PETRIFIED_END_WALL_CORROCK_CROWN.get()
 	));
 
 	public static final RegistryObject<BlockEntityType<EnderCampfireTileEntity>> ENDER_CAMPFIRE = HELPER.createBlockEntity("ender_campfire", EnderCampfireTileEntity::new, () -> Set.of(EEBlocks.ENDER_CAMPFIRE.get()));
@@ -28,5 +28,5 @@ public final class EEBlockEntityTypes {
 	public static final RegistryObject<BlockEntityType<BolloomBudTileEntity>> BOLLOOM_BUD = HELPER.createBlockEntity("bolloom_bud", BolloomBudTileEntity::new, () -> Set.of(EEBlocks.BOLLOOM_BUD.get()));
 	public static final RegistryObject<BlockEntityType<PuffBugHiveTileEntity>> PUFFBUG_HIVE = HELPER.createBlockEntity("puffbug_hive", PuffBugHiveTileEntity::new, () -> Set.of(EEBlocks.PUFFBUG_HIVE.get()));
 	public static final RegistryObject<BlockEntityType<BoofBlockTileEntity>> BOOF_BLOCK = HELPER.createBlockEntity("boof_block", BoofBlockTileEntity::new, () -> Set.of(EEBlocks.BOOF_BLOCK.get()));
-	public static final RegistryObject<BlockEntityType<DispensedBlockBoofTileEntity>> BOOF_BLOCK_DISPENSED = HELPER.createBlockEntity("boof_block_dispensed", DispensedBlockBoofTileEntity::new, () -> Set.of(EEBlocks.BOOF_BLOCK_DISPENSED.get()));
+	public static final RegistryObject<BlockEntityType<DispensedBlockBoofTileEntity>> BOOF_BLOCK_DISPENSED = HELPER.createBlockEntity("boof_block_dispensed", DispensedBlockBoofTileEntity::new, () -> Set.of(EEBlocks.DISPENSED_BOOF_BLOCK.get()));
 }

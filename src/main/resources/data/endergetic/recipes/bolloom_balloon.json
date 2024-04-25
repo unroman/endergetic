@@ -7,12 +7,10 @@
     "#"
   ],
   "key": {
-    "#": 
-    {
+    "#": {
       "item": "minecraft:string"
     },
-    "F": 
-    {
+    "F": {
       "item": "endergetic:bolloom_fruit"
     }
   },

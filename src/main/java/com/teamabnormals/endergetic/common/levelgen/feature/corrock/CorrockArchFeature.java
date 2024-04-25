@@ -100,7 +100,7 @@ public class CorrockArchFeature extends AbstractCorrockFeature<CorrockArchConfig
 						}
 					}
 					BlockState corrockBlockState = CORROCK_BLOCK_STATE.get();
-					BlockState corrockState = EEBlocks.CORROCK_END.get().defaultBlockState();
+					BlockState corrockState = EEBlocks.END_CORROCK.get().defaultBlockState();
 					float crownChance = config.getCrownChance();
 					float plantChance = config.getPlantChance();
 					corrockBlockPositions.forEach(corrockPos -> {

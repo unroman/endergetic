@@ -36,9 +36,9 @@ import java.util.function.Supplier;
 
 public class CorrockPlantBlock extends Block implements SimpleWaterloggedBlock {
 	private static final Map<ResourceLocation, Supplier<Block>> CONVERSIONS = Util.make(Maps.newHashMap(), (conversions) -> {
-		conversions.put(BuiltinDimensionTypes.OVERWORLD.location(), EEBlocks.CORROCK_OVERWORLD);
-		conversions.put(BuiltinDimensionTypes.NETHER.location(), EEBlocks.CORROCK_NETHER);
-		conversions.put(BuiltinDimensionTypes.END.location(), EEBlocks.CORROCK_END);
+		conversions.put(BuiltinDimensionTypes.OVERWORLD.location(), EEBlocks.OVERWORLD_CORROCK);
+		conversions.put(BuiltinDimensionTypes.NETHER.location(), EEBlocks.NETHER_CORROCK);
+		conversions.put(BuiltinDimensionTypes.END.location(), EEBlocks.END_CORROCK);
 	});
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 15.0D, 14.0D);
@@ -112,7 +112,7 @@ public class CorrockPlantBlock extends Block implements SimpleWaterloggedBlock {
 	}
 
 	protected Block getConversionBlock(LevelAccessor level) {
-		return CONVERSIONS.getOrDefault(level.registryAccess().registry(Registries.DIMENSION_TYPE).get().getKey(level.dimensionType()), EEBlocks.CORROCK_OVERWORLD).get();
+		return CONVERSIONS.getOrDefault(level.registryAccess().registry(Registries.DIMENSION_TYPE).get().getKey(level.dimensionType()), EEBlocks.OVERWORLD_CORROCK).get();
 	}
 
 	private boolean shouldConvert(LevelAccessor level) {

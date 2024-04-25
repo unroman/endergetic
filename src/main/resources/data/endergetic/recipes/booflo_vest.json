@@ -7,12 +7,10 @@
     "HHH"
   ],
   "key": {
-    "B": 
-    {
+    "B": {
       "item": "endergetic:boof_block"
     },
-    "H": 
-    {
+    "H": {
       "item": "endergetic:booflo_hide"
     }
   },

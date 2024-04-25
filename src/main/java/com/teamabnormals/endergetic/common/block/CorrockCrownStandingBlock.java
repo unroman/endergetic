@@ -42,9 +42,9 @@ import java.util.function.Supplier;
 
 public class CorrockCrownStandingBlock extends CorrockCrownBlock {
 	private static final Map<ResourceLocation, Supplier<CorrockCrownBlock>> CONVERSIONS = Util.make(Maps.newHashMap(), (conversions) -> {
-		conversions.put(BuiltinDimensionTypes.OVERWORLD.location(), EEBlocks.CORROCK_CROWN_OVERWORLD_STANDING);
-		conversions.put(BuiltinDimensionTypes.NETHER.location(), EEBlocks.CORROCK_CROWN_NETHER_STANDING);
-		conversions.put(BuiltinDimensionTypes.END.location(), EEBlocks.CORROCK_CROWN_END_STANDING);
+		conversions.put(BuiltinDimensionTypes.OVERWORLD.location(), EEBlocks.OVERWORLD_CORROCK_CROWN);
+		conversions.put(BuiltinDimensionTypes.NETHER.location(), EEBlocks.NETHER_CORROCK_CROWN);
+		conversions.put(BuiltinDimensionTypes.END.location(), EEBlocks.END_CORROCK_CROWN);
 	});
 	public static final IntegerProperty ROTATION = BlockStateProperties.ROTATION_16;
 	public static final BooleanProperty UPSIDE_DOWN = BooleanProperty.create("upside_down");
@@ -142,7 +142,7 @@ public class CorrockCrownStandingBlock extends CorrockCrownBlock {
 	}
 
 	protected Block getConversionBlock(LevelAccessor level) {
-		return CONVERSIONS.getOrDefault(level.registryAccess().registry(Registries.DIMENSION_TYPE).get().getKey(level.dimensionType()), EEBlocks.CORROCK_CROWN_OVERWORLD_STANDING).get();
+		return CONVERSIONS.getOrDefault(level.registryAccess().registry(Registries.DIMENSION_TYPE).get().getKey(level.dimensionType()), EEBlocks.OVERWORLD_CORROCK_CROWN).get();
 	}
 
 	private boolean shouldConvert(LevelAccessor level) {

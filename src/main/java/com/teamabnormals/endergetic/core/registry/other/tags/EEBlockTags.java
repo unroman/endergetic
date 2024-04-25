@@ -6,6 +6,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
 public class EEBlockTags {
+	public static final TagKey<Block> POISE_STEMS = blockTag("poise_stems");
 	public static final TagKey<Block> END_PLANTABLE = blockTag("end_plantable");
 	public static final TagKey<Block> POISE_PLANTABLE = blockTag("poise_plantable");
 	public static final TagKey<Block> ENDER_FIRE_BASE_BLOCKS = blockTag("ender_fire_base_blocks");

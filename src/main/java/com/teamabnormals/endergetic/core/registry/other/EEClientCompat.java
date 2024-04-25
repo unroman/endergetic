@@ -12,12 +12,12 @@ public class EEClientCompat {
 	}
 
 	private static void registerRenderLayers() {
-		setRenderLayer(EEBlocks.CORROCK_END.get(), RenderType.cutout());
-		setRenderLayer(EEBlocks.CORROCK_NETHER.get(), RenderType.cutout());
-		setRenderLayer(EEBlocks.CORROCK_OVERWORLD.get(), RenderType.cutout());
-		setRenderLayer(EEBlocks.PETRIFIED_CORROCK_END.get(), RenderType.cutout());
-		setRenderLayer(EEBlocks.PETRIFIED_CORROCK_NETHER.get(), RenderType.cutout());
-		setRenderLayer(EEBlocks.PETRIFIED_CORROCK_OVERWORLD.get(), RenderType.cutout());
+		setRenderLayer(EEBlocks.END_CORROCK.get(), RenderType.cutout());
+		setRenderLayer(EEBlocks.NETHER_CORROCK.get(), RenderType.cutout());
+		setRenderLayer(EEBlocks.OVERWORLD_CORROCK.get(), RenderType.cutout());
+		setRenderLayer(EEBlocks.PETRIFIED_END_CORROCK.get(), RenderType.cutout());
+		setRenderLayer(EEBlocks.PETRIFIED_NETHER_CORROCK.get(), RenderType.cutout());
+		setRenderLayer(EEBlocks.PETRIFIED_OVERWORLD_CORROCK.get(), RenderType.cutout());
 
 		setRenderLayer(EEBlocks.ENDER_FIRE.get(), RenderType.cutout());
 		setRenderLayer(EEBlocks.ENDER_TORCH.get(), RenderType.cutout());
