@@ -4,11 +4,9 @@ import com.google.common.collect.Lists;
 import com.teamabnormals.endergetic.common.entity.bolloom.BolloomBalloon;
 import com.teamabnormals.endergetic.common.entity.eetle.GliderEetle;
 import com.teamabnormals.endergetic.core.interfaces.BalloonHolder;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.RelativeMovement;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 @Mixin(Entity.class)
 public final class EntityMixin implements BalloonHolder {
@@ -25,11 +22,6 @@ public final class EntityMixin implements BalloonHolder {
 
 	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;moveTo(DDDFF)V", shift = At.Shift.AFTER), method = "teleportTo(DDD)V")
 	private void updateBalloonPositions(double x, double y, double z, CallbackInfo info) {
-		this.balloons.forEach(BolloomBalloon::updateAttachedPosition);
-	}
-
-	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;moveTo(DDDFF)V", shift = At.Shift.AFTER), method = "teleportTo(Lnet/minecraft/server/level/ServerLevel;DDDLjava/util/Set;FF)Z")
-	private void updateBalloonPositions(ServerLevel level, double x, double y, double z, Set<RelativeMovement> p_265083_, float p_265573_, float p_265094_, CallbackInfoReturnable<Boolean> cir) {
 		this.balloons.forEach(BolloomBalloon::updateAttachedPosition);
 	}
 

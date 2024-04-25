@@ -23,6 +23,7 @@ public final class EEAdvancementModifierProvider extends AdvancementModifierProv
 	private static final EntityType<?>[] BREEDABLE_ANIMALS = new EntityType[]{EEEntityTypes.PUFF_BUG.get()};
 	private static final EntityType<?>[] MOBS_TO_KILL = new EntityType[]{EEEntityTypes.BOOFLO.get(), EEEntityTypes.PUFF_BUG.get()};
 
+	// TODO: Eetle Update
 	public EEAdvancementModifierProvider(PackOutput output, CompletableFuture<Provider> provider) {
 		super(EndergeticExpansion.MOD_ID, output, provider);
 	}

@@ -2,18 +2,13 @@ package com.teamabnormals.endergetic.core.data.server;
 
 import com.teamabnormals.blueprint.common.world.modification.chunk.ChunkGeneratorModifierProvider;
 import com.teamabnormals.blueprint.common.world.modification.chunk.modifiers.SurfaceRuleModifier;
-import com.teamabnormals.blueprint.core.registry.BlueprintSurfaceRules;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import com.teamabnormals.endergetic.core.registry.EEBiomes;
+import com.teamabnormals.endergetic.core.registry.builtin.EEBiomes;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
-import com.teamabnormals.endergetic.core.registry.EESurfaceRules;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Noises;
-import net.minecraft.world.level.levelgen.SurfaceRules;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -38,6 +33,7 @@ public final class EEChunkGeneratorModifierProvider extends ChunkGeneratorModifi
 				.selects("the_end")
 				.addModifier(new SurfaceRuleModifier(poiseForest, false));
 
+		// TODO: Eetle Update
 //		RuleSource corrockPlains = SurfaceRules.ifTrue(SurfaceRules.isBiome(Biomes.END_HIGHLANDS, Biomes.END_MIDLANDS), EESurfaceRules.CorrockRuleSource.INSTANCE);
 //		this.entry("corrock_plains_surface")
 //				.selects("the_end")

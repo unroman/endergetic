@@ -2,12 +2,12 @@ package com.teamabnormals.endergetic.core.data.server;
 
 import com.teamabnormals.blueprint.core.registry.BlueprintDataPackRegistries;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import com.teamabnormals.endergetic.core.registry.EEBiomeSlices;
-import com.teamabnormals.endergetic.core.registry.EEBiomes;
+import com.teamabnormals.endergetic.core.registry.builtin.EEBiomeSlices;
+import com.teamabnormals.endergetic.core.registry.builtin.EEBiomes;
 import com.teamabnormals.endergetic.core.registry.EEFeatures.EEConfiguredFeatures;
 import com.teamabnormals.endergetic.core.registry.EEFeatures.EEPlacedFeatures;
-import com.teamabnormals.endergetic.core.registry.other.EEBiomeModifiers;
-import com.teamabnormals.endergetic.core.registry.other.EEDamageTypes;
+import com.teamabnormals.endergetic.core.registry.builtin.EEBiomeModifiers;
+import com.teamabnormals.endergetic.core.registry.builtin.EEDamageTypes;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;

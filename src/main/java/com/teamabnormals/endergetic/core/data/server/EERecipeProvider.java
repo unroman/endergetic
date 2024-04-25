@@ -37,8 +37,6 @@ public class EERecipeProvider extends BlueprintRecipeProvider {
 	public void buildRecipes(Consumer<FinishedRecipe> consumer) {
 		storageRecipes(consumer, RecipeCategory.FOOD, EEItems.BOLLOOM_FRUIT.get(), RecipeCategory.BUILDING_BLOCKS, BOLLOOM_CRATE.get());
 
-		// foodCookingRecipes(consumer, EETLE_EGG.get(), EEItems.COOKED_EETLE_EGG.get());
-
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, EUMUS_BRICKS.get()).define('#', EEItems.EUMUS_BRICK.get()).pattern("##").pattern("##").unlockedBy("has_eumus_brick", has(EEItems.EUMUS_BRICK.get())).save(consumer);
 		generateRecipes(consumer, EEBlockFamilies.EUMUS_BRICKS_FAMILY);
 		stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, EUMUS_BRICK_SLAB.get(), EUMUS_BRICKS.get(), 2);
@@ -77,22 +75,25 @@ public class EERecipeProvider extends BlueprintRecipeProvider {
 		WoodworksRecipeProvider.baseRecipes(consumer, POISE_PLANKS.get(), POISE_SLAB.get(), POISE_BOARDS.get(), POISE_BOOKSHELF.get(), CHISELED_POISE_BOOKSHELF.get(), POISE_LADDER.get(), POISE_BEEHIVE.get(), POISE_CHEST.get(), TRAPPED_POISE_CHEST.get(), EndergeticExpansion.MOD_ID);
 		WoodworksRecipeProvider.sawmillRecipes(consumer, EEBlockFamilies.POISE_PLANKS_FAMILY, EEItemTags.POISE_STEMS, POISE_BOARDS.get(), POISE_LADDER.get(), EndergeticExpansion.MOD_ID);
 
-		petrifiedCorrockRecipe(consumer, PETRIFIED_INFESTED_CORROCK, INFESTED_CORROCK);
-
-		petrifiedCorrockRecipe(consumer, PETRIFIED_END_CORROCK, END_CORROCK);
-		petrifiedCorrockRecipe(consumer, PETRIFIED_END_CORROCK_BLOCK, END_CORROCK_BLOCK);
-		petrifiedCorrockRecipe(consumer, PETRIFIED_END_CORROCK_CROWN, END_CORROCK_CROWN);
-		petrifiedCorrockRecipe(consumer, PETRIFIED_SPECKLED_END_CORROCK, SPECKLED_END_CORROCK);
-
-		petrifiedCorrockRecipe(consumer, PETRIFIED_NETHER_CORROCK, NETHER_CORROCK);
-		petrifiedCorrockRecipe(consumer, PETRIFIED_NETHER_CORROCK_BLOCK, NETHER_CORROCK_BLOCK);
-		petrifiedCorrockRecipe(consumer, PETRIFIED_NETHER_CORROCK_CROWN, NETHER_CORROCK_CROWN);
-		petrifiedCorrockRecipe(consumer, PETRIFIED_SPECKLED_NETHER_CORROCK, SPECKLED_NETHER_CORROCK);
-
-		petrifiedCorrockRecipe(consumer, PETRIFIED_OVERWORLD_CORROCK, OVERWORLD_CORROCK);
-		petrifiedCorrockRecipe(consumer, PETRIFIED_OVERWORLD_CORROCK_BLOCK, OVERWORLD_CORROCK_BLOCK);
-		petrifiedCorrockRecipe(consumer, PETRIFIED_OVERWORLD_CORROCK_CROWN, OVERWORLD_CORROCK_CROWN);
-		petrifiedCorrockRecipe(consumer, PETRIFIED_SPECKLED_OVERWORLD_CORROCK, SPECKLED_OVERWORLD_CORROCK);
+		// TODO: Eetle Update
+//		foodCookingRecipes(consumer, EETLE_EGG.get(), EEItems.COOKED_EETLE_EGG.get());
+//
+//		petrifiedCorrockRecipe(consumer, PETRIFIED_INFESTED_CORROCK, INFESTED_CORROCK);
+//
+//		petrifiedCorrockRecipe(consumer, PETRIFIED_END_CORROCK, END_CORROCK);
+//		petrifiedCorrockRecipe(consumer, PETRIFIED_END_CORROCK_BLOCK, END_CORROCK_BLOCK);
+//		petrifiedCorrockRecipe(consumer, PETRIFIED_END_CORROCK_CROWN, END_CORROCK_CROWN);
+//		petrifiedCorrockRecipe(consumer, PETRIFIED_SPECKLED_END_CORROCK, SPECKLED_END_CORROCK);
+//
+//		petrifiedCorrockRecipe(consumer, PETRIFIED_NETHER_CORROCK, NETHER_CORROCK);
+//		petrifiedCorrockRecipe(consumer, PETRIFIED_NETHER_CORROCK_BLOCK, NETHER_CORROCK_BLOCK);
+//		petrifiedCorrockRecipe(consumer, PETRIFIED_NETHER_CORROCK_CROWN, NETHER_CORROCK_CROWN);
+//		petrifiedCorrockRecipe(consumer, PETRIFIED_SPECKLED_NETHER_CORROCK, SPECKLED_NETHER_CORROCK);
+//
+//		petrifiedCorrockRecipe(consumer, PETRIFIED_OVERWORLD_CORROCK, OVERWORLD_CORROCK);
+//		petrifiedCorrockRecipe(consumer, PETRIFIED_OVERWORLD_CORROCK_BLOCK, OVERWORLD_CORROCK_BLOCK);
+//		petrifiedCorrockRecipe(consumer, PETRIFIED_OVERWORLD_CORROCK_CROWN, OVERWORLD_CORROCK_CROWN);
+//		petrifiedCorrockRecipe(consumer, PETRIFIED_SPECKLED_OVERWORLD_CORROCK, SPECKLED_OVERWORLD_CORROCK);
 	}
 
 	public static void petrifiedCorrockRecipe(Consumer<FinishedRecipe> consumer, RegistryObject<? extends Block> petrifiedCorrock, RegistryObject<? extends Block> corrock) {

@@ -1,4 +1,4 @@
-package com.teamabnormals.endergetic.core.registry.other;
+package com.teamabnormals.endergetic.core.registry.builtin;
 
 import com.teamabnormals.endergetic.common.levelgen.biome.modifiers.SmallEndIslandsAmbienceBiomeModifier;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
@@ -28,6 +28,7 @@ public final class EEBiomeModifiers {
 		//TODO: Biome Tag
 		List<ResourceKey<Biome>> endHighlandsOrMidlands = List.of(Biomes.END_HIGHLANDS, Biomes.END_MIDLANDS);
 
+		// TODO: Eetle Update
 //		addSpawn(context, "add_eetle_spawns", endHighlandsOrMidlands, new MobSpawnSettings.SpawnerData(EEEntityTypes.CHARGER_EETLE.get(), 12, 2, 5), new MobSpawnSettings.SpawnerData(EEEntityTypes.CHARGER_EETLE.get(), 8, 2, 4));
 //		addFeature(context, "add_corrock_vegetation", endHighlandsOrMidlands, GenerationStep.Decoration.VEGETAL_DECORATION, EEPlacedFeatures.CORROCK_PATCH, EEPlacedFeatures.EETLE_EGG_PATCH);
 //		addFeature(context, "add_corrock_surface_structures", endHighlandsOrMidlands, GenerationStep.Decoration.SURFACE_STRUCTURES, EEPlacedFeatures.CORROCK_BRANCH, EEPlacedFeatures.CORROCK_TOWER, EEPlacedFeatures.CORROCK_SHELF, EEPlacedFeatures.CORROCK_ARCH, EEPlacedFeatures.EUMUS_PATCH, EEPlacedFeatures.SPECKLED_CORROCK_PATCH);

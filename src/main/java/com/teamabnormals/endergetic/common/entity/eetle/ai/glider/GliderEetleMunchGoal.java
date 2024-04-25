@@ -2,7 +2,7 @@ package com.teamabnormals.endergetic.common.entity.eetle.ai.glider;
 
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatedGoal;
 import com.teamabnormals.endergetic.common.entity.eetle.GliderEetle;
-import com.teamabnormals.endergetic.core.registry.other.EEDamageTypes;
+import com.teamabnormals.endergetic.core.registry.builtin.EEDamageTypes;
 import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;

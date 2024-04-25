@@ -179,8 +179,8 @@ public class BolloomBalloon extends AbstractBolloom {
 	public void detachFromEntity() {
 		if (this.attachedEntity != null) {
 			((BalloonHolder) this.attachedEntity).detachBalloon(this);
-			if (this.attachedEntity instanceof CustomBalloonPositioner) {
-				((CustomBalloonPositioner) this.attachedEntity).onBalloonDetached(this);
+			if (this.attachedEntity instanceof CustomBalloonPositioner customBalloonPositioner) {
+				customBalloonPositioner.onBalloonDetached(this);
 			}
 			this.attachedEntity = null;
 		}
@@ -200,8 +200,8 @@ public class BolloomBalloon extends AbstractBolloom {
 		if (this.canUpdate()) {
 			this.tick();
 			this.incrementTicksExisted(!this.level().isClientSide);
-			if (this.attachedEntity instanceof CustomBalloonPositioner) {
-				((CustomBalloonPositioner) this.attachedEntity).updateAttachedPosition(this);
+			if (this.attachedEntity instanceof CustomBalloonPositioner customBalloonPositioner) {
+				customBalloonPositioner.updateAttachedPosition(this);
 			} else if (this.attachedEntity != null) {
 				this.setPos(this.attachedEntity.getX() + this.getSway() * Mth.sin(-this.getVineYRot()), this.attachedEntity.getY() + this.getPassengersRidingOffset() + this.attachedEntity.getEyeHeight(), this.attachedEntity.getZ() + this.getSway() * Mth.cos(-this.getVineYRot()));
 			}

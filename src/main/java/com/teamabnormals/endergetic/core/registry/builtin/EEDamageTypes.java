@@ -1,4 +1,4 @@
-package com.teamabnormals.endergetic.core.registry.other;
+package com.teamabnormals.endergetic.core.registry.builtin;
 
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import net.minecraft.core.registries.Registries;

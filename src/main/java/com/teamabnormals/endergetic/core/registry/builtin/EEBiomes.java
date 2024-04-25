@@ -1,7 +1,9 @@
-package com.teamabnormals.endergetic.core.registry;
+package com.teamabnormals.endergetic.core.registry.builtin;
 
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
+import com.teamabnormals.endergetic.core.registry.EEEntityTypes;
 import com.teamabnormals.endergetic.core.registry.EEFeatures.EEPlacedFeatures;
+import com.teamabnormals.endergetic.core.registry.EESoundEvents;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
