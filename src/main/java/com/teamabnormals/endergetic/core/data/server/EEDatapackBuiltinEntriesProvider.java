@@ -29,6 +29,6 @@ public class EEDatapackBuiltinEntriesProvider extends DatapackBuiltinEntriesProv
 			.add(ForgeRegistries.Keys.BIOME_MODIFIERS, EEBiomeModifiers::bootstrap);
 
 	public EEDatapackBuiltinEntriesProvider(PackOutput output, CompletableFuture<Provider> provider) {
-		super(output, provider, BUILDER, Set.of(EndergeticExpansion.MOD_ID));
+		super(output, provider, BUILDER, Set.of(EndergeticExpansion.MOD_ID, "minecraft"));
 	}
 }

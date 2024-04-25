@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:dragon_breath"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "pattern": [
+    "#",
+    "O"
+  ],
+  "result": {
+    "item": "endergetic:acidian_lantern"
+  },
+  "show_notification": true
+}

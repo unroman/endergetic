@@ -1,0 +1,22 @@
+{
+  "values": [
+    "minecraft:shulker",
+    "minecraft:painting",
+    "minecraft:vex",
+    "minecraft:allay",
+    "minecraft:item_frame",
+    "minecraft:glow_item_frame",
+    "endergetic:boof_block",
+    "endergetic:poise_cluster",
+    "endergetic:bolloom_balloon",
+    "endergetic:bolloom_fruit",
+    {
+      "id": "quark:glass_item_frame",
+      "required": false
+    },
+    {
+      "id": "quark:dyed_item_frame",
+      "required": false
+    }
+  ]
+}

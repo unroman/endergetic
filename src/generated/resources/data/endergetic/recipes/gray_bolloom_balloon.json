@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "group": "bolloom_balloon",
+  "ingredients": [
+    {
+      "item": "endergetic:bolloom_balloon"
+    },
+    {
+      "item": "minecraft:gray_dye"
+    }
+  ],
+  "result": {
+    "item": "endergetic:gray_bolloom_balloon"
+  }
+}

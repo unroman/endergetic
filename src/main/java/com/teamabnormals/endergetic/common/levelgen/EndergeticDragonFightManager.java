@@ -86,7 +86,7 @@ public final class EndergeticDragonFightManager extends EndDragonFight {
 			this.level.getChunkSource().removeRegionTicket(TicketType.DRAGON, new ChunkPos(0, 0), 9, Unit.INSTANCE);
 		}
 
-		if (EEConfig.ValuesHolder.shouldDebugDragonFightManager()) {
+		if (EEConfig.COMMON.debugDragonFightManager.get()) {
 			LOGGER.debug("Found exit portal: " + this.findEndergeticExitPortal(true));
 			LOGGER.debug(this.portalLocation != null ? this.portalLocation.toString() : "null");
 		}

@@ -2,7 +2,6 @@ package com.teamabnormals.endergetic.core;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
-import net.minecraftforge.fml.config.ModConfig;
 import org.apache.commons.lang3.tuple.Pair;
 
 /**
@@ -14,20 +13,10 @@ public final class EEConfig {
 		public final ConfigValue<Boolean> debugDragonFightManager;
 
 		Common(ForgeConfigSpec.Builder builder) {
-			builder.comment("Common only settings for Endergetic")
-					.push("common");
-
-			debugDragonFightManager = builder
-					.comment("If The Dragon Fight Manager should debug its portal values; Default: False")
-					.translation(makeTranslation("debug_dragon_fight_manager"))
-					.define("debugDragonFightManager", false);
-
+			builder.push("debug");
+			debugDragonFightManager = builder.comment("If the Dragon Fight Manager should debug its portal values").define("Debug Dragon Fight Manager", false);
 			builder.pop();
 		}
-	}
-
-	private static String makeTranslation(String name) {
-		return "endergetic.config." + name;
 	}
 
 	public static final ForgeConfigSpec COMMON_SPEC;
@@ -38,17 +27,4 @@ public final class EEConfig {
 		COMMON_SPEC = specPair.getRight();
 		COMMON = specPair.getLeft();
 	}
-
-	public static class ValuesHolder {
-		private static boolean debugDragonFightManager;
-
-		public static void updateCommonValuesFromConfig(ModConfig config) {
-			debugDragonFightManager = EEConfig.COMMON.debugDragonFightManager.get();
-		}
-
-		public static boolean shouldDebugDragonFightManager() {
-			return debugDragonFightManager;
-		}
-	}
-
 }

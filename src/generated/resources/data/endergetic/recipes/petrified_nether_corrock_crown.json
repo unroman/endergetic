@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "endergetic:nether_corrock_crown"
+    },
+    "B": {
+      "tag": "forge:buckets/water"
+    }
+  },
+  "pattern": [
+    "###",
+    "#B#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "item": "endergetic:petrified_nether_corrock_crown"
+  },
+  "show_notification": true
+}

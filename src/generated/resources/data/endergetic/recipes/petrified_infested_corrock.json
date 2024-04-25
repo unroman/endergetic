@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "endergetic:infested_corrock"
+    },
+    "B": {
+      "tag": "forge:buckets/water"
+    }
+  },
+  "pattern": [
+    "###",
+    "#B#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "item": "endergetic:petrified_infested_corrock"
+  },
+  "show_notification": true
+}

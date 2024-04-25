@@ -46,6 +46,7 @@ import com.teamabnormals.endergetic.core.data.client.EEEndimationProvider;
 import com.teamabnormals.endergetic.core.data.server.*;
 import com.teamabnormals.endergetic.core.data.server.tags.EEBiomeTagsProvider;
 import com.teamabnormals.endergetic.core.data.server.tags.EEBlockTagsProvider;
+import com.teamabnormals.endergetic.core.data.server.tags.EEEntityTypeTagsProvider;
 import com.teamabnormals.endergetic.core.data.server.tags.EEItemTagsProvider;
 import com.teamabnormals.endergetic.core.keybinds.KeybindHandler;
 import com.teamabnormals.endergetic.core.registry.*;
@@ -128,13 +129,6 @@ public class EndergeticExpansion {
 		EEDataSerializers.SERIALIZERS.register(bus);
 		EEBiomeModifierSerializers.SERIALIZERS.register(bus);
 
-		bus.addListener((ModConfigEvent event) -> {
-			final ModConfig config = event.getConfig();
-			if (config.getSpec() == EEConfig.COMMON_SPEC) {
-				EEConfig.ValuesHolder.updateCommonValuesFromConfig(config);
-			}
-		});
-
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
 			bus.addListener(EventPriority.LOWEST, this::clientSetup);
 			bus.addListener(KeybindHandler::registerKeys);
@@ -177,6 +171,7 @@ public class EndergeticExpansion {
 		generator.addProvider(server, blockTags);
 		generator.addProvider(server, new EEItemTagsProvider(output, provider, blockTags.contentsGetter(), helper));
 		generator.addProvider(server, new EEBiomeTagsProvider(output, provider, helper));
+		generator.addProvider(server, new EEEntityTypeTagsProvider(output, provider, helper));
 
 		boolean client = event.includeClient();
 		generator.addProvider(client, new EEEndimationProvider(output));
