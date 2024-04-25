@@ -1,4 +1,4 @@
-package com.teamabnormals.endergetic.core.data.server;
+package com.teamabnormals.endergetic.core.data.server.modifiers;
 
 import com.teamabnormals.blueprint.common.world.modification.chunk.ChunkGeneratorModifierProvider;
 import com.teamabnormals.blueprint.common.world.modification.chunk.modifiers.SurfaceRuleModifier;

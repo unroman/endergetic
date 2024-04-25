@@ -35,7 +35,7 @@ public class EECompat {
 		DispenserBlock.registerBehavior(EEItems.LIGHT_GRAY_BOLLOOM_BALLOON.get(), new BolloomBalloonItem.BalloonDispenseBehavior());
 		DispenserBlock.registerBehavior(EEItems.BLACK_BOLLOOM_BALLOON.get(), new BolloomBalloonItem.BalloonDispenseBehavior());
 		DispenserBlock.registerBehavior(EEItems.WHITE_BOLLOOM_BALLOON.get(), new BolloomBalloonItem.BalloonDispenseBehavior());
-		DispenserBlock.registerBehavior(EEItems.PUFFBUG_BOTTLE.get(), new PuffBugBottleItem.PuffBugBottleDispenseBehavior());
+		DispenserBlock.registerBehavior(EEItems.PUFF_BUG_BOTTLE.get(), new PuffBugBottleItem.PuffBugBottleDispenseBehavior());
 	}
 
 	private static void registerCompostables() {

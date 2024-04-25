@@ -36,7 +36,7 @@ public final class EEItems {
 	public static final RegistryObject<Item> BOLLOOM_FRUIT = HELPER.createItem("bolloom_fruit", () -> new BolloomFruitItem(new Item.Properties().food(EEFoods.BOLLOOM_FRUIT)));
 	public static final RegistryObject<Item> BOOFLO_HIDE = HELPER.createItem("booflo_hide", () -> new Item(new Item.Properties()));
 	public static final RegistryObject<Item> BOOFLO_VEST = HELPER.createItem("booflo_vest", () -> new BoofloVestItem(new Item.Properties()));
-	public static final RegistryObject<Item> PUFFBUG_BOTTLE = HELPER.createItem("puffbug_bottle", () -> new PuffBugBottleItem(new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> PUFF_BUG_BOTTLE = HELPER.createItem("puffbug_bottle", () -> new PuffBugBottleItem(new Item.Properties().stacksTo(1)));
 	public static final RegistryObject<Item> MUSIC_DISC_KILOBYTE = HELPER.createItem("music_disc_kilobyte", () -> new BlueprintRecordItem(14, EESoundEvents.KILOBYTE, new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 163));
 	public static final RegistryObject<Item> COOKED_EETLE_EGG = HELPER.createItem("cooked_eetle_egg", () -> new Item(new Item.Properties().food(EEFoods.COOKED_EETLE_EGG)));
 	public static final RegistryObject<Item> PORTAPLASM = HELPER.createItem("portaplasm", () -> new Item(new Item.Properties()));
@@ -76,7 +76,7 @@ public final class EEItems {
 				.addItemsAfter(of(Items.SHULKER_SHELL), BOOFLO_HIDE)
 				.addItemsAfter(of(Items.NETHER_BRICK), EUMUS_BRICK)
 				.tab(TOOLS_AND_UTILITIES)
-				.addItemsBefore(of(Items.FISHING_ROD), PUFFBUG_BOTTLE)
+				.addItemsBefore(of(Items.FISHING_ROD), PUFF_BUG_BOTTLE)
 				.addItemsAfter(of(Items.LEAD), BOLLOOM_BALLOON)
 				.tab(COLORED_BLOCKS)
 				.addItems(BOLLOOM_BALLOON, WHITE_BOLLOOM_BALLOON, LIGHT_GRAY_BOLLOOM_BALLOON, GRAY_BOLLOOM_BALLOON, BLACK_BOLLOOM_BALLOON, BROWN_BOLLOOM_BALLOON, RED_BOLLOOM_BALLOON, ORANGE_BOLLOOM_BALLOON, YELLOW_BOLLOOM_BALLOON, LIME_BOLLOOM_BALLOON, GREEN_BOLLOOM_BALLOON, CYAN_BOLLOOM_BALLOON, LIGHT_BLUE_BOLLOOM_BALLOON, BLUE_BOLLOOM_BALLOON, PURPLE_BOLLOOM_BALLOON, MAGENTA_BOLLOOM_BALLOON, PINK_BOLLOOM_BALLOON)

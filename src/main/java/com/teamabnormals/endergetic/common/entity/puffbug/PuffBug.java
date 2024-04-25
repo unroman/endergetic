@@ -1029,7 +1029,7 @@ public class PuffBug extends Animal implements Endimatable {
 		if (item == Items.GLASS_BOTTLE) {
 			this.playSound(SoundEvents.BOTTLE_FILL_DRAGONBREATH, 1.0F, 1.0F);
 			itemstack.shrink(1);
-			ItemStack bottle = new ItemStack(EEItems.PUFFBUG_BOTTLE.get());
+			ItemStack bottle = new ItemStack(EEItems.PUFF_BUG_BOTTLE.get());
 			this.setBottleData(bottle);
 
 			if (itemstack.isEmpty()) {
