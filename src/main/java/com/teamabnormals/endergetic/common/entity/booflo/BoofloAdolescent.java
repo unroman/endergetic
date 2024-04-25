@@ -10,7 +10,7 @@ import com.teamabnormals.endergetic.common.entity.booflo.ai.AdolescentEatGoal;
 import com.teamabnormals.endergetic.common.entity.booflo.ai.BoofloNearestAttackableTargetGoal;
 import com.teamabnormals.endergetic.core.registry.EEEntityTypes;
 import com.teamabnormals.endergetic.core.registry.EEItems;
-import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Position;
 import net.minecraft.core.particles.ItemParticleOption;

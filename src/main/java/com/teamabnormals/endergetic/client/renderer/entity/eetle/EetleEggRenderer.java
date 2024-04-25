@@ -8,7 +8,7 @@ import com.teamabnormals.endergetic.client.model.eetle.eggs.MediumEetleEggModel;
 import com.teamabnormals.endergetic.client.model.eetle.eggs.SmallEetleEggModel;
 import com.teamabnormals.endergetic.client.renderer.block.EetleEggTileEntityRenderer;
 import com.teamabnormals.endergetic.common.entity.eetle.EetleEgg;
-import com.teamabnormals.endergetic.core.registry.other.EERenderTypes;
+import com.teamabnormals.endergetic.core.other.EERenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;

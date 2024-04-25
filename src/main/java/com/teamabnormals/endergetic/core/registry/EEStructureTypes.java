@@ -3,7 +3,7 @@ package com.teamabnormals.endergetic.core.registry;
 import com.teamabnormals.endergetic.common.levelgen.structure.EetleNestStructure;
 import com.teamabnormals.endergetic.common.levelgen.structure.structures.EetleNestPieces.EetleNestPiece;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import com.teamabnormals.endergetic.core.registry.other.tags.EEBiomeTags;
+import com.teamabnormals.endergetic.core.other.tags.EEBiomeTags;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;

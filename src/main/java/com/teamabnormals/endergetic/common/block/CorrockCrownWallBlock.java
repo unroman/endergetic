@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.teamabnormals.endergetic.client.particle.data.CorrockCrownParticleData;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
-import com.teamabnormals.endergetic.core.registry.other.EEEvents;
+import com.teamabnormals.endergetic.core.other.EEEvents;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

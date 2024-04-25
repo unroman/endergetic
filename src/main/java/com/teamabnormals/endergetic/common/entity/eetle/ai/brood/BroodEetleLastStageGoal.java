@@ -3,7 +3,7 @@ package com.teamabnormals.endergetic.common.entity.eetle.ai.brood;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.teamabnormals.endergetic.common.entity.eetle.BroodEetle;
 import com.teamabnormals.endergetic.common.entity.eetle.EetleEgg;
-import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.phys.Vec3;

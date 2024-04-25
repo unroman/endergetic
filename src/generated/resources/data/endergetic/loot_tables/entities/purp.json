@@ -8,22 +8,20 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:set_count",
-              "count": 1
-            },
-            {
+              "add": false,
               "count": {
                 "type": "minecraft:uniform",
                 "max": 1.0,
                 "min": 0.0
               },
-              "function": "minecraft:looting_enchant"
+              "function": "minecraft:set_count"
             }
           ],
           "name": "endergetic:portaplasm"
         }
       ],
-      "rolls": 1
+      "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "endergetic:entities/purp"
 }

@@ -1,4 +1,4 @@
-package com.teamabnormals.endergetic.core.registry.other;
+package com.teamabnormals.endergetic.core.other;
 
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.endergetic.common.block.poise.boof.BoofBlock;

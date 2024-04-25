@@ -10,7 +10,7 @@ import com.teamabnormals.endergetic.common.block.EetleEggBlock;
 import com.teamabnormals.endergetic.common.block.entity.EetleEggTileEntity;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
-import com.teamabnormals.endergetic.core.registry.other.EERenderTypes;
+import com.teamabnormals.endergetic.core.other.EERenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;

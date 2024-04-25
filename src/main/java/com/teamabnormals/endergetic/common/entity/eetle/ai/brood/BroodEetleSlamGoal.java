@@ -4,7 +4,7 @@ import com.teamabnormals.blueprint.core.endimator.entity.EndimatedGoal;
 import com.teamabnormals.endergetic.common.entity.eetle.AbstractEetle;
 import com.teamabnormals.endergetic.common.entity.eetle.BroodEetle;
 import com.teamabnormals.endergetic.core.registry.EEParticleTypes;
-import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.server.level.ServerLevel;

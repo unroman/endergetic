@@ -9,8 +9,8 @@ import com.teamabnormals.endergetic.client.particle.data.CorrockCrownParticleDat
 import com.teamabnormals.endergetic.common.entity.purpoid.ai.*;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import com.teamabnormals.endergetic.core.registry.EEParticleTypes;
-import com.teamabnormals.endergetic.core.registry.other.EEDataSerializers;
-import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.other.EEDataSerializers;
+import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -61,8 +61,8 @@ public class Purpoid extends PathfinderMob implements Endimatable {
 	private static final EntityDataAccessor<Optional<BlockPos>> RESTING_POS = SynchedEntityData.defineId(Purpoid.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
 	private static final EntityDataAccessor<Direction> RESTING_SIDE = SynchedEntityData.defineId(Purpoid.class, EntityDataSerializers.DIRECTION);
 	private static final EntityDataAccessor<Integer> SHIELDED_MOMMY_ID = SynchedEntityData.defineId(Purpoid.class, EntityDataSerializers.INT);
-	private static final ResourceLocation PURP_LOOT_TABLE = new ResourceLocation(EndergeticExpansion.MOD_ID, "entities/purpoid/purp");
-	private static final ResourceLocation PURPAZOID_LOOT_TABLE = new ResourceLocation(EndergeticExpansion.MOD_ID, "entities/purpoid/purpazoid");
+	private static final ResourceLocation PURP_LOOT_TABLE = new ResourceLocation(EndergeticExpansion.MOD_ID, "entities/purp");
+	private static final ResourceLocation PURPAZOID_LOOT_TABLE = new ResourceLocation(EndergeticExpansion.MOD_ID, "entities/purpazoid");
 	private final TeleportController teleportController = new TeleportController();
 	private int growingAge;
 	private int teleportCooldown;

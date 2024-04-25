@@ -3,6 +3,9 @@ package com.teamabnormals.endergetic.core.data.server;
 import com.google.common.collect.ImmutableList;
 import com.teamabnormals.endergetic.common.block.EetleEggBlock;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
+import com.teamabnormals.endergetic.core.registry.EEBlocks;
+import com.teamabnormals.endergetic.core.registry.EEEntityTypes;
+import com.teamabnormals.endergetic.core.registry.EEItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -21,11 +24,15 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithLootingCondition;
 import net.minecraft.world.level.storage.loot.providers.number.BinomialDistributionGenerator;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
@@ -40,8 +47,8 @@ public class EELootTableProvider extends LootTableProvider {
 
 	public EELootTableProvider(PackOutput output) {
 		super(output, BuiltInLootTables.all(), ImmutableList.of(
-				new SubProviderEntry(AutumnityBlockLoot::new, LootContextParamSets.BLOCK)
-				//, new SubProviderEntry(AutumnityEntityLoot::new, LootContextParamSets.ENTITY)
+				new SubProviderEntry(EEBlockLoot::new, LootContextParamSets.BLOCK),
+				new SubProviderEntry(EEEntityLoot::new, LootContextParamSets.ENTITY)
 		));
 	}
 
@@ -49,9 +56,9 @@ public class EELootTableProvider extends LootTableProvider {
 	protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext context) {
 	}
 
-	private static class AutumnityBlockLoot extends BlockLootSubProvider {
+	private static class EEBlockLoot extends BlockLootSubProvider {
 
-		protected AutumnityBlockLoot() {
+		protected EEBlockLoot() {
 			super(Set.of(), FeatureFlags.REGISTRY.allFlags());
 		}
 
@@ -183,6 +190,18 @@ public class EELootTableProvider extends LootTableProvider {
 
 		@Override
 		public void generate() {
+			this.add(EEEntityTypes.BOOFLO.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(EEItems.BOOFLO_HIDE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.2F, 0.2F))));
+			this.add(EEEntityTypes.BOOFLO_ADOLESCENT.get(), LootTable.lootTable());
+			this.add(EEEntityTypes.BOOFLO_BABY.get(), LootTable.lootTable());
+			this.add(EEEntityTypes.BROOD_EETLE.get(), LootTable.lootTable());
+			this.add(EEEntityTypes.PUFF_BUG.get(), LootTable.lootTable());
+
+			this.add(EEEntityTypes.PURPOID.get(), new ResourceLocation(EndergeticExpansion.MOD_ID, "entities/purp"), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(EEItems.PORTAPLASM.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))))));
+			this.add(EEEntityTypes.PURPOID.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(EEItems.PORTAPLASM.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 2.0F))))));
+			this.add(EEEntityTypes.PURPOID.get(), new ResourceLocation(EndergeticExpansion.MOD_ID, "entities/purpazoid"), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(EEItems.PORTAPLASM.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 8.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1.0F, 3.0F))))));
+
+			this.add(EEEntityTypes.CHARGER_EETLE.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(EEBlocks.EETLE_EGG.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.2F, 0.1F))));
+			this.add(EEEntityTypes.GLIDER_EETLE.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(EEBlocks.EETLE_EGG.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.2F, 0.1F))));
 		}
 
 		@Override

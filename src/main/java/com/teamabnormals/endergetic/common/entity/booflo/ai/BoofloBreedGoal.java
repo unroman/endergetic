@@ -4,7 +4,7 @@ import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.teamabnormals.endergetic.common.advancement.EECriteriaTriggers;
 import com.teamabnormals.endergetic.common.entity.booflo.Booflo;
 import com.teamabnormals.endergetic.common.entity.booflo.Booflo.GroundMoveHelperController;
-import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;

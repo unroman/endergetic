@@ -2,7 +2,7 @@ package com.teamabnormals.endergetic.common.block.poise;
 
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
 import com.teamabnormals.endergetic.core.registry.EEParticleTypes;
-import com.teamabnormals.endergetic.core.registry.other.tags.EEBlockTags;
+import com.teamabnormals.endergetic.core.other.tags.EEBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

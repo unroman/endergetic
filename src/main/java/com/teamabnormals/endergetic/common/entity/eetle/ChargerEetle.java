@@ -3,7 +3,7 @@ package com.teamabnormals.endergetic.common.entity.eetle;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.teamabnormals.endergetic.common.entity.eetle.ai.charger.EetleCatapultGoal;
 import com.teamabnormals.endergetic.common.entity.eetle.ai.charger.EetleMeleeAttackGoal;
-import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;

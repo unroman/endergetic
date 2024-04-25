@@ -1,6 +1,6 @@
 package com.teamabnormals.endergetic.core.mixin.chorus;
 
-import com.teamabnormals.endergetic.core.registry.other.tags.EEBlockTags;
+import com.teamabnormals.endergetic.core.other.tags.EEBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;

@@ -4,7 +4,7 @@ import com.teamabnormals.endergetic.common.block.entity.BolloomBudTileEntity;
 import com.teamabnormals.endergetic.common.block.entity.BolloomBudTileEntity.BudSide;
 import com.teamabnormals.endergetic.core.registry.EEBlockEntityTypes;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
-import com.teamabnormals.endergetic.core.registry.other.tags.EEBlockTags;
+import com.teamabnormals.endergetic.core.other.tags.EEBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;

@@ -10,9 +10,9 @@ import com.teamabnormals.endergetic.common.entity.eetle.flying.FlyingEetleMoveCo
 import com.teamabnormals.endergetic.common.entity.eetle.flying.FlyingRotations;
 import com.teamabnormals.endergetic.common.entity.eetle.flying.IFlyingEetle;
 import com.teamabnormals.endergetic.common.entity.eetle.flying.TargetFlyingRotations;
-import com.teamabnormals.endergetic.core.registry.other.EEDataProcessors;
-import com.teamabnormals.endergetic.core.registry.other.EEDataSerializers;
-import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.other.EEDataProcessors;
+import com.teamabnormals.endergetic.core.other.EEDataSerializers;
+import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;

@@ -3,7 +3,7 @@ package com.teamabnormals.endergetic.common.entity.puffbug.ai;
 import com.teamabnormals.endergetic.common.block.entity.PuffBugHiveTileEntity;
 import com.teamabnormals.endergetic.common.block.entity.PuffBugHiveTileEntity.HiveOccupantData;
 import com.teamabnormals.endergetic.common.entity.puffbug.PuffBug;
-import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.ai.goal.Goal;

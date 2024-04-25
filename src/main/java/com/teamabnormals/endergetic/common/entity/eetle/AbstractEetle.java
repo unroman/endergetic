@@ -10,7 +10,7 @@ import com.teamabnormals.endergetic.common.entity.eetle.ai.EetleHurtByTargetGoal
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
 import com.teamabnormals.endergetic.core.registry.EEParticleTypes;
 import com.teamabnormals.endergetic.core.registry.EESoundEvents;
-import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

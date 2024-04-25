@@ -1,4 +1,4 @@
-package com.teamabnormals.endergetic.core.registry.other.tags;
+package com.teamabnormals.endergetic.core.other.tags;
 
 import com.teamabnormals.blueprint.core.util.TagUtil;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;

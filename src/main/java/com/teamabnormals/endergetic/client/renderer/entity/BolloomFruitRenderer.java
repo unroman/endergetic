@@ -6,7 +6,7 @@ import com.mojang.math.Axis;
 import com.teamabnormals.endergetic.client.model.bolloom.BolloomFruitModel;
 import com.teamabnormals.endergetic.common.entity.bolloom.BolloomFruit;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import com.teamabnormals.endergetic.core.registry.other.EERenderTypes;
+import com.teamabnormals.endergetic.core.other.EERenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

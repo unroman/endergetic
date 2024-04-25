@@ -2,7 +2,7 @@ package com.teamabnormals.endergetic.core.data.client;
 
 import com.teamabnormals.blueprint.core.data.client.BlueprintBlockStateProvider;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import com.teamabnormals.endergetic.core.registry.other.EEBlockFamilies;
+import com.teamabnormals.endergetic.core.other.EEBlockFamilies;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -23,7 +23,9 @@ public class EEBlockStateProvider extends BlueprintBlockStateProvider {
 		this.directionalBlock(BOLLOOM_CRATE);
 
 		this.block(EUMUS.get());
-		this.block(CHISELED_END_STONE_BRICKS);
+		this.cubeColumnBlock(CHISELED_EUMUS_BRICKS);
+		this.cubeColumnBlock(CHISELED_END_STONE_BRICKS);
+		this.block(CRACKED_EUMUS_BRICKS);
 		this.block(CRACKED_END_STONE_BRICKS);
 		this.block(CRACKED_PURPUR_BLOCK);
 

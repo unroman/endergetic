@@ -8,7 +8,7 @@ import com.teamabnormals.endergetic.common.entity.bolloom.BolloomBalloon;
 import com.teamabnormals.endergetic.common.item.BolloomBalloonItem;
 import com.teamabnormals.endergetic.core.interfaces.BalloonHolder;
 import com.teamabnormals.endergetic.core.interfaces.CustomBalloonPositioner;
-import com.teamabnormals.endergetic.core.registry.other.EEDataProcessors;
+import com.teamabnormals.endergetic.core.other.EEDataProcessors;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;

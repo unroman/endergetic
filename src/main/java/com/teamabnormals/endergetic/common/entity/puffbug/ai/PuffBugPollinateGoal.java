@@ -4,7 +4,7 @@ import com.teamabnormals.blueprint.core.endimator.PlayableEndimation;
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatedGoal;
 import com.teamabnormals.endergetic.common.block.entity.BolloomBudTileEntity;
 import com.teamabnormals.endergetic.common.entity.puffbug.PuffBug;
-import com.teamabnormals.endergetic.core.registry.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 

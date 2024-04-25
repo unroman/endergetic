@@ -1,4 +1,4 @@
-package com.teamabnormals.endergetic.core.registry.other;
+package com.teamabnormals.endergetic.core.other;
 
 import com.google.common.collect.Maps;
 import com.teamabnormals.blueprint.client.ClientInfo;

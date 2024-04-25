@@ -5,7 +5,7 @@ import com.teamabnormals.endergetic.common.entity.BoofBlockEntity;
 import com.teamabnormals.endergetic.core.registry.EEBlockEntityTypes;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
 import com.teamabnormals.endergetic.core.registry.EESoundEvents;
-import com.teamabnormals.endergetic.core.registry.other.tags.EEEntityTypeTags;
+import com.teamabnormals.endergetic.core.other.tags.EEEntityTypeTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
