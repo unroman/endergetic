@@ -166,6 +166,7 @@ public class EndergeticExpansion {
 		provider = datapackEntries.getRegistryProvider();
 		generator.addProvider(server, new EEChunkGeneratorModifierProvider(output, provider));
 		generator.addProvider(server, new EERecipeProvider(output));
+		generator.addProvider(server, new EELootTableProvider(output));
 		generator.addProvider(server, new EEAdvancementModifierProvider(output, provider));
 		generator.addProvider(server, new EELootModifierProvider(output, provider));
 		EEBlockTagsProvider blockTags = new EEBlockTagsProvider(output, provider, helper);

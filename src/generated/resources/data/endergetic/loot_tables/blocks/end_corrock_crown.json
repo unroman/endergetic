@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "endergetic:end_corrock_crown"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "endergetic:blocks/end_corrock_crown"
+}
