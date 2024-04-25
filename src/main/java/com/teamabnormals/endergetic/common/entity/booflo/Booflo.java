@@ -489,73 +489,73 @@ public class Booflo extends PathfinderMob implements Endimatable {
 		}
 	}
 
+	// TODO: FIX THIS RAHHHHHHHHHHHHH
 
 	@Override
 	public void tickRidden(Player rider, Vec3 vec3d) {
 		super.tickRidden(rider, vec3d);
+		this.setYRot(rider.getYRot());
+		this.yRotO = this.getYRot();
+		this.setXRot(0.0F);
+		this.setRot(this.getYRot(), this.getXRot());
+		this.yBodyRot = this.getYRot();
+		this.yHeadRot = this.getYRot();
+
+		float playerMoveFoward = rider.zza;
+
+		if (!this.level().isClientSide() && playerMoveFoward > 0.0F) {
+			if (this.onGround() && this.isNoEndimationPlaying() && !this.isBoofed()) {
+				NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.BOOFLO_HOP);
+			} else if (!this.onGround() && this.isNoEndimationPlaying() && this.isBoofed()) {
+				NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.BOOFLO_SWIM);
+			}
+		}
+
+		//if (this.isControlledByLocalInstance()) {
+
+			if (this.isBoofed()) {
+				float gravity = this.getBoostPower() > 0 ? 0.01F : 0.035F;
+
+				if (this.isPathFinding()) {
+					this.getNavigation().stop();
+				}
+
+				if (this.getBoofloAttackTarget() != null) {
+					this.setBoofloAttackTargetId(0);
+				}
+
+				this.move(MoverType.SELF, this.getDeltaMovement());
+				this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
+				if (!this.isInWater()) {
+					this.setDeltaMovement(this.getDeltaMovement().subtract(0, gravity, 0));
+				}
+			} else {
+				if (this.onGround() && this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_HOP) && this.getAnimationTick() == 10) {
+					Vec3 motion = this.getDeltaMovement();
+					MobEffectInstance jumpBoost = this.getEffect(MobEffects.JUMP);
+					float boostPower = jumpBoost == null ? 1.0F : (float) (jumpBoost.getAmplifier() + 1);
+
+					this.setDeltaMovement(motion.x, 0.55F * boostPower, motion.z);
+					this.hasImpulse = true;
+
+					float xMotion = -Mth.sin(this.getYRot() * ((float) Math.PI / 180F));
+					float zMotion = Mth.cos(this.getYRot() * ((float) Math.PI / 180F));
+
+					float multiplier = 0.35F + (float) this.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
+
+					this.setDeltaMovement(this.getDeltaMovement().add(xMotion * multiplier, 0.0F, zMotion * multiplier));
+				}
+			//}
+		}
 	}
 
 	@Override
 	public void travel(Vec3 vec3d) {
 		if (this.isAlive() && this.isVehicle()) {
-			Entity controllingPassenger = this.getControllingPassenger();
-			if (controllingPassenger instanceof Player rider) {
-				this.setYRot(rider.getYRot());
-				this.yRotO = this.getYRot();
-				this.setXRot(0.0F);
-				this.setRot(this.getYRot(), this.getXRot());
-				this.yBodyRot = this.getYRot();
-				this.yHeadRot = this.getYRot();
-
-				float playerMoveFoward = rider.zza;
-
-				if (!this.level().isClientSide() && playerMoveFoward > 0.0F) {
-					if (this.onGround() && this.isNoEndimationPlaying() && !this.isBoofed()) {
-						NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.BOOFLO_HOP);
-					} else if (!this.onGround() && this.isNoEndimationPlaying() && this.isBoofed()) {
-						NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.BOOFLO_SWIM);
-					}
-				}
-
-				if (this.isBoofed()) {
-					float gravity = this.getBoostPower() > 0 ? 0.01F : 0.035F;
-
-					if (this.isPathFinding()) {
-						this.getNavigation().stop();
-					}
-
-					if (this.getBoofloAttackTarget() != null) {
-						this.setBoofloAttackTargetId(0);
-					}
-
-					this.move(MoverType.SELF, this.getDeltaMovement());
-					this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
-					if (!this.isInWater()) {
-						this.setDeltaMovement(this.getDeltaMovement().subtract(0, gravity, 0));
-					}
-				} else {
-					if (this.onGround() && this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_HOP) && this.getAnimationTick() == 10) {
-						Vec3 motion = this.getDeltaMovement();
-						MobEffectInstance jumpBoost = this.getEffect(MobEffects.JUMP);
-						float boostPower = jumpBoost == null ? 1.0F : (float) (jumpBoost.getAmplifier() + 1);
-
-						this.setDeltaMovement(motion.x, 0.55F * boostPower, motion.z);
-						this.hasImpulse = true;
-
-						float xMotion = -Mth.sin(this.getYRot() * ((float) Math.PI / 180F));
-						float zMotion = Mth.cos(this.getYRot() * ((float) Math.PI / 180F));
-
-						float multiplier = 0.35F + (float) this.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
-
-						this.setDeltaMovement(this.getDeltaMovement().add(xMotion * multiplier, 0.0F, zMotion * multiplier));
-					}
-
-					if (this.isControlledByLocalInstance()) {
-						super.travel(new Vec3(0.0F, vec3d.y, 0.0F));
-					} else {
-						this.setDeltaMovement(Vec3.ZERO);
-					}
-				}
+			if (this.isControlledByLocalInstance()) {
+				super.travel(new Vec3(0.0F, vec3d.y, 0.0F));
+			} else {
+				this.setDeltaMovement(Vec3.ZERO);
 			}
 		} else {
 			if (this.isEffectiveAi() && this.isBoofed()) {
