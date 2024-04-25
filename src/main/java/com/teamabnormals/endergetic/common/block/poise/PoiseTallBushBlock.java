@@ -1,11 +1,13 @@
 package com.teamabnormals.endergetic.common.block.poise;
 
-import com.teamabnormals.endergetic.common.levelgen.feature.PoiseTreeFeature;
+import com.teamabnormals.endergetic.core.other.tags.EEBlockTags;
+import com.teamabnormals.endergetic.core.registry.EEFeatures.EEConfiguredFeatures;
 import com.teamabnormals.endergetic.core.registry.EEParticleTypes;
 import com.teamabnormals.endergetic.core.registry.EESoundEvents;
-import com.teamabnormals.endergetic.core.other.tags.EEBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -29,12 +31,13 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.eventbus.api.Event.Result;
 
 import javax.annotation.Nullable;
 
@@ -179,14 +182,15 @@ public class PoiseTallBushBlock extends Block implements BonemealableBlock {
 		this.grow(level, pos, state, rand);
 	}
 
-	public void grow(ServerLevel worldIn, BlockPos pos, BlockState state, RandomSource rand) {
+	public void grow(ServerLevel level, BlockPos pos, BlockState state, RandomSource rand) {
 		if (state.getValue(STAGE) == 0) {
-			worldIn.setBlock(pos, state.cycle(STAGE), 4);
+			level.setBlock(pos, state.cycle(STAGE), 4);
 		} else {
-			// TODO: Reimplement
-			// if (!ForgeEventFactory.blockGrowFeature(worldIn, rand, pos)) return;
+			Holder<ConfiguredFeature<?, ?>> holder = level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(EEConfiguredFeatures.POISE_TREE).orElse(null);
 			BlockPos treePos = state.getValue(HALF) == DoubleBlockHalf.LOWER ? pos : pos.below();
-			(new PoiseTreeFeature(NoneFeatureConfiguration.CODEC)).place(FeatureConfiguration.NONE, worldIn, worldIn.getChunkSource().getGenerator(), rand, treePos);
+			if (holder != null && ForgeEventFactory.blockGrowFeature(level, rand, treePos, holder).getResult() != Result.DENY) {
+				holder.get().place(level, level.getChunkSource().getGenerator(), rand, treePos);
+			}
 		}
 	}
 }

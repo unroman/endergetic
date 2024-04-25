@@ -454,7 +454,7 @@ public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
 		if (source.getDirectEntity() instanceof AbstractArrow) {
 			return false;
 		}
-		// TODO: Make sure this works properly
+		// TODO: Make sure this works properly, perhaps a magic damage tag in blueprint
 		return super.hurt(source, source.is(DamageTypeTags.WITCH_RESISTANT_TO) && source.is(DamageTypeTags.BYPASSES_ARMOR) ? amount : amount * (source.is(DamageTypeTags.IS_PROJECTILE) ? 0.05F : 0.1F));
 	}
 

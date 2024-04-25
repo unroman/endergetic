@@ -13,8 +13,8 @@ import com.teamabnormals.endergetic.common.advancement.EECriteriaTriggers;
 import com.teamabnormals.endergetic.common.entity.bolloom.BolloomFruit;
 import com.teamabnormals.endergetic.common.entity.booflo.ai.*;
 import com.teamabnormals.endergetic.common.entity.puffbug.PuffBug;
-import com.teamabnormals.endergetic.core.registry.*;
 import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.registry.*;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Position;
@@ -59,7 +59,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 import java.util.UUID;
 import java.util.function.Predicate;
 
@@ -153,13 +152,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 	}
 
 	public static AttributeSupplier.Builder registerAttributes() {
-		return Mob.createMobAttributes()
-				.add(Attributes.ATTACK_DAMAGE, 7.0F)
-				.add(Attributes.MAX_HEALTH, 40.0F)
-				.add(Attributes.MOVEMENT_SPEED, 1.05F)
-				.add(Attributes.ARMOR, 4.0F)
-				.add(Attributes.FOLLOW_RANGE, 22.0F)
-				.add(Attributes.KNOCKBACK_RESISTANCE, 0.6F);
+		return Mob.createMobAttributes().add(Attributes.ATTACK_DAMAGE, 7.0F).add(Attributes.MAX_HEALTH, 40.0F).add(Attributes.MOVEMENT_SPEED, 1.05F).add(Attributes.ARMOR, 4.0F).add(Attributes.FOLLOW_RANGE, 22.0F).add(Attributes.KNOCKBACK_RESISTANCE, 0.6F);
 	}
 
 	@Override
@@ -496,80 +489,77 @@ public class Booflo extends PathfinderMob implements Endimatable {
 		}
 	}
 
+
 	@Override
-	public void travel(Vec3 vec3d) {
-		if (this.isAlive() && this.isVehicle()) {
-			Entity controllingPassenger = this.getControllingPassenger();
-			if (controllingPassenger instanceof Player) {
-				LivingEntity rider = (LivingEntity) this.getControllingPassenger();
-				this.setYRot(rider.getYRot());
-				this.yRotO = this.getYRot();
-				this.setXRot(0.0F);
-				this.setRot(this.getYRot(), this.getXRot());
-				this.yBodyRot = this.getYRot();
-				this.yHeadRot = this.getYRot();
+	public void tickRidden(Player rider, Vec3 vec3d) {
+		this.setYRot(rider.getYRot());
+		this.yRotO = this.getYRot();
+		this.setXRot(0.0F);
+		this.setRot(this.getYRot(), this.getXRot());
+		this.yBodyRot = this.getYRot();
+		this.yHeadRot = this.getYRot();
 
-				float playerMoveFoward = rider.zza;
+		float playerMoveFoward = rider.zza;
+		if (!this.level().isClientSide() && playerMoveFoward > 0.0F) {
+			if (this.onGround() && this.isNoEndimationPlaying() && !this.isBoofed()) {
+				NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.BOOFLO_HOP);
+			} else if (!this.onGround() && this.isNoEndimationPlaying() && this.isBoofed()) {
+				NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.BOOFLO_SWIM);
+			}
+		}
 
-				if (!this.level().isClientSide && playerMoveFoward > 0.0F) {
-					if (this.onGround() && this.isNoEndimationPlaying() && !this.isBoofed()) {
-						NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.BOOFLO_HOP);
-					} else if (!this.onGround() && this.isNoEndimationPlaying() && this.isBoofed()) {
-						NetworkUtil.setPlayingAnimation(this, EEPlayableEndimations.BOOFLO_SWIM);
-					}
-				}
+		if (this.isBoofed()) {
+			float gravity = this.getBoostPower() > 0 ? 0.01F : 0.035F;
 
-				if (this.isBoofed()) {
-					float gravity = this.getBoostPower() > 0 ? 0.01F : 0.035F;
+			if (this.isPathFinding()) {
+				this.getNavigation().stop();
+			}
 
-					if (this.isPathFinding()) {
-						this.getNavigation().stop();
-					}
+			if (this.getBoofloAttackTarget() != null) {
+				this.setBoofloAttackTargetId(0);
+			}
 
-					if (this.getBoofloAttackTarget() != null) {
-						this.setBoofloAttackTargetId(0);
-					}
-
-					this.move(MoverType.SELF, this.getDeltaMovement());
-					this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
-					if (!this.isInWater()) {
-						this.setDeltaMovement(this.getDeltaMovement().subtract(0, gravity, 0));
-					}
-				} else {
-					if (this.onGround() && this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_HOP) && this.getAnimationTick() == 10) {
-						Vec3 motion = this.getDeltaMovement();
-						MobEffectInstance jumpBoost = this.getEffect(MobEffects.JUMP);
-						float boostPower = jumpBoost == null ? 1.0F : (float) (jumpBoost.getAmplifier() + 1);
-
-						this.setDeltaMovement(motion.x, 0.55F * boostPower, motion.z);
-						this.hasImpulse = true;
-
-						float xMotion = -Mth.sin(this.getYRot() * ((float) Math.PI / 180F));
-						float zMotion = Mth.cos(this.getYRot() * ((float) Math.PI / 180F));
-
-						float multiplier = 0.35F + (float) this.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
-
-						this.setDeltaMovement(this.getDeltaMovement().add(xMotion * multiplier, 0.0F, zMotion * multiplier));
-					}
-
-					if (this.isControlledByLocalInstance()) {
-						super.travel(new Vec3(0.0F, vec3d.y, 0.0F));
-					} else {
-						this.setDeltaMovement(Vec3.ZERO);
-					}
-				}
+			this.move(MoverType.SELF, this.getDeltaMovement());
+			this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
+			if (!this.isInWater()) {
+				this.setDeltaMovement(this.getDeltaMovement().subtract(0, gravity, 0));
 			}
 		} else {
-			if (this.isEffectiveAi() && this.isBoofed()) {
-				this.moveRelative(0.0F, vec3d);
-				this.move(MoverType.SELF, this.getDeltaMovement());
-				this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
-				if (!this.isMovingInAir()) {
-					this.setDeltaMovement(this.getDeltaMovement().subtract(0, 0.01D, 0));
-				}
-			} else {
-				super.travel(vec3d);
+			if (this.onGround() && this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_HOP) && this.getAnimationTick() == 10) {
+				Vec3 motion = this.getDeltaMovement();
+				MobEffectInstance jumpBoost = this.getEffect(MobEffects.JUMP);
+				float boostPower = jumpBoost == null ? 1.0F : (float) (jumpBoost.getAmplifier() + 1);
+
+				this.setDeltaMovement(motion.x, 0.55F * boostPower, motion.z);
+				this.hasImpulse = true;
+
+				float xMotion = -Mth.sin(this.getYRot() * ((float) Math.PI / 180F));
+				float zMotion = Mth.cos(this.getYRot() * ((float) Math.PI / 180F));
+
+				float multiplier = 0.35F + (float) this.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
+
+				this.setDeltaMovement(this.getDeltaMovement().add(xMotion * multiplier, 0.0F, zMotion * multiplier));
 			}
+
+			if (this.isControlledByLocalInstance()) {
+				super.tickRidden(rider, new Vec3(0.0F, vec3d.y, 0.0F));
+			} else {
+				this.setDeltaMovement(Vec3.ZERO);
+			}
+		}
+	}
+
+	@Override
+	public void travel(Vec3 vec3d) {
+		if (this.isEffectiveAi() && this.isBoofed()) {
+			this.moveRelative(0.0F, vec3d);
+			this.move(MoverType.SELF, this.getDeltaMovement());
+			this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
+			if (!this.isMovingInAir()) {
+				this.setDeltaMovement(this.getDeltaMovement().subtract(0, 0.01D, 0));
+			}
+		} else {
+			super.travel(vec3d);
 		}
 	}
 
@@ -577,11 +567,10 @@ public class Booflo extends PathfinderMob implements Endimatable {
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 		if (reason == MobSpawnType.NATURAL) {
-			Random rand = new Random();
-			if (rand.nextFloat() < 0.2F) {
+			if (worldIn.getRandom().nextFloat() < 0.2F) {
 				this.babiesToBirth = 3;
 			}
-			this.setFruitsNeeded(rand.nextInt(3) + 2);
+			this.setFruitsNeeded(worldIn.getRandom().nextInt(3) + 2);
 		}
 		return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 	}
@@ -968,8 +957,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 
 	@Override
 	protected void doPush(Entity entity) {
-		if (entity instanceof BoofloBaby && (((BoofloBaby) (entity)).isBeingBorn() || ((BoofloBaby) (entity)).getMotherNoClipTicks() > 0))
-			return;
+		if (entity instanceof BoofloBaby && (((BoofloBaby) (entity)).isBeingBorn() || ((BoofloBaby) (entity)).getMotherNoClipTicks() > 0)) return;
 		super.doPush(entity);
 	}
 
@@ -1152,12 +1140,21 @@ public class Booflo extends PathfinderMob implements Endimatable {
 		return this.isBoofed() ? BOOFED_SIZE : super.getDimensions(poseIn);
 	}
 
-	// TODO: Does this cause a problem?
-//	@Override
-//	@Nullable
-//	public LivingEntity getControllingPassenger() {
-//		return this.getPassengers().isEmpty() ? null : this.getPassengers().get(0);
-//	}
+	@Override
+	@Nullable
+	public LivingEntity getControllingPassenger() {
+		Entity entity = this.getFirstPassenger();
+		if (entity instanceof Mob mob) {
+			return mob;
+		} else {
+			entity = this.getFirstPassenger();
+			if (entity instanceof Player player) {
+				return player;
+			}
+
+			return null;
+		}
+	}
 
 	protected boolean isResistantToBoof(Entity entity) {
 		return entity instanceof Booflo || entity instanceof BoofloAdolescent || entity instanceof BoofloBaby;

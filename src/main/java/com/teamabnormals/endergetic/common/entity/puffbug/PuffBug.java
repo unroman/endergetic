@@ -854,7 +854,6 @@ public class PuffBug extends Animal implements Endimatable {
 		if (resultType == HitResult.Type.ENTITY) {
 			EntityHitResult entityResult = (EntityHitResult) result;
 			Entity entity = entityResult.getEntity();
-			//TODO: See if this should be changed
 			if (entity.hurt(this.level().damageSources().mobProjectile(this, this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue())) {
 				this.setInflated(true);
 				this.removeFireDirection();
@@ -1116,7 +1115,6 @@ public class PuffBug extends Animal implements Endimatable {
 	protected void doPush(Entity entity) {
 		if (!this.isInflated() && !(entity instanceof PuffBug)) {
 			if (this.isProjectile()) {
-				// TODO: See if this an issue
 				if (entity.hurt(this.damageSources().mobProjectile(this, this), 5.0F)) {
 					this.setInflated(true);
 					this.removeFireDirection();
