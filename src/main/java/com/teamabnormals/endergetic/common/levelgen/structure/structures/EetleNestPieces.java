@@ -11,7 +11,7 @@ import com.teamabnormals.endergetic.common.entity.eetle.BroodEetle;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
 import com.teamabnormals.endergetic.core.registry.EEEntityTypes;
-import com.teamabnormals.endergetic.core.registry.EEStructures.EEStructurePieceTypes;
+import com.teamabnormals.endergetic.core.registry.EEStructureTypes.EEStructurePieceTypes;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

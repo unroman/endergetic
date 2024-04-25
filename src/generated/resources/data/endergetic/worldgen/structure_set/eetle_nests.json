@@ -1,0 +1,15 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 5193657,
+    "separation": 9,
+    "spacing": 18,
+    "spread_type": "triangular"
+  },
+  "structures": [
+    {
+      "structure": "endergetic:eetle_nest",
+      "weight": 1
+    }
+  ]
+}

@@ -2,7 +2,7 @@ package com.teamabnormals.endergetic.common.levelgen.structure;
 
 import com.mojang.serialization.Codec;
 import com.teamabnormals.endergetic.common.levelgen.structure.structures.EetleNestPieces;
-import com.teamabnormals.endergetic.core.registry.EEStructures;
+import com.teamabnormals.endergetic.core.registry.EEStructureTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.NoiseColumn;
@@ -59,6 +59,6 @@ public class EetleNestStructure extends Structure {
 
 	@Override
 	public StructureType<?> type() {
-		return EEStructures.EETLE_NEST_TYPE.get();
+		return EEStructureTypes.EETLE_NEST_TYPE.get();
 	}
 }

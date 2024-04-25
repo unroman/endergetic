@@ -1,0 +1,24 @@
+{
+  "type": "endergetic:eetle_nest",
+  "biomes": "#endergetic:has_structure/eetle_nest",
+  "spawn_overrides": {
+    "monster": {
+      "bounding_box": "full",
+      "spawns": [
+        {
+          "type": "endergetic:charger_eetle",
+          "maxCount": 7,
+          "minCount": 3,
+          "weight": 12
+        },
+        {
+          "type": "endergetic:glider_eetle",
+          "maxCount": 6,
+          "minCount": 3,
+          "weight": 8
+        }
+      ]
+    }
+  },
+  "step": "raw_generation"
+}

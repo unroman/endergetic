@@ -26,6 +26,10 @@ public final class EEBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(Tags.Biomes.IS_SPARSE).add(EEBiomes.POISE_FOREST);
 		this.tag(Tags.Biomes.IS_SPARSE_END).add(EEBiomes.POISE_FOREST);
 		this.tag(Tags.Biomes.IS_MAGICAL).add(EEBiomes.POISE_FOREST);
-		this.tag(EEBiomeTags.HAS_EETLE_NEST);
+
+		this.tag(EEBiomeTags.HAS_EETLE_NEST);//.add(Biomes.END_HIGHLANDS);
+		this.tag(EEBiomeTags.HAS_EETLE);//.add(Biomes.END_HIGHLANDS, Biomes.END_MIDLANDS);
+		this.tag(EEBiomeTags.HAS_CORROCK);//.add(Biomes.END_HIGHLANDS, Biomes.END_MIDLANDS);
+		this.tag(EEBiomeTags.HAS_SPARSE_CORROCK);//.add(Biomes.END_MIDLANDS);
 	}
 }

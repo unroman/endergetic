@@ -35,7 +35,6 @@ import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -43,7 +42,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
@@ -338,11 +336,6 @@ public abstract class AbstractEetle extends Monster implements Endimatable {
 	@Override
 	protected boolean shouldDropLoot() {
 		return !this.isBaby();
-	}
-
-	@Override
-	public ItemStack getPickedResult(HitResult target) {
-		return super.getPickedResult(target); // new ItemStack(EEItems.EETLE_SPAWN_EGG.get());
 	}
 
 	@Override

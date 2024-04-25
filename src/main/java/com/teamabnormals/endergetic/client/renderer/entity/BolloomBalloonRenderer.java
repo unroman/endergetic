@@ -3,7 +3,6 @@ package com.teamabnormals.endergetic.client.renderer.entity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import com.mojang.math.Axis;
 import com.teamabnormals.endergetic.client.model.bolloom.BolloomBalloonModel;
 import com.teamabnormals.endergetic.common.entity.bolloom.BolloomBalloon;
 import com.teamabnormals.endergetic.core.registry.other.EERenderTypes;

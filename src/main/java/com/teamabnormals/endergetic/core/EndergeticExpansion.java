@@ -51,6 +51,7 @@ import com.teamabnormals.endergetic.core.data.server.tags.EEEntityTypeTagsProvid
 import com.teamabnormals.endergetic.core.data.server.tags.EEItemTagsProvider;
 import com.teamabnormals.endergetic.core.keybinds.KeybindHandler;
 import com.teamabnormals.endergetic.core.registry.*;
+import com.teamabnormals.endergetic.core.registry.EEStructureTypes.EEStructurePieceTypes;
 import com.teamabnormals.endergetic.core.registry.builtin.EEBiomes;
 import com.teamabnormals.endergetic.core.registry.other.EEClientCompat;
 import com.teamabnormals.endergetic.core.registry.other.EECompat;
@@ -121,10 +122,8 @@ public class EndergeticExpansion {
 		EESurfaceRules.RULES.register(bus);
 		EEPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES.register(bus);
 		EEFeatures.FEATURES.register(bus);
-		EEStructures.STRUCTURE_TYPES.register(bus);
-		EEStructures.STRUCTURES.register(bus);
-//		EEStructures.PieceTypes.STRUCTURE_PIECE_TYPES.register(bus);
-//		EEStructures.Sets.STRUCTURE_SETS.register(bus);
+		EEStructureTypes.STRUCTURE_TYPES.register(bus);
+		EEStructurePieceTypes.STRUCTURE_PIECE_TYPES.register(bus);
 		EEDataSerializers.SERIALIZERS.register(bus);
 		EEBiomeModifierSerializers.SERIALIZERS.register(bus);
 

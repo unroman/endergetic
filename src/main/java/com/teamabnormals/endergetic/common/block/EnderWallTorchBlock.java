@@ -11,8 +11,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.Random;
-
 public class EnderWallTorchBlock extends WallTorchBlock {
 
 	public EnderWallTorchBlock(Properties properties) {

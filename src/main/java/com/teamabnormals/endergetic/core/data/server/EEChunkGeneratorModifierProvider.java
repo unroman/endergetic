@@ -3,8 +3,8 @@ package com.teamabnormals.endergetic.core.data.server;
 import com.teamabnormals.blueprint.common.world.modification.chunk.ChunkGeneratorModifierProvider;
 import com.teamabnormals.blueprint.common.world.modification.chunk.modifiers.SurfaceRuleModifier;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import com.teamabnormals.endergetic.core.registry.builtin.EEBiomes;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
+import com.teamabnormals.endergetic.core.registry.builtin.EEBiomes;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Blocks;
@@ -22,7 +22,7 @@ public final class EEChunkGeneratorModifierProvider extends ChunkGeneratorModifi
 
 	@Override
 	protected void registerEntries(Provider provider) {
-		// TODO: ModdednessSliceConditionSource
+		// TODO: Do I have to worry about ModdednessSliceConditionSource?
 		//ConditionSource inSlice = new BlueprintSurfaceRules.ModdednessSliceConditionSource(new ResourceLocation(EndergeticExpansion.MOD_ID, "poise_forest"));
 		ConditionSource inPoiseForest = isBiome(EEBiomes.POISE_FOREST);
 		RuleSource poismoss = ifTrue(noiseCondition(Noises.SURFACE, 0.43F, Double.MAX_VALUE), sequence(ifTrue(ON_FLOOR, state(EEBlocks.POISMOSS.get().defaultBlockState())), state(Blocks.END_STONE.defaultBlockState())));

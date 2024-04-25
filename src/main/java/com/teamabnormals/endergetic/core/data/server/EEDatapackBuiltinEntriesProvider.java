@@ -2,11 +2,13 @@ package com.teamabnormals.endergetic.core.data.server;
 
 import com.teamabnormals.blueprint.core.registry.BlueprintDataPackRegistries;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import com.teamabnormals.endergetic.core.registry.builtin.EEBiomeSlices;
-import com.teamabnormals.endergetic.core.registry.builtin.EEBiomes;
 import com.teamabnormals.endergetic.core.registry.EEFeatures.EEConfiguredFeatures;
 import com.teamabnormals.endergetic.core.registry.EEFeatures.EEPlacedFeatures;
+import com.teamabnormals.endergetic.core.registry.EEStructureTypes.EEStructureSets;
+import com.teamabnormals.endergetic.core.registry.EEStructureTypes.EEStructures;
 import com.teamabnormals.endergetic.core.registry.builtin.EEBiomeModifiers;
+import com.teamabnormals.endergetic.core.registry.builtin.EEBiomeSlices;
+import com.teamabnormals.endergetic.core.registry.builtin.EEBiomes;
 import com.teamabnormals.endergetic.core.registry.builtin.EEDamageTypes;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.RegistrySetBuilder;
@@ -25,6 +27,8 @@ public class EEDatapackBuiltinEntriesProvider extends DatapackBuiltinEntriesProv
 			.add(Registries.PLACED_FEATURE, EEPlacedFeatures::bootstrap)
 			.add(Registries.BIOME, EEBiomes::bootstrap)
 			.add(Registries.DAMAGE_TYPE, EEDamageTypes::bootstrap)
+			.add(Registries.STRUCTURE, EEStructures::bootstrap)
+			.add(Registries.STRUCTURE_SET, EEStructureSets::bootstrap)
 			.add(BlueprintDataPackRegistries.MODDED_BIOME_SLICES, EEBiomeSlices::bootstrap)
 			.add(ForgeRegistries.Keys.BIOME_MODIFIERS, EEBiomeModifiers::bootstrap);
 

@@ -43,7 +43,7 @@ public final class EEProperties {
 	}
 
 	public static Properties poiseGrass(boolean isPlant) {
-		return !isPlant ? Properties.of().mapColor(MapColor.COLOR_PURPLE).requiresCorrectToolForDrops().strength(3.0F, 9.0F).randomTicks() : Properties.of().mapColor(MapColor.COLOR_PURPLE).sound(SoundType.GRASS).strength(0F).noCollission();
+		return !isPlant ? Properties.of().mapColor(MapColor.COLOR_PURPLE).requiresCorrectToolForDrops().strength(3.0F, 9.0F).randomTicks() : Properties.of().mapColor(MapColor.COLOR_PURPLE).sound(SoundType.GRASS).strength(0F).noCollission().replaceable();
 	}
 
 	public static Properties bolloomBud() {
