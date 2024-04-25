@@ -16,8 +16,16 @@ public class EEBlockStateProvider extends BlueprintBlockStateProvider {
 
 	@Override
 	protected void registerStatesAndModels() {
-		this.blockFamily(EEBlockFamilies.POISE_PLANKS_FAMILY);
 		this.blockFamily(EEBlockFamilies.EUMUS_BRICKS_FAMILY);
+		this.blockFamily(EEBlockFamilies.POISE_PLANKS_FAMILY);
+
+		this.block(BOOF_BLOCK);
+		this.directionalBlock(BOLLOOM_CRATE);
+
+		this.block(EUMUS.get());
+		this.block(CHISELED_END_STONE_BRICKS);
+		this.block(CRACKED_END_STONE_BRICKS);
+		this.block(CRACKED_PURPUR_BLOCK);
 
 		this.logBlocks(POISE_STEM, POISE_WOOD);
 		this.logBlocks(STRIPPED_POISE_STEM, STRIPPED_POISE_WOOD);

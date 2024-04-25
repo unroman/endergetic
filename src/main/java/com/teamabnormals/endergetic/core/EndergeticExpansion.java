@@ -42,6 +42,7 @@ import com.teamabnormals.endergetic.common.network.entity.booflo.C2SBoostMessage
 import com.teamabnormals.endergetic.common.network.entity.booflo.C2SInflateMessage;
 import com.teamabnormals.endergetic.common.network.entity.booflo.C2SSlamMessage;
 import com.teamabnormals.endergetic.common.network.entity.puffbug.RotateMessage;
+import com.teamabnormals.endergetic.core.data.client.EEBlockStateProvider;
 import com.teamabnormals.endergetic.core.data.client.EEEndimationProvider;
 import com.teamabnormals.endergetic.core.data.server.*;
 import com.teamabnormals.endergetic.core.data.server.tags.EEBiomeTagsProvider;
@@ -175,6 +176,7 @@ public class EndergeticExpansion {
 
 		boolean client = event.includeClient();
 		generator.addProvider(client, new EEEndimationProvider(output));
+		generator.addProvider(client, new EEBlockStateProvider(output, helper));
 	}
 
 	private void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {

@@ -1,7 +1,0 @@
-{
-    "parent": "block/ladder",
-    "textures": {
-        "particle": "endergetic:block/poise_ladder",
-        "texture": "endergetic:block/poise_ladder"
-    }
-}

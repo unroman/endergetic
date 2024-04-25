@@ -1,7 +1,0 @@
-{
-   	"variants": {
-   		"axis=y": { "model": "endergetic:block/poise_wood" },
-        "axis=z": { "model": "endergetic:block/poise_wood", "x": 90 },
-        "axis=x": { "model": "endergetic:block/poise_wood", "x": 90, "y": 90 }
-    }
-}

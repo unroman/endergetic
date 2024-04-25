@@ -1,8 +1,0 @@
-{
-    "parent": "block/inner_stairs",
-    "textures": {
-        "bottom": "endergetic:block/eumus_bricks",
-        "top": "endergetic:block/eumus_bricks",
-        "side": "endergetic:block/eumus_bricks"
-    }
-}

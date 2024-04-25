@@ -1,7 +1,0 @@
-{
-    "parent": "block/cube_column",
-    "textures": {
-        "end": "endergetic:block/poise_planks",
-        "side": "endergetic:block/poise_bookshelf"
-    }
-}

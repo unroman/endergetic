@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "endergetic:block/stripped_poise_stem",
+    "side": "endergetic:block/stripped_poise_stem"
+  }
+}

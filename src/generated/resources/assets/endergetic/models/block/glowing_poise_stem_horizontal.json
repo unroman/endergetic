@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "endergetic:block/glowing_poise_stem_top",
+    "side": "endergetic:block/glowing_poise_stem"
+  }
+}

@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_column",
-  "textures": {
-    "end": "endergetic:block/chiseled_end_stone_bricks_top",
-    "side": "endergetic:block/chiseled_end_stone_bricks"
-  }
-}

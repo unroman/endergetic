@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "endergetic:block/eumus_brick_slab"
+    },
+    "type=double": {
+      "model": "endergetic:block/eumus_bricks"
+    },
+    "type=top": {
+      "model": "endergetic:block/eumus_brick_slab_top"
+    }
+  }
+}
