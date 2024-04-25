@@ -48,6 +48,7 @@ public class EERecipeProvider extends BlueprintRecipeProvider {
 
 		chiseledBuilder(RecipeCategory.BUILDING_BLOCKS, CHISELED_END_STONE_BRICKS.get(), Ingredient.of(Blocks.END_STONE_BRICK_SLAB)).unlockedBy("has_end_stone_brick_slab", has(Blocks.END_STONE_BRICK_SLAB)).save(consumer);
 		stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_END_STONE_BRICKS.get(), Blocks.END_STONE_BRICKS);
+		stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_END_STONE_BRICKS.get(), Blocks.END_STONE);
 
 		SimpleCookingRecipeBuilder.smelting(Ingredient.of(Blocks.END_STONE_BRICKS), RecipeCategory.BUILDING_BLOCKS, CRACKED_END_STONE_BRICKS.get(), 0.1F, 200).unlockedBy("has_end_stone_bricks", has(Blocks.END_STONE_BRICKS)).save(consumer);
 		SimpleCookingRecipeBuilder.smelting(Ingredient.of(Blocks.PURPUR_BLOCK), RecipeCategory.BUILDING_BLOCKS, CRACKED_PURPUR_BLOCK.get(), 0.1F, 200).unlockedBy("has_purpur_block", has(Blocks.PURPUR_BLOCK)).save(consumer);
@@ -70,10 +71,10 @@ public class EERecipeProvider extends BlueprintRecipeProvider {
 		woodFromLogs(consumer, POISE_WOOD.get(), POISE_STEM.get());
 		woodFromLogs(consumer, STRIPPED_POISE_WOOD.get(), STRIPPED_POISE_STEM.get());
 		woodFromLogs(consumer, GLOWING_POISE_WOOD.get(), GLOWING_POISE_STEM.get());
-		// hangingSign(consumer, POISE_HANGING_SIGNS.getFirst().get(), STRIPPED_POISE_STEM.get());
+		hangingSign(consumer, POISE_HANGING_SIGNS.getFirst().get(), STRIPPED_POISE_STEM.get());
 
 		BoatloadRecipeProvider.boatRecipes(consumer, EEBoatTypes.POISE);
-		WoodworksRecipeProvider.baseRecipes(consumer, POISE_PLANKS.get(), POISE_SLAB.get(), POISE_BOARDS.get(), POISE_BOOKSHELF.get(), Blocks.CHISELED_BOOKSHELF, POISE_LADDER.get(), POISE_BEEHIVE.get(), POISE_CHEST.get(), TRAPPED_POISE_CHEST.get(), EndergeticExpansion.MOD_ID);
+		WoodworksRecipeProvider.baseRecipes(consumer, POISE_PLANKS.get(), POISE_SLAB.get(), POISE_BOARDS.get(), POISE_BOOKSHELF.get(), CHISELED_POISE_BOOKSHELF.get(), POISE_LADDER.get(), POISE_BEEHIVE.get(), POISE_CHEST.get(), TRAPPED_POISE_CHEST.get(), EndergeticExpansion.MOD_ID);
 		WoodworksRecipeProvider.sawmillRecipes(consumer, EEBlockFamilies.POISE_PLANKS_FAMILY, EEItemTags.POISE_STEMS, POISE_BOARDS.get(), POISE_LADDER.get(), EndergeticExpansion.MOD_ID);
 
 		petrifiedCorrockRecipe(consumer, PETRIFIED_INFESTED_CORROCK, INFESTED_CORROCK);

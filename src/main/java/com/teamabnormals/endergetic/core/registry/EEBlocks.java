@@ -7,10 +7,11 @@ import com.teamabnormals.blueprint.common.block.BlueprintDirectionalBlock;
 import com.teamabnormals.blueprint.common.block.LogBlock;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintChestBlock;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock;
+import com.teamabnormals.blueprint.common.block.sign.BlueprintCeilingHangingSignBlock;
 import com.teamabnormals.blueprint.common.block.sign.BlueprintStandingSignBlock;
+import com.teamabnormals.blueprint.common.block.sign.BlueprintWallHangingSignBlock;
 import com.teamabnormals.blueprint.common.block.sign.BlueprintWallSignBlock;
 import com.teamabnormals.blueprint.common.item.BEWLRBlockItem;
-import com.teamabnormals.endergetic.core.registry.other.EEProperties;
 import com.teamabnormals.endergetic.common.block.*;
 import com.teamabnormals.endergetic.common.block.entity.BolloomBudTileEntity;
 import com.teamabnormals.endergetic.common.block.poise.*;
@@ -19,6 +20,7 @@ import com.teamabnormals.endergetic.common.block.poise.boof.DispensedBoofBlock;
 import com.teamabnormals.endergetic.common.block.poise.hive.PuffBugHiveBlock;
 import com.teamabnormals.endergetic.common.block.poise.hive.PuffbugHiveHangerBlock;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
+import com.teamabnormals.endergetic.core.registry.other.EEProperties;
 import com.teamabnormals.endergetic.core.registry.util.EndergeticBlockSubRegistryHelper;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -101,11 +103,14 @@ public final class EEBlocks {
 	public static final RegistryObject<Block> POISE_PRESSURE_PLATE = HELPER.createBlock("poise_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, EEProperties.POISE.pressurePlate(), EEProperties.POISE_BLOCK_SET));
 	public static final RegistryObject<Block> POISE_BUTTON = HELPER.createBlock("poise_button", () -> new ButtonBlock(EEProperties.POISE.button(), EEProperties.POISE_BLOCK_SET, 30, true));
 	public static final RegistryObject<Block> POISE_TRAPDOOR = HELPER.createBlock("poise_trapdoor", () -> new TrapDoorBlock(EEProperties.POISE.trapdoor(), EEProperties.POISE_BLOCK_SET));
-	public static final RegistryObject<Block> POISE_BOOKSHELF = HELPER.createFuelBlock("poise_bookshelf", () -> new Block(EEProperties.POISE.chiseledBookshelf()), 300);
+	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> POISE_SIGNS = HELPER.createSignBlock("poise", EEProperties.POISE_WOOD_TYPE, EEProperties.POISE.sign());
+	public static final Pair<RegistryObject<BlueprintCeilingHangingSignBlock>, RegistryObject<BlueprintWallHangingSignBlock>> POISE_HANGING_SIGNS = HELPER.createHangingSignBlock("poise", EEProperties.POISE_WOOD_TYPE, EEProperties.POISE.hangingSign());
+
 	public static final RegistryObject<Block> POISE_BOARDS = HELPER.createFuelBlock("poise_boards", () -> new RotatedPillarBlock(EEProperties.POISE.planks()), 300);
+	public static final RegistryObject<Block> POISE_BOOKSHELF = HELPER.createFuelBlock("poise_bookshelf", () -> new Block(EEProperties.POISE.chiseledBookshelf()), 300);
+	public static final RegistryObject<Block> CHISELED_POISE_BOOKSHELF = HELPER.createFuelBlock("chiseled_poise_bookshelf", () -> new ChiseledPoiseBookShelfBlock(EEProperties.POISE.chiseledBookshelf()), 300);
 	public static final RegistryObject<Block> POISE_LADDER = HELPER.createFuelBlock("poise_ladder", () -> new LadderBlock(EEProperties.POISE.ladder()), 300);
 	public static final RegistryObject<Block> POISE_BEEHIVE = HELPER.createBlock("poise_beehive", () -> new BlueprintBeehiveBlock(EEProperties.POISE.beehive()));
-	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> POISE_SIGNS = HELPER.createSignBlock("poise", EEProperties.POISE_WOOD_TYPE, EEProperties.POISE.sign());
 	public static final RegistryObject<BlueprintChestBlock> POISE_CHEST = HELPER.createChestBlock("poise", EEProperties.POISE.chest());
 	public static final RegistryObject<BlueprintTrappedChestBlock> TRAPPED_POISE_CHEST = HELPER.createTrappedChestBlockNamed("poise", EEProperties.POISE.chest());
 

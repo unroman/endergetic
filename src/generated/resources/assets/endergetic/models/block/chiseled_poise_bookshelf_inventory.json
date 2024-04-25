@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/chiseled_bookshelf_inventory",
+  "textures": {
+    "front": "endergetic:block/chiseled_poise_bookshelf_empty",
+    "side": "endergetic:block/chiseled_poise_bookshelf_side",
+    "top": "endergetic:block/chiseled_poise_bookshelf_top"
+  }
+}

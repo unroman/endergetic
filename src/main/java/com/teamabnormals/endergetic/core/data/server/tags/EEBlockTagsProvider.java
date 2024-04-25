@@ -72,8 +72,8 @@ public final class EEBlockTagsProvider extends BlueprintBlockTagsProvider {
 		this.tag(BlockTags.WOODEN_PRESSURE_PLATES).add(POISE_PRESSURE_PLATE.get());
 		this.tag(BlockTags.STANDING_SIGNS).add(POISE_SIGNS.getFirst().get());
 		this.tag(BlockTags.WALL_SIGNS).add(POISE_SIGNS.getSecond().get());
-		this.tag(BlockTags.CEILING_HANGING_SIGNS);//.add(POISE_HANGING_SIGNS.getFirst().get());
-		this.tag(BlockTags.WALL_HANGING_SIGNS);//.add(POISE_HANGING_SIGNS.getSecond().get());
+		this.tag(BlockTags.CEILING_HANGING_SIGNS).add(POISE_HANGING_SIGNS.getFirst().get());
+		this.tag(BlockTags.WALL_HANGING_SIGNS).add(POISE_HANGING_SIGNS.getSecond().get());
 
 		this.tag(BlueprintBlockTags.WOODEN_BOARDS).add(POISE_BOARDS.get());
 		this.tag(BlueprintBlockTags.WOODEN_CHESTS).add(POISE_CHEST.get());
@@ -81,6 +81,6 @@ public final class EEBlockTagsProvider extends BlueprintBlockTagsProvider {
 		this.tag(BlueprintBlockTags.WOODEN_BEEHIVES).add(POISE_BEEHIVE.get());
 		this.tag(BlueprintBlockTags.WOODEN_LADDERS).add(POISE_LADDER.get());
 		this.tag(BlueprintBlockTags.WOODEN_BOOKSHELVES).add(POISE_BOOKSHELF.get());
-		this.tag(BlueprintBlockTags.WOODEN_CHISELED_BOOKSHELVES);//.add(CHISELED_POISE_BOOKSHELF.get());
+		this.tag(BlueprintBlockTags.WOODEN_CHISELED_BOOKSHELVES).add(CHISELED_POISE_BOOKSHELF.get());
 	}
 }

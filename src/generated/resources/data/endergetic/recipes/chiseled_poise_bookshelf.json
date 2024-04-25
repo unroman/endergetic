@@ -34,7 +34,7 @@
           "###"
         ],
         "result": {
-          "item": "minecraft:chiseled_bookshelf"
+          "item": "endergetic:chiseled_poise_bookshelf"
         },
         "show_notification": true
       }

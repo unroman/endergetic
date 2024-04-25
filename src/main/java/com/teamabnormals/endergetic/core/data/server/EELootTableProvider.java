@@ -107,7 +107,7 @@ public class EELootTableProvider extends LootTableProvider {
 			this.dropSelf(GLOWING_POISE_STEM.get());
 			this.dropSelf(GLOWING_POISE_WOOD.get());
 			this.dropSelf(POISE_SIGNS.getFirst().get());
-			// this.dropSelf(POISE_HANGING_SIGNS.getFirst().get());
+			this.dropSelf(POISE_HANGING_SIGNS.getFirst().get());
 			this.dropSelf(POISE_PRESSURE_PLATE.get());
 			this.dropSelf(POISE_TRAPDOOR.get());
 			this.dropSelf(POISE_BUTTON.get());
@@ -123,7 +123,7 @@ public class EELootTableProvider extends LootTableProvider {
 			this.add(POISE_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(TRAPPED_POISE_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(POISE_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
-			// this.dropWhenSilkTouch(CHISELED_POISE_BOOKSHELF.get());
+			this.dropWhenSilkTouch(CHISELED_POISE_BOOKSHELF.get());
 
 			this.dropPottedContents(POTTED_POISE_BUSH.get());
 			this.dropPottedContents(POTTED_TALL_POISE_BUSH.get());

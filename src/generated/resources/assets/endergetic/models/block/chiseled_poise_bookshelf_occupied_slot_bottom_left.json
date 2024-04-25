@@ -1,0 +1,6 @@
+{
+  "parent": "endergetic:block/chiseled_poise_bookshelf_slot_bottom_left",
+  "textures": {
+    "texture": "endergetic:block/chiseled_poise_bookshelf_occupied"
+  }
+}

@@ -18,7 +18,7 @@
           },
           "has_the_recipe": {
             "conditions": {
-              "recipe": "endergetic:chiseled_bookshelf"
+              "recipe": "endergetic:chiseled_poise_bookshelf"
             },
             "trigger": "minecraft:recipe_unlocked"
           }
@@ -31,7 +31,7 @@
         ],
         "rewards": {
           "recipes": [
-            "endergetic:chiseled_bookshelf"
+            "endergetic:chiseled_poise_bookshelf"
           ]
         },
         "sends_telemetry_event": false
