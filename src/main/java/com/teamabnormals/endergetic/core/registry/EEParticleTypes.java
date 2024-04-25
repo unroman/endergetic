@@ -26,15 +26,15 @@ import java.util.function.Function;
 public class EEParticleTypes {
 	public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, EndergeticExpansion.MOD_ID);
 
-	public static final RegistryObject<SimpleParticleType> POISE_BUBBLE = createBasicParticleType(true, "poise_bubble");
-	public static final RegistryObject<SimpleParticleType> SHORT_POISE_BUBBLE = createBasicParticleType(true, "short_poise_bubble");
-	public static final RegistryObject<SimpleParticleType> ENDER_FLAME = createBasicParticleType(true, "ender_flame");
+	public static final RegistryObject<SimpleParticleType> POISE_BUBBLE = createBasicParticleType("poise_bubble", true);
+	public static final RegistryObject<SimpleParticleType> SHORT_POISE_BUBBLE = createBasicParticleType("short_poise_bubble", true);
+	public static final RegistryObject<SimpleParticleType> ENDER_FLAME = createBasicParticleType("ender_flame", true);
 	public static final RegistryObject<ParticleType<BlockParticleOption>> FAST_BLOCK = createParticleType("fast_block", BlockParticleOption.DESERIALIZER, BlockParticleOption::codec);
 	public static final RegistryObject<ParticleType<CorrockCrownParticleData>> OVERWORLD_CROWN = createParticleType("overworld_crown", CorrockCrownParticleData.DESERIALIZER, CorrockCrownParticleData::codec);
 	public static final RegistryObject<ParticleType<CorrockCrownParticleData>> NETHER_CROWN = createParticleType("nether_crown", CorrockCrownParticleData.DESERIALIZER, CorrockCrownParticleData::codec);
 	public static final RegistryObject<ParticleType<CorrockCrownParticleData>> END_CROWN = createParticleType("end_crown", CorrockCrownParticleData.DESERIALIZER, CorrockCrownParticleData::codec);
 
-	private static RegistryObject<SimpleParticleType> createBasicParticleType(boolean alwaysShow, String name) {
+	private static RegistryObject<SimpleParticleType> createBasicParticleType(String name, boolean alwaysShow) {
 		return PARTICLES.register(name, () -> new SimpleParticleType(alwaysShow));
 	}
 

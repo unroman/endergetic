@@ -2,7 +2,7 @@ package com.teamabnormals.endergetic.core.data.client;
 
 import com.teamabnormals.blueprint.core.data.client.BlueprintBlockStateProvider;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import com.teamabnormals.endergetic.core.registry.EEBlockFamilies;
+import com.teamabnormals.endergetic.core.registry.other.EEBlockFamilies;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
 

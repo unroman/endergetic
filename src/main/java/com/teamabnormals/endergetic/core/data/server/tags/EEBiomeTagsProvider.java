@@ -1,7 +1,7 @@
 package com.teamabnormals.endergetic.core.data.server.tags;
 
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import com.teamabnormals.endergetic.core.registry.EEBiomes;
+import com.teamabnormals.endergetic.core.registry.builtin.EEBiomes;
 import com.teamabnormals.endergetic.core.registry.other.tags.EEBiomeTags;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;

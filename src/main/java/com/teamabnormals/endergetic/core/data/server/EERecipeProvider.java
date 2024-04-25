@@ -5,9 +5,8 @@ import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import com.teamabnormals.boatload.core.data.server.BoatloadRecipeProvider;
 import com.teamabnormals.endergetic.common.entity.bolloom.BalloonColor;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import com.teamabnormals.endergetic.core.registry.EEBlockFamilies;
-import com.teamabnormals.endergetic.core.registry.EEBlocks;
 import com.teamabnormals.endergetic.core.registry.EEItems;
+import com.teamabnormals.endergetic.core.registry.other.EEBlockFamilies;
 import com.teamabnormals.endergetic.core.registry.other.tags.EEItemTags;
 import com.teamabnormals.endergetic.integration.boatload.EEBoatTypes;
 import com.teamabnormals.woodworks.core.data.server.WoodworksRecipeProvider;
@@ -17,7 +16,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.RegistryObject;
@@ -56,12 +54,12 @@ public class EERecipeProvider extends BlueprintRecipeProvider {
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ENDER_LANTERN.get()).define('#', ENDER_TORCH.get()).define('X', Items.IRON_NUGGET).pattern("XXX").pattern("X#X").pattern("XXX").unlockedBy("has_ender_torch", has(ENDER_TORCH.get())).save(consumer);
 
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ACIDIAN_LANTERN.get()).define('#', Items.DRAGON_BREATH).define('O', Items.OBSIDIAN).pattern("#").pattern("O").unlockedBy("has_dragon_breath", has(Items.DRAGON_BREATH)).save(consumer);
-		
+
 		ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, BOOF_BLOCK.get()).define('#', EEItems.BOOFLO_HIDE.get()).pattern("##").pattern("##").unlockedBy("has_booflo_hide", has(EEItems.BOOFLO_HIDE.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, EEItems.BOOFLO_VEST.get()).define('#', EEItems.BOOFLO_HIDE.get()).define('B', BOOF_BLOCK.get()).pattern("# #").pattern("#B#").pattern("###").unlockedBy("has_booflo_hide", has(EEItems.BOOFLO_HIDE.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, EEItems.BOLLOOM_BALLOON.get(), 3).define('#', EEItems.BOLLOOM_FRUIT.get()).define('S', Items.STRING).pattern("#").pattern("S").pattern("S").group("bolloom_balloon").unlockedBy("has_bolloom_fruit", has(EEItems.BOLLOOM_FRUIT.get())).save(consumer);
 		Arrays.stream(BalloonColor.values()).filter(color -> color.color != null).forEach(color -> ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, color.balloonItem.get()).requires(EEItems.BOLLOOM_BALLOON.get()).requires(DyeItem.byColor(color.color)).group("bolloom_balloon").unlockedBy("has_bolloom_balloon", has(EEItems.BOLLOOM_BALLOON.get())).save(consumer));
-		
+
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GLOWING_POISE_WOOD.get(), 8).define('#', POISE_WOOD.get()).define('C', POISE_CLUSTER.get()).pattern("###").pattern("#C#").pattern("###").unlockedBy("has_poise_cluster", has(POISE_CLUSTER.get())).save(consumer, getModConversionRecipeName(GLOWING_POISE_WOOD.get(), POISE_CLUSTER.get()));
 
 		generateRecipes(consumer, EEBlockFamilies.POISE_PLANKS_FAMILY);
