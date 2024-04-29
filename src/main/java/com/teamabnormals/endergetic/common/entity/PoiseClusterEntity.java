@@ -15,7 +15,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
@@ -211,11 +210,10 @@ public class PoiseClusterEntity extends LivingEntity {
 			} else if (this.level() instanceof ClientLevel clientLevel) {
 				BlockState state = EEBlocks.POISE_CLUSTER.get().defaultBlockState();
 				VoxelShape voxelshape = state.getShape(this.level(), this.blockPosition());
-				double d0 = 0.25D;
-				voxelshape.forAllBoxes((p_172273_, p_172274_, p_172275_, p_172276_, p_172277_, p_172278_) -> {
-					double d1 = Math.min(1.0D, p_172276_ - p_172273_);
-					double d2 = Math.min(1.0D, p_172277_ - p_172274_);
-					double d3 = Math.min(1.0D, p_172278_ - p_172275_);
+				voxelshape.forAllBoxes((x1, y1, z1, x2, y2, z2) -> {
+					double d1 = Math.min(1.0D, x2 - x1);
+					double d2 = Math.min(1.0D, y2 - y1);
+					double d3 = Math.min(1.0D, z2 - z1);
 					int i = Math.max(2, Mth.ceil(d1 / 0.25D));
 					int j = Math.max(2, Mth.ceil(d2 / 0.25D));
 					int k = Math.max(2, Mth.ceil(d3 / 0.25D));
@@ -226,9 +224,9 @@ public class PoiseClusterEntity extends LivingEntity {
 								double d4 = ((double) l + 0.5D) / (double) i;
 								double d5 = ((double) i1 + 0.5D) / (double) j;
 								double d6 = ((double) j1 + 0.5D) / (double) k;
-								double d7 = d4 * d1 + p_172273_;
-								double d8 = d5 * d2 + p_172274_;
-								double d9 = d6 * d3 + p_172275_;
+								double d7 = d4 * d1 + x1;
+								double d8 = d5 * d2 + y1;
+								double d9 = d6 * d3 + z1;
 								Minecraft.getInstance().particleEngine.add(new TerrainParticle(clientLevel, this.getX() + d7 - 0.5F, this.getY() + d8, this.getZ() + d9 - 0.5F, d4 - 0.5D, d5 - 0.5D, d6 - 0.5D, state, this.blockPosition()).updateSprite(state, this.blockPosition()));
 							}
 						}
