@@ -90,7 +90,7 @@ public abstract class AbstractBolloom extends Entity {
 		}
 
 		if (isOnServerSide) {
-			if (this.getY() >= 254 && this.isUntied()) {
+			if (this.getY() > this.level().getMaxBuildHeight() && this.isUntied()) {
 				this.onBroken(true);
 				this.discard();
 			}
