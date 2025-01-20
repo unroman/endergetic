@@ -28,7 +28,8 @@ public class EEParticleTypes {
 
 	public static final RegistryObject<SimpleParticleType> POISE_BUBBLE = createBasicParticleType("poise_bubble", true);
 	public static final RegistryObject<SimpleParticleType> SHORT_POISE_BUBBLE = createBasicParticleType("short_poise_bubble", true);
-	public static final RegistryObject<SimpleParticleType> ENDER_FLAME = createBasicParticleType("ender_flame", true);
+	public static final RegistryObject<SimpleParticleType> ENDER_FIRE_FLAME = createBasicParticleType("ender_fire_flame", true);
+	public static final RegistryObject<SimpleParticleType> SMALL_ENDER_FIRE_FLAME = createBasicParticleType("small_ender_fire_flame", false);
 	public static final RegistryObject<ParticleType<BlockParticleOption>> FAST_BLOCK = createParticleType("fast_block", BlockParticleOption.DESERIALIZER, BlockParticleOption::codec);
 	public static final RegistryObject<ParticleType<CorrockCrownParticleData>> OVERWORLD_CROWN = createParticleType("overworld_crown", CorrockCrownParticleData.DESERIALIZER, CorrockCrownParticleData::codec);
 	public static final RegistryObject<ParticleType<CorrockCrownParticleData>> NETHER_CROWN = createParticleType("nether_crown", CorrockCrownParticleData.DESERIALIZER, CorrockCrownParticleData::codec);
@@ -49,7 +50,8 @@ public class EEParticleTypes {
 
 		@SubscribeEvent(priority = EventPriority.LOWEST)
 		public static void registerParticleTypes(RegisterParticleProvidersEvent event) {
-			event.registerSpriteSet(ENDER_FLAME.get(), FlameParticle.Provider::new);
+			event.registerSpriteSet(ENDER_FIRE_FLAME.get(), FlameParticle.Provider::new);
+			event.registerSpriteSet(SMALL_ENDER_FIRE_FLAME.get(), FlameParticle.SmallFlameProvider::new);
 			event.registerSpriteSet(POISE_BUBBLE.get(), PoiseBubbleParticle.Factory::new);
 			event.registerSpriteSet(SHORT_POISE_BUBBLE.get(), PoiseBubbleParticle.ShortFactory::new);
 			event.registerSpecial(FAST_BLOCK.get(), new Factory());

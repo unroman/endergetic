@@ -26,7 +26,7 @@ public class EnderWallTorchBlock extends WallTorchBlock {
 		double d2 = (double) pos.getZ() + 0.5D;
 		Direction direction1 = direction.getOpposite();
 		worldIn.addParticle(ParticleTypes.SMOKE, d0 + 0.27D * (double) direction1.getStepX(), d1 + 0.22D, d2 + 0.27D * (double) direction1.getStepZ(), 0.0D, 0.0D, 0.0D);
-		worldIn.addParticle(EEParticleTypes.ENDER_FLAME.get(), d0 + 0.27D * (double) direction1.getStepX(), d1 + 0.22D, d2 + 0.27D * (double) direction1.getStepZ(), 0.0D, 0.0D, 0.0D);
+		worldIn.addParticle(EEParticleTypes.ENDER_FIRE_FLAME.get(), d0 + 0.27D * (double) direction1.getStepX(), d1 + 0.22D, d2 + 0.27D * (double) direction1.getStepZ(), 0.0D, 0.0D, 0.0D);
 	}
 
 }
