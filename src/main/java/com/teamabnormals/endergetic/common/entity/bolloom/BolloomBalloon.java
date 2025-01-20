@@ -7,6 +7,7 @@ import com.teamabnormals.endergetic.core.interfaces.CustomBalloonPositioner;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
 import com.teamabnormals.endergetic.core.registry.EEEntityTypes;
 import com.teamabnormals.endergetic.core.other.EEDataSerializers;
+import com.teamabnormals.endergetic.core.registry.EEItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -257,6 +258,9 @@ public class BolloomBalloon extends AbstractBolloom {
 		Entity knot = this.getKnot();
 		if (knot instanceof BolloomKnot bolloomKnot) {
 			bolloomKnot.setBalloonsTied(bolloomKnot.getBalloonsTied() - 1);
+		}
+		if (dropFruit) {
+			Block.popResource(this.level(), this.blockPosition(), new ItemStack(this.getColor().balloonItem.get()));
 		}
 	}
 

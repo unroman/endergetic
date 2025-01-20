@@ -274,7 +274,7 @@ public abstract class AbstractBolloom extends Entity {
 			if (this.isAlive() && !this.level().isClientSide) {
 				this.discard();
 				this.markHurt();
-				this.onBroken(true);
+				this.onBroken(!source.isCreativePlayer());
 			}
 			return true;
 		}
