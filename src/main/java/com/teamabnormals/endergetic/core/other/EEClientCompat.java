@@ -26,14 +26,14 @@ public class EEClientCompat {
 		setRenderLayer(EEBlocks.ENDER_CAMPFIRE.get(), RenderType.cutout());
 
 		setRenderLayer(EEBlocks.POTTED_POISE_BUSH.get(), RenderType.cutout());
-		setRenderLayer(EEBlocks.POTTED_TALL_POISE_BUSH.get(), RenderType.translucent());
+		setRenderLayer(EEBlocks.POTTED_TALL_POISE_BUSH.get(), RenderType.tripwire());
 		setRenderLayer(EEBlocks.POISE_DOOR.get(), RenderType.cutout());
 		setRenderLayer(EEBlocks.POISE_TRAPDOOR.get(), RenderType.cutout());
 		setRenderLayer(EEBlocks.POISE_LADDER.get(), RenderType.cutout());
 		setRenderLayer(EEBlocks.EUMUS_POISMOSS.get(), RenderType.cutoutMipped());
 		setRenderLayer(EEBlocks.POISMOSS.get(), RenderType.cutoutMipped());
 		setRenderLayer(EEBlocks.POISE_BUSH.get(), RenderType.cutout());
-		setRenderLayer(EEBlocks.TALL_POISE_BUSH.get(), RenderType.translucent());
+		setRenderLayer(EEBlocks.TALL_POISE_BUSH.get(), RenderType.tripwire());
 		setRenderLayer(EEBlocks.POISE_CLUSTER.get(), RenderType.translucent());
 		setRenderLayer(EEBlocks.HIVE_HANGER.get(), RenderType.cutout());
 	}
