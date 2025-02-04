@@ -3,6 +3,7 @@ package com.teamabnormals.endergetic.core.data.server;
 import com.teamabnormals.blueprint.core.data.server.BlueprintRecipeProvider;
 import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import com.teamabnormals.boatload.core.data.server.BoatloadRecipeProvider;
+import com.teamabnormals.clayworks.core.data.server.ClayworksRecipeProvider;
 import com.teamabnormals.endergetic.common.entity.bolloom.BalloonColor;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import com.teamabnormals.endergetic.core.registry.EEItems;
@@ -35,6 +36,7 @@ public class EERecipeProvider extends BlueprintRecipeProvider {
 	public void buildRecipes(Consumer<FinishedRecipe> consumer) {
 		storageRecipes(consumer, RecipeCategory.FOOD, EEItems.BOLLOOM_FRUIT.get(), RecipeCategory.BUILDING_BLOCKS, BOLLOOM_CRATE.get());
 
+		SimpleCookingRecipeBuilder.smelting(Ingredient.of(EUMUS.get()), RecipeCategory.MISC, EEItems.EUMUS_BRICK.get(), 0.1F, 200).unlockedBy("has_eumus", has(EUMUS.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, EUMUS_BRICKS.get()).define('#', EEItems.EUMUS_BRICK.get()).pattern("##").pattern("##").unlockedBy("has_eumus_brick", has(EEItems.EUMUS_BRICK.get())).save(consumer);
 		generateRecipes(consumer, EEBlockFamilies.EUMUS_BRICKS_FAMILY);
 		stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, EUMUS_BRICK_SLAB.get(), EUMUS_BRICKS.get(), 2);
@@ -72,6 +74,11 @@ public class EERecipeProvider extends BlueprintRecipeProvider {
 		BoatloadRecipeProvider.boatRecipes(consumer, EEBoatTypes.POISE);
 		WoodworksRecipeProvider.baseRecipes(consumer, POISE_PLANKS.get(), POISE_SLAB.get(), POISE_BOARDS.get(), POISE_BOOKSHELF.get(), CHISELED_POISE_BOOKSHELF.get(), POISE_LADDER.get(), POISE_BEEHIVE.get(), POISE_CHEST.get(), TRAPPED_POISE_CHEST.get(), EndergeticExpansion.MOD_ID);
 		WoodworksRecipeProvider.sawmillRecipes(consumer, EEBlockFamilies.POISE_PLANKS_FAMILY, EEItemTags.POISE_STEMS, POISE_BOARDS.get(), POISE_LADDER.get(), EndergeticExpansion.MOD_ID);
+
+		ClayworksRecipeProvider.bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.END_STONE_BRICKS, CRACKED_END_STONE_BRICKS.get(), 0.1F, 100, EndergeticExpansion.MOD_ID);
+		ClayworksRecipeProvider.bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.PURPUR_BLOCK, CRACKED_PURPUR_BLOCK.get(), 0.1F, 100, EndergeticExpansion.MOD_ID);
+		ClayworksRecipeProvider.bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, EUMUS.get(), EEItems.EUMUS_BRICK.get(), 0.1F, 100, EndergeticExpansion.MOD_ID);
+		ClayworksRecipeProvider.bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, EUMUS_BRICKS.get(), CRACKED_EUMUS_BRICKS.get(), 0.1F, 100, EndergeticExpansion.MOD_ID);
 
 		// TODO: Eetle Update
 //		foodCookingRecipes(consumer, EETLE_EGG.get(), EEItems.COOKED_EETLE_EGG.get());
