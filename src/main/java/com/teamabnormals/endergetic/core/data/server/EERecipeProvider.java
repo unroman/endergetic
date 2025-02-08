@@ -99,6 +99,8 @@ public class EERecipeProvider extends BlueprintRecipeProvider {
 //		petrifiedCorrockRecipe(consumer, PETRIFIED_OVERWORLD_CORROCK_BLOCK, OVERWORLD_CORROCK_BLOCK);
 //		petrifiedCorrockRecipe(consumer, PETRIFIED_OVERWORLD_CORROCK_CROWN, OVERWORLD_CORROCK_CROWN);
 //		petrifiedCorrockRecipe(consumer, PETRIFIED_SPECKLED_OVERWORLD_CORROCK, SPECKLED_OVERWORLD_CORROCK);
+
+		storageRecipes(consumer, RecipeCategory.REDSTONE, EEItems.PORTAPLASM.get(), RecipeCategory.BUILDING_BLOCKS, PORTAPLASM_BLOCK.get());
 	}
 
 	public static void petrifiedCorrockRecipe(Consumer<FinishedRecipe> consumer, RegistryObject<? extends Block> petrifiedCorrock, RegistryObject<? extends Block> corrock) {

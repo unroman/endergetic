@@ -4,6 +4,7 @@ import com.teamabnormals.endergetic.core.registry.EEBlocks;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.client.ChunkRenderTypeSet;
 
 public class EEClientCompat {
 
@@ -18,6 +19,7 @@ public class EEClientCompat {
 		setRenderLayer(EEBlocks.PETRIFIED_END_CORROCK.get(), RenderType.cutout());
 		setRenderLayer(EEBlocks.PETRIFIED_NETHER_CORROCK.get(), RenderType.cutout());
 		setRenderLayer(EEBlocks.PETRIFIED_OVERWORLD_CORROCK.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EEBlocks.PORTAPLASM_BLOCK.get(), ChunkRenderTypeSet.of(RenderType.tripwire(), RenderType.translucent()));
 
 		setRenderLayer(EEBlocks.ENDER_FIRE.get(), RenderType.cutout());
 		setRenderLayer(EEBlocks.ENDER_TORCH.get(), RenderType.cutout());

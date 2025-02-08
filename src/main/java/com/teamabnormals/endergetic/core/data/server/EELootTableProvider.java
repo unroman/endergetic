@@ -136,6 +136,7 @@ public class EELootTableProvider extends LootTableProvider {
 
 			this.dropSelf(INFESTED_CORROCK.get());
 			this.dropSelf(PETRIFIED_INFESTED_CORROCK.get());
+			this.dropSelf(PORTAPLASM_BLOCK.get());
 
 			this.dropWhenSilkTouch(END_CORROCK.get());
 			this.dropSelf(END_CORROCK_BLOCK.get());
