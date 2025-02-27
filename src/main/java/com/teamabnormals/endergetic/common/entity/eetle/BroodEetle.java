@@ -4,6 +4,7 @@ import com.teamabnormals.blueprint.client.ClientInfo;
 import com.teamabnormals.blueprint.core.endimator.Endimatable;
 import com.teamabnormals.blueprint.core.endimator.PlayableEndimation;
 import com.teamabnormals.blueprint.core.endimator.TimedEndimation;
+import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.teamabnormals.endergetic.api.entity.pathfinding.EndergeticFlyingPathNavigator;
 import com.teamabnormals.endergetic.api.entity.util.DetectionHelper;
@@ -15,9 +16,10 @@ import com.teamabnormals.endergetic.common.entity.eetle.flying.FlyingRotations;
 import com.teamabnormals.endergetic.common.entity.eetle.flying.IFlyingEetle;
 import com.teamabnormals.endergetic.common.entity.eetle.flying.TargetFlyingRotations;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
-import com.teamabnormals.endergetic.core.registry.EEParticleTypes;
 import com.teamabnormals.endergetic.core.other.EEDataSerializers;
 import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
+import com.teamabnormals.endergetic.core.registry.EEParticleTypes;
+import com.teamabnormals.endergetic.core.registry.EESoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -51,6 +53,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
@@ -58,6 +62,7 @@ import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
@@ -84,6 +89,9 @@ public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
 	private final Set<ServerPlayer> trackedPlayers = new HashSet<>();
 	private final FlyingRotations flyingRotations = new FlyingRotations();
 	private final Set<LivingEntity> revengeTargets = new HashSet<>();
+	@OnlyIn(Dist.CLIENT)
+	@Nullable
+	private Vec3[] dyingParticleDirectionals = null;
 	@Nullable
 	public BlockPos takeoffPos;
 	private int idleDelay;
@@ -189,25 +197,53 @@ public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
 		super.tick();
 
 		Level world = this.level();
+		RandomSource random = this.random;
 		if (this.isDeadOrDying()) {
 			if (!this.isEndimationPlaying(EEPlayableEndimations.BROOD_EETLE_DEATH_LEFT) && !this.isEndimationPlaying(EEPlayableEndimations.BROOD_EETLE_DEATH_RIGHT) && !world.isClientSide) {
-				NetworkUtil.setPlayingAnimation(this, this.random.nextBoolean() ? EEPlayableEndimations.BROOD_EETLE_DEATH_LEFT : EEPlayableEndimations.BROOD_EETLE_DEATH_RIGHT);
+				NetworkUtil.setPlayingAnimation(this, random.nextBoolean() ? EEPlayableEndimations.BROOD_EETLE_DEATH_LEFT : EEPlayableEndimations.BROOD_EETLE_DEATH_RIGHT);
 			}
-			if (++this.deathTime >= 105) {
+			if (++this.deathTime >= 100) {
 				if (!world.isClientSide) {
 					ItemEntity elytra = this.spawnAtLocation(Items.ELYTRA);
 					if (elytra != null) {
 						elytra.setExtendedLifetime();
 					}
+					this.playSound(EESoundEvents.BROOD_EETLE_DEATH.get(), 2.0F, 0.9F + random.nextFloat() * 0.1F);
 					this.discard();
-					if (world instanceof ServerLevel) {
+					if (world instanceof ServerLevel serverLevel) {
 						Vec3 eggSackPos = BroodEggSack.getEggPos(this.position(), this.yBodyRot, this.getEggCannonProgressServer(), this.getEggCannonFlyingProgressServer(), this.getFlyingRotations().getFlyPitch(), this.isOnLastHealthStage());
-						((ServerLevel) world).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, EEBlocks.EETLE_EGG.get().defaultBlockState()), eggSackPos.x(), eggSackPos.y() + 0.83F, eggSackPos.z(), 20, 0.3125F, 0.3125F, 0.3125F, 0.2D);
-						((ServerLevel) world).sendParticles(new CorrockCrownParticleData(EEParticleTypes.END_CROWN.get(), true), eggSackPos.x(), eggSackPos.y() + 0.83F, eggSackPos.z(), 30, 0.3125F, 0.3125F, 0.3125F, 0.2D);
+						serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, EEBlocks.EETLE_EGG.get().defaultBlockState()), eggSackPos.x(), eggSackPos.y() + 0.83F, eggSackPos.z(), 30, 0.3125F, 0.3125F, 0.3125F, 0.2D);
+						serverLevel.sendParticles(new CorrockCrownParticleData(EEParticleTypes.END_CROWN, 180, 61, 0.0F, 0.1F, Optional.of(0.15F)), eggSackPos.x(), eggSackPos.y() + 0.83F, eggSackPos.z(), 2000, 0.3125F, 0.3125F, 0.3125F, 1.0D);
 					}
 				} else {
 					for (int i = 0; i < 20; ++i) {
-						world.addParticle(ParticleTypes.POOF, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), this.random.nextGaussian() * 0.02D, this.random.nextGaussian() * 0.02D, this.random.nextGaussian() * 0.02D);
+						world.addParticle(ParticleTypes.POOF, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), random.nextGaussian() * 0.02D, random.nextGaussian() * 0.02D, random.nextGaussian() * 0.02D);
+					}
+				}
+			} else if (world.isClientSide) {
+				int deathTime = this.deathTime;
+				if (deathTime == 30 || deathTime == 50 || deathTime == 70) {
+					Vec3[] directionals = this.dyingParticleDirectionals = new Vec3[8];
+					for (int i = 0; i < 8; i++) {
+						double xOffset = MathUtil.makeNegativeRandomly(random.nextDouble() * 0.5D, random);
+						double yOffset = random.nextDouble() * 1.5D;
+						double zOffset = MathUtil.makeNegativeRandomly(random.nextDouble() * 0.5D, random);
+						directionals[i] = new Vec3(xOffset, yOffset, zOffset);
+					}
+				}
+				if (deathTime >= 35 && deathTime <= 85 && deathTime % 2 == 0 && ((deathTime - 35) % 20 + 20) % 20 <= 10) {
+					Vec3[] dyingParticleDirectionals = this.dyingParticleDirectionals;
+					if (dyingParticleDirectionals != null) {
+						CorrockCrownParticleData dyingParticle = new CorrockCrownParticleData(EEParticleTypes.END_CROWN, 30, 10, 1.0F, 0.05F, Optional.of(0.2F));
+						Vec3 eggSackPos = BroodEggSack.getEggPos(this.position(), this.yBodyRot, this.getEggCannonProgress(), this.getEggCannonFlyingProgress(), this.getFlyingRotations().getFlyPitch(), this.isOnLastHealthStage());
+						double minY = eggSackPos.y() - 0.4D;
+						for (int i = 0; i < 8; i++) {
+							Vec3 directional = dyingParticleDirectionals[i];
+							double x = eggSackPos.x() + directional.x();
+							double y = minY + directional.y();
+							double z = eggSackPos.z() + directional.z();
+							world.addParticle(dyingParticle, x, y, z, directional.x(), 0.5D + random.nextDouble() * 0.05D, directional.z());
+						}
 					}
 				}
 			}
@@ -220,8 +256,8 @@ public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
 			if (this.flyCooldown > 0) this.flyCooldown--;
 			if (this.eggDropOffCooldown > 0) this.eggDropOffCooldown--;
 
-			if (this.random.nextFloat() < 0.005F && this.idleDelay <= 0 && this.onGround() && !this.isFiringCannon() && this.isNoEndimationPlaying()) {
-				NetworkUtil.setPlayingAnimation(this, this.random.nextFloat() < 0.6F && !this.isFlying() ? EEPlayableEndimations.BROOD_EETLE_FLAP : EEPlayableEndimations.BROOD_EETLE_MUNCH);
+			if (random.nextFloat() < 0.005F && this.idleDelay <= 0 && this.onGround() && !this.isFiringCannon() && this.isNoEndimationPlaying()) {
+				NetworkUtil.setPlayingAnimation(this, random.nextFloat() < 0.6F && !this.isFlying() ? EEPlayableEndimations.BROOD_EETLE_FLAP : EEPlayableEndimations.BROOD_EETLE_MUNCH);
 				this.resetIdleFlapDelay();
 			}
 
@@ -243,7 +279,7 @@ public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
 				this.ticksFlying++;
 
 				if (this.isEndimationPlaying(EEPlayableEndimations.BROOD_EETLE_AIR_SLAM) && this.getAnimationTick() == 5 && (this.onGround() || !this.level().noCollision(DetectionHelper.checkOnGround(this.getBoundingBox(), 0.25F)))) {
-					BroodEetleSlamGoal.slam(this, this.random, 1.0F);
+					BroodEetleSlamGoal.slam(this, random, 1.0F);
 				}
 			} else {
 				this.ticksFlying = 0;
@@ -729,7 +765,7 @@ public class BroodEetle extends Monster implements Endimatable, IFlyingEetle {
 			Level world = this.level();
 			if (world instanceof ServerLevel) {
 				Vec3 eggSackPos = BroodEggSack.getEggPos(this.position(), this.yBodyRot, this.getEggCannonProgressServer(), this.getEggCannonFlyingProgressServer(), this.getFlyingRotations().getFlyPitch(), this.isOnLastHealthStage());
-				((ServerLevel) world).sendParticles(new CorrockCrownParticleData(EEParticleTypes.END_CROWN.get(), true), eggSackPos.x(), eggSackPos.y() + (this.isFlying() ? 0.0F : 1.0F), eggSackPos.z(), 20, 0.3125F, 0.3125F, 0.3125F, 0.15D);
+				((ServerLevel) world).sendParticles(CorrockCrownParticleData.EETLE, eggSackPos.x(), eggSackPos.y() + (this.isFlying() ? 0.0F : 1.0F), eggSackPos.z(), 20, 0.3125F, 0.3125F, 0.3125F, 0.15D);
 			}
 		}
 	}

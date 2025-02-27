@@ -179,6 +179,14 @@
       }
     ]
   },
+  "entity.brood_eetle.death": {
+    "subtitle": "subtitles.endergetic.brood_eetle.death",
+    "sounds": [
+      {
+        "name": "endergetic:entity/eetle/brood_death"
+      }
+    ]
+  },
   "entity.eetle.leetle_ambient": {
     "subtitle": "subtitles.endergetic.eetle.leetle_ambient",
     "sounds": [

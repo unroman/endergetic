@@ -57,6 +57,7 @@ public final class EESoundEvents {
 	public static final RegistryObject<SoundEvent> PUFFBUG_HURT = HELPER.createSoundEvent("entity.puffbug.hurt");
 	public static final RegistryObject<SoundEvent> PUFFBUG_DEATH = HELPER.createSoundEvent("entity.puffbug.death");
 
+	public static final RegistryObject<SoundEvent> BROOD_EETLE_DEATH = HELPER.createSoundEvent("entity.brood_eetle.death");
 	public static final RegistryObject<SoundEvent> LEETLE_AMBIENT = HELPER.createSoundEvent("entity.eetle.leetle_ambient");
 	public static final RegistryObject<SoundEvent> LEETLE_HURT = HELPER.createSoundEvent("entity.eetle.leetle_hurt");
 	public static final RegistryObject<SoundEvent> LEETLE_DEATH = HELPER.createSoundEvent("entity.eetle.leetle_death");
