@@ -553,7 +553,7 @@ public class Purpoid extends PathfinderMob implements Endimatable {
 	}
 
 	private CorrockCrownParticleData createParticleData() {
-		return new CorrockCrownParticleData(EEParticleTypes.END_CROWN.get(), false, 0.2F * this.getSize().getScale());
+		return CorrockCrownParticleData.scaled(EEParticleTypes.END_CROWN, 0.2F * this.getSize().getScale());
 	}
 
 	@Override

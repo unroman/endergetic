@@ -3,7 +3,7 @@ package com.teamabnormals.endergetic.client.renderer.entity.eetle;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.teamabnormals.endergetic.client.model.eetle.BroodEetleModel;
-import com.teamabnormals.endergetic.client.renderer.entity.layers.EmissiveLayerRenderer;
+import com.teamabnormals.endergetic.client.renderer.entity.layers.BroodEetleEmissiveLayer;
 import com.teamabnormals.endergetic.common.entity.eetle.BroodEetle;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import com.teamabnormals.endergetic.core.other.EEModelLayers;
@@ -17,11 +17,10 @@ import java.util.List;
 
 public class BroodEetleRenderer extends MobRenderer<BroodEetle, BroodEetleModel> {
 	private static final ResourceLocation[] TEXTURES = getStageTextures();
-	private static final ResourceLocation EMISSIVE_TEXTURE = new ResourceLocation(EndergeticExpansion.MOD_ID, "textures/entity/eetle/brood/brood_eetle_emissive.png");
 
 	public BroodEetleRenderer(EntityRendererProvider.Context context) {
 		super(context, new BroodEetleModel(context.bakeLayer(EEModelLayers.BROOD_EETLE)), 1.0F);
-		this.addLayer(new EmissiveLayerRenderer<>(this, EMISSIVE_TEXTURE));
+		this.addLayer(new BroodEetleEmissiveLayer<>(this));
 	}
 
 	@Override

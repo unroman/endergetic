@@ -94,7 +94,7 @@ public class EetleEggTileEntity extends BlockEntity {
 								}
 							}
 							if (level instanceof ServerLevel) {
-								((ServerLevel) level).sendParticles(new CorrockCrownParticleData(EEParticleTypes.END_CROWN.get(), true), x + 0.5F, y + 0.25F * (size + 1.0F), z + 0.5F, 5 + size, 0.3F, 0.1F, 0.3F, 0.1D);
+								((ServerLevel) level).sendParticles(CorrockCrownParticleData.EETLE, x + 0.5F, y + 0.25F * (size + 1.0F), z + 0.5F, 5 + size, 0.3F, 0.1F, 0.3F, 0.1D);
 							}
 						}
 					}

@@ -60,7 +60,7 @@ public class CorrockCrownWallBlock extends CorrockCrownBlock {
 		double posX = (double) pos.getX() + 0.5F + xOffset;
 		double posY = (double) pos.getY() + 0.5D + yOffset;
 		double posZ = (double) pos.getZ() + 0.5F + zOffset;
-		world.addParticle(new CorrockCrownParticleData(this.dimensionalType.particle.get(), false), posX, posY, posZ, xFacingOffset * -0.01F + rand.nextFloat() * 0.04F - rand.nextFloat() * 0.04F, -0.005F, zFacingOffset * -0.01F + rand.nextFloat() * 0.04F - rand.nextFloat() * 0.04F);
+		world.addParticle(CorrockCrownParticleData.of(this.dimensionalType.particle), posX, posY, posZ, xFacingOffset * -0.01F + rand.nextFloat() * 0.04F - rand.nextFloat() * 0.04F, -0.005F, zFacingOffset * -0.01F + rand.nextFloat() * 0.04F - rand.nextFloat() * 0.04F);
 	}
 
 	@Override

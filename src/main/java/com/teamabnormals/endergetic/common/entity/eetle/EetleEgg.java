@@ -216,7 +216,7 @@ public class EetleEgg extends Entity implements IEntityAdditionalSpawnData {
 		}
 		if (world instanceof ServerLevel) {
 			world.playSound(null, pos, EESoundEvents.EETLE_EGG_BREAK.get(), SoundSource.BLOCKS, 1.0F - random.nextFloat() * 0.1F, 0.8F + random.nextFloat() * 0.2F);
-			((ServerLevel) world).sendParticles(new CorrockCrownParticleData(EEParticleTypes.END_CROWN.get(), true), x + 0.5F, y + 0.25F * (size + 1.0F), z + 0.5F, 5 + size, 0.3F, 0.1F, 0.3F, 0.1D);
+			((ServerLevel) world).sendParticles(CorrockCrownParticleData.EETLE, x + 0.5F, y + 0.25F * (size + 1.0F), z + 0.5F, 5 + size, 0.3F, 0.1F, 0.3F, 0.1D);
 		}
 	}
 

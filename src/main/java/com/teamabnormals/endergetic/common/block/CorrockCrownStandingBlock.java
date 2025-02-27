@@ -68,7 +68,7 @@ public class CorrockCrownStandingBlock extends CorrockCrownBlock {
 			double posX = (double) pos.getX() + 0.5D + xOffset;
 			double posY = (double) pos.getY() + 0.5D + yOffset;
 			double posZ = (double) pos.getZ() + 0.5D + zOffset;
-			world.addParticle(new CorrockCrownParticleData(this.dimensionalType.particle.get(), false), posX, posY, posZ, rand.nextFloat() * 0.05F - rand.nextFloat() * 0.05F, -0.005F, rand.nextFloat() * 0.05F - rand.nextFloat() * 0.05F);
+			world.addParticle(CorrockCrownParticleData.of(this.dimensionalType.particle), posX, posY, posZ, rand.nextFloat() * 0.05F - rand.nextFloat() * 0.05F, -0.005F, rand.nextFloat() * 0.05F - rand.nextFloat() * 0.05F);
 		} else if (rand.nextFloat() < 0.6F) {
 			double xOffset = makeNegativeRandomly(rand.nextFloat() * 0.25F, rand);
 			double yOffset = makeNegativeRandomly(rand.nextFloat() * 0.25F, rand);
@@ -76,7 +76,7 @@ public class CorrockCrownStandingBlock extends CorrockCrownBlock {
 			double posX = (double) pos.getX() + 0.5D + xOffset;
 			double posY = (double) pos.getY() + 0.5D + yOffset;
 			double posZ = (double) pos.getZ() + 0.5D + zOffset;
-			world.addParticle(new CorrockCrownParticleData(this.dimensionalType.particle.get(), false), posX, posY, posZ, rand.nextFloat() * 0.03F - rand.nextFloat() * 0.03F, 0.01F + rand.nextFloat() * 0.02F, rand.nextFloat() * 0.03F - rand.nextFloat() * 0.03F);
+			world.addParticle(CorrockCrownParticleData.of(this.dimensionalType.particle), posX, posY, posZ, rand.nextFloat() * 0.03F - rand.nextFloat() * 0.03F, 0.01F + rand.nextFloat() * 0.02F, rand.nextFloat() * 0.03F - rand.nextFloat() * 0.03F);
 		}
 	}
 

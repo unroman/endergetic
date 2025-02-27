@@ -240,7 +240,7 @@ public abstract class AbstractEetle extends Monster implements Endimatable {
 								eetleEggTileEntity.bypassSpawningGameRule();
 							}
 							if (world instanceof ServerLevel) {
-								((ServerLevel) world).sendParticles(new CorrockCrownParticleData(EEParticleTypes.END_CROWN.get(), true), this.getX(), this.getY() + this.getBbHeight(), this.getZ(), 5, this.getBbWidth() / 4.0F, this.getBbHeight() / 4.0F, this.getBbWidth() / 4.0F, 0.1D);
+								((ServerLevel) world).sendParticles(CorrockCrownParticleData.EETLE, this.getX(), this.getY() + this.getBbHeight(), this.getZ(), 5, this.getBbWidth() / 4.0F, this.getBbHeight() / 4.0F, this.getBbWidth() / 4.0F, 0.1D);
 							}
 						}
 					}
@@ -274,7 +274,7 @@ public abstract class AbstractEetle extends Monster implements Endimatable {
 		if (endimation == EEPlayableEndimations.EETLE_GROW_UP && world instanceof ServerLevel) {
 			this.setBaby(false);
 			this.playSound(EESoundEvents.LEETLE_TRANSFORM.get(), this.getSoundVolume(), this.getVoicePitch());
-			((ServerLevel) world).sendParticles(new CorrockCrownParticleData(EEParticleTypes.END_CROWN.get(), true), this.getX(), this.getY() + this.getBbHeight(), this.getZ(), 5, this.getBbWidth() / 4.0F, this.getBbHeight() / 4.0F, this.getBbWidth() / 4.0F, 0.1D);
+			((ServerLevel) world).sendParticles(CorrockCrownParticleData.EETLE, this.getX(), this.getY() + this.getBbHeight(), this.getZ(), 5, this.getBbWidth() / 4.0F, this.getBbHeight() / 4.0F, this.getBbWidth() / 4.0F, 0.1D);
 		}
 	}
 

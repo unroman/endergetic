@@ -14,25 +14,32 @@ public class CorrockCrownParticle extends TextureSheetParticle {
 	private final SpriteSet animatedSprite;
 	private final float rotSpeed;
 
-	public CorrockCrownParticle(SpriteSet animatedSprite, ClientLevel world, double x, double y, double z, double motionX, double motionY, double motionZ, boolean eetle, Optional<Float> scale) {
+	public CorrockCrownParticle(SpriteSet animatedSprite, ClientLevel world, double x, double y, double z, double motionX, double motionY, double motionZ, int lifetime, int lifetimeBoost, float gravity, float gravityBoost, Optional<Float> scale) {
 		super(world, x, y, z);
-		scale.ifPresent(value -> this.quadSize = value + value * 0.1F * (this.random.nextFloat() * 0.5F + 0.5F));
-		float size = (float) ((eetle ? 0.5D : 0.3D) + Math.random() * 0.4D);
-		this.setSize(size, size);
+		scale.ifPresent(value -> {
+			float size = 0.2F * (this.quadSize = value * (0.75F + this.random.nextFloat() * 0.5F));
+			this.setSize(size, size);
+		});
 		this.xd = motionX + motionX * ((float) Math.random() - 0.5F) * 0.2F;
-		this.yd = motionY + (eetle ? 0.05F : 0.0F);
+		this.yd = motionY + Math.random() * 0.025D;
 		this.zd = motionZ + motionZ * ((float) Math.random() - 0.5F) * 0.2F;
 		this.animatedSprite = animatedSprite;
-		this.gravity = eetle ? 0.8F : (float) Math.random() * 0.08F;
+		this.gravity = gravity + (float) Math.random() * gravityBoost;
 		this.roll = (float) Math.random() * ((float) Math.PI * 2.0F);
-		this.lifetime = (int) (Math.random() * 20 + (eetle ? 20 : 40));
-		this.rotSpeed = ((float) Math.random() - 0.5F) * (eetle ? 0.1F : 0.075F);
+		this.lifetime = lifetime + (int) (Math.random() * lifetimeBoost);
+		this.rotSpeed = ((float) Math.random() - 0.5F) * 0.075F;
 		this.setSpriteFromAge(animatedSprite);
 	}
 
 	@Override
 	public void tick() {
 		super.tick();
+
+		if (this.stoppedByCollision && this.yd >= 0.25D) {
+			this.stoppedByCollision = false;
+			this.yd = -0.05D;
+		}
+
 		this.oRoll = this.roll;
 		this.roll += (float) Math.PI * this.rotSpeed * 2.0F;
 
@@ -77,7 +84,7 @@ public class CorrockCrownParticle extends TextureSheetParticle {
 
 		@Override
 		public Particle createParticle(CorrockCrownParticleData data, ClientLevel world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-			return new CorrockCrownParticle(this.animatedSprite, world, x, y, z, xSpeed, ySpeed, zSpeed, data.isEetle(), data.getScale());
+			return new CorrockCrownParticle(this.animatedSprite, world, x, y, z, xSpeed, ySpeed, zSpeed, data.getLifetime(), data.getLifetimeBoost(), data.getGravity(), data.getGravityBoost(), data.getScale());
 		}
 	}
 }

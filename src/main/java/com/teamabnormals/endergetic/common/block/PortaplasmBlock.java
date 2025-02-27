@@ -136,7 +136,7 @@ public class PortaplasmBlock extends Block {
 			double x = pos.getX() + 0.5D;
 			double y = pos.getY() + 1.0D;
 			double z = pos.getZ() + 0.5D;
-			level.sendParticles(new CorrockCrownParticleData(EEParticleTypes.END_CROWN.get(), false, 0.1F), x + 0.5D, y + 0.5D, z + 0.5D, 6, 0.75F, 0.75F, 0.75F, 0.1D);
+			level.sendParticles(CorrockCrownParticleData.scaled(EEParticleTypes.END_CROWN, 0.1F), x + 0.5D, y + 0.5D, z + 0.5D, 6, 0.75F, 0.75F, 0.75F, 0.1D);
 			var receivers = this.getReceivers(level, pos);
 			Collections.shuffle(receivers);
 			int maxReceiverIndex = receivers.size() - 1;
@@ -186,7 +186,7 @@ public class PortaplasmBlock extends Block {
 	@Override
 	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
 		if (state.getValue(PHASE) != 2) return;
-		CorrockCrownParticleData particleData = new CorrockCrownParticleData(EEParticleTypes.END_CROWN.get(), false, 0.1F);
+		CorrockCrownParticleData particleData = CorrockCrownParticleData.scaled(EEParticleTypes.END_CROWN, 0.1F);
 		double centerX = pos.getX() + 0.5D;
 		double centerY = pos.getY() + 0.5D;
 		double centerZ = pos.getZ() + 0.5D;

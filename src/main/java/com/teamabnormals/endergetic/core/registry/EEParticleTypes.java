@@ -60,5 +60,4 @@ public class EEParticleTypes {
 			event.registerSpriteSet(END_CROWN.get(), CorrockCrownParticle.Factory::new);
 		}
 	}
-
 }
