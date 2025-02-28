@@ -35,7 +35,8 @@ public class CorrockCrownParticleData implements ParticleOptions {
 			return new CorrockCrownParticleData(() -> particleTypeIn, buffer.readInt(), buffer.readInt(), buffer.readFloat(), buffer.readFloat(), buffer.readBoolean() ? Optional.of(buffer.readFloat()) : Optional.empty());
 		}
 	};
-	public static final CorrockCrownParticleData EETLE = new CorrockCrownParticleData(EEParticleTypes.END_CROWN, 20, 21, 0.8F, 0.025F, Optional.empty());
+	@SuppressWarnings("FunctionalExpressionCanBeFolded")
+	public static final CorrockCrownParticleData EETLE = new CorrockCrownParticleData(() -> EEParticleTypes.END_CROWN.get(), 20, 21, 0.8F, 0.025F, Optional.empty());
 	private final Supplier<ParticleType<CorrockCrownParticleData>> particleType;
 	private final int lifetime;
 	private final int lifetimeBoost;

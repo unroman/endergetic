@@ -8,7 +8,6 @@ import com.teamabnormals.endergetic.common.block.EetleEggBlock;
 import com.teamabnormals.endergetic.common.block.entity.EetleEggTileEntity;
 import com.teamabnormals.endergetic.common.entity.eetle.ai.EetleHurtByTargetGoal;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
-import com.teamabnormals.endergetic.core.registry.EEParticleTypes;
 import com.teamabnormals.endergetic.core.registry.EESoundEvents;
 import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
 import net.minecraft.core.BlockPos;
@@ -274,7 +273,8 @@ public abstract class AbstractEetle extends Monster implements Endimatable {
 		if (endimation == EEPlayableEndimations.EETLE_GROW_UP && world instanceof ServerLevel) {
 			this.setBaby(false);
 			this.playSound(EESoundEvents.LEETLE_TRANSFORM.get(), this.getSoundVolume(), this.getVoicePitch());
-			((ServerLevel) world).sendParticles(CorrockCrownParticleData.EETLE, this.getX(), this.getY() + this.getBbHeight(), this.getZ(), 5, this.getBbWidth() / 4.0F, this.getBbHeight() / 4.0F, this.getBbWidth() / 4.0F, 0.1D);
+			double halfHeight = this.getBbHeight() / 2.0D;
+			((ServerLevel) world).sendParticles(CorrockCrownParticleData.EETLE, this.getX(), this.getY() + halfHeight, this.getZ(), 10, this.getBbWidth() / 4.0F, halfHeight, this.getBbWidth() / 4.0F, 0.2D);
 		}
 	}
 
