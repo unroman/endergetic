@@ -67,7 +67,7 @@ public class EELootTableProvider extends LootTableProvider {
 			this.dropSelf(ENDER_LANTERN.get());
 			this.dropSelf(ENDER_TORCH.get());
 			this.dropOther(ENDER_WALL_TORCH.get(), ENDER_TORCH.get());
-			this.add(ENDER_CAMPFIRE.get(), (block) -> createSilkTouchDispatchTable(block, applyExplosionCondition(block, LootItem.lootTableItem(Items.COPPER_BLOCK).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))));
+			this.add(ENDER_CAMPFIRE.get(), (block) -> createSilkTouchDispatchTable(block, applyExplosionCondition(block, LootItem.lootTableItem(Items.END_STONE).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))));
 
 			this.add(EETLE_EGG.get(), block -> {
 				return LootTable.lootTable()
