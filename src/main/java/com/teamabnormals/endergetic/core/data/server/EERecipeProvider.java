@@ -62,6 +62,7 @@ public class EERecipeProvider extends BlueprintRecipeProvider {
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, EEItems.BOLLOOM_BALLOON.get(), 3).define('#', EEItems.BOLLOOM_FRUIT.get()).define('S', Items.STRING).pattern("#").pattern("S").pattern("S").group("bolloom_balloon").unlockedBy("has_bolloom_fruit", has(EEItems.BOLLOOM_FRUIT.get())).save(consumer);
 		Arrays.stream(BalloonColor.values()).filter(color -> color.color != null).forEach(color -> ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, color.balloonItem.get()).requires(EEItems.BOLLOOM_BALLOON.get()).requires(DyeItem.byColor(color.color)).group("bolloom_balloon").unlockedBy("has_bolloom_balloon", has(EEItems.BOLLOOM_BALLOON.get())).save(consumer));
 
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GLOWING_POISE_STEM.get(), 8).define('#', POISE_STEM.get()).define('C', POISE_CLUSTER.get()).pattern("###").pattern("#C#").pattern("###").unlockedBy("has_poise_cluster", has(POISE_CLUSTER.get())).save(consumer, getModConversionRecipeName(GLOWING_POISE_STEM.get(), POISE_CLUSTER.get()));
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GLOWING_POISE_WOOD.get(), 8).define('#', POISE_WOOD.get()).define('C', POISE_CLUSTER.get()).pattern("###").pattern("#C#").pattern("###").unlockedBy("has_poise_cluster", has(POISE_CLUSTER.get())).save(consumer, getModConversionRecipeName(GLOWING_POISE_WOOD.get(), POISE_CLUSTER.get()));
 
 		generateRecipes(consumer, EEBlockFamilies.POISE_PLANKS_FAMILY);
